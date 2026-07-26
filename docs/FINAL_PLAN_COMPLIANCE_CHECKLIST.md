@@ -107,5 +107,8 @@ engineering check is not treated as evidence that a method improves accuracy.
 - [x] Complete the single diagnosis-driven Route B candidate (ABL) at 30
   epochs. It passes through mIoU +0.006236 with Fire neutral inside the
   conservative noise band.
-- [ ] Complete the promoted ABL 100-epoch formal run; three-seed and test-set
-  work remains paused until its formal decision is frozen.
+- [x] Complete the promoted ABL 100-epoch formal run. Its best checkpoint gains
+  mIoU +0.001695 and Fire IoU +0.002812, so it fails both internal method
+  thresholds and is retained only as a B-route ablation.
+- [x] Keep the test set sealed and close Route B without automatically adding
+  a second loss candidate.

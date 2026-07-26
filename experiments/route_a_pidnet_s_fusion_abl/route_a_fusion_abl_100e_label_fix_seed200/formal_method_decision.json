@@ -1,0 +1,32 @@
+{
+  "decision": "fails_internal_method_threshold_retain_as_ablation",
+  "test_set_used": false,
+  "baseline": {
+    "run": "G:\\py2\\experiments\\route_a_pidnet_s_fusion\\route_a_fusion_100e_label_fix_seed200",
+    "best_epoch": 86,
+    "miou": 0.8067280342508664,
+    "fire_iou": 0.6693104185963411
+  },
+  "candidate": {
+    "run": "G:\\py2\\experiments\\route_a_pidnet_s_fusion_abl\\route_a_fusion_abl_100e_label_fix_seed200",
+    "best_epoch": 93,
+    "miou": 0.808422709955544,
+    "background_iou": 0.909832056744548,
+    "smoke_iou": 0.8433132959339337,
+    "fire_iou": 0.6721227771881504,
+    "fire_precision": 0.7665991005951962,
+    "fire_recall": 0.8450509373467081,
+    "fire_boundary_f1": 0.9124020124469534
+  },
+  "deltas": {
+    "miou": 0.0016946757046776284,
+    "fire_iou": 0.002812358591809283
+  },
+  "thresholds": {
+    "rule_1": "miou_gain >= 0.005 and fire_iou_not_lower",
+    "rule_2": "fire_iou_gain >= 0.01 and miou_gain >= -0.003"
+  },
+  "passes_rule_1": false,
+  "passes_rule_2": false,
+  "route_b_closed": true
+}

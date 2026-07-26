@@ -148,3 +148,15 @@ Fusion epochs 26--30 window it achieved:
 It therefore passes the predefined mIoU rule and is promoted, without any
 hyperparameter change, to one 100-epoch formal run. The test set remains
 sealed.
+
+### Formal 100-epoch outcome
+
+The promoted run completed 100 epochs. On each model's mIoU-selected best
+validation checkpoint, ABL versus the Fusion baseline is:
+
+- mIoU: `0.8084227100` versus `0.8067280343`, gain `+0.0016946757`;
+- Fire IoU: `0.6721227772` versus `0.6693104186`, gain `+0.0028123586`.
+
+It fails both preregistered internal method-establishment thresholds. Route B
+is therefore closed and ABL is retained only as a zero-inference-overhead
+ablation. No test image or test metric was used.
