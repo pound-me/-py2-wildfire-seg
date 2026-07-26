@@ -141,6 +141,9 @@ engineering check is not treated as evidence that a method improves accuracy.
 - [x] Create the unified Pareto registry template and a plotter that leaves
   untrained or unmeasured methods pending instead of inventing coordinates.
 - [ ] Complete SAMF engineering acceptance and its single 30-epoch screen.
+  Engineering acceptance passed: beta-zero bitwise equivalence, AMP/two-stage
+  gradients, inference interface, 7.705M parameters, 3.1545 GFLOPs and paired
+  RTX 2060 median 32.32 FPS. The single 30-epoch screen is the remaining item.
 - [x] Verify the Route C bibliography against formal titles, venues/years and
   DOI/original metadata; archive BibTeX and code-reuse status. Mark SGFNet,
   CBL, top-level FreqFusion and PSL as no-license reference-only sources.

@@ -32,6 +32,7 @@ from custom_models.pidnet_dfm_mproto import (  # noqa: E402
     PIDNetDFMMProto,
 )
 from custom_models.pidnet_dysample import PIDNetDySample  # noqa: E402
+from custom_models.pidnet_samf import PIDNetSAMF  # noqa: E402
 
 
 def load_config(path: Path) -> dict:
@@ -118,6 +119,8 @@ def build_model(config: dict, augment: bool = True) -> PIDNet:
         from custom_models.pidnet_freqfusion import PIDNetFreqFusion
 
         model_class = PIDNetFreqFusion
+    elif model_name == "pidnet_s_samf":
+        model_class = PIDNetSAMF
     else:
         raise ValueError(f"Unsupported model: {model_name}")
     model_kwargs = dict(
@@ -147,6 +150,11 @@ def build_model(config: dict, augment: bool = True) -> PIDNet:
         )
         model_kwargs["feature_resample_group"] = int(
             config.get("FREQFUSION_FEATURE_RESAMPLE_GROUP", 4)
+        )
+    if model_name == "pidnet_s_samf":
+        model_kwargs["smoke_class"] = int(config.get("SAMF_SMOKE_CLASS", 1))
+        model_kwargs["thermal_channel"] = int(
+            config.get("SAMF_THERMAL_CHANNEL", 3)
         )
     return model_class(**model_kwargs)
 

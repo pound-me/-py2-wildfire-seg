@@ -240,6 +240,14 @@ def main() -> None:
             candidate_parameters / baseline_parameters - 1.0
         ),
         "speed_drop_at_most_3_percent": relative_change <= 0.03,
+        "real_time_minimum_fps": 30.0,
+        "real_time_maximum_median_latency_ms": 1000.0 / 30.0,
+        "baseline_passes_30_fps": baseline_median <= 1000.0 / 30.0,
+        "candidate_passes_30_fps": candidate_median <= 1000.0 / 30.0,
+        "route_c_admission_rule": (
+            "candidate median FPS >= 30 in paired RTX 2060 measurement"
+        ),
+        "route_c_candidate_admitted": candidate_median <= 1000.0 / 30.0,
         "deployment_parameter_counts_equal": (
             baseline_parameters == candidate_parameters
         ),

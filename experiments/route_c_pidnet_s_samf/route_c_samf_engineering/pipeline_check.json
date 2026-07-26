@@ -1,0 +1,117 @@
+{
+  "config": "G:\\py2\\configs\\route_c\\pidnet_s_fusion_samf_30e_label_fix.yaml",
+  "confirmed_definition": {
+    "gate_source": "pre_injection_pag3_seghead_p_softmax",
+    "gate_detached": false,
+    "thermal_alignment": "adaptive_avg_pool_1_4_to_1_8",
+    "inference_internal_head": "seghead_p_retained_not_returned"
+  },
+  "equivalence_checkpoint": "G:\\py2\\experiments\\route_a_pidnet_s_fusion\\route_a_fusion_100e_label_fix_seed200\\best.pth",
+  "beta_zero": 0.0,
+  "beta_zero_output_bitwise_equal": [
+    true,
+    true,
+    true
+  ],
+  "beta_zero_output_max_abs": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "insertion_shapes": {
+    "thermal_stem": [
+      2,
+      32,
+      64,
+      64
+    ],
+    "pag3": [
+      2,
+      64,
+      32,
+      32
+    ],
+    "smoke_logits": [
+      2,
+      3,
+      32,
+      32
+    ],
+    "thermal_projection": [
+      2,
+      64,
+      32,
+      32
+    ]
+  },
+  "matched_pretrained_tensors": 301,
+  "baseline_matched_pretrained_tensors": 301,
+  "amp_beta_zero_loss": 15.646806716918945,
+  "amp_beta_zero_components": {
+    "base_total": 15.646806716918945,
+    "semantic": 9.149215698242188,
+    "boundary": 0.0,
+    "smoke_auxiliary": 0.0,
+    "smoke_bce": 0.0,
+    "smoke_dice": 0.0,
+    "weighted_smoke_auxiliary": 0.0
+  },
+  "beta_gradient_at_zero": 0.24484972400595198,
+  "thermal_gradient_at_zero": 0.0,
+  "projection_gradient_at_zero": 0.0,
+  "amp_beta_active_loss": 15.649328231811523,
+  "amp_beta_active_components": {
+    "base_total": 15.649328231811523,
+    "semantic": 9.149246215820312,
+    "boundary": 0.0,
+    "smoke_auxiliary": 0.0,
+    "smoke_bce": 0.0,
+    "smoke_dice": 0.0,
+    "weighted_smoke_auxiliary": 0.0
+  },
+  "active_gradient_norms": {
+    "beta": 0.04832412724327851,
+    "thermal_stem": 0.7023813126117715,
+    "thermal_projection": 0.29297855360794367,
+    "smoke_head": 1.6499118763732086,
+    "p_branch": 4.5842486558496045,
+    "i_branch": 168.26763730613027,
+    "d_branch": 4.2111046661466744,
+    "final_head": 30.402542609621023
+  },
+  "training_output_shapes": [
+    [
+      4,
+      3,
+      256,
+      256
+    ],
+    [
+      4,
+      3,
+      256,
+      256
+    ],
+    [
+      4,
+      1,
+      256,
+      256
+    ]
+  ],
+  "inference_output_shape": [
+    1,
+    3,
+    32,
+    32
+  ],
+  "inference_returns_tensor_only": true,
+  "inference_internal_smoke_head_calls": 1,
+  "inference_has_boundary_auxiliary_head": false,
+  "baseline_training_parameters": 7717095,
+  "candidate_training_parameters": 7723928,
+  "training_parameter_increment": 6833,
+  "baseline_inference_parameters": 7623939,
+  "candidate_inference_parameters": 7705271,
+  "inference_parameter_increment": 81332
+}
