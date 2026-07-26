@@ -157,6 +157,9 @@ engineering check is not treated as evidence that a method improves accuracy.
 - [x] Run the single TGM 30-epoch screen and evaluate both decisions. TGM
   gained -0.003078 mIoU and -0.006146 Fire, so it failed its own promotion and
   the Amendment 5 positive trigger; no TGM 100e or combination run is allowed.
+- [x] Close Route C after auditing commit chronology, all conditional branches,
+  paired latency gates and the sealed test set. Any new main-innovation search
+  requires a separately approved route or preregistration amendment.
 - [x] Before any TGM result, preregister Amendment 5: if TGM is also positive,
   allow one ABL+SAMF and one ABL+SAMF+TGM 30-epoch screen against the plain
   Fusion baseline; promote at mIoU +0.005 or Fire +0.01, subject to the paired
