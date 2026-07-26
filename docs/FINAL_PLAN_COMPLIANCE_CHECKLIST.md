@@ -134,6 +134,8 @@ engineering check is not treated as evidence that a method improves accuracy.
   measurements for Table 1.
 - [x] Freeze a non-overwriting `route_c_*` IR-only 100-epoch config and launch
   record using label_fix A1, seed 200 and a fresh ImageNet initialization.
+- [x] Prepare a same-process rotating-order RGB/IR/Fusion latency benchmark for
+  Table 1; execution remains blocked until the IR best checkpoint is frozen.
 - [ ] Complete SAMF engineering acceptance and its single 30-epoch screen.
 - [x] Verify the Route C bibliography against formal titles, venues/years and
   DOI/original metadata; archive BibTeX and code-reuse status. Mark SGFNet,
