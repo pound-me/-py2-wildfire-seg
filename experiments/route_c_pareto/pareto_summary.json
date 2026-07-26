@@ -2,9 +2,10 @@
   "registry": "G:\\py2\\configs\\route_c\\pareto_registry_template.csv",
   "split_id": "flame2_val_label_fix_seed200",
   "test_set_used": false,
-  "plotted_count": 3,
-  "pending_count": 10,
+  "plotted_count": 4,
+  "pending_count": 9,
   "pareto_frontier_method_ids": [
+    "tgm",
     "abl",
     "samf"
   ],

@@ -274,3 +274,15 @@ uses the existing single-method screening rules.
 
 Approved and numerically confirmed by the user on 2026-07-27 before TGM
 implementation, engineering output or training result existed.
+
+### Amendment 5 trigger outcome
+
+The frozen standalone TGM run completed 30 epochs after this amendment was
+committed. Against the Fusion epochs 26--30 window it obtained mIoU gain
+`-0.0030784552` and Fire IoU gain `-0.0061460136`. Both primary gains are
+negative. Although the other tolerance, class-stability and paired 44.78 FPS
+engineering conditions are satisfied, the required strictly positive primary
+gain does not exist. Amendment 5 is therefore not triggered: neither
+Fusion+ABL+SAMF nor Fusion+ABL+SAMF+TGM is authorized for training.
+
+No test image or test metric was used in this trigger decision.

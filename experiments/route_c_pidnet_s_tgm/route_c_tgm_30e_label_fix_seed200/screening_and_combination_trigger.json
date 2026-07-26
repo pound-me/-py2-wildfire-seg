@@ -1,0 +1,39 @@
+{
+  "test_set_used": false,
+  "baseline": {
+    "run": "G:\\py2\\experiments\\route_a_pidnet_s_fusion\\route_a_fusion_100e_label_fix_seed200",
+    "epoch_window": [26, 30],
+    "miou_mean": 0.7861409555868736,
+    "fire_iou_mean": 0.6467101737950955,
+    "fire_conservative_noise_band": 0.014250943138484629
+  },
+  "tgm": {
+    "run": "G:\\py2\\experiments\\route_c_pidnet_s_tgm\\route_c_tgm_30e_label_fix_seed200",
+    "epoch_window": [26, 30],
+    "miou_mean": 0.7830625003746203,
+    "fire_iou_mean": 0.640564160206009,
+    "miou_gain": -0.0030784552122532505,
+    "fire_iou_gain": -0.0061460135890865075,
+    "class_collapse": false
+  },
+  "standalone_promotion": {
+    "passes_miou_rule": false,
+    "passes_fire_rule": false,
+    "passes_screening": false,
+    "promote_to_100_epochs": false
+  },
+  "amendment_5_positive_trigger": {
+    "at_least_one_primary_gain_strictly_positive": false,
+    "miou_within_negative_tolerance": true,
+    "fire_within_negative_tolerance": true,
+    "no_class_collapse": true,
+    "paired_rtx2060_fps": 44.78367430857899,
+    "passes_30_fps": true,
+    "triggered": false
+  },
+  "combination_authorization": {
+    "abl_plus_samf_30e": false,
+    "abl_plus_samf_plus_tgm_30e": false,
+    "reason": "TGM mIoU and Fire IoU gains are both negative"
+  }
+}

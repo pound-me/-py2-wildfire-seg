@@ -154,8 +154,9 @@ engineering check is not treated as evidence that a method improves accuracy.
   post-injection auxiliary P head and alpha-zero identity. Bitwise equivalence,
   AMP gradients and inference interface passed; 7.635M parameters, 3.0077
   GFLOPs and paired RTX 2060 44.34 FPS pass engineering admission.
-- [ ] Run the single TGM 30-epoch screen, evaluate both its own promotion rule
-  and the separately preregistered positive trigger for combination screening.
+- [x] Run the single TGM 30-epoch screen and evaluate both decisions. TGM
+  gained -0.003078 mIoU and -0.006146 Fire, so it failed its own promotion and
+  the Amendment 5 positive trigger; no TGM 100e or combination run is allowed.
 - [x] Before any TGM result, preregister Amendment 5: if TGM is also positive,
   allow one ABL+SAMF and one ABL+SAMF+TGM 30-epoch screen against the plain
   Fusion baseline; promote at mIoU +0.005 or Fire +0.01, subject to the paired
