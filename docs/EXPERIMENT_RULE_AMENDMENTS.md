@@ -160,3 +160,51 @@ validation checkpoint, ABL versus the Fusion baseline is:
 It fails both preregistered internal method-establishment thresholds. Route B
 is therefore closed and ABL is retained only as a zero-inference-overhead
 ablation. No test image or test metric was used.
+
+## Amendment 4: Route C activation and measured real-time budget
+
+Date: 2026-07-26
+
+### Superseded rule
+
+> Deployment parameters and FLOPs must not exceed the Fusion PIDNet-S
+> baseline, with any structural increase rejected before training.
+
+### Operative rule, approved and effective immediately
+
+> A candidate may have a finite increase in deployment parameters and FLOPs
+> provided that it reaches at least 30 FPS on the RTX 2060. Baseline and
+> candidate must be benchmarked as a same-session pair, after warm-up, using
+> repeated measurements whose median latency is the decision statistic.
+
+Thirty FPS is equivalent to a median per-image latency no greater than
+`33.33 ms`. Parameters and FLOPs remain mandatory reported quantities, but
+neither an increase above the Fusion baseline nor the former 3% relative
+slowdown rule is an automatic rejection. Measured RTX 2060 latency is the
+hard engineering gate. The previously proposed fixed `FLOPs <= +5%` cap is
+not the operative rule.
+
+The 30-epoch screening rules, conservative Fire noise-band interpretation,
+100-epoch internal method thresholds, validation-only selection, three-seed
+discipline and sealed test set are unchanged.
+
+### Unified Pareto accounting
+
+All comparable methods must be placed in one validation-mIoU versus measured
+latency Pareto registry and plot under the new paired benchmark protocol. The
+required historical rows are the five closed Route A modules (DEConv D2,
+mproto P1, DySample Pag4, DySample Context and FreqFusion Pag3), Route B ABL,
+all Route C candidates, the plain Fusion PIDNet-S baseline and
+RoboFireFuseNet. A method that was not trained keeps its engineering status
+and has no invented mIoU value. Historical rejection decisions remain valid
+records of the rule active at the time; the Pareto remeasurement does not
+retroactively promote them into formal methods.
+
+### Route C authorization
+
+Route C is formally activated. Its first candidate is SAMF, selected from the
+completed visibility diagnosis: all 20 manually reviewed worst-Fire-IoU
+validation samples have invisible RGB fire, heavy smoke occlusion and clearer
+IR. TGM is explicitly deferred until the SAMF screening result is frozen.
+
+Approved by the user on 2026-07-26 before SAMF implementation or training.

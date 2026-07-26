@@ -112,3 +112,18 @@ engineering check is not treated as evidence that a method improves accuracy.
   thresholds and is retained only as a B-route ablation.
 - [x] Keep the test set sealed and close Route B without automatically adding
   a second loss candidate.
+
+## Route C
+
+- [x] Replace the zero-increase parameter/FLOP rule with the approved measured
+  real-time gate: RTX 2060 paired same-session AMP benchmark, warmed up,
+  repeated median latency no greater than 33.33 ms (at least 30 FPS).
+- [x] Keep all accuracy thresholds, validation-only selection, seed discipline
+  and the sealed test set unchanged.
+- [x] Require one validation-mIoU versus latency Pareto registry for the five
+  closed Route A modules, ABL, Route C, Fusion PIDNet-S and RoboFireFuseNet.
+- [x] Formally activate Route C and freeze the order: evidence closeout, SAMF
+  engineering/screening/formal run, then and only then TGM implementation.
+- [ ] Complete worst-20 summary, full-validation Fire FN/FP spatial attribution
+  and the IR-only 100-epoch motivation row.
+- [ ] Complete SAMF engineering acceptance and its single 30-epoch screen.
