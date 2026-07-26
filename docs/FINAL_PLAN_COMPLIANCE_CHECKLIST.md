@@ -149,13 +149,16 @@ engineering check is not treated as evidence that a method improves accuracy.
   threshold before unfreezing TGM. SAMF gained 0.001885 mIoU and 0.004068 Fire
   IoU, passed the 30 FPS gate at 34.57 FPS, but failed both internal accuracy
   thresholds; retain it as a positive ablation and unfreeze TGM.
-- [ ] Implement and engineering-check the single frozen TGM variant; do not
-  produce training results until its remaining structural details and the
-  operational definition of a positive TGM result are explicitly confirmed.
+- [ ] Implement and engineering-check the single frozen TGM variant using the
+  confirmed 1/4-to-1/8 pre-gate alignment, explicit spatial/channel gates,
+  post-injection auxiliary P head and alpha-zero identity.
 - [x] Before any TGM result, preregister Amendment 5: if TGM is also positive,
   allow one ABL+SAMF and one ABL+SAMF+TGM 30-epoch screen against the plain
   Fusion baseline; promote at mIoU +0.005 or Fire +0.01, subject to the paired
   RTX 2060 >=30 FPS gate and no class collapse.
+- [x] Before TGM implementation, numerically define a positive TGM trigger as
+  at least one strictly positive mIoU/Fire gain while the other remains inside
+  the original -0.005/-Delta_fire tolerance and no class collapses.
 - [x] Verify the Route C bibliography against formal titles, venues/years and
   DOI/original metadata; archive BibTeX and code-reuse status. Mark SGFNet,
   CBL, top-level FreqFusion and PSL as no-license reference-only sources.

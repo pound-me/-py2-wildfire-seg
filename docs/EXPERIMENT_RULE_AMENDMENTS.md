@@ -256,9 +256,21 @@ Parameters, FLOPs and latency remain mandatory reported quantities. The test set
 remains sealed, and no three-seed expansion occurs before a 100-epoch result
 meets the formal method threshold.
 
-The user's phrase "TGM is also positive" is deliberately recorded without a
-post-result numerical reinterpretation. Its exact operational sign criterion
-must be confirmed before TGM training begins; until then, no combination trigger
-may be evaluated.
+The user's phrase "TGM is also positive" is operationally frozen as follows,
+using the same epochs 26--30 means against the plain Fusion baseline:
 
-Approved by the user on 2026-07-27 before any TGM result existed.
+- at least one of TGM mIoU gain or Fire IoU gain must be strictly greater than
+  zero;
+- if mIoU is not the positive metric, its gain must remain at least `-0.005`;
+- if Fire is not the positive metric, its gain must remain no lower than the
+  negative Fusion conservative Fire band `-Delta_fire`;
+- Smoke and Fire class collapse is prohibited; and
+- the standalone TGM architecture must pass the paired RTX 2060 `>=30 FPS`
+  engineering gate.
+
+This sign criterion is only the trigger for the authorized combination screens;
+it does not promote TGM itself to a 100-epoch method. TGM's own promotion still
+uses the existing single-method screening rules.
+
+Approved and numerically confirmed by the user on 2026-07-27 before TGM
+implementation, engineering output or training result existed.
