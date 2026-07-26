@@ -132,4 +132,6 @@ engineering check is not treated as evidence that a method improves accuracy.
   Smoke neighbourhoods cover 69.90% of FN and 72.18% of FP.
 - [ ] Complete the IR-only 100-epoch motivation row and paired efficiency
   measurements for Table 1.
+- [x] Freeze a non-overwriting `route_c_*` IR-only 100-epoch config and launch
+  record using label_fix A1, seed 200 and a fresh ImageNet initialization.
 - [ ] Complete SAMF engineering acceptance and its single 30-epoch screen.
