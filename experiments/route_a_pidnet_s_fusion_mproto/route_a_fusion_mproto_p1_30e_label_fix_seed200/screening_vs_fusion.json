@@ -1,0 +1,91 @@
+{
+  "terminology": "fire_conservative_noise_band is max-min, not a statistical sigma",
+  "baseline": {
+    "metrics": "G:\\py2\\experiments\\route_a_pidnet_s_fusion\\route_a_fusion_100e_label_fix_seed200\\metrics.jsonl",
+    "epoch_window": [
+      26,
+      30
+    ],
+    "miou_mean": 0.7861409555868736,
+    "fire_iou_mean": 0.6467101737950955,
+    "fire_conservative_noise_band": 0.014250943138484629,
+    "fire_sample_standard_deviation": 0.006089851426224935,
+    "miou_values": [
+      0.7678683840912598,
+      0.7932996047193628,
+      0.7944135566309853,
+      0.7886447504805859,
+      0.7864784820121743
+    ],
+    "fire_iou_values": [
+      0.6358597750161066,
+      0.6493812593823567,
+      0.6495982023626671,
+      0.6501107181545912,
+      0.6486009140597562
+    ],
+    "smoke_iou_values": [
+      0.7976434077884589,
+      0.8301245665853345,
+      0.8309908147076196,
+      0.8186877745934676,
+      0.8211906441011225
+    ],
+    "smoke_or_fire_class_collapse": false,
+    "prototype_health_valid": true,
+    "prototype_health_checked_epoch_range": [
+      1,
+      30
+    ],
+    "prototype_invalid_epochs": []
+  },
+  "candidates": [
+    {
+      "metrics": "G:\\py2\\experiments\\route_a_pidnet_s_fusion_mproto\\route_a_fusion_mproto_p1_30e_label_fix_seed200\\metrics.jsonl",
+      "epoch_window": [
+        26,
+        30
+      ],
+      "miou_mean": 0.7899207602199181,
+      "fire_iou_mean": 0.6406797204484376,
+      "fire_conservative_noise_band": 0.014458699956338972,
+      "fire_sample_standard_deviation": 0.005336061107316325,
+      "miou_values": [
+        0.785558947711694,
+        0.7885704368124965,
+        0.7909330392697359,
+        0.7890401213808272,
+        0.7955012559248372
+      ],
+      "fire_iou_values": [
+        0.6391017839383556,
+        0.638990023297454,
+        0.6423245616480672,
+        0.6342617667009861,
+        0.6487204666573251
+      ],
+      "smoke_iou_values": [
+        0.8220953927933927,
+        0.8272983228367218,
+        0.83080653460645,
+        0.8330550140869524,
+        0.8341870207774686
+      ],
+      "smoke_or_fire_class_collapse": false,
+      "prototype_health_valid": true,
+      "prototype_health_checked_epoch_range": [
+        1,
+        30
+      ],
+      "prototype_invalid_epochs": [],
+      "miou_gain": 0.0037798046330445034,
+      "fire_iou_gain": -0.006030453346657971,
+      "fire_interpretation": "neutral_within_conservative_band",
+      "passes_miou_rule": false,
+      "passes_fire_rule": false,
+      "health_and_classes_valid": true,
+      "passes_screening": false
+    }
+  ],
+  "recommended_metrics": null
+}
