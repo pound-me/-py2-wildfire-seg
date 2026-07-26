@@ -17,5 +17,11 @@ dysample
   url:    https://github.com/tiny-smart/dysample.git
   commit: 81a1de5caa95d55a0f5488425fa53ec7ef47f8f0 (2024-05-02)
 
+FreqFusion
+  url:    https://github.com/Linwei-Chen/FreqFusion.git
+  commit: 3fb0c70637a3c194fb74294d3ce4681958b26241 (2025-11-25)
+  license: no repository-level license declared as of 2026-07-26;
+           source audit only, not approved for redistribution or integration
+
 RoboFireFuseNet is NOT listed here: it carries local patches and is tracked
 directly by the parent repository (see RoboFireFuseNet/UPSTREAM.txt).
