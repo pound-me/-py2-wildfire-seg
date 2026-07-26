@@ -230,10 +230,11 @@ written.
 
 ABL and SAMF both show positive validation direction while acting on different
 error sources: ABL changes training-time boundary supervision without inference
-overhead, whereas SAMF performs smoke-conditioned thermal injection. If the
-standalone TGM result is also positive, TGM does not need to pass the existing
-single-method promotion or 100-epoch establishment threshold to trigger the
-following combination screens:
+overhead, whereas SAMF performs smoke-conditioned thermal injection. Their two-
+component combination is therefore independently authorized. If the standalone
+TGM result is also positive, TGM does not need to pass the existing single-
+method promotion or 100-epoch establishment threshold before it is added to the
+three-component screen:
 
 - Fusion + ABL + SAMF;
 - Fusion + ABL + SAMF + TGM.
@@ -256,8 +257,10 @@ Parameters, FLOPs and latency remain mandatory reported quantities. The test set
 remains sealed, and no three-seed expansion occurs before a 100-epoch result
 meets the formal method threshold.
 
-The user's phrase "TGM is also positive" is operationally frozen as follows,
-using the same epochs 26--30 means against the plain Fusion baseline:
+The TGM-positive condition applies only to `Fusion + ABL + SAMF + TGM`; it is
+not a prerequisite for `Fusion + ABL + SAMF`. The user's phrase "TGM is also
+positive" is operationally frozen as follows, using the same epochs 26--30
+means against the plain Fusion baseline:
 
 - at least one of TGM mIoU gain or Fire IoU gain must be strictly greater than
   zero;
@@ -268,21 +271,30 @@ using the same epochs 26--30 means against the plain Fusion baseline:
 - the standalone TGM architecture must pass the paired RTX 2060 `>=30 FPS`
   engineering gate.
 
-This sign criterion is only the trigger for the authorized combination screens;
-it does not promote TGM itself to a 100-epoch method. TGM's own promotion still
-uses the existing single-method screening rules.
+This sign criterion is only the trigger for adding TGM to the three-component
+screen; it does not control the ABL+SAMF pair and does not promote TGM itself to
+a 100-epoch method. TGM's own promotion still uses the existing single-method
+screening rules.
 
 Approved and numerically confirmed by the user on 2026-07-27 before TGM
 implementation, engineering output or training result existed.
 
-### Amendment 5 trigger outcome
+### Amendment 5 trigger outcome and execution correction
 
 The frozen standalone TGM run completed 30 epochs after this amendment was
 committed. Against the Fusion epochs 26--30 window it obtained mIoU gain
 `-0.0030784552` and Fire IoU gain `-0.0061460136`. Both primary gains are
 negative. Although the other tolerance, class-stability and paired 44.78 FPS
-engineering conditions are satisfied, the required strictly positive primary
-gain does not exist. Amendment 5 is therefore not triggered: neither
-Fusion+ABL+SAMF nor Fusion+ABL+SAMF+TGM is authorized for training.
+engineering conditions are satisfied, the required strictly positive TGM gain
+does not exist. Therefore `Fusion+ABL+SAMF+TGM` is not authorized.
+
+The earlier closure audit incorrectly treated TGM positivity as a prerequisite
+for both combinations. The user's same-day clarification confirms that this was
+an execution omission: because standalone ABL and standalone SAMF are both
+positive, `Fusion+ABL+SAMF` is independently required and remains pending. Its
+30-epoch gain is evaluated directly against plain Fusion at mIoU `+0.005` or
+Fire IoU `+0.01`, subject to no class collapse and the paired RTX 2060
+`>=30 FPS` gate. Passing promotes one fresh-initialization 100-epoch run;
+failure genuinely closes Route C. No threshold or observed result is changed.
 
 No test image or test metric was used in this trigger decision.

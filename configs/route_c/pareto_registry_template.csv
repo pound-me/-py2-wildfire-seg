@@ -9,6 +9,6 @@ abl,Fusion + ABL,100e formal,flame2_val_label_fix_seed200,0.808422709955544,27.5
 samf,Fusion + SAMF,100e formal,flame2_val_label_fix_seed200,0.8086130496925034,28.929772000000007,7705271,3.1545,failed_internal_threshold_positive_ablation,Formal best checkpoint; passes 30 FPS but not accuracy threshold
 tgm,Fusion + TGM,30e screen,flame2_val_label_fix_seed200,0.7830625003746203,22.329565749999993,7635252,3.0077,failed_screen_and_positive_trigger,Checkpoint-paired latency; both mIoU and Fire gains are negative
 samf_tgm,Fusion + SAMF + TGM,Route C historical combination,flame2_val_label_fix_seed200,,,,,superseded_by_amendment_5,Not one of the two newly authorized configurations
-abl_samf,Fusion + ABL + SAMF,Route C combination,flame2_val_label_fix_seed200,,,,,not_authorized_tgm_trigger_failed,TGM produced no positive primary gain
+abl_samf,Fusion + ABL + SAMF,Route C combination,flame2_val_label_fix_seed200,,,,,required_pending_execution,Independently triggered because ABL and SAMF are both positive
 abl_samf_tgm,Fusion + ABL + SAMF + TGM,Route C combination,flame2_val_label_fix_seed200,,,,,not_authorized_tgm_trigger_failed,TGM produced no positive primary gain
 robofirefusenet,RoboFireFuseNet,external comparison,flame2_val_label_fix_seed200,,,,,pending_same_split_evaluation,Do not use paper-reported metrics from another split/protocol

@@ -32,8 +32,8 @@
     "triggered": false
   },
   "combination_authorization": {
-    "abl_plus_samf_30e": false,
+    "abl_plus_samf_30e": true,
     "abl_plus_samf_plus_tgm_30e": false,
-    "reason": "TGM mIoU and Fire IoU gains are both negative"
+    "reason": "ABL+SAMF is independently required because both components are positive; TGM mIoU and Fire gains are both negative, so only the triple is disabled"
   }
 }

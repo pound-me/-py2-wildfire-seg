@@ -6,7 +6,7 @@
 
 ## 1. 路线边界
 
-TGM是独立Fusion PIDNet-S候选，不包含SAMF烟门，也不实现SAMF+TGM路径。ABL+SAMF及ABL+SAMF+TGM组合仅受Amendment 5的条件授权，当前不得提前运行。
+TGM是独立Fusion PIDNet-S候选，不包含SAMF烟门，也不实现SAMF+TGM路径。ABL+SAMF由ABL与SAMF均正向独立授权；TGM正向与否只决定是否授权ABL+SAMF+TGM。工程验收阶段不得提前运行任何尚未到执行节点的组合。
 
 ## 2. 用户确认的冻结定义
 
@@ -26,7 +26,7 @@ F_out = F_pag3 + alpha * g_c * g_s * Conv1x1_64->64_no-bias(F_pag3)
 
 ## 3. 正向触发定义
 
-TGM第26–30轮均值相对Fusion基线至少一个mIoU/Fire增益严格大于0；另一指标必须保持在原容忍范围内：mIoU不低于`-0.005`，Fire不低于`-Delta_fire`。同时不得类别崩溃，且架构须达到RTX 2060成对实测30 FPS。该定义只触发Amendment 5组合筛选，不替代TGM自身进入100轮的原门槛。
+TGM第26–30轮均值相对Fusion基线至少一个mIoU/Fire增益严格大于0；另一指标必须保持在原容忍范围内：mIoU不低于`-0.005`，Fire不低于`-Delta_fire`。同时不得类别崩溃，且架构须达到RTX 2060成对实测30 FPS。该定义只触发将TGM加入ABL+SAMF三元组合，不控制ABL+SAMF两两组合，也不替代TGM自身进入100轮的原门槛。
 
 ## 4. 工程准入清单
 
