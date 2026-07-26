@@ -1,0 +1,12 @@
+method_id,display_name,stage,split_id,miou,latency_ms_median,parameters,gflops,status,notes
+fusion_baseline,Fusion PIDNet-S,100e formal,flame2_val_label_fix_seed200,,,,,pending_paired_latency,Formal Route A Fusion baseline
+deconv_d2,Fusion + DEConv D2,30e screen,flame2_val_label_fix_seed200,,,,,pending_paired_latency,One of the five closed Route A modules
+mproto_p1,Fusion + mproto P1,30e screen,flame2_val_label_fix_seed200,,,,,pending_paired_latency,Training-only prototype supervision; inference architecture equals Fusion
+dysample_pag4,Fusion + DySample Pag4,30e screen,flame2_val_label_fix_seed200,,,,,pending_paired_latency,One of the five closed Route A modules
+dysample_context,Fusion + DySample Context,engineering only,flame2_val_label_fix_seed200,,,,,untrained_no_miou,Do not invent mIoU
+freqfusion_pag3,Fusion + FreqFusion Pag3,engineering only,flame2_val_label_fix_seed200,,,,,untrained_no_miou,Do not invent mIoU
+abl,Fusion + ABL,100e formal,flame2_val_label_fix_seed200,,,,,pending_paired_latency,Training-only loss; inference architecture equals Fusion
+samf,Fusion + SAMF,Route C,flame2_val_label_fix_seed200,,,,,not_started,Fill only after frozen experiment artifacts
+tgm,Fusion + TGM,Route C,flame2_val_label_fix_seed200,,,,,blocked_by_samf,Do not implement before SAMF screening is frozen
+samf_tgm,Fusion + SAMF + TGM,Route C combination,flame2_val_label_fix_seed200,,,,,blocked_by_individual_100e,Only if both individual methods pass 100e
+robofirefusenet,RoboFireFuseNet,external comparison,flame2_val_label_fix_seed200,,,,,pending_same_split_evaluation,Do not use paper-reported metrics from another split/protocol

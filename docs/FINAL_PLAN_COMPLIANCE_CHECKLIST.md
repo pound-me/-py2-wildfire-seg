@@ -138,6 +138,8 @@ engineering check is not treated as evidence that a method improves accuracy.
   Table 1; execution remains blocked until the IR best checkpoint is frozen.
 - [x] Prepare a Table 1 builder that rejects split, input-channel or checkpoint
   mismatches across validation metrics, complexity and latency artifacts.
+- [x] Create the unified Pareto registry template and a plotter that leaves
+  untrained or unmeasured methods pending instead of inventing coordinates.
 - [ ] Complete SAMF engineering acceptance and its single 30-epoch screen.
 - [x] Verify the Route C bibliography against formal titles, venues/years and
   DOI/original metadata; archive BibTeX and code-reuse status. Mark SGFNet,
