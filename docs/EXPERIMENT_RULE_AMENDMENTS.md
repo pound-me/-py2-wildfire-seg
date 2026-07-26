@@ -133,3 +133,18 @@ A possible future change from zero-overhead structural gating to a deployment
 budget is only a proposal for Route C. It does not change the active rule and
 does not retroactively admit any failed candidate unless the user and adviser
 approve it in writing.
+
+### Screening outcome
+
+The single ABL run completed 30 epochs on 2026-07-26. Against the frozen
+Fusion epochs 26--30 window it achieved:
+
+- mIoU mean: `0.7923770674`, gain `+0.0062361118`;
+- Fire IoU mean: `0.6453304305`, gain `-0.0013797433`;
+- Fire interpretation: neutral inside the baseline conservative band
+  `±0.0142509431`;
+- no Smoke/Fire class collapse.
+
+It therefore passes the predefined mIoU rule and is promoted, without any
+hyperparameter change, to one 100-epoch formal run. The test set remains
+sealed.

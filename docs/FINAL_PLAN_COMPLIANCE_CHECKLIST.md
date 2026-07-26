@@ -104,6 +104,8 @@ engineering check is not treated as evidence that a method improves accuracy.
   now closed and that no candidate qualifies for a Fusion 100-epoch run.
 - [x] Obtain the user's explicit choice: Route B is authorized because plain
   direct-concatenation Fusion leaves the method-innovation section too thin.
-- [ ] Complete the single diagnosis-driven Route B candidate (ABL) at 30
-  epochs; three-seed and test-set work remains paused until its decision is
-  frozen.
+- [x] Complete the single diagnosis-driven Route B candidate (ABL) at 30
+  epochs. It passes through mIoU +0.006236 with Fire neutral inside the
+  conservative noise band.
+- [ ] Complete the promoted ABL 100-epoch formal run; three-seed and test-set
+  work remains paused until its formal decision is frozen.
