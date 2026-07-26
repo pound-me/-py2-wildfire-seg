@@ -1,0 +1,27 @@
+{
+  "checkpoint": null,
+  "checkpoint_epoch": null,
+  "weights_source": "architecture_only_random_initialization",
+  "model": "pidnet_s_dysample",
+  "input_shape": [
+    1,
+    4,
+    256,
+    256
+  ],
+  "training_parameters_with_auxiliary_heads": 7783143,
+  "inference_parameters_main_head": 7689987,
+  "forward_flops": 2958135336,
+  "forward_gflops": 2.958135336,
+  "estimated_macs": 1479067668.0,
+  "estimated_gmacs": 1.479067668,
+  "operator_flops": {
+    "aten::conv2d": 2957148160,
+    "aten::mul": 348160,
+    "aten::add": 639016
+  },
+  "deconv_modules_before_reparameterization": 0,
+  "deconv_modules_in_deployment_model": 0,
+  "counting_method": "torch.profiler with_flops=True; multiply and add are counted as separate floating-point operations",
+  "scope": "deployment model forward, main segmentation output only"
+}

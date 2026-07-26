@@ -86,8 +86,10 @@ engineering check is not treated as evidence that a method improves accuracy.
   `81a1de5caa95d55a0f5488425fa53ec7ef47f8f0` and record its MIT LICENSE.
 - [x] Limit initial DySample screening to two theory-driven single-position
   variants: late Pag4 semantic fusion and SPP-context upsampling before DFM.
-- [ ] Complete DySample engineering checks and run both 30-epoch screening
-  experiments under the adopted A1 protocol.
+- [x] Close both theory-driven DySample positions under the Route A Fusion
+  protocol: Pag4 passes engineering but fails its 30-epoch accuracy screen;
+  Context passes functional/AMP checks but exceeds baseline deployment
+  parameters and FLOPs, so it is correctly stopped before training.
 - [x] Audit FreqFusion licensing and switch from the unlicensed repository-root
   file to the official repository's Apache-2.0 SegNeXt integration; keep the
   complete upstream checkout ignored by the parent repository.
@@ -98,3 +100,8 @@ engineering check is not treated as evidence that a method improves accuracy.
   48.907% and AMP latency increases 21.699% on RTX 2060; deployment parameters
   and FLOPs also increase, so the 3% lightweight gate fails and no 30-epoch
   screening run is started.
+- [x] Record that every explicitly named Route A primary/backup candidate is
+  now closed and that no candidate qualifies for a Fusion 100-epoch run.
+- [ ] Obtain the user's explicit choice to freeze plain Fusion PIDNet-S as the
+  final method or formally authorize one new, tightly scoped research route;
+  three-seed and test-set work remains paused until then.
