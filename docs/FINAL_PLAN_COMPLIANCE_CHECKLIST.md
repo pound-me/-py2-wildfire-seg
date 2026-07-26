@@ -135,3 +135,6 @@ engineering check is not treated as evidence that a method improves accuracy.
 - [x] Freeze a non-overwriting `route_c_*` IR-only 100-epoch config and launch
   record using label_fix A1, seed 200 and a fresh ImageNet initialization.
 - [ ] Complete SAMF engineering acceptance and its single 30-epoch screen.
+- [x] Verify the Route C bibliography against formal titles, venues/years and
+  DOI/original metadata; archive BibTeX and code-reuse status. Mark SGFNet,
+  CBL, top-level FreqFusion and PSL as no-license reference-only sources.

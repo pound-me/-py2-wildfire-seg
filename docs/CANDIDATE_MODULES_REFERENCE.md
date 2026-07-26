@@ -23,7 +23,7 @@
 
 | 方法 | 论文 | 出处 / 年份 | 机制简述 | 推理开销 | 代码仓库 | 状态 |
 |---|---|---|---|---|---|---|
-| PSL（BES + PUO） | Prototype-based Scatter Learning for Smoke Segmentation | Pattern Recognition, Vol.172, 2026, Article 112605, DOI: 10.1016/j.patcog.2025.112605 | 每类多原型 + Bottom-K 特征值散度损失（类内聚合）+ 原型去相关（防退化） | 零（训练期 only） | https://github.com/LujianYao/psl （以项目文档核实结果为准） | [已采纳] dfm 后多原型分离的主要参照 |
+| PSL（BES + PUO） | Prototype-based Scatter Learning for Smoke Segmentation | Pattern Recognition, Vol.172, 2026, Article 112605, DOI: 10.1016/j.patcog.2025.112605 | 每类多原型 + Bottom-K 特征值散度损失（类内聚合）+ 原型去相关（防退化） | 零（训练期 only） | https://github.com/LujianYao/psl（无仓库级LICENSE，仅思想参考；本项目为独立feature-side surrogate） | [已采纳] dfm 后多原型分离的主要参照 |
 | 跨图像像素对比 + 记忆库 | Exploring Cross-Image Pixel Contrast for Semantic Segmentation | ICCV, 2021 | 像素级 InfoNCE，EMA 记忆库跨 batch 积累各类样本，缓解小 batch 下稀有类样本不足 | 零（训练期 only） | https://github.com/tfzhou/ContrastiveSeg （已核实） | [参考] EMA 跨批次机制的参照 |
 | FoSp | FoSp: Focus and Separation Network for Early Smoke Segmentation | arXiv:2306.04474, 2023 | 透射率引导，把烟雾从背景域显式分离；整体结构偏重 | 较大 | 见论文页 | [参考] 只借鉴分离思想 |
 
