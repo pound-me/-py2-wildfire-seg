@@ -95,3 +95,14 @@ checkpoint加载路径未受影响。
 - `experiments/route_a_pidnet_s_fusion_dysample/route_a_fusion_dysample_pag4_engineering/pipeline_check.json`
 - `experiments/route_a_pidnet_s_fusion_dysample/route_a_fusion_dysample_pag4_engineering/complexity_architecture_only.json`
 - `experiments/route_a_pidnet_s_fusion_dysample/route_a_fusion_dysample_pag4_engineering/fusion_baseline_complexity_architecture_only.json`
+
+## 6. 30轮筛选结论
+
+Fusion-DySample Pag4已完成30轮。第26--30轮均值为mIoU 0.7863853198、
+Fire IoU 0.6409149274；相对Fusion基线分别为 +0.0002443642 与
+-0.0057952464。Fire变化位于保守噪声带内，两条进入100轮规则均未满足。
+
+正式结论：不通过，不进入100轮。详细记录见
+`docs/FUSION_DYSAMPLE_30E_RESULT.md`。下一备用方向如需启动，必须另行完成来源与
+轻量化审计并落档，不能直接把本轮失败解释为对所有DySample插入位置或FreqFusion的
+结论。
