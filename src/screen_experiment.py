@@ -73,10 +73,13 @@ def summarize(path: Path, start: int, end: int) -> dict:
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Screen 30-epoch candidates using the fixed 26-30 protocol."
+        description=(
+            "Summarize a baseline window and optionally screen candidates "
+            "using the fixed epoch-window protocol."
+        )
     )
     parser.add_argument("--baseline", type=Path, required=True)
-    parser.add_argument("--candidate", type=Path, action="append", required=True)
+    parser.add_argument("--candidate", type=Path, action="append", default=[])
     parser.add_argument("--start-epoch", type=int, default=26)
     parser.add_argument("--end-epoch", type=int, default=30)
     parser.add_argument("--output", type=Path)

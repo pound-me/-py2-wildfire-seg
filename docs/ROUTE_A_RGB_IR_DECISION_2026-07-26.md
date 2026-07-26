@@ -111,3 +111,27 @@ DySample Pag4 已完成 30 轮并归档：
 
 批准依据：用户在 2026-07-26 明确下达 Route A 执行顺序，并要求诊断与 Fusion
 30 轮证据完成后将路线变更正式写入决策日志。本文件在上述证据全部生成后写入。
+
+## 8. Fusion 100 轮正式基线确立
+
+Fusion 100 轮训练与 best checkpoint 验证已经完成，原第 7 节第 3 条的候选条件
+已满足。自此，Fusion PIDNet-S 正式替代 RGB PIDNet-S，成为后续 Route A
+结构筛选、噪声带和论文主表的基线。
+
+- 运行：`experiments/route_a_pidnet_s_fusion/route_a_fusion_100e_label_fix_seed200`
+- Best epoch：86
+- Best mIoU：0.806728
+- Background / Smoke / Fire IoU：0.908876 / 0.841998 / 0.669310
+- Fire precision / recall：0.794331 / 0.809615
+- Fire Boundary F1@3px：0.909688
+- 第 26--30 轮 mIoU 均值：0.786141
+- 第 26--30 轮 Fire IoU 均值：0.646710
+- 新 Fire 保守噪声带 `Delta_fire`：0.014251
+- 新 Fire 样本标准差：0.006090
+- 参数量：7,623,939
+- FLOPs：2.956014 GFLOPs
+- RTX 2060 独立评估延迟：25.871 ms（38.7 FPS）
+
+相对原 RGB best，Fusion best 的 mIoU / Smoke / Fire 分别提高
+0.193057 / 0.086159 / 0.452081。测试集仍未使用。详细正式记录见
+`docs/FUSION_BASELINE_100E_RECORD.md`。

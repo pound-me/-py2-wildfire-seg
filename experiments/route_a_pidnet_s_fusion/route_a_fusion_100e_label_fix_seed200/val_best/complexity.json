@@ -1,0 +1,26 @@
+{
+  "checkpoint": "G:\\py2\\experiments\\route_a_pidnet_s_fusion\\route_a_fusion_100e_label_fix_seed200\\best.pth",
+  "checkpoint_epoch": 86,
+  "model": "pidnet_s",
+  "input_shape": [
+    1,
+    4,
+    256,
+    256
+  ],
+  "training_parameters_with_auxiliary_heads": 7717095,
+  "inference_parameters_main_head": 7623939,
+  "forward_flops": 2956013568,
+  "forward_gflops": 2.956013568,
+  "estimated_macs": 1478006784.0,
+  "estimated_gmacs": 1.478006784,
+  "operator_flops": {
+    "aten::conv2d": 2955051008,
+    "aten::mul": 331776,
+    "aten::add": 630784
+  },
+  "deconv_modules_before_reparameterization": 0,
+  "deconv_modules_in_deployment_model": 0,
+  "counting_method": "torch.profiler with_flops=True; multiply and add are counted as separate floating-point operations",
+  "scope": "deployment model forward, main segmentation output only"
+}
