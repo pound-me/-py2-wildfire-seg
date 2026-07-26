@@ -40,3 +40,4 @@ third_party/PIDNet/
 third_party/PSL/
 third_party/dysample/
 third_party/FreqFusion/
+third_party/active-boundary-loss/

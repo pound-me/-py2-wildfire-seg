@@ -83,3 +83,53 @@ The fusion model is promoted to a 100-epoch formal-baseline run. The existing
 RGB baseline is retained as motivation evidence, and DEConv/mproto code is
 retained for fresh 30-epoch screening only after the fusion baseline is
 established. No test image or test metric was used in this amendment.
+
+## Amendment 3: diagnosis-driven Route B single candidate
+
+Date: 2026-07-26
+
+### Previous decision point
+
+After all named Route A structural and backup candidates were closed, the
+project required an explicit choice between freezing plain Fusion PIDNet-S and
+authorizing one tightly scoped additional research candidate.
+
+### User authorization
+
+The user selected Route B because direct RGB+IR concatenation alone leaves the
+paper's method-innovation section too thin. Route B is limited to one 30-epoch
+candidate; the test set remains sealed and the Fusion baseline, seed,
+augmentation protocol, learning-rate horizon and screening thresholds remain
+unchanged.
+
+### Evidence-driven candidate selection
+
+The fixed validation error profile shows that 78.4324% of all errors lie
+within the three-pixel semantic-boundary band. Smoke boundary recall is
+0.747883, Fire boundary recall is 0.835477, and 63.32% of Fire errors are
+Fire-to-Smoke confusions. Consequently, Route B must directly supervise the
+main semantic logits at class boundaries and must add no inference parameter,
+FLOP or output.
+
+Active Boundary Loss (ABL, AAAI 2022 Oral) is selected as the only Route B
+candidate. The author repository is Apache-2.0 and pinned at commit
+`1511507533ad98f04ea26e3648360a6c1d477d37`. Conditional Boundary Loss is not
+selected because its official implementation is coupled to OCRHead/MaskFormer
+and the audited repository does not declare a repository-level LICENSE.
+
+### Screening discipline
+
+- Run exactly one ABL configuration for 30 epochs, seed 200, with a 100-epoch
+  polynomial-learning-rate horizon.
+- Use ABL weight 1.0 and the paper/source defaults without a weight sweep.
+- Compare epochs 26--30 against the frozen Fusion baseline window.
+- A second Route B candidate is prohibited unless ABL is a documented near
+  miss with a specific, correctable cause and the user separately approves it.
+- Otherwise Route B closes after ABL. No test metric may be consulted.
+
+### Lightweight-budget proposal remains separate
+
+A possible future change from zero-overhead structural gating to a deployment
+budget is only a proposal for Route C. It does not change the active rule and
+does not retroactively admit any failed candidate unless the user and adviser
+approve it in writing.

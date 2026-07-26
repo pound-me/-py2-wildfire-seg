@@ -4,6 +4,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
+from active_boundary_loss import ActiveBoundaryLoss
 from prototype_learning import EMAPrototypeTotalLoss
 
 
@@ -284,6 +285,79 @@ class FireBoundaryTotalLoss:
             "fire_boundary_dice": fire_dice,
             "fire_boundary_positive_pixels": positive_count,
             "weighted_fire_boundary": weighted_fire,
+        }
+        return losses, metric_outputs, accuracy, components
+
+
+class ActiveBoundaryTotalLoss:
+    """PIDNet loss plus paper-driven ABL on the main semantic logits."""
+
+    def __init__(self, base_criterion: object, config: dict) -> None:
+        self.base_criterion = base_criterion
+        self.objective_name = "active_boundary"
+        smoothing_behavior = str(
+            config.get(
+                "ABL_LABEL_SMOOTHING_BEHAVIOR",
+                "official_source_lssce_v1",
+            )
+        )
+        if smoothing_behavior != "official_source_lssce_v1":
+            raise ValueError(
+                "Only the official ABL-linked LSSCE-V1 smoothing behavior is "
+                "supported."
+            )
+        if not bool(config.get("ABL_FP32_UNDER_AMP", True)):
+            raise ValueError("ABL must remain FP32 under AMP for numerical stability.")
+        self.auxiliary_weight = float(config.get("ABL_WEIGHT", 1.0))
+        self.active_boundary = ActiveBoundaryLoss(
+            ignore_label=int(config["IGNORE_LABEL"]),
+            detach_neighbors=bool(config.get("ABL_DETACH_NEIGHBORS", True)),
+            max_boundary_ratio=float(config.get("ABL_MAX_BOUNDARY_RATIO", 0.01)),
+            label_smoothing=float(config.get("ABL_LABEL_SMOOTHING", 0.2)),
+            max_clip_distance=float(config.get("ABL_MAX_CLIP_DISTANCE", 20.0)),
+            threshold_scope=str(config.get("ABL_THRESHOLD_SCOPE", "per_image")),
+        )
+
+    def get_loss(
+        self,
+        outputs: list[torch.Tensor] | tuple[torch.Tensor, ...],
+        labels: torch.Tensor,
+        edges: torch.Tensor,
+    ) -> tuple[torch.Tensor, list[torch.Tensor], object, dict[str, torch.Tensor]]:
+        if not isinstance(outputs, (list, tuple)) or len(outputs) < 3:
+            raise RuntimeError(
+                "Active-boundary training expects PIDNet detail, semantic, "
+                "and boundary outputs."
+            )
+        raw_outputs = list(outputs)
+        losses, metric_outputs, accuracy, base_parts = self.base_criterion.get_loss(
+            raw_outputs,
+            labels,
+            edges,
+        )
+        base_total = losses.mean()
+        active_boundary, diagnostics = self.active_boundary(
+            raw_outputs[1],
+            labels,
+        )
+        weighted_active_boundary = self.auxiliary_weight * active_boundary
+        losses = losses + weighted_active_boundary
+        components = {
+            "base_total": base_total,
+            "semantic": base_parts[0].mean(),
+            "boundary": base_parts[1].mean(),
+            "active_boundary": active_boundary,
+            "weighted_active_boundary": weighted_active_boundary,
+            "abl_predicted_boundary_pixels": diagnostics[
+                "predicted_boundary_pixels"
+            ],
+            "abl_supervised_boundary_pixels": diagnostics[
+                "supervised_boundary_pixels"
+            ],
+            "abl_mean_boundary_distance": diagnostics[
+                "mean_boundary_distance"
+            ],
+            "abl_skipped": diagnostics["skipped"],
         }
         return losses, metric_outputs, accuracy, components
 
@@ -668,6 +742,8 @@ class ClassPrototypeTotalLoss:
 
 
 def build_training_criterion(base_criterion: object, config: dict):
+    if config.get("TRAINING_OBJECTIVE") == "active_boundary":
+        return ActiveBoundaryTotalLoss(base_criterion, config)
     if config.get("TRAINING_OBJECTIVE") == "fire_boundary":
         return FireBoundaryTotalLoss(base_criterion, config)
     if config.get("TRAINING_OBJECTIVE") == "fire_region":
@@ -680,6 +756,7 @@ def build_training_criterion(base_criterion: object, config: dict):
 
 
 __all__ = [
+    "ActiveBoundaryTotalLoss",
     "ClassPrototypeLoss",
     "ClassPrototypeTotalLoss",
     "EMAPrototypeTotalLoss",

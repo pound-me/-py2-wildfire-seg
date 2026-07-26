@@ -632,6 +632,8 @@ def main() -> None:
         print(f"Fire-boundary loss weight: {criterion.auxiliary_weight:.4f}")
     elif criterion.objective_name == "fire_region":
         print(f"Fire-region loss weight: {criterion.auxiliary_weight:.4f}")
+    elif criterion.objective_name == "active_boundary":
+        print(f"Active-boundary loss weight: {criterion.auxiliary_weight:.4f}")
     elif criterion.objective_name == "class_prototype":
         print(
             "Class/prototype loss weights: "
@@ -783,6 +785,14 @@ def main() -> None:
                     "  fire-region auxiliary: "
                     f"train={train_loss_components['fire_region_auxiliary']:.5f}, "
                     f"val={validation_loss_components['fire_region_auxiliary']:.5f}"
+                )
+            elif criterion.objective_name == "active_boundary":
+                print(
+                    "  active boundary: "
+                    f"train={train_loss_components['active_boundary']:.5f}, "
+                    f"val={validation_loss_components['active_boundary']:.5f}, "
+                    "supervised px="
+                    f"{train_loss_components['abl_supervised_boundary_pixels']:.1f}"
                 )
             elif criterion.objective_name == "class_prototype":
                 print(

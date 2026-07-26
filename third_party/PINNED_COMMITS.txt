@@ -27,5 +27,17 @@ FreqFusion
   policy: source remains in the ignored checkout and is not redistributed by
           the parent repository
 
+active-boundary-loss
+  url:    https://github.com/wangchi95/active-boundary-loss.git
+  commit: 1511507533ad98f04ea26e3648360a6c1d477d37 (2022-03-24)
+  license: Apache-2.0
+  source: abl.py
+  source sha256: 07fc49d923a2420db7316eeb1650e95b2ea415bc85233937df99b239e3c6fe87
+  license sha256: 1eb85fc97224598dad1852b5d6483bbcf0aa8608790dcc657a5a2a761ae9c8c6
+  linked LSSCE-V1 commit: af876e43218694dc8599cc4711d9a5c5e043b1b2
+  linked label_smooth.py sha256: 0367fcad3d1b62283db0a4bb40fe7b5e08095f4ad17db4e6b96b323162ac2251
+  policy: the ignored checkout is used for provenance and numerical checks;
+          the parent repository contains a documented device-safe adaptation
+
 RoboFireFuseNet is NOT listed here: it carries local patches and is tracked
 directly by the parent repository (see RoboFireFuseNet/UPSTREAM.txt).

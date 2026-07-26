@@ -31,8 +31,8 @@
 
 | 方法 | 论文 | 出处 / 年份 | 机制简述 | 推理开销 | 代码仓库 | 状态 |
 |---|---|---|---|---|---|---|
-| CBL（Conditional Boundary Loss） | Conditional Boundary Loss for Semantic Segmentation | IEEE TIP, 2023 | 边界像素拉向本类局部均值、推离邻近他类；同时做边界锐化与边界处类别分离 | 零（损失 only） | 使用前自行核对官方仓库 | [参考] 可作 mproto 的替代消融 |
-| ABL（Active Boundary Loss） | Active Boundary Loss for Semantic Segmentation | AAAI, 2022 | 预测边界向真值边界法向逐步对齐 | 零（损失 only） | 使用前自行核对官方仓库 | [参考] |
+| CBL（Conditional Boundary Loss） | Conditional Boundary Loss for Semantic Segmentation | IEEE TIP, 2023 | 边界像素拉向本类局部均值、推离邻近他类；同时做边界锐化与边界处类别分离 | 零（损失 only） | 作者官方实现未声明仓库级 LICENSE，且接口绑定 OCRHead/MaskFormer | [未选择] 不进入 B 路线 |
+| ABL（Active Boundary Loss） | Active Boundary Loss for Semantic Segmentation | AAAI, 2022 Oral | 预测边界向真值边界法向逐步对齐，直接监督主分割 logits | 零（损失 only） | https://github.com/wangchi95/active-boundary-loss（作者官方，Apache-2.0，已固定 commit） | [已采纳] B 路线唯一30轮候选 |
 
 ## 四、Light-Bag / 融合与上采样
 
@@ -57,6 +57,7 @@
 1. [已采纳] P 分支 DEConv（pidnet_s_deconv，D1/D2 变体，合核训练 + 零初始化等价 + 部署重参数化）。
 2. [已采纳] dfm 后多原型分离（pidnet_s_dfm_mproto，PSL 式多原型 + EMA 0.99 跨批次 + 类内去相关；
    Fire 采用混合点采样：256 均匀 + 256 按连通域均匀，基于与标签同步增强的连通域 ID 图）。
-3. [备用] DySample / FreqFusion：仅当 DEConv 与多原型均未通过 30 轮筛选时启用。
-4. 已被本项目阴性实验排除的路线：单独增加烟雾二值辅助（LSCM v2/v2.1）、单独火焰边界损失
+3. [已归档] DySample / FreqFusion：在 Fusion 协议下已完成性能或工程闭环，均未进入100轮。
+4. [当前扩展] 依据 Fusion 错误画像，仅批准 ABL 作为 B 路线唯一30轮候选；CBL不进入训练。
+5. 已被本项目阴性实验排除的路线：单独增加烟雾二值辅助（LSCM v2/v2.1）、单独火焰边界损失
    （fire_boundary）、单独火焰区域损失（fire_region）。详见 docs/ 下各实验记录。

@@ -1,0 +1,185 @@
+{
+  "config": "G:\\py2\\configs\\route_a\\pidnet_s_fusion_abl_30e_label_fix.yaml",
+  "official_repository": "https://github.com/wangchi95/active-boundary-loss",
+  "official_commit_expected": "1511507533ad98f04ea26e3648360a6c1d477d37",
+  "official_commit_actual": "1511507533ad98f04ea26e3648360a6c1d477d37",
+  "official_checkout_clean": true,
+  "official_license": "Apache-2.0",
+  "official_source_sha256": "07fc49d923a2420db7316eeb1650e95b2ea415bc85233937df99b239e3c6fe87",
+  "official_license_sha256": "1eb85fc97224598dad1852b5d6483bbcf0aa8608790dcc657a5a2a761ae9c8c6",
+  "linked_lssce_commit": "af876e43218694dc8599cc4711d9a5c5e043b1b2",
+  "linked_lssce_sha256": "0367fcad3d1b62283db0a4bb40fe7b5e08095f4ad17db4e6b96b323162ac2251",
+  "source_equivalence": {
+    "official_loss": 0.15205223858356476,
+    "adapted_source_batch_loss": 0.15205223858356476,
+    "loss_maximum_absolute_error": 0.0,
+    "gradient_maximum_absolute_error": 0.0,
+    "predicted_boundary_masks_equal": true,
+    "source_batch_diagnostics": {
+      "predicted_boundary_pixels": 72.0,
+      "supervised_boundary_pixels": 72.0,
+      "mean_boundary_distance": 1.5416666269302368,
+      "skipped": 0.0
+    },
+    "per_image_seed_counts": [
+      8,
+      5
+    ],
+    "per_image_seed_maximum": 10.24,
+    "per_image_fixed_input_deterministic": true
+  },
+  "matched_pretrained_tensors": 301,
+  "selected_training_batch_index": 31,
+  "training_parameters": 7717095,
+  "inference_parameters": 7623939,
+  "baseline_inference_parameters": 7623939,
+  "inference_parameter_increment": 0,
+  "amp_total_loss": 12.963338851928711,
+  "amp_active_boundary_loss": 0.1296287626028061,
+  "loss_components": {
+    "base_total": 12.833709716796875,
+    "semantic": 8.804259300231934,
+    "boundary": 0.11623739451169968,
+    "active_boundary": 0.1296287626028061,
+    "weighted_active_boundary": 0.1296287626028061,
+    "abl_predicted_boundary_pixels": 6216.0,
+    "abl_supervised_boundary_pixels": 6216.0,
+    "abl_mean_boundary_distance": 1.8067889213562012,
+    "abl_skipped": 0.0
+  },
+  "isolated_abl_gradient_norms": {
+    "final_layer": 0.3830288780302771,
+    "dfm": 0.13997579690571543,
+    "p_branch_layer5": 0.1101928075039713,
+    "i_branch_layer5": 1.49033351880442,
+    "d_branch_layer5": 0.11415322121205367,
+    "auxiliary_p_head": 0.0,
+    "auxiliary_d_head": 0.0
+  },
+  "full_boundary_head_gradient_norm": 0.49036857798312555,
+  "amp_optimizer_step_parameter_delta": 0.0003784298896789551,
+  "amp_optimizer_scaler_attempts": [
+    {
+      "attempt": 1,
+      "scale_before": 65536.0,
+      "scale_after": 32768.0,
+      "parameter_delta": 0.0
+    },
+    {
+      "attempt": 2,
+      "scale_before": 32768.0,
+      "scale_after": 16384.0,
+      "parameter_delta": 0.0
+    },
+    {
+      "attempt": 3,
+      "scale_before": 16384.0,
+      "scale_after": 8192.0,
+      "parameter_delta": 0.0
+    },
+    {
+      "attempt": 4,
+      "scale_before": 8192.0,
+      "scale_after": 4096.0,
+      "parameter_delta": 0.0
+    },
+    {
+      "attempt": 5,
+      "scale_before": 4096.0,
+      "scale_after": 2048.0,
+      "parameter_delta": 0.0
+    },
+    {
+      "attempt": 6,
+      "scale_before": 2048.0,
+      "scale_after": 2048.0,
+      "parameter_delta": 0.0003784298896789551
+    }
+  ],
+  "baseline_amp_optimizer_step_parameter_delta": 0.0003784298896789551,
+  "baseline_amp_optimizer_scaler_attempts": [
+    {
+      "attempt": 1,
+      "scale_before": 65536.0,
+      "scale_after": 32768.0,
+      "parameter_delta": 0.0
+    },
+    {
+      "attempt": 2,
+      "scale_before": 32768.0,
+      "scale_after": 16384.0,
+      "parameter_delta": 0.0
+    },
+    {
+      "attempt": 3,
+      "scale_before": 16384.0,
+      "scale_after": 8192.0,
+      "parameter_delta": 0.0
+    },
+    {
+      "attempt": 4,
+      "scale_before": 8192.0,
+      "scale_after": 4096.0,
+      "parameter_delta": 0.0
+    },
+    {
+      "attempt": 5,
+      "scale_before": 4096.0,
+      "scale_after": 2048.0,
+      "parameter_delta": 0.0
+    },
+    {
+      "attempt": 6,
+      "scale_before": 2048.0,
+      "scale_after": 2048.0,
+      "parameter_delta": 0.0003784298896789551
+    }
+  ],
+  "checkpoint_model_maximum_restore_error": 0.0,
+  "checkpoint_optimizer_state_entries": 242,
+  "checkpoint_scaler_state_restored": true,
+  "training_output_shapes": [
+    [
+      4,
+      3,
+      32,
+      32
+    ],
+    [
+      4,
+      3,
+      32,
+      32
+    ],
+    [
+      4,
+      1,
+      32,
+      32
+    ]
+  ],
+  "metric_output_shapes": [
+    [
+      4,
+      3,
+      256,
+      256
+    ],
+    [
+      4,
+      3,
+      256,
+      256
+    ]
+  ],
+  "inference_output_shape": [
+    1,
+    3,
+    32,
+    32
+  ],
+  "checkpoint_criterion_state": null,
+  "inference_returns_tensor_only": true,
+  "inference_contains_abl_state": false,
+  "testset_sealed": true
+}

@@ -102,6 +102,8 @@ engineering check is not treated as evidence that a method improves accuracy.
   screening run is started.
 - [x] Record that every explicitly named Route A primary/backup candidate is
   now closed and that no candidate qualifies for a Fusion 100-epoch run.
-- [ ] Obtain the user's explicit choice to freeze plain Fusion PIDNet-S as the
-  final method or formally authorize one new, tightly scoped research route;
-  three-seed and test-set work remains paused until then.
+- [x] Obtain the user's explicit choice: Route B is authorized because plain
+  direct-concatenation Fusion leaves the method-innovation section too thin.
+- [ ] Complete the single diagnosis-driven Route B candidate (ABL) at 30
+  epochs; three-seed and test-set work remains paused until its decision is
+  frozen.
