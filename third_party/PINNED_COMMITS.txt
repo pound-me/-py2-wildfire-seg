@@ -20,8 +20,12 @@ dysample
 FreqFusion
   url:    https://github.com/Linwei-Chen/FreqFusion.git
   commit: 3fb0c70637a3c194fb74294d3ce4681958b26241 (2025-11-25)
-  license: no repository-level license declared as of 2026-07-26;
-           source audit only, not approved for redistribution or integration
+  root license: no repository-level license declared as of 2026-07-26
+  selected source: SegNeXt/mmseg/models/decode_heads/FreqFusion.py
+  selected license: Apache-2.0 from SegNeXt/LICENSE
+  source sha256: 14a5af3a614a721cc01777102974e0cbfb4f29a19a45df8b883be7b0d1f38d91
+  policy: source remains in the ignored checkout and is not redistributed by
+          the parent repository
 
 RoboFireFuseNet is NOT listed here: it carries local patches and is tracked
 directly by the parent repository (see RoboFireFuseNet/UPSTREAM.txt).

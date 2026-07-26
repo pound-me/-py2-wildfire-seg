@@ -39,7 +39,7 @@
 | 模块 | 论文 | 出处 / 年份 | 机制简述 | 推理开销 | 代码仓库 | 状态 |
 |---|---|---|---|---|---|---|
 | DySample | Learning to Upsample by Learning to Sample | ICCV, 2023 | 点采样式动态上采样，替换 bilinear `F.interpolate`；参数量仅数 K | 极小 | https://github.com/tiny-smart/dysample （已核实） | [备用] |
-| FreqFusion | Frequency-Aware Feature Fusion for Dense Image Prediction | IEEE TPAMI, 2024 | 融合时对低分辨率特征自适应低通、高分辨率特征补高频，针对上采样边界模糊与小目标被粗特征淹没 | 小 | https://github.com/Linwei-Chen/FreqFusion （官方来源已核实；仓库未声明 LICENSE） | [备用，授权待确认] |
+| FreqFusion | Frequency-Aware Feature Fusion for Dense Image Prediction | IEEE TPAMI, 2024 | 融合时对低分辨率特征自适应低通、高分辨率特征补高频，针对上采样边界模糊与小目标被粗特征淹没 | 小 | https://github.com/Linwei-Chen/FreqFusion （采用官方仓库内 Apache-2.0 的 SegNeXt 集成版；顶层文件不使用） | [备用，内部学术实验已授权] |
 | CAA（Context Anchor Attention） | Poly Kernel Inception Network for Remote Sensing Detection (PKINet) | CVPR, 2024 | 条带卷积（1×k / k×1）构成的轻量方向注意力，适合细长烟羽 | 小 | https://github.com/NUST-Machine-Intelligence-Laboratory/PKINet （使用前自行核对） | [参考] |
 
 ## 五、领域专用网络（整网参考，不直接移植）
