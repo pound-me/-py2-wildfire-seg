@@ -145,9 +145,12 @@ engineering check is not treated as evidence that a method improves accuracy.
   gradients, inference interface, 7.705M parameters, 3.1545 GFLOPs and paired
   RTX 2060 median 32.32 FPS. The 26--30 window gained 0.005667 mIoU while Fire
   remained neutral inside the Fusion conservative band, so the screen passed.
-- [ ] Run the frozen SAMF definition for 100 epochs and apply the formal method
-  threshold before unfreezing TGM. The seed-200 run started on 2026-07-27 at
-  00:13 Asia/Shanghai as PID 5572; in-progress logs remain uncommitted.
+- [x] Run the frozen SAMF definition for 100 epochs and apply the formal method
+  threshold before unfreezing TGM. SAMF gained 0.001885 mIoU and 0.004068 Fire
+  IoU, passed the 30 FPS gate at 34.57 FPS, but failed both internal accuracy
+  thresholds; retain it as a positive ablation and unfreeze TGM.
+- [ ] Implement and engineering-check the single frozen TGM variant; do not
+  combine it with SAMF because SAMF did not pass the 100-epoch threshold.
 - [x] Verify the Route C bibliography against formal titles, venues/years and
   DOI/original metadata; archive BibTeX and code-reuse status. Mark SGFNet,
   CBL, top-level FreqFusion and PSL as no-license reference-only sources.

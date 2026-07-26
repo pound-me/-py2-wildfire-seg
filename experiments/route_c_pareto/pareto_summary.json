@@ -1,0 +1,13 @@
+{
+  "registry": "G:\\py2\\configs\\route_c\\pareto_registry_template.csv",
+  "split_id": "flame2_val_label_fix_seed200",
+  "test_set_used": false,
+  "plotted_count": 3,
+  "pending_count": 8,
+  "pareto_frontier_method_ids": [
+    "abl",
+    "samf"
+  ],
+  "real_time_gate_ms": 33.333333333333336,
+  "discipline": "Rows without same-split validation mIoU and measured median latency remain pending and are not assigned invented coordinates."
+}

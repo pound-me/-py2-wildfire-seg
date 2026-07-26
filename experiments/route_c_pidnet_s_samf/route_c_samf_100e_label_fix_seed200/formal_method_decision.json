@@ -1,0 +1,50 @@
+{
+  "decision": "fails_internal_method_threshold_retain_as_positive_ablation",
+  "test_set_used": false,
+  "baseline": {
+    "run": "G:\\py2\\experiments\\route_a_pidnet_s_fusion\\route_a_fusion_100e_label_fix_seed200",
+    "best_epoch": 86,
+    "miou": 0.8067280342508664,
+    "background_iou": 0.9088757916268864,
+    "smoke_iou": 0.8419978925293716,
+    "fire_iou": 0.6693104185963411,
+    "fire_precision": 0.7943314303251389,
+    "fire_recall": 0.8096151795425948,
+    "fire_boundary_f1": 0.9096879709360258
+  },
+  "candidate": {
+    "run": "G:\\py2\\experiments\\route_c_pidnet_s_samf\\route_c_samf_100e_label_fix_seed200",
+    "best_epoch": 95,
+    "miou": 0.8086130496925034,
+    "background_iou": 0.9092805129475328,
+    "smoke_iou": 0.8431801553957207,
+    "fire_iou": 0.6733784807342569,
+    "fire_precision": 0.7779114145321456,
+    "fire_recall": 0.833642109154504,
+    "fire_boundary_f1": 0.9106641005469289
+  },
+  "deltas": {
+    "miou": 0.0018850154416369946,
+    "background_iou": 0.0004047213206463953,
+    "smoke_iou": 0.0011822628663491483,
+    "fire_iou": 0.004068062137915773,
+    "fire_precision": -0.01642001579299327,
+    "fire_recall": 0.02402692961190922,
+    "fire_boundary_f1": 0.0009761296109030986
+  },
+  "thresholds": {
+    "rule_1": "miou_gain >= 0.005 and fire_iou_not_lower",
+    "rule_2": "fire_iou_gain >= 0.01 and miou_gain >= -0.003"
+  },
+  "passes_rule_1": false,
+  "passes_rule_2": false,
+  "deployment": {
+    "parameters": 7705271,
+    "gflops": 3.1545,
+    "paired_rtx2060_median_latency_ms": 28.929772000000007,
+    "fps": 34.566466683525874,
+    "passes_30_fps": true
+  },
+  "tgm_unblocked": true,
+  "samf_tgm_combination_blocked": true
+}
