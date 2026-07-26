@@ -160,6 +160,9 @@ engineering check is not treated as evidence that a method improves accuracy.
 - [ ] Complete the independently triggered ABL+SAMF 30-epoch screen against
   plain Fusion; promote at mIoU +0.005 or Fire +0.01, subject to no class
   collapse and the paired RTX 2060 >=30 FPS gate.
+- [x] Freeze ABL+SAMF as the existing SAMF inference structure plus the
+  training-only ABL objective; beta-zero equivalence, AMP gradients, inference
+  isolation, 7.705M parameters, 3.1545 GFLOPs and paired 35.90 FPS all pass.
 - [ ] Close Route C only after the ABL+SAMF branch is resolved: run one fresh
   100-epoch formal experiment if it passes, otherwise record the failed screen.
 - [x] Correct the premature closure record: ABL+SAMF is triggered by ABL and

@@ -1,0 +1,59 @@
+{
+  "config": "G:\\py2\\configs\\route_c\\pidnet_s_fusion_abl_samf_30e_label_fix.yaml",
+  "test_set_used": false,
+  "fresh_imagenet_initialization": true,
+  "factory_model": "PIDNetSAMF",
+  "samf_module_count": 1,
+  "matched_pretrained_tensors": 301,
+  "beta_zero_output_bitwise_equal": [
+    true,
+    true,
+    true
+  ],
+  "beta_zero_output_max_abs": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "amp_total_loss": 16.55133819580078,
+  "amp_active_boundary_loss": 0.9045311808586121,
+  "amp_components": {
+    "base_total": 15.646806716918945,
+    "semantic": 9.149215698242188,
+    "boundary": 0.0,
+    "active_boundary": 0.9045311808586121,
+    "weighted_active_boundary": 0.9045311808586121,
+    "abl_predicted_boundary_pixels": 6423.0,
+    "abl_supervised_boundary_pixels": 6423.0,
+    "abl_mean_boundary_distance": 23.0554256439209,
+    "abl_skipped": 0.0
+  },
+  "beta_zero_combined_gradient_norms": {
+    "samf_beta": 0.2528246657859399,
+    "thermal_stem": 0.0,
+    "thermal_projection": 0.0,
+    "final_layer": 29.940916191017287,
+    "dfm": 11.709009761511632,
+    "p_branch": 4.51831079916815,
+    "i_branch": 145.57228054046402,
+    "d_branch": 5.076690467170882
+  },
+  "beta_point_one_isolated_abl_gradient_norms": {
+    "thermal_stem": 0.020945461548565875,
+    "thermal_projection": 0.008515686875138213,
+    "smoke_head": 0.04884082683812297,
+    "final_layer": 1.0764070821643588,
+    "dfm": 0.4299512395165438,
+    "p_branch": 0.21806697621900445,
+    "i_branch": 5.428274891952884,
+    "d_branch": 0.2900006993065571
+  },
+  "inference_class_equals_standalone_samf": true,
+  "inference_state_signature_equals_standalone_samf": true,
+  "combination_inference_parameters": 7705271,
+  "standalone_samf_inference_parameters": 7705271,
+  "inference_parameter_increment_over_samf": 0,
+  "inference_returns_tensor_only": true,
+  "inference_contains_abl": false,
+  "inference_has_boundary_auxiliary_head": false
+}
