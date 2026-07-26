@@ -1,0 +1,74 @@
+{
+  "title": "Table 1: input-modality motivation on the validation split",
+  "test_set_used": false,
+  "selection": "each 100-epoch run's validation-mIoU-selected best checkpoint",
+  "latency_protocol": "single-process same-session rotating-order model-forward benchmark; warm-up precedes repeated median latency",
+  "all_models_pass_30_fps": true,
+  "rows": [
+    {
+      "mode": "rgb",
+      "method": "RGB-only PIDNet-S",
+      "best_epoch": 83,
+      "background_iou": 0.8679435982304643,
+      "smoke_iou": 0.7558384873867732,
+      "fire_iou": 0.2172295511620957,
+      "miou": 0.6136705455931111,
+      "parameters": 7623651,
+      "parameters_millions": 7.623651,
+      "gflops": 2.946576384,
+      "latency_ms_median": 20.300622749999988,
+      "fps": 49.25957259119061,
+      "passes_30_fps": true
+    },
+    {
+      "mode": "ir",
+      "method": "IR-only PIDNet-S",
+      "best_epoch": 82,
+      "background_iou": 0.8143792079332386,
+      "smoke_iou": 0.7126985840646924,
+      "fire_iou": 0.6738194842215294,
+      "miou": 0.7336324254064869,
+      "parameters": 7623075,
+      "parameters_millions": 7.623075,
+      "gflops": 2.927702016,
+      "latency_ms_median": 20.573345250000052,
+      "fps": 48.60658234469659,
+      "passes_30_fps": true
+    },
+    {
+      "mode": "fusion",
+      "method": "RGB+IR Fusion PIDNet-S",
+      "best_epoch": 86,
+      "background_iou": 0.9088757916268864,
+      "smoke_iou": 0.8419978925293716,
+      "fire_iou": 0.6693104185963411,
+      "miou": 0.8067280342508664,
+      "parameters": 7623939,
+      "parameters_millions": 7.623939,
+      "gflops": 2.956013568,
+      "latency_ms_median": 20.178296999999983,
+      "fps": 49.558196115361014,
+      "passes_30_fps": true
+    }
+  ],
+  "sources": {
+    "latency": "G:\\py2\\experiments\\route_c_input_motivation\\table1_paired_latency_rtx2060.json",
+    "models": {
+      "rgb": {
+        "metrics": "G:\\py2\\experiments\\pidnet_s_rgb_baseline_adopted\\baseline_a1_100e_label_fix\\val_best\\metrics.json",
+        "complexity": "G:\\py2\\experiments\\pidnet_s_rgb_baseline_adopted\\baseline_a1_100e_label_fix\\complexity.json",
+        "checkpoint": "G:\\py2\\experiments\\pidnet_s_rgb_baseline_adopted\\baseline_a1_100e_label_fix\\best.pth"
+      },
+      "ir": {
+        "metrics": "G:\\py2\\experiments\\route_c_pidnet_s_ir\\route_c_ir_100e_label_fix_seed200\\val_best\\metrics.json",
+        "complexity": "G:\\py2\\experiments\\route_c_pidnet_s_ir\\route_c_ir_100e_label_fix_seed200\\val_best\\complexity.json",
+        "checkpoint": "G:\\py2\\experiments\\route_c_pidnet_s_ir\\route_c_ir_100e_label_fix_seed200\\best.pth"
+      },
+      "fusion": {
+        "metrics": "G:\\py2\\experiments\\route_a_pidnet_s_fusion\\route_a_fusion_100e_label_fix_seed200\\val_best\\metrics.json",
+        "complexity": "G:\\py2\\experiments\\route_a_pidnet_s_fusion\\route_a_fusion_100e_label_fix_seed200\\val_best\\complexity.json",
+        "checkpoint": "G:\\py2\\experiments\\route_a_pidnet_s_fusion\\route_a_fusion_100e_label_fix_seed200\\best.pth"
+      }
+    }
+  }
+}

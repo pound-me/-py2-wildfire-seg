@@ -130,8 +130,8 @@ engineering check is not treated as evidence that a method improves accuracy.
 - [x] Complete full-validation Fire FN/FP spatial attribution. The strict
   lower-quartile rule degenerates at Q1=1 pixel and is preserved as written;
   Smoke neighbourhoods cover 69.90% of FN and 72.18% of FP.
-- [ ] Complete the IR-only 100-epoch motivation row and paired efficiency
-  measurements for Table 1.
+- [x] Complete the IR-only 100-epoch motivation row and RGB/IR/Fusion paired
+  efficiency measurements for Table 1; all three exceed 30 FPS.
 - [x] Freeze a non-overwriting `route_c_*` IR-only 100-epoch config and launch
   record using label_fix A1, seed 200 and a fresh ImageNet initialization.
 - [x] Prepare a same-process rotating-order RGB/IR/Fusion latency benchmark for

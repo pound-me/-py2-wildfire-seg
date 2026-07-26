@@ -1,7 +1,9 @@
 # Route C节点1c：IR-only 100轮启动记录
 
 日期：2026-07-26
-状态：配置冻结，等待/开始100轮训练。
+状态：**100轮训练、best验证、复杂度与Table 1同会话测速均已完成。**
+
+正式结果见`docs/ROUTE_C_INPUT_MODALITY_TABLE1_RESULT_2026-07-26.md`。
 
 ## 1. 目的
 

@@ -1,0 +1,179 @@
+{
+  "protocol": "single-process same-session rotating-order model-forward benchmark; warm-up precedes repeated median latency",
+  "script": "G:\\py2\\src\\benchmark_route_c_input_modes.py",
+  "script_sha256": "0223a2024d32bf090a0d2589490b43be68ef9bb804fc6c8289f0571618da8b69",
+  "device": "NVIDIA GeForce RTX 2060",
+  "torch_cuda_version": "12.6",
+  "torch_version": "2.8.0+cu126",
+  "cudnn_version": 91002,
+  "amp": true,
+  "warmup_iterations_per_model": 100,
+  "timed_iterations_per_trial": 200,
+  "repeats": 12,
+  "trial_orders": [
+    [
+      "rgb",
+      "ir",
+      "fusion"
+    ],
+    [
+      "ir",
+      "fusion",
+      "rgb"
+    ],
+    [
+      "fusion",
+      "rgb",
+      "ir"
+    ],
+    [
+      "rgb",
+      "ir",
+      "fusion"
+    ],
+    [
+      "ir",
+      "fusion",
+      "rgb"
+    ],
+    [
+      "fusion",
+      "rgb",
+      "ir"
+    ],
+    [
+      "rgb",
+      "ir",
+      "fusion"
+    ],
+    [
+      "ir",
+      "fusion",
+      "rgb"
+    ],
+    [
+      "fusion",
+      "rgb",
+      "ir"
+    ],
+    [
+      "rgb",
+      "ir",
+      "fusion"
+    ],
+    [
+      "ir",
+      "fusion",
+      "rgb"
+    ],
+    [
+      "fusion",
+      "rgb",
+      "ir"
+    ]
+  ],
+  "real_time_threshold": {
+    "minimum_fps": 30.0,
+    "maximum_median_latency_ms": 33.333333333333336
+  },
+  "models": {
+    "rgb": {
+      "config": "G:\\py2\\configs\\adopted_protocol_label_fix\\pidnet_s_rgb_baseline_adopted_100e.yaml",
+      "config_sha256": "26c0cf7ad66bdb4147c36135e2daf8725699ee12ca8a03f497fb31607fa3f8d6",
+      "checkpoint": "G:\\py2\\experiments\\pidnet_s_rgb_baseline_adopted\\baseline_a1_100e_label_fix\\best.pth",
+      "input_shape": [
+        1,
+        3,
+        256,
+        256
+      ],
+      "deployment_parameters": 7623651,
+      "latency_ms_trials": [
+        20.39650850000001,
+        20.088130500000005,
+        20.525068500000003,
+        20.879189999999994,
+        20.14143499999996,
+        20.4577965,
+        23.370836,
+        20.204736999999966,
+        20.13815049999998,
+        21.36203899999998,
+        19.956332999999944,
+        20.03892350000001
+      ],
+      "latency_ms_median": 20.300622749999988,
+      "latency_ms_mean": 20.629928999999986,
+      "latency_ms_std": 0.9112090474344884,
+      "latency_ms_p95": 22.26599764999999,
+      "fps_from_median": 49.25957259119061,
+      "passes_30_fps": true
+    },
+    "ir": {
+      "config": "G:\\py2\\configs\\route_c\\pidnet_s_ir_100e_label_fix.yaml",
+      "config_sha256": "2afb44330a2d867f39e9770c07680d0d2d9ce9d293e5a34e988325e117f8cb06",
+      "checkpoint": "G:\\py2\\experiments\\route_c_pidnet_s_ir\\route_c_ir_100e_label_fix_seed200\\best.pth",
+      "input_shape": [
+        1,
+        1,
+        256,
+        256
+      ],
+      "deployment_parameters": 7623075,
+      "latency_ms_trials": [
+        20.441901000000016,
+        19.935343999999997,
+        22.716608499999996,
+        20.2951165,
+        21.07882349999997,
+        21.651455499999983,
+        20.762611000000035,
+        20.401907000000037,
+        20.231685999999982,
+        21.50443999999993,
+        20.134746500000062,
+        20.70478950000009
+      ],
+      "latency_ms_median": 20.573345250000052,
+      "latency_ms_mean": 20.821619083333342,
+      "latency_ms_std": 0.7655058527526172,
+      "latency_ms_p95": 22.13077434999999,
+      "fps_from_median": 48.60658234469659,
+      "passes_30_fps": true
+    },
+    "fusion": {
+      "config": "G:\\py2\\configs\\route_a\\pidnet_s_fusion_100e_label_fix.yaml",
+      "config_sha256": "f5bd069328a9c7f8e905d37a778fc71853b628d6db7d14d86741cb281d498161",
+      "checkpoint": "G:\\py2\\experiments\\route_a_pidnet_s_fusion\\route_a_fusion_100e_label_fix_seed200\\best.pth",
+      "input_shape": [
+        1,
+        4,
+        256,
+        256
+      ],
+      "deployment_parameters": 7623939,
+      "latency_ms_trials": [
+        19.803694499999995,
+        20.10947400000001,
+        20.603800500000023,
+        20.178520499999983,
+        20.983716500000043,
+        19.837611499999994,
+        20.70735500000005,
+        20.572824999999995,
+        20.12545849999995,
+        20.19591349999999,
+        20.139138499999945,
+        20.178073499999982
+      ],
+      "latency_ms_median": 20.178296999999983,
+      "latency_ms_mean": 20.28629845833333,
+      "latency_ms_std": 0.3404779378611153,
+      "latency_ms_p95": 20.831717675000046,
+      "fps_from_median": 49.558196115361014,
+      "passes_30_fps": true
+    }
+  },
+  "all_models_pass_30_fps": true,
+  "scope": "model forward only; batch size 1; validation metrics are stored separately"
+}

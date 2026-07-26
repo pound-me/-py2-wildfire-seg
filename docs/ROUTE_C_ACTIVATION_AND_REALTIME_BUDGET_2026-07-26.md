@@ -52,6 +52,10 @@
 新实验统一使用`route_c_*`前缀。每个模块每个阶段单独形成决策文档、commit并推送；正在
 写入的日志与checkpoint不提交。测试集继续封存。
 
+节点1已完成：人工诊断、全验证集Fire空间归因和IR-only 100轮Table 1均已归档。三输入
+均超过30 FPS；IR相对RGB的Fire IoU提升0.456590，Fusion相对IR恢复Smoke 0.129299但
+Fire略低0.004509。结果见`docs/ROUTE_C_INPUT_MODALITY_TABLE1_RESULT_2026-07-26.md`。
+
 ## 5. SAMF优先级证据
 
 人工核查表为
