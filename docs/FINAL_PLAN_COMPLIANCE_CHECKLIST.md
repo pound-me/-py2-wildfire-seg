@@ -146,7 +146,8 @@ engineering check is not treated as evidence that a method improves accuracy.
   RTX 2060 median 32.32 FPS. The 26--30 window gained 0.005667 mIoU while Fire
   remained neutral inside the Fusion conservative band, so the screen passed.
 - [ ] Run the frozen SAMF definition for 100 epochs and apply the formal method
-  threshold before unfreezing TGM.
+  threshold before unfreezing TGM. The seed-200 run started on 2026-07-27 at
+  00:13 Asia/Shanghai as PID 5572; in-progress logs remain uncommitted.
 - [x] Verify the Route C bibliography against formal titles, venues/years and
   DOI/original metadata; archive BibTeX and code-reuse status. Mark SGFNet,
   CBL, top-level FreqFusion and PSL as no-license reference-only sources.
