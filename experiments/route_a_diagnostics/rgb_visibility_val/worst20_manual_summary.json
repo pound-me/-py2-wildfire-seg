@@ -1,0 +1,126 @@
+{
+  "source": "G:\\py2\\experiments\\route_a_diagnostics\\rgb_visibility_val\\worst20_manual_checklist_filled.csv",
+  "rows": 20,
+  "unique_images": 20,
+  "rank_min": 1,
+  "rank_max": 20,
+  "all_manual_fields_complete": true,
+  "categorical_counts": {
+    "manual_rgb_visibility_visible_partial_invisible": {
+      "invisible": 20
+    },
+    "manual_smoke_occlusion_none_partial_heavy": {
+      "heavy": 20
+    },
+    "manual_ir_clearer_yes_no": {
+      "yes": 20
+    },
+    "manual_small_fire_yes_no": {
+      "no": 16,
+      "yes": 4
+    }
+  },
+  "manual_notes": {
+    "nonempty": 20,
+    "exact_text_counts": {
+      "浓烟盖死,图片全是烟": 2,
+      "浓烟盖死,肉眼找不到": 18
+    }
+  },
+  "numeric_columns": {
+    "rank": {
+      "min": 1.0,
+      "q1_inclusive": 5.75,
+      "median": 10.5,
+      "mean": 10.5,
+      "q3_inclusive": 15.25,
+      "max": 20.0
+    },
+    "iou_fire": {
+      "min": 0.00032829940906106366,
+      "q1_inclusive": 0.009577423617487688,
+      "median": 0.019120153689261885,
+      "mean": 0.03185521945480602,
+      "q3_inclusive": 0.057936196607071284,
+      "max": 0.06938197567882726
+    },
+    "precision_fire": {
+      "min": 0.0007621951219512195,
+      "q1_inclusive": 0.11416838682528212,
+      "median": 0.17593217929122384,
+      "mean": 0.19663598845541339,
+      "q3_inclusive": 0.2885753031169001,
+      "max": 0.42613636363636365
+    },
+    "recall_fire": {
+      "min": 0.0005555555555555556,
+      "q1_inclusive": 0.010198340485380805,
+      "median": 0.022101616359101045,
+      "mean": 0.04784175580431661,
+      "q3_inclusive": 0.08502940423102218,
+      "max": 0.14950942220837876
+    },
+    "gt_fire_pixels": {
+      "min": 1735.0,
+      "q1_inclusive": 5430.75,
+      "median": 7262.5,
+      "mean": 7708.5,
+      "q3_inclusive": 10897.75,
+      "max": 13007.0
+    },
+    "mean_fire_luma": {
+      "min": 130.9101827608278,
+      "q1_inclusive": 141.65330922869902,
+      "median": 142.7903338868282,
+      "mean": 144.8237355858543,
+      "q3_inclusive": 145.38924163363623,
+      "max": 184.75220815326352
+    },
+    "low_luma_ratio_60": {
+      "min": 0.0,
+      "q1_inclusive": 0.0,
+      "median": 0.0,
+      "mean": 0.014802201483538202,
+      "q3_inclusive": 0.016779199532521157,
+      "max": 0.07011609133543477
+    },
+    "low_luma_ratio_80": {
+      "min": 0.0,
+      "q1_inclusive": 0.00041666666666666664,
+      "median": 0.010082795453132183,
+      "mean": 0.029756526644660643,
+      "q3_inclusive": 0.06342700833884066,
+      "max": 0.0888752210348274
+    },
+    "low_luma_ratio_100": {
+      "min": 0.0005763688760806917,
+      "q1_inclusive": 0.02293263367326448,
+      "median": 0.05775957742499688,
+      "mean": 0.06511675581829424,
+      "q3_inclusive": 0.09476891321160993,
+      "max": 0.14546020869023515
+    },
+    "smoke_proximity_ratio": {
+      "min": 0.6146134996658499,
+      "q1_inclusive": 0.8172749583006684,
+      "median": 0.882732718632159,
+      "mean": 0.8649660383143271,
+      "q3_inclusive": 0.9381459039334923,
+      "max": 0.9648122665618243
+    },
+    "exact_fire_smoke_overlap_ratio": {
+      "min": 0.0,
+      "q1_inclusive": 0.0,
+      "median": 0.0,
+      "mean": 0.0,
+      "q3_inclusive": 0.0,
+      "max": 0.0
+    }
+  },
+  "headline": {
+    "rgb_invisible": 20,
+    "smoke_heavy": 20,
+    "ir_clearer_yes": 20,
+    "small_fire_yes": 4
+  }
+}

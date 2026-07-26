@@ -64,5 +64,6 @@
 - 小火点：4/20。
 
 因此烟遮挡下的热信息注入是当前最直接的病因对应机制，SAMF优先于TGM和更通用的复杂
-融合模块。上述人工结论将在节点1a读取原CSV后按全部列正式汇总，并与
-`smoke_proximity_ratio`机器统计互证。
+融合模块。节点1a已经读取原CSV并汇总全部列；完整分布及其与
+`smoke_proximity_ratio`机器统计的互证见
+`docs/RGB_VISIBILITY_MANUAL_DIAGNOSTIC_2026-07-26.md`。

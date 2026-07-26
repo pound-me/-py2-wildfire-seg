@@ -124,6 +124,9 @@ engineering check is not treated as evidence that a method improves accuracy.
   closed Route A modules, ABL, Route C, Fusion PIDNet-S and RoboFireFuseNet.
 - [x] Formally activate Route C and freeze the order: evidence closeout, SAMF
   engineering/screening/formal run, then and only then TGM implementation.
-- [ ] Complete worst-20 summary, full-validation Fire FN/FP spatial attribution
-  and the IR-only 100-epoch motivation row.
+- [x] Complete and archive the filled worst-20 manual-check summary: RGB
+  invisible 20/20, heavy smoke 20/20, IR clearer 20/20, small fire 4/20,
+  cross-checked against the Smoke-proximity proxy.
+- [ ] Complete full-validation Fire FN/FP spatial attribution and the IR-only
+  100-epoch motivation row.
 - [ ] Complete SAMF engineering acceptance and its single 30-epoch screen.
