@@ -34,6 +34,15 @@ def main() -> None:
             / "best.pth"
         ),
     )
+    parser.add_argument(
+        "--architecture-only",
+        action="store_true",
+        help=(
+            "Measure parameters/FLOPs without loading weights. This is for "
+            "pre-training architecture admission checks; results must not be "
+            "reported as checkpoint evaluation."
+        ),
+    )
     parser.add_argument("--height", type=int, default=256)
     parser.add_argument("--width", type=int, default=256)
     parser.add_argument("--warmup-iterations", type=int, default=10)
@@ -47,14 +56,17 @@ def main() -> None:
     mode = str(config["MODE"]).lower()
     if mode not in input_channels:
         raise ValueError(f"Unsupported input mode: {config['MODE']}")
-    checkpoint_path = args.checkpoint.resolve()
-    checkpoint = torch.load(
-        checkpoint_path,
-        map_location="cpu",
-        weights_only=False,
-    )
-    if "model_state_dict" not in checkpoint:
-        raise KeyError("The checkpoint does not contain model_state_dict.")
+    checkpoint_path = None
+    checkpoint = None
+    if not args.architecture_only:
+        checkpoint_path = args.checkpoint.resolve()
+        checkpoint = torch.load(
+            checkpoint_path,
+            map_location="cpu",
+            weights_only=False,
+        )
+        if "model_state_dict" not in checkpoint:
+            raise KeyError("The checkpoint does not contain model_state_dict.")
 
     device = torch.device(config["DEVICE"])
     training_model = build_model(config, augment=True)
@@ -64,15 +76,16 @@ def main() -> None:
     del training_model
 
     model = build_model(config, augment=False)
-    incompatible = model.load_state_dict(
-        checkpoint["model_state_dict"],
-        strict=False,
-    )
-    if incompatible.missing_keys:
-        raise RuntimeError(
-            "Missing inference-model weights: "
-            + ", ".join(incompatible.missing_keys)
+    if checkpoint is not None:
+        incompatible = model.load_state_dict(
+            checkpoint["model_state_dict"],
+            strict=False,
         )
+        if incompatible.missing_keys:
+            raise RuntimeError(
+                "Missing inference-model weights: "
+                + ", ".join(incompatible.missing_keys)
+            )
     deconv_modules_before = count_deconv_modules(model)
     if deconv_modules_before:
         model = reparameterize_deconv_model(model, inplace=True)
@@ -108,8 +121,13 @@ def main() -> None:
     }
     total_flops = sum(operator_flops.values())
     results = {
-        "checkpoint": str(checkpoint_path),
-        "checkpoint_epoch": checkpoint.get("epoch"),
+        "checkpoint": str(checkpoint_path) if checkpoint_path else None,
+        "checkpoint_epoch": checkpoint.get("epoch") if checkpoint else None,
+        "weights_source": (
+            "architecture_only_random_initialization"
+            if args.architecture_only
+            else "checkpoint"
+        ),
         "model": config["MODEL"],
         "input_shape": [1, input_channels[mode], args.height, args.width],
         "training_parameters_with_auxiliary_heads": training_parameters,
@@ -130,7 +148,11 @@ def main() -> None:
     output_path = (
         args.output.resolve()
         if args.output
-        else checkpoint_path.parent / "test_best" / "complexity.json"
+        else (
+            PROJECT_ROOT / "experiments" / "architecture_only_complexity.json"
+            if checkpoint_path is None
+            else checkpoint_path.parent / "test_best" / "complexity.json"
+        )
     )
     output_path.parent.mkdir(parents=True, exist_ok=True)
     with output_path.open("w", encoding="utf-8") as stream:

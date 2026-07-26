@@ -79,3 +79,9 @@ RGB 路线中胜出的两个结构候选：
   `experiments/route_a_pidnet_s_fusion_deconv/route_a_fusion_deconv_d2_30e_label_fix_seed200/screening_vs_fusion.json`
 - P1筛选：
   `experiments/route_a_pidnet_s_fusion_mproto/route_a_fusion_mproto_p1_30e_label_fix_seed200/screening_vs_fusion.json`
+
+## 7. 后续备用路线触发
+
+D2与P1均未通过后，最终计划中的备用路线触发条件已经满足。下一项实验固定为
+Fusion-DySample Pag4单候选30轮筛选；触发依据、候选边界和协议见
+`docs/FUSION_DYSAMPLE_TRIGGER_2026-07-26.md`。
