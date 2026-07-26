@@ -1,0 +1,104 @@
+{
+  "device": "NVIDIA GeForce RTX 2060",
+  "input_shape": [
+    1,
+    4,
+    256,
+    256
+  ],
+  "weights_source": "architecture_only_random_initialization",
+  "amp": true,
+  "warmup_iterations_per_model": 100,
+  "timed_iterations_per_trial": 200,
+  "repeats": 10,
+  "trial_orders": [
+    [
+      "baseline",
+      "candidate"
+    ],
+    [
+      "candidate",
+      "baseline"
+    ],
+    [
+      "baseline",
+      "candidate"
+    ],
+    [
+      "candidate",
+      "baseline"
+    ],
+    [
+      "baseline",
+      "candidate"
+    ],
+    [
+      "candidate",
+      "baseline"
+    ],
+    [
+      "baseline",
+      "candidate"
+    ],
+    [
+      "candidate",
+      "baseline"
+    ],
+    [
+      "baseline",
+      "candidate"
+    ],
+    [
+      "candidate",
+      "baseline"
+    ]
+  ],
+  "baseline": {
+    "config": "G:\\py2\\configs\\route_a\\pidnet_s_fusion_100e_label_fix.yaml",
+    "checkpoint": null,
+    "deployment_parameters": 7623939,
+    "latency_ms_trials": [
+      36.10420300000001,
+      29.271369499999977,
+      27.104630500000013,
+      34.07295949999998,
+      39.36605350000001,
+      54.26176150000003,
+      44.65777350000003,
+      30.899764999999917,
+      46.94504699999996,
+      26.564004500000063
+    ],
+    "latency_ms_median": 35.08858125,
+    "latency_ms_mean": 36.92475675,
+    "latency_ms_std": 8.798854544897907,
+    "fps_from_median": 28.499299896885972
+  },
+  "candidate": {
+    "config": "G:\\py2\\configs\\route_a\\pidnet_s_fusion_freqfusion_pag3_30e_label_fix.yaml",
+    "checkpoint": null,
+    "deployment_parameters": 7639733,
+    "latency_ms_trials": [
+      43.00538500000002,
+      38.0821555,
+      39.236239499999996,
+      37.20701699999999,
+      48.15619349999999,
+      57.15473500000002,
+      42.39929149999995,
+      47.17658,
+      45.21948200000011,
+      33.86812799999987
+    ],
+    "latency_ms_median": 42.70233824999998,
+    "latency_ms_mean": 43.150520699999994,
+    "latency_ms_std": 6.36198016307439,
+    "fps_from_median": 23.417921382794546
+  },
+  "candidate_latency_relative_change": 0.2169867440850144,
+  "candidate_latency_percent_change": 21.69867440850144,
+  "candidate_parameter_relative_change": 0.00207163252486664,
+  "speed_drop_at_most_3_percent": false,
+  "deployment_parameter_counts_equal": false,
+  "scope": "paired model-forward benchmark in one process"
+}

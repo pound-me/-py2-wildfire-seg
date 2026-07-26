@@ -114,6 +114,10 @@ def build_model(config: dict, augment: bool = True) -> PIDNet:
         model_class = PIDNetDEConvMProto
     elif model_name == "pidnet_s_dysample":
         model_class = PIDNetDySample
+    elif model_name == "pidnet_s_freqfusion":
+        from custom_models.pidnet_freqfusion import PIDNetFreqFusion
+
+        model_class = PIDNetFreqFusion
     else:
         raise ValueError(f"Unsupported model: {model_name}")
     model_kwargs = dict(
@@ -132,6 +136,17 @@ def build_model(config: dict, augment: bool = True) -> PIDNet:
         model_kwargs["dysample_variant"] = config.get(
             "DYSAMPLE_VARIANT",
             "pag4",
+        )
+    if model_name == "pidnet_s_freqfusion":
+        model_kwargs["freqfusion_variant"] = config.get(
+            "FREQFUSION_VARIANT",
+            "pag3",
+        )
+        model_kwargs["compressed_channels"] = int(
+            config.get("FREQFUSION_COMPRESSED_CHANNELS", 16)
+        )
+        model_kwargs["feature_resample_group"] = int(
+            config.get("FREQFUSION_FEATURE_RESAMPLE_GROUP", 4)
         )
     return model_class(**model_kwargs)
 

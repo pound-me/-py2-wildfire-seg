@@ -1,0 +1,80 @@
+{
+  "device": "NVIDIA GeForce RTX 2060",
+  "input_shape": [
+    1,
+    4,
+    256,
+    256
+  ],
+  "weights_source": "architecture_only_random_initialization",
+  "amp": false,
+  "warmup_iterations_per_model": 50,
+  "timed_iterations_per_trial": 100,
+  "repeats": 6,
+  "trial_orders": [
+    [
+      "baseline",
+      "candidate"
+    ],
+    [
+      "candidate",
+      "baseline"
+    ],
+    [
+      "baseline",
+      "candidate"
+    ],
+    [
+      "candidate",
+      "baseline"
+    ],
+    [
+      "baseline",
+      "candidate"
+    ],
+    [
+      "candidate",
+      "baseline"
+    ]
+  ],
+  "baseline": {
+    "config": "G:\\py2\\configs\\route_a\\pidnet_s_fusion_100e_label_fix.yaml",
+    "checkpoint": null,
+    "deployment_parameters": 7623939,
+    "latency_ms_trials": [
+      27.029443000000004,
+      16.511114000000013,
+      16.85998099999999,
+      16.265444000000002,
+      16.29143199999998,
+      16.975959999999972
+    ],
+    "latency_ms_median": 16.685547500000002,
+    "latency_ms_mean": 18.322228999999997,
+    "latency_ms_std": 3.9030078915779858,
+    "fps_from_median": 59.932105913815526
+  },
+  "candidate": {
+    "config": "G:\\py2\\configs\\route_a\\pidnet_s_fusion_freqfusion_pag3_30e_label_fix.yaml",
+    "checkpoint": null,
+    "deployment_parameters": 7639733,
+    "latency_ms_trials": [
+      27.52200300000002,
+      28.585308000000005,
+      24.238687,
+      25.453266000000028,
+      22.01676599999999,
+      22.485545999999985
+    ],
+    "latency_ms_median": 24.845976500000013,
+    "latency_ms_mean": 25.05026266666667,
+    "latency_ms_std": 2.4223606303393264,
+    "fps_from_median": 40.24796529933124
+  },
+  "candidate_latency_relative_change": 0.48907169513017235,
+  "candidate_latency_percent_change": 48.90716951301724,
+  "candidate_parameter_relative_change": 0.00207163252486664,
+  "speed_drop_at_most_3_percent": false,
+  "deployment_parameter_counts_equal": false,
+  "scope": "paired model-forward benchmark in one process"
+}

@@ -88,3 +88,13 @@ engineering check is not treated as evidence that a method improves accuracy.
   variants: late Pag4 semantic fusion and SPP-context upsampling before DFM.
 - [ ] Complete DySample engineering checks and run both 30-epoch screening
   experiments under the adopted A1 protocol.
+- [x] Audit FreqFusion licensing and switch from the unlicensed repository-root
+  file to the official repository's Apache-2.0 SegNeXt integration; keep the
+  complete upstream checkout ignored by the parent repository.
+- [x] Record the publication contingency: obtain author permission before
+  release, otherwise independently reimplement from the paper or publish only
+  a pinned-commit fetch-and-verify script, with proper paper/repository citation.
+- [x] Complete Pag3 FreqFusion engineering admission. FP32 latency increases
+  48.907% and AMP latency increases 21.699% on RTX 2060; deployment parameters
+  and FLOPs also increase, so the 3% lightweight gate fails and no 30-epoch
+  screening run is started.

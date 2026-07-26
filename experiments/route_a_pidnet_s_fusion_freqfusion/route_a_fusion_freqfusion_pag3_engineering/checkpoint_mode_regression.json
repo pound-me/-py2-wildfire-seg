@@ -1,0 +1,50 @@
+{
+  "device": "NVIDIA GeForce RTX 2060",
+  "input_shape": [
+    1,
+    4,
+    256,
+    256
+  ],
+  "weights_source": "checkpoints",
+  "amp": true,
+  "warmup_iterations_per_model": 1,
+  "timed_iterations_per_trial": 1,
+  "repeats": 1,
+  "trial_orders": [
+    [
+      "baseline",
+      "candidate"
+    ]
+  ],
+  "baseline": {
+    "config": "G:\\py2\\configs\\route_a\\pidnet_s_fusion_100e_label_fix.yaml",
+    "checkpoint": "G:\\py2\\experiments\\route_a_pidnet_s_fusion\\route_a_fusion_100e_label_fix_seed200\\best.pth",
+    "deployment_parameters": 7623939,
+    "latency_ms_trials": [
+      48.76570000000058
+    ],
+    "latency_ms_median": 48.76570000000058,
+    "latency_ms_mean": 48.76570000000058,
+    "latency_ms_std": 0.0,
+    "fps_from_median": 20.50621645951946
+  },
+  "candidate": {
+    "config": "G:\\py2\\configs\\route_a\\pidnet_s_fusion_100e_label_fix.yaml",
+    "checkpoint": "G:\\py2\\experiments\\route_a_pidnet_s_fusion\\route_a_fusion_100e_label_fix_seed200\\best.pth",
+    "deployment_parameters": 7623939,
+    "latency_ms_trials": [
+      58.65749999999892
+    ],
+    "latency_ms_median": 58.65749999999892,
+    "latency_ms_mean": 58.65749999999892,
+    "latency_ms_std": 0.0,
+    "fps_from_median": 17.048118313941412
+  },
+  "candidate_latency_relative_change": 0.2028433919742405,
+  "candidate_latency_percent_change": 20.28433919742405,
+  "candidate_parameter_relative_change": 0.0,
+  "speed_drop_at_most_3_percent": false,
+  "deployment_parameter_counts_equal": true,
+  "scope": "paired model-forward benchmark in one process"
+}

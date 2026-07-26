@@ -17,16 +17,17 @@ from custom_models.pidnet_deconv import (
 
 def load_inference_model(
     config: dict,
-    checkpoint_path: Path,
+    checkpoint_path: Path | None,
     device: torch.device,
 ) -> torch.nn.Module:
     model = build_model(config, augment=False)
-    checkpoint = torch.load(
-        checkpoint_path,
-        map_location="cpu",
-        weights_only=False,
-    )
-    model.load_state_dict(checkpoint["model_state_dict"], strict=False)
+    if checkpoint_path is not None:
+        checkpoint = torch.load(
+            checkpoint_path,
+            map_location="cpu",
+            weights_only=False,
+        )
+        model.load_state_dict(checkpoint["model_state_dict"], strict=False)
     model = model.to(device).eval().float()
     if count_deconv_modules(model) > 0:
         model = reparameterize_deconv_model(model, inplace=False).to(device)
@@ -81,9 +82,17 @@ def main() -> None:
         )
     )
     parser.add_argument("--baseline-config", type=Path, required=True)
-    parser.add_argument("--baseline-checkpoint", type=Path, required=True)
+    parser.add_argument("--baseline-checkpoint", type=Path)
     parser.add_argument("--candidate-config", type=Path, required=True)
-    parser.add_argument("--candidate-checkpoint", type=Path, required=True)
+    parser.add_argument("--candidate-checkpoint", type=Path)
+    parser.add_argument(
+        "--architecture-only",
+        action="store_true",
+        help=(
+            "Benchmark randomly initialized architectures without loading "
+            "checkpoints. Use only for pre-training deployment admission."
+        ),
+    )
     parser.add_argument("--height", type=int, default=256)
     parser.add_argument("--width", type=int, default=256)
     parser.add_argument("--warmup-iterations", type=int, default=100)
@@ -95,6 +104,15 @@ def main() -> None:
 
     if not torch.cuda.is_available():
         raise RuntimeError("CUDA is required for deployment-speed measurement.")
+    if args.architecture_only:
+        if args.baseline_checkpoint or args.candidate_checkpoint:
+            raise ValueError(
+                "Do not provide checkpoints together with --architecture-only."
+            )
+    elif not args.baseline_checkpoint or not args.candidate_checkpoint:
+        raise ValueError(
+            "Both checkpoints are required unless --architecture-only is used."
+        )
     baseline_config = load_config(args.baseline_config.resolve())
     candidate_config = load_config(args.candidate_config.resolve())
     if baseline_config["DEVICE"] != candidate_config["DEVICE"]:
@@ -117,12 +135,20 @@ def main() -> None:
 
     baseline = load_inference_model(
         baseline_config,
-        args.baseline_checkpoint.resolve(),
+        (
+            None
+            if args.architecture_only
+            else args.baseline_checkpoint.resolve()
+        ),
         device,
     )
     candidate = load_inference_model(
         candidate_config,
-        args.candidate_checkpoint.resolve(),
+        (
+            None
+            if args.architecture_only
+            else args.candidate_checkpoint.resolve()
+        ),
         device,
     )
     baseline_parameters = sum(parameter.numel() for parameter in baseline.parameters())
@@ -170,6 +196,11 @@ def main() -> None:
     result = {
         "device": torch.cuda.get_device_name(device),
         "input_shape": list(sample.shape),
+        "weights_source": (
+            "architecture_only_random_initialization"
+            if args.architecture_only
+            else "checkpoints"
+        ),
         "amp": args.amp,
         "warmup_iterations_per_model": warmup_iterations,
         "timed_iterations_per_trial": timed_iterations,
@@ -177,7 +208,11 @@ def main() -> None:
         "trial_orders": trial_orders,
         "baseline": {
             "config": str(args.baseline_config.resolve()),
-            "checkpoint": str(args.baseline_checkpoint.resolve()),
+            "checkpoint": (
+                None
+                if args.architecture_only
+                else str(args.baseline_checkpoint.resolve())
+            ),
             "deployment_parameters": baseline_parameters,
             "latency_ms_trials": baseline_trials,
             "latency_ms_median": baseline_median,
@@ -187,7 +222,11 @@ def main() -> None:
         },
         "candidate": {
             "config": str(args.candidate_config.resolve()),
-            "checkpoint": str(args.candidate_checkpoint.resolve()),
+            "checkpoint": (
+                None
+                if args.architecture_only
+                else str(args.candidate_checkpoint.resolve())
+            ),
             "deployment_parameters": candidate_parameters,
             "latency_ms_trials": candidate_trials,
             "latency_ms_median": candidate_median,
@@ -197,6 +236,9 @@ def main() -> None:
         },
         "candidate_latency_relative_change": relative_change,
         "candidate_latency_percent_change": relative_change * 100.0,
+        "candidate_parameter_relative_change": (
+            candidate_parameters / baseline_parameters - 1.0
+        ),
         "speed_drop_at_most_3_percent": relative_change <= 0.03,
         "deployment_parameter_counts_equal": (
             baseline_parameters == candidate_parameters
