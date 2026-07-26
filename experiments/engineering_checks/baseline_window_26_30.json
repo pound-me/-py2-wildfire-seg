@@ -1,0 +1,62 @@
+{
+  "terminology": "fire_conservative_noise_band is max-min, not a statistical sigma",
+  "baseline": {
+    "metrics": "G:\\py2\\experiments\\pidnet_s_rgb_baseline\\baseline_100e_fair\\metrics.jsonl",
+    "epoch_window": [
+      26,
+      30
+    ],
+    "miou_mean": 0.5579677762843549,
+    "fire_iou_mean": 0.19729446057130876,
+    "fire_conservative_noise_band": 0.01277850346368603,
+    "fire_sample_standard_deviation": 0.00501827000879962,
+    "miou_values": [
+      0.5821306714517754,
+      0.522450711836611,
+      0.5686572108081114,
+      0.5282166631074163,
+      0.5883836242178603
+    ],
+    "fire_iou_values": [
+      0.19452089695059546,
+      0.19013996150296592,
+      0.20291846496665195,
+      0.1987534027426964,
+      0.20013957669363405
+    ]
+  },
+  "candidates": [
+    {
+      "metrics": "G:\\py2\\experiments\\pidnet_s_rgb_baseline\\baseline_100e_fair\\metrics.jsonl",
+      "epoch_window": [
+        26,
+        30
+      ],
+      "miou_mean": 0.5579677762843549,
+      "fire_iou_mean": 0.19729446057130876,
+      "fire_conservative_noise_band": 0.01277850346368603,
+      "fire_sample_standard_deviation": 0.00501827000879962,
+      "miou_values": [
+        0.5821306714517754,
+        0.522450711836611,
+        0.5686572108081114,
+        0.5282166631074163,
+        0.5883836242178603
+      ],
+      "fire_iou_values": [
+        0.19452089695059546,
+        0.19013996150296592,
+        0.20291846496665195,
+        0.1987534027426964,
+        0.20013957669363405
+      ],
+      "miou_gain": 0.0,
+      "fire_iou_gain": 0.0,
+      "fire_interpretation": "neutral_within_conservative_band",
+      "passes_miou_rule": false,
+      "passes_fire_rule": false,
+      "passes_screening": false
+    }
+  ],
+  "recommended_metrics": null
+}

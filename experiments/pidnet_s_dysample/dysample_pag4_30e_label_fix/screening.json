@@ -1,0 +1,91 @@
+{
+  "terminology": "fire_conservative_noise_band is max-min, not a statistical sigma",
+  "baseline": {
+    "metrics": "G:\\py2\\experiments\\pidnet_s_rgb_baseline_adopted\\baseline_a1_100e_label_fix\\metrics.jsonl",
+    "epoch_window": [
+      26,
+      30
+    ],
+    "miou_mean": 0.5459809666565772,
+    "fire_iou_mean": 0.19783960301335823,
+    "fire_conservative_noise_band": 0.02710174422560596,
+    "fire_sample_standard_deviation": 0.011144140968837993,
+    "miou_values": [
+      0.6017895797513632,
+      0.5746279742913113,
+      0.5930528235094977,
+      0.49660845526852765,
+      0.4638260004621865
+    ],
+    "fire_iou_values": [
+      0.2003308499444982,
+      0.21599401023672987,
+      0.19449029916302132,
+      0.1888922660111239,
+      0.18949058971141783
+    ],
+    "smoke_iou_values": [
+      0.7595209431032492,
+      0.656697279135399,
+      0.726911965839249,
+      0.45874524317299725,
+      0.37250044680439026
+    ],
+    "smoke_or_fire_class_collapse": false,
+    "prototype_health_valid": true,
+    "prototype_health_checked_epoch_range": [
+      1,
+      30
+    ],
+    "prototype_invalid_epochs": []
+  },
+  "candidates": [
+    {
+      "metrics": "G:\\py2\\experiments\\pidnet_s_dysample\\dysample_pag4_30e_label_fix\\metrics.jsonl",
+      "epoch_window": [
+        26,
+        30
+      ],
+      "miou_mean": 0.5600604079468463,
+      "fire_iou_mean": 0.19914911602826746,
+      "fire_conservative_noise_band": 0.024935785393877696,
+      "fire_sample_standard_deviation": 0.010851183650336643,
+      "miou_values": [
+        0.5815281656745325,
+        0.5529434035024262,
+        0.5806922479879203,
+        0.5123044078753186,
+        0.5728338146940338
+      ],
+      "fire_iou_values": [
+        0.184079645237042,
+        0.20206592741138593,
+        0.2090154306309197,
+        0.1920631281531225,
+        0.2085214487088671
+      ],
+      "smoke_iou_values": [
+        0.7026600082238322,
+        0.6193499094935805,
+        0.6961454304916944,
+        0.5393157864965786,
+        0.6683819211835395
+      ],
+      "smoke_or_fire_class_collapse": false,
+      "prototype_health_valid": true,
+      "prototype_health_checked_epoch_range": [
+        1,
+        30
+      ],
+      "prototype_invalid_epochs": [],
+      "miou_gain": 0.014079441290269057,
+      "fire_iou_gain": 0.001309513014909225,
+      "fire_interpretation": "neutral_within_conservative_band",
+      "passes_miou_rule": true,
+      "passes_fire_rule": false,
+      "health_and_classes_valid": true,
+      "passes_screening": true
+    }
+  ],
+  "recommended_metrics": "G:\\py2\\experiments\\pidnet_s_dysample\\dysample_pag4_30e_label_fix\\metrics.jsonl"
+}

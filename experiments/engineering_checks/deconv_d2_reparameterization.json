@@ -1,0 +1,13 @@
+{
+  "config": "G:\\py2\\configs\\pidnet_s_deconv_d2.yaml",
+  "weight_source": "G:/py2/weights/PIDNet_S_ImageNet.pth.tar",
+  "deconv_modules_before": 8,
+  "deconv_modules_after": 0,
+  "fp32_maximum_absolute_error": 0.0,
+  "threshold": 1e-05,
+  "random_prediction_equal": true,
+  "validation_pixels_compared": 4096,
+  "validation_mismatched_pixels": 0,
+  "deployment_parameters": 7623651,
+  "baseline_parameters": 7623651
+}

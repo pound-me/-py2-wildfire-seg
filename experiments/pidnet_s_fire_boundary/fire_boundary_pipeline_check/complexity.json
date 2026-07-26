@@ -1,0 +1,24 @@
+{
+  "checkpoint": "G:\\py2\\experiments\\pidnet_s_fire_boundary\\fire_boundary_pipeline_check\\best.pth",
+  "checkpoint_epoch": 1,
+  "model": "pidnet_s",
+  "input_shape": [
+    1,
+    3,
+    256,
+    256
+  ],
+  "training_parameters_with_auxiliary_heads": 7716807,
+  "inference_parameters_main_head": 7623651,
+  "forward_flops": 2946576384,
+  "forward_gflops": 2.946576384,
+  "estimated_macs": 1473288192.0,
+  "estimated_gmacs": 1.473288192,
+  "operator_flops": {
+    "aten::conv2d": 2945613824,
+    "aten::mul": 331776,
+    "aten::add": 630784
+  },
+  "counting_method": "torch.profiler with_flops=True; multiply and add are counted as separate floating-point operations",
+  "scope": "deployment model forward, main segmentation output only"
+}

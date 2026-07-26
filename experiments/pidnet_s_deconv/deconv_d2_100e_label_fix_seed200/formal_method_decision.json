@@ -1,0 +1,43 @@
+{
+  "baseline_validation_best": {
+    "epoch": 83,
+    "miou": 0.6136705455931111,
+    "fire_iou": 0.2172295511620957,
+    "fire_precision": 0.31675967096916013,
+    "fire_recall": 0.40875425662754244,
+    "fire_boundary_f1": 0.3685805169932291
+  },
+  "d2_validation_best": {
+    "epoch": 69,
+    "miou": 0.616654725294584,
+    "fire_iou": 0.219220188262466,
+    "fire_precision": 0.3570301397815405,
+    "fire_recall": 0.36222176407441903,
+    "fire_boundary_f1": 0.360341235688086,
+    "deployment_parameters": 7623651,
+    "forward_flops": 2946576000.0
+  },
+  "difference_vs_baseline": {
+    "miou": 0.002984179701472887,
+    "fire_iou": 0.00199063710037029,
+    "fire_precision": 0.04027046881238037,
+    "fire_recall": -0.04653249255312341,
+    "fire_boundary_f1": -0.008239281305143096
+  },
+  "reparameterization": {
+    "fp32_maximum_absolute_error": 0.0,
+    "validation_pixels_compared": 245760,
+    "validation_mismatched_pixels": 0,
+    "deployment_parameters_equal_baseline": true
+  },
+  "paired_speed": {
+    "baseline_latency_ms_median": 30.09962074999997,
+    "d2_latency_ms_median": 28.472570750000017,
+    "d2_latency_percent_change": -5.405549835706669,
+    "speed_drop_at_most_3_percent": true
+  },
+  "internal_rule_miou_pass": false,
+  "internal_rule_fire_pass": false,
+  "method_established": false,
+  "decision": "D2 satisfies deployment constraints and slightly improves both validation mIoU and Fire IoU, but does not reach either internal method-establishment threshold on the mIoU-selected best checkpoint."
+}

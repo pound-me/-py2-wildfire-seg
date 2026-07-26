@@ -1,0 +1,16 @@
+{
+  "python": "3.9.23 (main, Jun  5 2025, 13:25:08) [MSC v.1929 64 bit (AMD64)]",
+  "platform": "Windows-10-10.0.26200-SP0",
+  "torch": "2.8.0+cu126",
+  "cuda_runtime": "12.6",
+  "cudnn": 91002,
+  "gpu": "NVIDIA GeForce RTX 2060",
+  "gpu_capability": [
+    7,
+    5
+  ],
+  "seed": 200,
+  "config_sha256": "9507f5ed2a4a86dd5407f02e5058009979fe49eeb8e01460d9f5beb14f7de767",
+  "source_sha256": "391c5584519d8067bcd57975e30ad02e7b3f8e5764be0a7ead848074a79bce7d",
+  "training_parameters": 7716807
+}

@@ -1,0 +1,136 @@
+{
+  "checkpoint": "G:\\py2\\experiments\\pidnet_s_dfm_mproto\\p1_100e_label_fix_seed200\\best.pth",
+  "checkpoint_epoch": 40,
+  "split": "validation",
+  "fixed_subset_images": 64,
+  "fixed_subset_samples": [
+    "FLAME2/images/img_XXX_(10758).png",
+    "FLAME2/images/img_XXX_(10881).png",
+    "FLAME2/images/img_XXX_(10903).png",
+    "FLAME2/images/img_XXX_(10908).png",
+    "FLAME2/images/img_XXX_(10915).png",
+    "FLAME2/images/img_XXX_(116).png",
+    "FLAME2/images/img_XXX_(11837).png",
+    "FLAME2/images/img_XXX_(11853).png",
+    "FLAME2/images/img_XXX_(12114).png",
+    "FLAME2/images/img_XXX_(12269).png",
+    "FLAME2/images/img_XXX_(12285).png",
+    "FLAME2/images/img_XXX_(13111).png",
+    "FLAME2/images/img_XXX_(13150).png",
+    "FLAME2/images/img_XXX_(1322).png",
+    "FLAME2/images/img_XXX_(13225).png",
+    "FLAME2/images/img_XXX_(13273).png",
+    "FLAME2/images/img_XXX_(13319).png",
+    "FLAME2/images/img_XXX_(1434).png",
+    "FLAME2/images/img_XXX_(14340).png",
+    "FLAME2/images/img_XXX_(14355).png",
+    "FLAME2/images/img_XXX_(14391).png",
+    "FLAME2/images/img_XXX_(14412).png",
+    "FLAME2/images/img_XXX_(14432).png",
+    "FLAME2/images/img_XXX_(1477).png",
+    "FLAME2/images/img_XXX_(1500).png",
+    "FLAME2/images/img_XXX_(1501).png",
+    "FLAME2/images/img_XXX_(15183).png",
+    "FLAME2/images/img_XXX_(15197).png",
+    "FLAME2/images/img_XXX_(15201).png",
+    "FLAME2/images/img_XXX_(15242).png",
+    "FLAME2/images/img_XXX_(15341).png",
+    "FLAME2/images/img_XXX_(16470).png",
+    "FLAME2/images/img_XXX_(16503).png",
+    "FLAME2/images/img_XXX_(16516).png",
+    "FLAME2/images/img_XXX_(16565).png",
+    "FLAME2/images/img_XXX_(16584).png",
+    "FLAME2/images/img_XXX_(167).png",
+    "FLAME2/images/img_XXX_(17473).png",
+    "FLAME2/images/img_XXX_(17502).png",
+    "FLAME2/images/img_XXX_(17535).png",
+    "FLAME2/images/img_XXX_(17548).png",
+    "FLAME2/images/img_XXX_(17580).png",
+    "FLAME2/images/img_XXX_(181).png",
+    "FLAME2/images/img_XXX_(18637).png",
+    "FLAME2/images/img_XXX_(18809).png",
+    "FLAME2/images/img_XXX_(18830).png",
+    "FLAME2/images/img_XXX_(18842).png",
+    "FLAME2/images/img_XXX_(19059).png",
+    "FLAME2/images/img_XXX_(19840).png",
+    "FLAME2/images/img_XXX_(20011).png",
+    "FLAME2/images/img_XXX_(20028).png",
+    "FLAME2/images/img_XXX_(20037).png",
+    "FLAME2/images/img_XXX_(20058).png",
+    "FLAME2/images/img_XXX_(205).png",
+    "FLAME2/images/img_XXX_(20701).png",
+    "FLAME2/images/img_XXX_(20785).png",
+    "FLAME2/images/img_XXX_(20870).png",
+    "FLAME2/images/img_XXX_(20990).png",
+    "FLAME2/images/img_XXX_(21015).png",
+    "FLAME2/images/img_XXX_(21790).png",
+    "FLAME2/images/img_XXX_(21801).png",
+    "FLAME2/images/img_XXX_(21851).png",
+    "FLAME2/images/img_XXX_(21861).png",
+    "FLAME2/images/img_XXX_(21896).png"
+  ],
+  "fixed_seed": 12007,
+  "points_per_class": {
+    "background": 1000,
+    "smoke": 1000,
+    "fire": 1000
+  },
+  "silhouette_score_cosine": 0.09558624029159546,
+  "mean_cosine_distance_to_class_centroid": {
+    "background": 0.5945293307304382,
+    "smoke": 0.20628315210342407,
+    "fire": 0.30773499608039856
+  },
+  "class_mean_cosine_similarity": [
+    [
+      1.0,
+      -0.08256237208843231,
+      -0.020680315792560577
+    ],
+    [
+      -0.08256237208843231,
+      1.0,
+      0.8902794122695923
+    ],
+    [
+      -0.020680315792560577,
+      0.8902794122695923,
+      1.0
+    ]
+  ],
+  "class_mean_cosine_distance": [
+    [
+      0.0,
+      1.0825623273849487,
+      1.02068030834198
+    ],
+    [
+      1.0825623273849487,
+      0.0,
+      0.10972058773040771
+    ],
+    [
+      1.02068030834198,
+      0.10972058773040771,
+      0.0
+    ]
+  ],
+  "prototype_cosine_matrix": [
+    [
+      1.0,
+      0.008635051548480988,
+      0.19466851651668549
+    ],
+    [
+      0.00863504409790039,
+      0.9999999403953552,
+      0.9030330181121826
+    ],
+    [
+      0.19466851651668549,
+      0.9030330777168274,
+      0.9999998807907104
+    ]
+  ],
+  "interpretation": "t-SNE is qualitative only; quantitative conclusions should use IoU, cosine distances, silhouette score, and prototype statistics."
+}

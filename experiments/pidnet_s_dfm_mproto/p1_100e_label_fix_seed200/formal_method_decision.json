@@ -1,0 +1,39 @@
+{
+  "baseline_validation_best": {
+    "epoch": 83,
+    "miou": 0.6136705455931111,
+    "fire_iou": 0.2172295511620957,
+    "fire_precision": 0.31675967096916013,
+    "fire_recall": 0.40875425662754244,
+    "fire_boundary_f1": 0.3685805169932291,
+    "latency_ms": 20.655911999999997
+  },
+  "p1_validation_best": {
+    "epoch": 40,
+    "miou": 0.607030382847565,
+    "fire_iou": 0.21817755770421865,
+    "fire_precision": 0.3106369759306636,
+    "fire_recall": 0.42297050397048264,
+    "fire_boundary_f1": 0.35265710053057675,
+    "latency_ms": 20.00375199999997,
+    "inference_parameters": 7623651,
+    "forward_flops": 2946576000.0
+  },
+  "difference_vs_baseline": {
+    "miou": -0.00664016274554609,
+    "fire_iou": 0.0009480065421229578,
+    "fire_precision": -0.006122695038496525,
+    "fire_recall": 0.0142162473429402,
+    "fire_boundary_f1": -0.01592341646265234,
+    "latency_relative_change": -0.0315744699681923
+  },
+  "internal_rule_miou_pass": false,
+  "internal_rule_fire_pass": false,
+  "method_established": false,
+  "feature_evidence": {
+    "silhouette_score_cosine": 0.09558624029159546,
+    "smoke_fire_class_mean_cosine_similarity": 0.8902794122695923,
+    "smoke_fire_class_mean_cosine_distance": 0.10972058773040771
+  },
+  "decision": "Do not promote P1 to three-seed final evaluation. Preserve it as a complete 100-epoch negative ablation and proceed to D2."
+}

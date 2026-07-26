@@ -1,0 +1,24 @@
+{
+  "checkpoint": "G:\\py2\\experiments\\pidnet_s_lscm_v3\\pipeline_check\\best.pth",
+  "checkpoint_epoch": 1,
+  "model": "pidnet_s_lscm_v3",
+  "input_shape": [
+    1,
+    3,
+    256,
+    256
+  ],
+  "training_parameters_with_auxiliary_heads": 7734955,
+  "inference_parameters_main_head": 7641799,
+  "forward_flops": 2982818817,
+  "forward_gflops": 2.982818817,
+  "estimated_macs": 1491409408.5,
+  "estimated_gmacs": 1.4914094085,
+  "operator_flops": {
+    "aten::conv2d": 2981724160,
+    "aten::mul": 332801,
+    "aten::add": 761856
+  },
+  "counting_method": "torch.profiler with_flops=True; multiply and add are counted as separate floating-point operations",
+  "scope": "deployment model forward, main segmentation output only"
+}

@@ -1,0 +1,26 @@
+{
+  "checkpoint": "G:\\py2\\experiments\\pidnet_s_dysample\\engineering_context_checkpoint\\best.pth",
+  "checkpoint_epoch": 1,
+  "model": "pidnet_s_dysample",
+  "input_shape": [
+    1,
+    3,
+    256,
+    256
+  ],
+  "training_parameters_with_auxiliary_heads": 7782855,
+  "inference_parameters_main_head": 7689699,
+  "forward_flops": 2948698152,
+  "forward_gflops": 2.948698152,
+  "estimated_macs": 1474349076.0,
+  "estimated_gmacs": 1.474349076,
+  "operator_flops": {
+    "aten::conv2d": 2947710976,
+    "aten::mul": 348160,
+    "aten::add": 639016
+  },
+  "deconv_modules_before_reparameterization": 0,
+  "deconv_modules_in_deployment_model": 0,
+  "counting_method": "torch.profiler with_flops=True; multiply and add are counted as separate floating-point operations",
+  "scope": "deployment model forward, main segmentation output only"
+}

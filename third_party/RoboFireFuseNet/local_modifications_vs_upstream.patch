@@ -1,0 +1,349 @@
+﻿diff --git a/datasets/base_dataset.py b/datasets/base_dataset.py
+index 4169e91..1a42e04 100644
+--- a/datasets/base_dataset.py
++++ b/datasets/base_dataset.py
+@@ -18,7 +18,9 @@ class BaseDataset(data.Dataset):
+                  crop_size=(512, 1024),
+                  scale_factor=16,
+                  mean=[0, 0, 0, 0],
+-                 std=[1, 1, 1, 1]):
++                 std=[1, 1, 1, 1],
++                 scale_min=0.5,
++                 scale_max=1.5):
+ 
+         self.base_size = base_size
+         self.crop_size = crop_size
+@@ -29,6 +31,12 @@ class BaseDataset(data.Dataset):
+         self.std_rgb = std[:3]
+         self.std_ir = std[3]
+         self.scale_factor = scale_factor
++        self.scale_min = float(scale_min)
++        self.scale_max = float(scale_max)
++        if self.scale_min <= 0 or self.scale_max < self.scale_min:
++            raise ValueError(
++                f"Invalid random scale range: {self.scale_min}-{self.scale_max}"
++            )
+ 
+     def input_transform(self, images):
+         """
+@@ -67,7 +75,7 @@ class BaseDataset(data.Dataset):
+             pad_image = np.resize(pad_image, (pad_image.shape[0], pad_image.shape[1], n_ch))
+         return pad_image
+ 
+-    def rand_crop(self, images, label, edge):
++    def rand_crop(self, images, label, edge, component_map=None):
+         """
+         Random crop images in dimension where there are less than self.crop_size
+         """
+@@ -80,6 +88,14 @@ class BaseDataset(data.Dataset):
+                                (255.0, 255.0, 255.0))
+         edge = self.pad_image(edge, h, w, self.crop_size,
+                                (0.0,))
++        if component_map is not None:
++            component_map = self.pad_image(
++                component_map,
++                h,
++                w,
++                self.crop_size,
++                0,
++            )
+         new_h, new_w = label.shape
+         x = random.randint(0, new_w - self.crop_size[1])
+         y = random.randint(0, new_h - self.crop_size[0])
+@@ -87,10 +103,15 @@ class BaseDataset(data.Dataset):
+             images[i] = image[y:y+self.crop_size[0], x:x+self.crop_size[1]]
+         label = label[y:y+self.crop_size[0], x:x+self.crop_size[1]]
+         edge = edge[y:y+self.crop_size[0], x:x+self.crop_size[1]]
++        if component_map is not None:
++            component_map = component_map[
++                y:y+self.crop_size[0], x:x+self.crop_size[1]
++            ]
++            return images, label, edge, component_map
+         return images, label, edge
+ 
+     def multi_scale_aug(self, images, label=None, edge=None,
+-                        rand_scale=1, rand_crop=True):
++                        rand_scale=1, rand_crop=True, component_map=None):
+         """
+         Randomly changes the scale of an image
+         """
+@@ -112,10 +133,26 @@ class BaseDataset(data.Dataset):
+             if edge is not None:
+                 edge = cv2.resize(edge, (new_w, new_h),
+                                 interpolation=cv2.INTER_NEAREST).reshape(new_h, new_w)
++            if component_map is not None:
++                component_map = cv2.resize(
++                    component_map,
++                    (new_w, new_h),
++                    interpolation=cv2.INTER_NEAREST,
++                ).reshape(new_h, new_w).astype(np.uint16, copy=False)
+         else:
+             return images
+         if rand_crop:
+-            images, label, edge = self.rand_crop(images, label, edge)
++            if component_map is None:
++                images, label, edge = self.rand_crop(images, label, edge)
++            else:
++                images, label, edge, component_map = self.rand_crop(
++                    images,
++                    label,
++                    edge,
++                    component_map,
++                )
++        if component_map is not None:
++            return images, label, edge, component_map
+         return images, label, edge
+ 
+     def day_to_night(self, image):
+@@ -190,7 +227,9 @@ class BaseDataset(data.Dataset):
+         return masked_image1, masked_image2
+ 
+     def gen_sample(self, images, label,
+-                   multi_scale=True, is_flip=True, edge_pad=True, edge_size=4, brightness=True, comp_mask=False, single_source=False):
++                   multi_scale=True, is_flip=True, edge_pad=True, edge_size=4,
++                   brightness=True, comp_mask=False, single_source=False,
++                   component_map=None):
+         """
+         generate a training sample by applying augmentation, then generates edge label with cv2 and then 
+         normalizes the images and the label and return image, label and edges
+@@ -204,12 +243,29 @@ class BaseDataset(data.Dataset):
+         if brightness and (np.random.random() > 0.5):
+             images = self.change_brightness(images)
+         if multi_scale:
+-            rand_scale = 0.5 + random.randint(0, self.scale_factor) / 10.0
+-            images, label, edge = self.multi_scale_aug(images, label, edge,
+-                                                rand_scale=rand_scale)
++            scale_start = int(round(self.scale_min * 10))
++            scale_end = int(round(self.scale_max * 10))
++            rand_scale = random.randint(scale_start, scale_end) / 10.0
++            transformed = self.multi_scale_aug(
++                images,
++                label,
++                edge,
++                rand_scale=rand_scale,
++                component_map=component_map,
++            )
++        else:
++            transformed = self.multi_scale_aug(
++                images,
++                label,
++                edge,
++                rand_scale=1,
++                rand_crop=True,
++                component_map=component_map,
++            )
++        if component_map is None:
++            images, label, edge = transformed
+         else:
+-            images, label, edge = self.multi_scale_aug(images, label, edge,
+-                                                rand_scale=1, rand_crop=True)
++            images, label, edge, component_map = transformed
+         images = self.input_transform(images)
+         label = self.label_transform(label)
+ 
+@@ -225,8 +281,17 @@ class BaseDataset(data.Dataset):
+             flip = np.random.choice(2) * 2 - 1
+             label = label[:, ::flip]
+             edge = edge[:, ::flip]
++            if component_map is not None:
++                component_map = component_map[:, ::flip]
+             for i, image in enumerate(images):
+                 images[i] = image[:, :, ::flip]
++        if component_map is not None:
++            component_map = component_map.astype(np.uint16, copy=False)
++            if not np.array_equal(component_map > 0, label == 2):
++                raise RuntimeError(
++                    "Augmented fire component map is not aligned with the fire label."
++                )
++            return images, label, edge, component_map
+         return images, label, edge
+ 
+ 
+diff --git a/datasets/wildfire.py b/datasets/wildfire.py
+index fd4d7db..06a3549 100644
+--- a/datasets/wildfire.py
++++ b/datasets/wildfire.py
+@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
+ import sys
+ sys.path.insert(0, './datasets/')
+ from base_dataset import BaseDataset
++from .flame2_labels import decode_three_class_label, load_three_class_label
+ import re
+ import pandas as pd
+ import torch
+@@ -31,17 +32,23 @@ class WildFire(BaseDataset):
+                  mode='fusion',
+                  blend_images=False,
+                  comp_mask=False,
+-                 single_source=False):
++                 single_source=False,
++                 scale_min=0.5,
++                 scale_max=1.5,
++                 fire_component_cache=None):
+ 
+         self.mean = mean
+         self.std = std
+-        super(WildFire, self).__init__(ignore_label, base_size,
+-                crop_size, scale_factor, self.mean, self.std)
++        super(WildFire, self).__init__(
++                ignore_label, base_size, crop_size, scale_factor,
++                self.mean, self.std, scale_min, scale_max)
+ 
+         self.root = root
+         self.list_path = list_path
+         self.num_classes = num_classes
+         self.mode = mode
++        if self.mode not in {'rgb', 'ir', 'fusion'}:
++            raise ValueError(f'Unsupported WildFire input mode: {self.mode}')
+         self.multi_scale = multi_scale
+         self.flip = flip
+         self.brightness = brightness
+@@ -64,11 +71,21 @@ class WildFire(BaseDataset):
+         self.blend_images = blend_images
+         self.comp_mask = comp_mask
+         self.single_source = single_source
++        self.fire_component_cache = fire_component_cache
++        if self.fire_component_cache and self.blend_images:
++            raise ValueError(
++                "Fire component caching is incompatible with blend_images."
++            )
+ 
+     def __len__(self):
+         return len(self.files)
+ 
+     def color2label(self, color_map):
++        if self.num_classes == 3:
++            return decode_three_class_label(
++                color_map,
++                source="WildFire.color2label input",
++            )
+         label = np.ones(color_map.shape[:2])*self.ignore_label
+         for i, v in enumerate(self.color_list):
+             label[(color_map == v).sum(2)==3] = i
+@@ -121,38 +138,113 @@ class WildFire(BaseDataset):
+         return img2_list, mask2
+ 
+     def load_sample(self, index):
+-        rgb_img = np.asarray(Image.open(os.path.join(self.root, self.files[index].replace('XXX', 'rgb'))).convert('RGB')).copy()
+-        ir_img = np.asarray(Image.open(os.path.join(self.root, self.files[index].replace('XXX', 'ir'))).convert('L')).copy()
++        rgb_path = os.path.join(
++            self.root,
++            self.files[index].replace('XXX', 'rgb'),
++        )
++        ir_path = os.path.join(
++            self.root,
++            self.files[index].replace('XXX', 'ir'),
++        )
++        label_path = os.path.join(
++            self.root,
++            self.files[index].replace('XXX', 'gt'),
++        )
++        rgb_img = np.asarray(Image.open(rgb_path).convert('RGB')).copy()
++        ir_img = np.asarray(Image.open(ir_path).convert('L')).copy()
+         ir_img = ir_img.reshape(*(ir_img.shape[:2]), -1)
+-        try:
+-            label_img = np.asarray(Image.open(os.path.join(self.root, self.files[index].replace('XXX', 'gt'))).convert('RGB')).astype('uint8').copy()
++        if self.num_classes == 3:
++            label_img = load_three_class_label(label_path)
++        else:
++            label_img = np.asarray(
++                Image.open(label_path).convert('RGB')
++            ).astype('uint8').copy()
+             unique_labels = np.unique(label_img)
+             unique_labels = unique_labels[unique_labels!=self.ignore_label]
+-            label_img = label_img[:, :, 0] if unique_labels.max() < 100 else self.color2label(label_img) # dangarous line
+-        except:
+-            print('no label found')
+-            label_img = np.zeros((rgb_img.shape[0], rgb_img.shape[1])).astype('uint8')
++            if unique_labels.size == 0:
++                raise ValueError(
++                    f'Label contains no recognized class values: {label_path}'
++                )
++            label_img = (
++                label_img[:, :, 0]
++                if unique_labels.max() < 100
++                else self.color2label(label_img)
++            )
+         loaded_images = [rgb_img, ir_img]
+         return loaded_images, label_img
+ 
++    def load_fire_component_map(self, index):
++        if not self.fire_component_cache:
++            return None
++        gt_name = os.path.basename(
++            self.files[index].replace('XXX', 'gt')
++        )
++        cache_path = os.path.join(
++            self.fire_component_cache,
++            os.path.splitext(gt_name)[0] + '.npy',
++        )
++        if not os.path.isfile(cache_path):
++            raise FileNotFoundError(
++                f'Fire component cache not found: {cache_path}'
++            )
++        component_map = np.load(cache_path, allow_pickle=False)
++        if component_map.dtype != np.uint16:
++            raise TypeError(
++                f'Fire component cache must be uint16: {cache_path}'
++            )
++        return component_map
++
+     def __getitem__(self, index):
+         loaded_images, label = self.load_sample(index)
++        fire_component_map = self.load_fire_component_map(index)
++        if fire_component_map is not None:
++            if fire_component_map.shape != label.shape:
++                raise RuntimeError(
++                    'Fire component cache shape does not match its label: '
++                    f'{fire_component_map.shape} vs {label.shape}'
++                )
++            if not np.array_equal(fire_component_map > 0, label == 2):
++                raise RuntimeError(
++                    'Fire component cache is not aligned with the raw fire label.'
++                )
+         # blend augmentation
+         if self.blend_images and (np.random.rand() < 0.5):
+             for i in range(3):
+                 tmp_loaded_images, tmp_label = self.load_sample(np.random.randint(0, len(self)))
+                 loaded_images, label = self.blend_objects(tmp_loaded_images, tmp_label, loaded_images, label)
+ 
+-        images, label, edge = self.gen_sample(loaded_images, label, 
+-                                self.multi_scale, self.flip, edge_pad=False,
+-                                edge_size=self.bd_dilate_size, brightness=self.brightness, comp_mask=self.comp_mask, single_source=self.single_source)
++        generated = self.gen_sample(
++            loaded_images,
++            label,
++            self.multi_scale,
++            self.flip,
++            edge_pad=False,
++            edge_size=self.bd_dilate_size,
++            brightness=self.brightness,
++            comp_mask=self.comp_mask,
++            single_source=self.single_source,
++            component_map=fire_component_map,
++        )
++        if fire_component_map is None:
++            images, label, edge = generated
++        else:
++            images, label, edge, fire_component_map = generated
+         images = np.concatenate(images, axis=0)
+         # return rgb only, ir only or fusion (default) depending on mode 
+         if self.mode == 'rgb':
+             images = images[:3]
+         elif self.mode == 'ir':
+-            images = images[3]
+-        return images.copy(), label.copy(), edge.copy(), [self.files[index].split('/')[-1]]
++            # Preserve the channel dimension so a batch is Bx1xHxW.
++            images = images[3:4]
++        sample = (
++            images.copy(),
++            label.copy(),
++            edge.copy(),
++            [self.files[index].split('/')[-1]],
++        )
++        if fire_component_map is not None:
++            return sample + (fire_component_map.copy(),)
++        return sample
+ 
+     def single_scale_inference(self, config, model, image):
+         pred = self.inference(config, model, image)

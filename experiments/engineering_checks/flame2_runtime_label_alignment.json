@@ -1,0 +1,17 @@
+{
+  "strict_decoder_shared_by_runtime_and_cache_builder": true,
+  "runtime_label_matches_strict_decoder": true,
+  "component_id_positive_iff_fire": true,
+  "component_dtype": "uint16",
+  "cache_basename_collisions": 0,
+  "split_counts": {
+    "train": 552,
+    "val": 240,
+    "test": 200
+  },
+  "sample_count": 992,
+  "pure_background_fire_samples": 35,
+  "all_fire_decodes_as_class_2": true,
+  "unknown_color_raises_value_error": true,
+  "missing_label_raises_file_not_found": true
+}

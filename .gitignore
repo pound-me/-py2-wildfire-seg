@@ -1,0 +1,41 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.vscode/*.log
+.claude/
+.codeartsdoer/
+
+# heavy artifacts - never version
+checkpoints/
+runs/
+weights/
+*.pt
+*.pth
+*.ckpt
+*.onnx
+
+# dataset: exclude images/caches, keep split lists
+data/**
+!data/**/
+!data/lists/**
+
+# experiments: exclude checkpoints/images/arrays, keep text provenance
+experiments/**
+!experiments/**/
+!experiments/**/*.json
+!experiments/**/*.jsonl
+!experiments/**/*.yaml
+!experiments/**/*.csv
+!experiments/**/*.txt
+!experiments/**/*.log
+
+# vendored upstream git dir (disabled) and demo animations
+third_party/RoboFireFuseNet/.git_upstream_backup/
+third_party/**/*.gif
+
+# reference clones: standalone git repos, pinned in third_party/PINNED_COMMITS.txt
+third_party/DEA-Net/
+third_party/PIDNet/
+third_party/PSL/
+third_party/dysample/

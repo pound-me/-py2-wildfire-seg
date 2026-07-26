@@ -1,0 +1,13 @@
+{
+  "python.defaultInterpreterPath": "F:\\anaconda3\\envs\\pytorch\\python.exe",
+  "python.terminal.activateEnvironment": true,
+  "python.analysis.extraPaths": [
+    "${workspaceFolder}\\third_party\\PIDNet",
+    "${workspaceFolder}\\third_party\\RoboFireFuseNet"
+  ],
+  "terminal.integrated.env.windows": {
+    "PYTHONUTF8": "0"
+  },
+  "python-envs.defaultEnvManager": "ms-python.python:conda",
+  "python-envs.defaultPackageManager": "ms-python.python:conda"
+}

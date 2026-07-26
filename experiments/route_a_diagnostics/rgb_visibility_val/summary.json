@@ -1,0 +1,23 @@
+{
+  "split": "val",
+  "test_split_used": false,
+  "reference_checkpoint_evaluation": "G:\\py2\\experiments\\pidnet_s_rgb_baseline_adopted\\baseline_a1_100e_label_fix\\val_best",
+  "validation_samples": 240,
+  "fire_containing_samples": 180,
+  "total_fire_pixels": 1406630,
+  "primary_low_luminance_threshold_0_255": 80.0,
+  "fire_pixel_low_luminance_ratio_60": 0.09808904971456602,
+  "fire_pixel_low_luminance_ratio_80": 0.1801888200877274,
+  "fire_pixel_low_luminance_ratio_100": 0.2923583316152791,
+  "smoke_proximity_radius_pixels": 5,
+  "fire_pixel_smoke_proximity_ratio": 0.5985419051207496,
+  "exact_fire_smoke_overlap_ratio": 0.0,
+  "definitions": {
+    "luminance": "BT.709 Y = 0.2126R + 0.7152G + 0.0722B on the evaluation-resolution RGB image",
+    "low_luminance": "Ground-truth Fire pixel with Y <= threshold",
+    "smoke_proximity_proxy": "Ground-truth Fire pixel within the configured radius of a ground-truth Smoke pixel",
+    "exact_overlap_note": "The three-class mask is mutually exclusive, so a pixel cannot be both Smoke and Fire; exact overlap is structurally zero."
+  },
+  "worst_selection": "Lowest saved per-image Fire IoU among validation images containing at least one ground-truth Fire pixel; ties use Fire recall then filename.",
+  "worst_count": 20
+}

@@ -1,0 +1,44 @@
+{
+  "component_alignment": true,
+  "fixed_seed_sampling_reproducible": true,
+  "sampling_without_replacement": true,
+  "sample_counts": {
+    "0": 512,
+    "1": 512,
+    "2": 512
+  },
+  "selected_real_batch_index": 31,
+  "synthetic_mixed_fire_count": 512,
+  "synthetic_fire_bucket_counts": {
+    "small_le_4": 413,
+    "medium_5_64": 0,
+    "large_gt_64": 99
+  },
+  "prototype_loss": 1.2678112983703613,
+  "amp_full_loss": 13.702252388000488,
+  "prototype_components": {
+    "base_total": 13.695144653320312,
+    "semantic": 8.72628402709961,
+    "boundary": 0.038880668580532074,
+    "prototype_total": 1.2793923616409302,
+    "prototype_contrastive": 1.2532339096069336,
+    "prototype_decorrelation": 0.2615848183631897,
+    "prototype_weight": 0.00555419921875,
+    "weighted_prototype": 0.007107735611498356,
+    "sampled_total": 1536.0,
+    "sampled_background": 512.0,
+    "sampled_smoke": 512.0,
+    "sampled_fire": 512.0
+  },
+  "branch_gradient_norms": {
+    "dfm": 0.6401929501444101,
+    "p_branch": 0.33153491374105215,
+    "i_branch": 3.324454086832702,
+    "d_branch": 0.4500995855778456
+  },
+  "prototype_gradient_is_none": true,
+  "checkpoint_restore_exact": true,
+  "next_ema_update_exact": true,
+  "inference_has_no_prototype_bank": true,
+  "inference_returns_tensor_only": true
+}

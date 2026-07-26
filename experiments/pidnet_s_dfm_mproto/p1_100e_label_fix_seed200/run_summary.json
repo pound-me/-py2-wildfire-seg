@@ -1,0 +1,32 @@
+{
+  "best_validation_miou": 0.607030382847565,
+  "elapsed_seconds": 3770.7904322,
+  "peak_allocated_gpu_memory_mb": 236.595703125,
+  "metrics": "G:\\py2\\experiments\\pidnet_s_dfm_mproto\\p1_100e_label_fix_seed200\\metrics.jsonl",
+  "environment": {
+    "python": "3.9.23 (main, Jun  5 2025, 13:25:08) [MSC v.1929 64 bit (AMD64)]",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "torch": "2.8.0+cu126",
+    "cuda_runtime": "12.6",
+    "cudnn": 91002,
+    "gpu": "NVIDIA GeForce RTX 2060",
+    "gpu_capability": [
+      7,
+      5
+    ],
+    "seed": 200,
+    "cudnn_deterministic": true,
+    "cudnn_benchmark": false,
+    "deterministic_algorithms_enabled": false,
+    "config_sha256": "be765310ff15f85b7d0382523e263a21dd48ed1a5599a33138d5d5f828bc1c6f",
+    "source_sha256": "6ed40025936a52d6392b3f943a3057f00c984e46615ae5fd23ddf32f4ad488e3",
+    "dataset_list_sha256": {
+      "TRAINSET": "5a210c644eec1688ef6609697ca7e42f387c80597559649f5eebdca9007dbe14",
+      "VALIDSET": "45d2d14bc8af4f0f7d1cb956b6746301bff43c76819c1e815636148d5b03e91f",
+      "TESTSET": "57e3a4b13be799809b5c013f028f76cecd64ae139caae5d15f9aabcf3fc8cb6a"
+    },
+    "pretrained_sha256": "f96e2c96b1aca1400a6f54ac41093d98b4817f6008a5d869abe6248551a5f359",
+    "fire_component_manifest_sha256": "d20e3b4faa40125ea10259a2c8867073ab113210175fbaf07e3563ea10d7e3fb",
+    "training_parameters": 7716807
+  }
+}

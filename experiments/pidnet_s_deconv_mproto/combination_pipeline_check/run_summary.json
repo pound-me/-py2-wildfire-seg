@@ -1,0 +1,22 @@
+{
+  "best_validation_miou": 0.021584828694661457,
+  "elapsed_seconds": 3.1900166,
+  "peak_allocated_gpu_memory_mb": 200.5732421875,
+  "metrics": "G:\\py2\\experiments\\pidnet_s_deconv_mproto\\combination_pipeline_check\\metrics.jsonl",
+  "environment": {
+    "python": "3.9.23 (main, Jun  5 2025, 13:25:08) [MSC v.1929 64 bit (AMD64)]",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "torch": "2.8.0+cu126",
+    "cuda_runtime": "12.6",
+    "cudnn": 91002,
+    "gpu": "NVIDIA GeForce RTX 2060",
+    "gpu_capability": [
+      7,
+      5
+    ],
+    "seed": 200,
+    "config_sha256": "41f895c9ce26b76b010f306ad873a3a13c00c9de2d93d2b24e8f8dd14820af09",
+    "source_sha256": "f8b344a96fbc26730c99e1e97d51c43fee684cddb83727b25fc676d93ca69be0",
+    "training_parameters": 8110023
+  }
+}

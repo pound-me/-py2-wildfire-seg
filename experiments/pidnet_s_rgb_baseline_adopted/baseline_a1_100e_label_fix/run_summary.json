@@ -1,0 +1,22 @@
+{
+  "best_validation_miou": 0.6136705455931111,
+  "elapsed_seconds": 3145.0301750999997,
+  "peak_allocated_gpu_memory_mb": 227.0341796875,
+  "metrics": "G:\\py2\\experiments\\pidnet_s_rgb_baseline_adopted\\baseline_a1_100e_label_fix\\metrics.jsonl",
+  "environment": {
+    "python": "3.9.23 (main, Jun  5 2025, 13:25:08) [MSC v.1929 64 bit (AMD64)]",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "torch": "2.8.0+cu126",
+    "cuda_runtime": "12.6",
+    "cudnn": 91002,
+    "gpu": "NVIDIA GeForce RTX 2060",
+    "gpu_capability": [
+      7,
+      5
+    ],
+    "seed": 200,
+    "config_sha256": "26c0cf7ad66bdb4147c36135e2daf8725699ee12ca8a03f497fb31607fa3f8d6",
+    "source_sha256": "de886001af762d76823e526ea705863fcf58da7f7fd353df94f4ed97b4dcbfc2",
+    "training_parameters": 7716807
+  }
+}

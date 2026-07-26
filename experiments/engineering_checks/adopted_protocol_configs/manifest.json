@@ -1,0 +1,20 @@
+{
+  "protocol": "G:\\py2\\configs\\pidnet_s_protocol_a1.yaml",
+  "protocol_sha256": "2cef96ab1bbfa471c490be159152584b35040217ab1e4a84b18cb35787508c18",
+  "protocol_values": {
+    "BRIGHTNESS": false,
+    "SCALE_MIN": 0.5,
+    "SCALE_MAX": 1.5
+  },
+  "written_configs": [
+    "G:\\py2\\experiments\\engineering_checks\\adopted_protocol_configs\\pidnet_s_rgb_baseline_adopted_100e.yaml",
+    "G:\\py2\\experiments\\engineering_checks\\adopted_protocol_configs\\pidnet_s_deconv_d1.yaml",
+    "G:\\py2\\experiments\\engineering_checks\\adopted_protocol_configs\\pidnet_s_deconv_d2.yaml",
+    "G:\\py2\\experiments\\engineering_checks\\adopted_protocol_configs\\pidnet_s_dfm_mproto_p1.yaml",
+    "G:\\py2\\experiments\\engineering_checks\\adopted_protocol_configs\\pidnet_s_dfm_mproto_p2.yaml",
+    "G:\\py2\\experiments\\engineering_checks\\adopted_protocol_configs\\pidnet_s_dfm_mproto_p3.yaml",
+    "G:\\py2\\experiments\\engineering_checks\\adopted_protocol_configs\\pidnet_s_dfm_mproto_p4.yaml",
+    "G:\\py2\\experiments\\engineering_checks\\adopted_protocol_configs\\pidnet_s_deconv_mproto.yaml"
+  ],
+  "rule": "Run the adopted 100-epoch baseline first, recompute its 26-30 conservative Fire noise band, then compare every candidate only against that baseline."
+}

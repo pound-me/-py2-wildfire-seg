@@ -1,0 +1,81 @@
+{
+  "terminology": "fire_conservative_noise_band is max-min, not a statistical sigma",
+  "baseline": {
+    "metrics": "G:\\py2\\experiments\\pidnet_s_rgb_baseline_adopted\\baseline_a1_100e\\metrics.jsonl",
+    "epoch_window": [
+      26,
+      30
+    ],
+    "miou_mean": 0.5733166235426074,
+    "fire_iou_mean": 0.1857213655644357,
+    "fire_conservative_noise_band": 0.030295168829507002,
+    "fire_sample_standard_deviation": 0.011016129108305796,
+    "miou_values": [
+      0.5907921464083062,
+      0.5508186195628362,
+      0.5972455365493341,
+      0.5729213856898691,
+      0.5548054295026913
+    ],
+    "fire_iou_values": [
+      0.18466123753976385,
+      0.19013188806639325,
+      0.16885097413946365,
+      0.185816585107587,
+      0.19914614296897065
+    ],
+    "smoke_iou_values": [
+      0.7433727581684018,
+      0.6009848576651298,
+      0.7573304025003114,
+      0.6904183405828722,
+      0.6426085250864888
+    ],
+    "smoke_or_fire_class_collapse": false,
+    "prototype_health_valid": true
+  },
+  "candidates": [
+    {
+      "metrics": "G:\\py2\\experiments\\pidnet_s_deconv\\deconv_d2_30e_a1\\metrics.jsonl",
+      "epoch_window": [
+        26,
+        30
+      ],
+      "miou_mean": 0.564147372480234,
+      "fire_iou_mean": 0.19708867300585906,
+      "fire_conservative_noise_band": 0.04405990136115123,
+      "fire_sample_standard_deviation": 0.01849273589468261,
+      "miou_values": [
+        0.5601892536324609,
+        0.5949803756616788,
+        0.5846693113444992,
+        0.5075734389696428,
+        0.5733244827928884
+      ],
+      "fire_iou_values": [
+        0.20703223407499283,
+        0.20699676022506752,
+        0.20911318229680548,
+        0.19724790749677526,
+        0.16505328093565425
+      ],
+      "smoke_iou_values": [
+        0.6376977160830191,
+        0.7186619453990527,
+        0.7064286354499164,
+        0.4941774374990327,
+        0.7523264000449723
+      ],
+      "smoke_or_fire_class_collapse": false,
+      "prototype_health_valid": true,
+      "miou_gain": -0.009169251062373318,
+      "fire_iou_gain": 0.011367307441423363,
+      "fire_interpretation": "neutral_within_conservative_band",
+      "passes_miou_rule": false,
+      "passes_fire_rule": false,
+      "health_and_classes_valid": true,
+      "passes_screening": false
+    }
+  ],
+  "recommended_metrics": null
+}

@@ -1,0 +1,111 @@
+{
+  "checkpoint": "G:\\py2\\experiments\\pidnet_s_deconv\\deconv_d2_30e_label_fix\\best.pth",
+  "checkpoint_epoch": 26,
+  "seed": 200,
+  "config_sha256": "17e09ce673e176bf9ac77aef38044b853b24195df10c900d1f2baddb27a98117",
+  "method_config_excluding_seed_sha256": "dd2844f4522b7aaebdd57e251e33d581e11b9fe2c09585659494b801ad8e6c1e",
+  "split": "val",
+  "sample_count": 240,
+  "metrics": {
+    "miou": 0.6017669104677276,
+    "mean_dice": 0.7085967195992736,
+    "pixel_accuracy": 0.8301528930664063,
+    "iou_background": 0.8499127232368645,
+    "dice_background": 0.9188679147519339,
+    "precision_background": 0.968346414081417,
+    "recall_background": 0.8741999125200185,
+    "iou_smoke": 0.7372250132528277,
+    "dice_smoke": 0.848738658065287,
+    "precision_smoke": 0.8403860800820214,
+    "recall_smoke": 0.857258934966422,
+    "iou_fire": 0.21816299491349078,
+    "dice_fire": 0.3581835859806,
+    "precision_fire": 0.29734090067372865,
+    "recall_fire": 0.45033164371583145
+  },
+  "boundary_metrics": {
+    "tolerance_pixels": 3,
+    "smoke": {
+      "boundary_precision": 0.6716129172493244,
+      "boundary_recall": 0.3381512625260144,
+      "boundary_f1": 0.44982137502078434,
+      "matched_prediction": 185388,
+      "prediction": 276034,
+      "matched_target": 224876,
+      "target": 665016
+    },
+    "fire": {
+      "boundary_precision": 0.4676546083028167,
+      "boundary_recall": 0.2673201510775383,
+      "boundary_f1": 0.34018447286274905,
+      "matched_prediction": 136644,
+      "prediction": 292190,
+      "matched_target": 150401,
+      "target": 562625
+    },
+    "mean_boundary_f1": 0.3950029239417667
+  },
+  "confusion_matrix": [
+    [
+      7536828,
+      314100,
+      770473
+    ],
+    [
+      87251,
+      4886898,
+      726460
+    ],
+    [
+      159115,
+      614065,
+      633450
+    ]
+  ],
+  "model": {
+    "name": "pidnet_s_deconv",
+    "training_parameters_with_auxiliary_heads": 8503239,
+    "training_parameters_millions": 8.503239,
+    "inference_parameters_main_head": 7623651,
+    "training_deconv_modules": 8,
+    "inference_deconv_modules_before_reparameterization": 8,
+    "deployment_deconv_modules": 0,
+    "inference_parameters_millions": 7.623651
+  },
+  "speed": {
+    "device": "NVIDIA GeForce RTX 2060",
+    "input_shape": [
+      1,
+      3,
+      256,
+      256
+    ],
+    "batch_size": 1,
+    "amp": true,
+    "warmup_iterations": 30,
+    "timed_iterations": 100,
+    "repeats": 5,
+    "latency_ms": 20.32011100000002,
+    "latency_ms_mean": 20.501053000000006,
+    "latency_ms_std": 0.6864253647157921,
+    "latency_ms_trials": [
+      19.906167000000003,
+      21.814269000000017,
+      20.456345999999996,
+      20.008371999999994,
+      20.32011100000002
+    ],
+    "fps": 49.21232959800264,
+    "fps_mean": 48.83064736146996,
+    "fps_std": 1.5732960160557607,
+    "fps_trials": [
+      50.23568826685719,
+      45.841554443103234,
+      48.88458574175467,
+      49.97907875763207,
+      49.21232959800264
+    ],
+    "peak_allocated_memory_mb": 58.82373046875,
+    "scope": "model forward, main segmentation output only"
+  }
+}

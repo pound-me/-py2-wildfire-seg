@@ -1,0 +1,91 @@
+{
+  "terminology": "fire_conservative_noise_band is max-min, not a statistical sigma",
+  "baseline": {
+    "metrics": "G:\\py2\\experiments\\pidnet_s_rgb_baseline_adopted\\baseline_a1_100e_label_fix\\metrics.jsonl",
+    "epoch_window": [
+      26,
+      30
+    ],
+    "miou_mean": 0.5459809666565772,
+    "fire_iou_mean": 0.19783960301335823,
+    "fire_conservative_noise_band": 0.02710174422560596,
+    "fire_sample_standard_deviation": 0.011144140968837993,
+    "miou_values": [
+      0.6017895797513632,
+      0.5746279742913113,
+      0.5930528235094977,
+      0.49660845526852765,
+      0.4638260004621865
+    ],
+    "fire_iou_values": [
+      0.2003308499444982,
+      0.21599401023672987,
+      0.19449029916302132,
+      0.1888922660111239,
+      0.18949058971141783
+    ],
+    "smoke_iou_values": [
+      0.7595209431032492,
+      0.656697279135399,
+      0.726911965839249,
+      0.45874524317299725,
+      0.37250044680439026
+    ],
+    "smoke_or_fire_class_collapse": false,
+    "prototype_health_valid": true,
+    "prototype_health_checked_epoch_range": [
+      1,
+      30
+    ],
+    "prototype_invalid_epochs": []
+  },
+  "candidates": [
+    {
+      "metrics": "G:\\py2\\experiments\\pidnet_s_deconv\\deconv_d1_30e_label_fix\\metrics.jsonl",
+      "epoch_window": [
+        26,
+        30
+      ],
+      "miou_mean": 0.5568157487570311,
+      "fire_iou_mean": 0.18545283165543225,
+      "fire_conservative_noise_band": 0.011996208183687795,
+      "fire_sample_standard_deviation": 0.004646007941184946,
+      "miou_values": [
+        0.5255693457568855,
+        0.5441457829353433,
+        0.588785666629218,
+        0.56564289711335,
+        0.5599350513503584
+      ],
+      "fire_iou_values": [
+        0.17950126177092937,
+        0.19149746995461717,
+        0.18837621108409494,
+        0.18314239304292526,
+        0.18474682242459448
+      ],
+      "smoke_iou_values": [
+        0.5741002518711639,
+        0.5974419834600677,
+        0.7414593617424607,
+        0.7140034534387824,
+        0.6785050841320379
+      ],
+      "smoke_or_fire_class_collapse": false,
+      "prototype_health_valid": true,
+      "prototype_health_checked_epoch_range": [
+        1,
+        30
+      ],
+      "prototype_invalid_epochs": [],
+      "miou_gain": 0.010834782100453855,
+      "fire_iou_gain": -0.012386771357925985,
+      "fire_interpretation": "neutral_within_conservative_band",
+      "passes_miou_rule": true,
+      "passes_fire_rule": false,
+      "health_and_classes_valid": true,
+      "passes_screening": true
+    }
+  ],
+  "recommended_metrics": "G:\\py2\\experiments\\pidnet_s_deconv\\deconv_d1_30e_label_fix\\metrics.jsonl"
+}

@@ -1,0 +1,21 @@
+﻿Reference clones under third_party/ (kept as standalone git repos, ignored by the parent repository).
+Pinned commits recorded 2026-07-26:
+
+DEA-Net
+  url:    https://github.com/cecret3350/DEA-Net.git
+  commit: 599d4d5533325aec0ceca81e661f3eeb2b0619e8 (2024-12-17)
+
+PIDNet
+  url:    https://github.com/XuJiacong/PIDNet.git
+  commit: 4c158cf24ce432f0a8cb43364fae38d93cee0dc3 (2025-12-18)
+
+PSL
+  url:    https://github.com/LujianYao/psl.git
+  commit: 39e6838315ff33222bf23011a793f4b7e72e79f6 (2025-09-27)
+
+dysample
+  url:    https://github.com/tiny-smart/dysample.git
+  commit: 81a1de5caa95d55a0f5488425fa53ec7ef47f8f0 (2024-05-02)
+
+RoboFireFuseNet is NOT listed here: it carries local patches and is tracked
+directly by the parent repository (see RoboFireFuseNet/UPSTREAM.txt).

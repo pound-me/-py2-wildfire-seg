@@ -1,0 +1,43 @@
+{
+  "baseline": {
+    "epoch_window": [26, 30],
+    "miou_mean": 0.5459809666565772,
+    "fire_iou_mean": 0.19783960301335823,
+    "fire_conservative_noise_band": 0.02710174422560596
+  },
+  "deconv_winner": {
+    "variant": "D2",
+    "miou_mean": 0.5630961036036723,
+    "fire_iou_mean": 0.21280060782396645,
+    "miou_gain": 0.0171151369470951,
+    "fire_iou_gain": 0.01496100481060822,
+    "passes_screening": true
+  },
+  "mproto_winner": {
+    "variant": "P1",
+    "settings": {
+      "prototypes_per_class": 1,
+      "fire_sampling": "uniform",
+      "prototype_decorrelation": false
+    },
+    "miou_mean": 0.5757001036633158,
+    "fire_iou_mean": 0.19815330807982764,
+    "miou_gain": 0.02971913700673856,
+    "fire_iou_gain": 0.00031370506646941076,
+    "passes_screening": true
+  },
+  "combination": {
+    "variant": "D2+P1",
+    "miou_mean": 0.5542379344812202,
+    "fire_iou_mean": 0.20385165140155817,
+    "miou_gain": 0.008256967824642913,
+    "fire_iou_gain": 0.0060120483881999365,
+    "passes_screening": true,
+    "miou_vs_p1": -0.021462169182095648,
+    "miou_vs_d2": -0.008858169122452103,
+    "fire_vs_d2": -0.008948956422408281,
+    "interpretation": "Passes the baseline threshold but is dominated by D2 and loses substantial mIoU versus P1; retain only as an ablation."
+  },
+  "selected_for_100_epoch_formal_run": "P1",
+  "selection_reason": "P1 has the highest epoch-26--30 mean mIoU. Its Fire change is neutral within the baseline conservative noise band, while the D2+P1 combination degrades relative to the successful individual modules."
+}

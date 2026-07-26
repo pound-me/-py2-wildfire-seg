@@ -1,0 +1,99 @@
+{
+  "checkpoint": "G:\\py2\\experiments\\pidnet_s_rgb_baseline\\baseline_100e\\best.pth",
+  "checkpoint_epoch": 54,
+  "split": "test",
+  "sample_count": 200,
+  "metrics": {
+    "miou": 0.5874268383530986,
+    "mean_dice": 0.6719175510229599,
+    "pixel_accuracy": 0.8588158503941595,
+    "iou_background": 0.8838052731769576,
+    "dice_background": 0.9383191413265953,
+    "iou_smoke": 0.7579504906174835,
+    "dice_smoke": 0.8623115322789915,
+    "iou_fire": 0.12052475126485494,
+    "dice_fire": 0.21512197946329323
+  },
+  "boundary_metrics": {
+    "tolerance_pixels": 3,
+    "smoke": {
+      "boundary_precision": 0.7277520696242836,
+      "boundary_recall": 0.25119891419092144,
+      "boundary_f1": 0.37348249853605486,
+      "matched_prediction": 85711,
+      "prediction": 117775,
+      "matched_target": 99942,
+      "target": 397860
+    },
+    "fire": {
+      "boundary_precision": 0.3648716119828816,
+      "boundary_recall": 0.18604545729311492,
+      "boundary_f1": 0.24643529739908476,
+      "matched_prediction": 61386,
+      "prediction": 168240,
+      "matched_target": 61555,
+      "target": 330860
+    },
+    "mean_boundary_f1": 0.3099588979675698
+  },
+  "confusion_matrix": [
+    [
+      7785438,
+      84902,
+      708475
+    ],
+    [
+      116660,
+      3193444,
+      364337
+    ],
+    [
+      113522,
+      453919,
+      224783
+    ]
+  ],
+  "model": {
+    "name": "pidnet_s",
+    "training_parameters_with_auxiliary_heads": 7716807,
+    "training_parameters_millions": 7.716807,
+    "inference_parameters_main_head": 7623651,
+    "inference_parameters_millions": 7.623651
+  },
+  "speed": {
+    "device": "NVIDIA GeForce RTX 2060",
+    "input_shape": [
+      1,
+      3,
+      256,
+      256
+    ],
+    "batch_size": 1,
+    "amp": true,
+    "warmup_iterations": 30,
+    "timed_iterations": 100,
+    "repeats": 5,
+    "latency_ms": 26.949983999999994,
+    "latency_ms_mean": 27.279465599999998,
+    "latency_ms_std": 1.831697087589389,
+    "latency_ms_trials": [
+      26.083779999999983,
+      24.90252999999999,
+      26.949983999999994,
+      28.23695700000002,
+      30.224076999999987
+    ],
+    "fps": 37.105773420867344,
+    "fps_mean": 36.820224633900395,
+    "fps_std": 2.426317103496471,
+    "fps_trials": [
+      38.338001623997776,
+      40.156562405506605,
+      37.105773420867344,
+      35.414580969188684,
+      33.086204749941594
+    ],
+    "peak_allocated_memory_mb": 58.82373046875,
+    "scope": "model forward, main segmentation output only"
+  }
+}

@@ -1,0 +1,29 @@
+method: bayes
+metric:
+  name: MIOU
+  goal: maximize
+parameters:
+  LR:
+    distribution: log_uniform_values
+    min: 0.00001
+    max: 0.01
+  WD:
+    distribution: log_uniform_values
+    min: 0.0000001
+    max: 0.001
+  BATCHSIZE:
+    distribution: int_uniform
+    min: 5
+    max: 64
+  WARMUP:
+    distribution: categorical
+    values: [0, 5, 10, 15, 20]
+  SCHED:
+    distribution: categorical
+    values: ['COS', 'POLY']
+  OPTIM:
+    distribution: categorical
+    values: ['ADAM', 'SGD']
+  USE_OHEM:
+    distribution: categorical
+    values: [True, False]

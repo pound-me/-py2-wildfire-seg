@@ -1,0 +1,75 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    
+
+    {
+      "name": "Check GPU and PIDNet-S",
+      "type": "debugpy",
+      "request": "launch",
+      "python": "F:\\anaconda3\\envs\\pytorch\\python.exe",
+      "program": "${workspaceFolder}\\src\\check_environment.py",
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}",
+      "env": {
+        "PYTHONUTF8": "0"
+      }
+    },
+    {
+      "name": "Check FLAME2 data",
+      "type": "debugpy",
+      "request": "launch",
+      "python": "F:\\anaconda3\\envs\\pytorch\\python.exe",
+      "program": "${workspaceFolder}\\src\\check_flame2_data.py",
+      "args": [
+        "--root",
+        "${workspaceFolder}\\data"
+      ],
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}",
+      "env": {
+        "PYTHONUTF8": "0"
+      }
+    },
+    {
+      "name": "Smoke-test PIDNet-S training",
+      "type": "debugpy",
+      "request": "launch",
+      "python": "F:\\anaconda3\\envs\\pytorch\\python.exe",
+      "program": "${workspaceFolder}\\src\\smoke_test_baseline_training.py",
+      "args": [
+        "--config",
+        "${workspaceFolder}\\configs\\pidnet_s_rgb_baseline.yaml"
+      ],
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}",
+      "env": {
+        "PYTHONUTF8": "0"
+      }
+    },
+    {
+      "name": "Short PIDNet-S training check",
+      "type": "debugpy",
+      "request": "launch",
+      "python": "F:\\anaconda3\\envs\\pytorch\\python.exe",
+      "program": "${workspaceFolder}\\src\\train_baseline.py",
+      "args": [
+        "--config",
+        "${workspaceFolder}\\configs\\pidnet_s_rgb_baseline.yaml",
+        "--epochs",
+        "1",
+        "--max-train-batches",
+        "8",
+        "--max-val-batches",
+        "4",
+        "--run-name",
+        "pipeline_check"
+      ],
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}",
+      "env": {
+        "PYTHONUTF8": "0"
+      }
+    }
+  ]
+}

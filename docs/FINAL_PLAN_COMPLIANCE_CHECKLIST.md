@@ -1,0 +1,90 @@
+# PIDNet-S final-plan compliance checklist
+
+Last updated: 2026-07-26
+
+This checklist separates implemented code from scientific results. A passing
+engineering check is not treated as evidence that a method improves accuracy.
+
+## Data and protocol
+
+- [x] Runtime training and cache construction share the strict black/gray/white
+  FLAME2 decoder.
+- [x] Unknown colors and missing labels raise; no all-background fallback.
+- [x] 992 labels and uint16 8-connected Fire caches verified.
+- [x] Runtime and augmented component-map/Fire alignment assertions exist.
+- [x] A1/A2/A3 rerun after the label fix; A1 adopted by the specified rule.
+- [x] Adopted A1 configs materialized in `configs/adopted_protocol_label_fix`.
+- [x] Adopted baseline epoch-26--30 reference and conservative Fire noise band
+  saved.
+- [x] Adopted A1 baseline completes all 100 epochs and best checkpoint is
+  evaluated on validation.
+
+## DEConv
+
+- [x] Official DEA-Net source pinned at commit
+  `599d4d5533325aec0ceca81e661f3eeb2b0619e8`.
+- [x] CDC/ADC/HDC/VDC mappings checked against official source.
+- [x] Five kernels are summed before one convolution; no branch BN or bias.
+- [x] Vanilla weight loads the PIDNet checkpoint and differential weights start
+  at zero.
+- [x] Formal checker covers initial main and three training outputs, deployment
+  FP32 error, validation predictions and parameter equality.
+- [x] Rerun the updated D1/D2 engineering checker and save JSON evidence.
+- [x] D1 and D2 strict-label 30-epoch runs and screening; D2 selected.
+
+## EMA multi-prototype supervision
+
+- [x] Official PSL source pinned at commit
+  `39e6838315ff33222bf23011a793f4b7e72e79f6`.
+- [x] DFM 128-channel feature sampling uses full-resolution coordinates and
+  `grid_sample(..., align_corners=False)` with pixel-center normalization.
+- [x] P1--P4 configurations isolate K, Fire component sampling and
+  feature-side decorrelation.
+- [x] Epoch-1 EMA-only, epoch-2 linear loss warmup, EMA=0.99, detached
+  prototypes and forced-FP32 prototype operations implemented.
+- [x] Fire mixed sampling is without replacement and records small/medium/large
+  component-area buckets.
+- [x] Health records hits, norms, cosine matrices, bucket assignments, dead and
+  collapse streaks. Uninitialized zero-hit prototypes cannot evade the
+  five-epoch death gate.
+- [x] Screening checks prototype-health failures over epochs 1--30, not only
+  the final five-epoch metric window.
+- [x] Rerun the updated AMP/gradient/checkpoint/inference engineering checker.
+- [x] P1, P2, P3 and P4 strict-label 30-epoch runs and screening in order;
+  P1 selected among the prototype variants.
+
+## Combination, deployment and paper evidence
+
+- [x] Select passing DEConv and mproto variants and run the D2+P1 combination
+  for 30 epochs. The combination passes the baseline screening threshold but
+  is dominated by the successful individual variants, so it is retained only
+  as an ablation.
+- [x] Run P1 and D2 for 100 epochs and verify the internal method threshold.
+  Neither method reaches either internal threshold on its mIoU-selected best
+  checkpoint; both are preserved as formal negative/near-neutral ablations.
+- [ ] Complete required three-seed rows and aggregate mean plus sample standard
+  deviation with unique-seed/config checks.
+- [x] Measure P1 and fused-D2 deployment parameters/FLOPs and RTX 2060 speed.
+  Both have baseline-identical deployment parameters/FLOPs. A same-process,
+  alternating-order paired benchmark verifies that fused D2 has no speed loss.
+- [ ] Export validation IoU, Fire precision/recall, boundary F1, prototype
+  statistics, fixed-sample fused features, cosine distances, silhouette score
+  and qualitative t-SNE.
+- [x] Test evaluation is code-locked behind `--confirm-frozen-test`.
+- [ ] After all choices are frozen, evaluate each final seed on the test set
+  once and aggregate without further method changes.
+
+## Backup route
+
+- [x] Formally amend and log the backup trigger so that both primary routes
+  failing either 30-epoch screening or their promoted winner's 100-epoch
+  internal threshold activates the backup route.
+- [x] Confirm that the mproto route winner P1 and the DEConv route winner D2
+  both completed 100 epochs and failed the internal method threshold.
+- [x] Record the P-route failure attribution before implementing DySample.
+- [x] Pin the official DySample repository at commit
+  `81a1de5caa95d55a0f5488425fa53ec7ef47f8f0` and record its MIT LICENSE.
+- [x] Limit initial DySample screening to two theory-driven single-position
+  variants: late Pag4 semantic fusion and SPP-context upsampling before DFM.
+- [ ] Complete DySample engineering checks and run both 30-epoch screening
+  experiments under the adopted A1 protocol.

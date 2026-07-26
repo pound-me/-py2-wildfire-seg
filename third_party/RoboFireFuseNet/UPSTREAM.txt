@@ -1,0 +1,13 @@
+Vendored from: https://github.com/dimfot3/RoboFireFuseNet.git
+Upstream commit: 0d8ec502da0bafea7c388a989650aa53d1ecf278 (2026-05-12)
+
+Local modifications vs upstream are archived in:
+  local_modifications_vs_upstream.patch
+At snapshot time: modified datasets/base_dataset.py and datasets/wildfire.py
+(fire component cache support + FLAME2 three-class color-table label decoding);
+added datasets/flame2_labels.py.
+
+The original .git directory of this vendored repo was renamed to
+.git_upstream_backup so that the parent project repository (G:\py2) can track
+the local patches directly. To restore upstream git operations (diff/pull),
+rename .git_upstream_backup back to .git.
