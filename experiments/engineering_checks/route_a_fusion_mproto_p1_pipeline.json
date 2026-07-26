@@ -1,0 +1,45 @@
+{
+  "component_alignment": true,
+  "fixed_seed_sampling_reproducible": true,
+  "sampling_without_replacement": true,
+  "sample_counts": {
+    "0": 512,
+    "1": 512,
+    "2": 512
+  },
+  "selected_real_batch_index": 31,
+  "synthetic_mixed_fire_count": 512,
+  "synthetic_fire_bucket_counts": {
+    "small_le_4": 323,
+    "medium_5_64": 0,
+    "large_gt_64": 189
+  },
+  "prototype_loss": 1.8719276189804077,
+  "amp_full_loss": 16.981128692626953,
+  "prototype_components": {
+    "base_total": 16.970754623413086,
+    "semantic": 9.151716232299805,
+    "boundary": 0.08765190839767456,
+    "prototype_total": 1.8673337697982788,
+    "prototype_contrastive": 1.8673337697982788,
+    "prototype_decorrelation": 0.0,
+    "prototype_weight": 0.00555419921875,
+    "weighted_prototype": 0.010374076664447784,
+    "sampled_total": 1536.0,
+    "sampled_background": 512.0,
+    "sampled_smoke": 512.0,
+    "sampled_fire": 512.0
+  },
+  "branch_gradient_norms": {
+    "dfm": 1.5850486159324646,
+    "p_branch": 1.3030548561364412,
+    "i_branch": 9.369539432227612,
+    "d_branch": 1.1043481528759003
+  },
+  "prototype_gradient_is_none": true,
+  "checkpoint_restore_exact": true,
+  "next_ema_update_exact": true,
+  "uninitialized_zero_hit_prototypes_fail_after_five_epochs": true,
+  "inference_has_no_prototype_bank": true,
+  "inference_returns_tensor_only": true
+}

@@ -62,7 +62,18 @@ def main() -> None:
     if count_deconv_modules(deployed) != 0:
         raise RuntimeError("Deployment model still contains DEConv modules.")
 
-    sample = torch.randn(1, 3, 256, 256, device=device, dtype=torch.float32)
+    input_channels = {"rgb": 3, "ir": 1, "fusion": 4}
+    mode = str(config["MODE"]).lower()
+    if mode not in input_channels:
+        raise ValueError(f"Unsupported input mode: {config['MODE']}")
+    sample = torch.randn(
+        1,
+        input_channels[mode],
+        256,
+        256,
+        device=device,
+        dtype=torch.float32,
+    )
     with torch.inference_mode():
         before = model(sample)
         after = deployed(sample)

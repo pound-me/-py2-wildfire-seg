@@ -1,0 +1,20 @@
+{
+  "config": "G:\\py2\\configs\\route_a\\pidnet_s_fusion_deconv_d2_30e_label_fix.yaml",
+  "weight_source": "G:/py2/weights/PIDNet_S_ImageNet.pth.tar",
+  "deconv_modules_before": 8,
+  "deconv_modules_after": 0,
+  "fp32_maximum_absolute_error": 0.0,
+  "threshold": 1e-05,
+  "random_prediction_equal": true,
+  "initial_baseline_fp32_maximum_absolute_error": 0.0,
+  "initial_baseline_prediction_equal": true,
+  "initial_baseline_matched_pretrained_tensors": 301,
+  "initial_training_output_count": 3,
+  "initial_training_segmentation_output_count": 3,
+  "initial_training_feature_output_count": 0,
+  "initial_training_outputs_fp32_maximum_absolute_error": 0.0,
+  "validation_pixels_compared": 245760,
+  "validation_mismatched_pixels": 0,
+  "deployment_parameters": 7623939,
+  "baseline_parameters": 7623939
+}
