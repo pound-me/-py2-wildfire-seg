@@ -42,3 +42,7 @@
 - 测速时不同时运行其他训练；
 - 保存GPU、PyTorch、CUDA、cuDNN、配置哈希、原始trial和门槛判定；
 - 正在写入的训练日志/checkpoint不提交，测速JSON与Table 1归档文档完成后再commit/push。
+
+完成三项复杂度和同会话测速后，使用`src/build_route_c_table1.py`生成JSON、CSV与Markdown。
+汇总脚本强制检查每行的metrics、complexity和latency是否引用同一个best checkpoint，并
+拒绝非验证集指标或错误输入通道，避免手工抄表造成行错配。
