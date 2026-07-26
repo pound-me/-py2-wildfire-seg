@@ -135,3 +135,17 @@ Fusion 100 轮训练与 best checkpoint 验证已经完成，原第 7 节第 3 �
 相对原 RGB best，Fusion best 的 mIoU / Smoke / Fire 分别提高
 0.193057 / 0.086159 / 0.452081。测试集仍未使用。详细正式记录见
 `docs/FUSION_BASELINE_100E_RECORD.md`。
+
+## 9. Fusion-D2/P1重新筛选结论
+
+Fusion正式基线确立后，按第7节规则重新运行了此前RGB路线的优胜者D2与P1。
+两项实验均完成30轮，并使用第26--30轮固定窗口严格筛选：
+
+- D2：mIoU相对Fusion基线 +0.004798，Fire IoU +0.003579；Fire中性，
+  mIoU未达到 +0.005 门槛，未通过。
+- P1：mIoU相对Fusion基线 +0.003780，Fire IoU -0.006030；Fire中性，
+  prototype健康且无类别崩溃，但未通过两条门槛。
+
+因此D2与P1均不进入Fusion 100轮，也不运行二者组合。Fusion PIDNet-S继续作为
+正式基线；模块代码和历史结果保留。详细证据与后续边界见
+`docs/FUSION_DP_30E_SCREENING_DECISION.md`。测试集仍未使用。
