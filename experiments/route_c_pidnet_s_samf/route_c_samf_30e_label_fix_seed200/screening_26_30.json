@@ -1,0 +1,91 @@
+{
+  "terminology": "fire_conservative_noise_band is max-min, not a statistical sigma",
+  "baseline": {
+    "metrics": "G:\\py2\\experiments\\route_a_pidnet_s_fusion\\route_a_fusion_100e_label_fix_seed200\\metrics.jsonl",
+    "epoch_window": [
+      26,
+      30
+    ],
+    "miou_mean": 0.7861409555868736,
+    "fire_iou_mean": 0.6467101737950955,
+    "fire_conservative_noise_band": 0.014250943138484629,
+    "fire_sample_standard_deviation": 0.006089851426224935,
+    "miou_values": [
+      0.7678683840912598,
+      0.7932996047193628,
+      0.7944135566309853,
+      0.7886447504805859,
+      0.7864784820121743
+    ],
+    "fire_iou_values": [
+      0.6358597750161066,
+      0.6493812593823567,
+      0.6495982023626671,
+      0.6501107181545912,
+      0.6486009140597562
+    ],
+    "smoke_iou_values": [
+      0.7976434077884589,
+      0.8301245665853345,
+      0.8309908147076196,
+      0.8186877745934676,
+      0.8211906441011225
+    ],
+    "smoke_or_fire_class_collapse": false,
+    "prototype_health_valid": true,
+    "prototype_health_checked_epoch_range": [
+      1,
+      30
+    ],
+    "prototype_invalid_epochs": []
+  },
+  "candidates": [
+    {
+      "metrics": "G:\\py2\\experiments\\route_c_pidnet_s_samf\\route_c_samf_30e_label_fix_seed200\\metrics.jsonl",
+      "epoch_window": [
+        26,
+        30
+      ],
+      "miou_mean": 0.7918076619759726,
+      "fire_iou_mean": 0.6434394539763831,
+      "fire_conservative_noise_band": 0.007788776612230097,
+      "fire_sample_standard_deviation": 0.0030776528007010226,
+      "miou_values": [
+        0.7895573438136799,
+        0.7849894362695785,
+        0.7966640169233652,
+        0.7914331557843051,
+        0.7963943570889344
+      ],
+      "fire_iou_values": [
+        0.6395999836949876,
+        0.6425209908349185,
+        0.6456296456090741,
+        0.642057889435718,
+        0.6473887603072177
+      ],
+      "smoke_iou_values": [
+        0.8294975288147087,
+        0.8179971782458411,
+        0.8371266100867993,
+        0.8288723966135716,
+        0.837173144405222
+      ],
+      "smoke_or_fire_class_collapse": false,
+      "prototype_health_valid": true,
+      "prototype_health_checked_epoch_range": [
+        1,
+        30
+      ],
+      "prototype_invalid_epochs": [],
+      "miou_gain": 0.005666706389099052,
+      "fire_iou_gain": -0.0032707198187124087,
+      "fire_interpretation": "neutral_within_conservative_band",
+      "passes_miou_rule": true,
+      "passes_fire_rule": false,
+      "health_and_classes_valid": true,
+      "passes_screening": true
+    }
+  ],
+  "recommended_metrics": "G:\\py2\\experiments\\route_c_pidnet_s_samf\\route_c_samf_30e_label_fix_seed200\\metrics.jsonl"
+}

@@ -140,10 +140,13 @@ engineering check is not treated as evidence that a method improves accuracy.
   mismatches across validation metrics, complexity and latency artifacts.
 - [x] Create the unified Pareto registry template and a plotter that leaves
   untrained or unmeasured methods pending instead of inventing coordinates.
-- [ ] Complete SAMF engineering acceptance and its single 30-epoch screen.
+- [x] Complete SAMF engineering acceptance and its single 30-epoch screen.
   Engineering acceptance passed: beta-zero bitwise equivalence, AMP/two-stage
   gradients, inference interface, 7.705M parameters, 3.1545 GFLOPs and paired
-  RTX 2060 median 32.32 FPS. The single 30-epoch screen is the remaining item.
+  RTX 2060 median 32.32 FPS. The 26--30 window gained 0.005667 mIoU while Fire
+  remained neutral inside the Fusion conservative band, so the screen passed.
+- [ ] Run the frozen SAMF definition for 100 epochs and apply the formal method
+  threshold before unfreezing TGM.
 - [x] Verify the Route C bibliography against formal titles, venues/years and
   DOI/original metadata; archive BibTeX and code-reuse status. Mark SGFNet,
   CBL, top-level FreqFusion and PSL as no-license reference-only sources.
