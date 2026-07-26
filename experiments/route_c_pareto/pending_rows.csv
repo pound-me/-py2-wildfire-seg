@@ -4,7 +4,7 @@ mproto_p1,Fusion + mproto P1,30e screen,flame2_val_label_fix_seed200,,,,,pending
 dysample_pag4,Fusion + DySample Pag4,30e screen,flame2_val_label_fix_seed200,,,,,pending_paired_latency,One of the five closed Route A modules
 dysample_context,Fusion + DySample Context,engineering only,flame2_val_label_fix_seed200,,,,,untrained_no_miou,Do not invent mIoU
 freqfusion_pag3,Fusion + FreqFusion Pag3,engineering only,flame2_val_label_fix_seed200,,,,,untrained_no_miou,Do not invent mIoU
-tgm,Fusion + TGM,Route C,flame2_val_label_fix_seed200,,,,,unblocked_after_samf_formal,TGM engineering is the next authorized node
+tgm,Fusion + TGM,engineering only,flame2_val_label_fix_seed200,,22.551228499999993,7635252.0,3.0077,engineering_passed_30fps_untrained,No mIoU until the frozen 30e screen completes
 samf_tgm,Fusion + SAMF + TGM,Route C historical combination,flame2_val_label_fix_seed200,,,,,superseded_by_amendment_5,Not one of the two newly authorized configurations
 abl_samf,Fusion + ABL + SAMF,Route C combination,flame2_val_label_fix_seed200,,,,,conditional_on_positive_tgm,One 30e screen only if standalone TGM is positive
 abl_samf_tgm,Fusion + ABL + SAMF + TGM,Route C combination,flame2_val_label_fix_seed200,,,,,conditional_on_positive_tgm,One 30e screen only if standalone TGM is positive

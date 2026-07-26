@@ -7,7 +7,7 @@ dysample_context,Fusion + DySample Context,engineering only,flame2_val_label_fix
 freqfusion_pag3,Fusion + FreqFusion Pag3,engineering only,flame2_val_label_fix_seed200,,,,,untrained_no_miou,Do not invent mIoU
 abl,Fusion + ABL,100e formal,flame2_val_label_fix_seed200,0.808422709955544,27.589911999999998,7623939,2.927702,measured_shared_inference_architecture,Training-only loss; uses paired Fusion deployment coordinate
 samf,Fusion + SAMF,100e formal,flame2_val_label_fix_seed200,0.8086130496925034,28.929772000000007,7705271,3.1545,failed_internal_threshold_positive_ablation,Formal best checkpoint; passes 30 FPS but not accuracy threshold
-tgm,Fusion + TGM,Route C,flame2_val_label_fix_seed200,,,,,unblocked_after_samf_formal,TGM engineering is the next authorized node
+tgm,Fusion + TGM,engineering only,flame2_val_label_fix_seed200,,22.551228499999993,7635252,3.0077,engineering_passed_30fps_untrained,No mIoU until the frozen 30e screen completes
 samf_tgm,Fusion + SAMF + TGM,Route C historical combination,flame2_val_label_fix_seed200,,,,,superseded_by_amendment_5,Not one of the two newly authorized configurations
 abl_samf,Fusion + ABL + SAMF,Route C combination,flame2_val_label_fix_seed200,,,,,conditional_on_positive_tgm,One 30e screen only if standalone TGM is positive
 abl_samf_tgm,Fusion + ABL + SAMF + TGM,Route C combination,flame2_val_label_fix_seed200,,,,,conditional_on_positive_tgm,One 30e screen only if standalone TGM is positive

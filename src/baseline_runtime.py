@@ -33,6 +33,7 @@ from custom_models.pidnet_dfm_mproto import (  # noqa: E402
 )
 from custom_models.pidnet_dysample import PIDNetDySample  # noqa: E402
 from custom_models.pidnet_samf import PIDNetSAMF  # noqa: E402
+from custom_models.pidnet_tgm import PIDNetTGM  # noqa: E402
 
 
 def load_config(path: Path) -> dict:
@@ -121,6 +122,8 @@ def build_model(config: dict, augment: bool = True) -> PIDNet:
         model_class = PIDNetFreqFusion
     elif model_name == "pidnet_s_samf":
         model_class = PIDNetSAMF
+    elif model_name == "pidnet_s_tgm":
+        model_class = PIDNetTGM
     else:
         raise ValueError(f"Unsupported model: {model_name}")
     model_kwargs = dict(
@@ -155,6 +158,10 @@ def build_model(config: dict, augment: bool = True) -> PIDNet:
         model_kwargs["smoke_class"] = int(config.get("SAMF_SMOKE_CLASS", 1))
         model_kwargs["thermal_channel"] = int(
             config.get("SAMF_THERMAL_CHANNEL", 3)
+        )
+    if model_name == "pidnet_s_tgm":
+        model_kwargs["thermal_channel"] = int(
+            config.get("TGM_THERMAL_CHANNEL", 3)
         )
     return model_class(**model_kwargs)
 

@@ -1,0 +1,136 @@
+{
+  "config": "G:\\py2\\configs\\route_c\\pidnet_s_fusion_tgm_30e_label_fix.yaml",
+  "frozen_definition": {
+    "TGM_THERMAL_ALIGNMENT": "adaptive_avg_pool_1_4_to_1_8_before_spatial_gate",
+    "TGM_SPATIAL_GATE": "sigmoid_conv1x1_32_to_1_no_bias_after_dwconv3x3_32_no_bias",
+    "TGM_CHANNEL_GATE": "sigmoid_linear_gap_original_thermal_32_to_64_bias_true",
+    "TGM_FEATURE_TRANSFORM": "conv1x1_64_to_64_bias_false",
+    "TGM_INSERTION": "pag3_output_1_8",
+    "TGM_AUXILIARY_P_SOURCE": "post_injection_tgm_output"
+  },
+  "standalone_without_samf": true,
+  "equivalence_checkpoint": "G:\\py2\\experiments\\route_a_pidnet_s_fusion\\route_a_fusion_100e_label_fix_seed200\\best.pth",
+  "alpha_zero": 0.0,
+  "alpha_zero_output_bitwise_equal": [
+    true,
+    true,
+    true
+  ],
+  "alpha_zero_output_max_abs": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "insertion_shapes": {
+    "thermal_stem": [
+      2,
+      32,
+      64,
+      64
+    ],
+    "pag3": [
+      2,
+      64,
+      32,
+      32
+    ],
+    "spatial_depthwise": [
+      2,
+      32,
+      32,
+      32
+    ],
+    "spatial_logits": [
+      2,
+      1,
+      32,
+      32
+    ],
+    "channel_logits": [
+      2,
+      64
+    ],
+    "feature_projection": [
+      2,
+      64,
+      32,
+      32
+    ]
+  },
+  "matched_pretrained_tensors": 301,
+  "baseline_matched_pretrained_tensors": 301,
+  "amp_alpha_zero_loss": 15.649984359741211,
+  "amp_alpha_zero_components": {
+    "base_total": 15.649984359741211,
+    "semantic": 9.15239429473877,
+    "boundary": 0.0,
+    "smoke_auxiliary": 0.0,
+    "smoke_bce": 0.0,
+    "smoke_dice": 0.0,
+    "weighted_smoke_auxiliary": 0.0
+  },
+  "alpha_gradient_at_zero": 0.20086490024072867,
+  "inactive_branch_gradient_norms": {
+    "thermal_stem": 0.0,
+    "spatial_depthwise": 0.0,
+    "spatial_pointwise": 0.0,
+    "channel_fc": 0.0,
+    "feature_projection": 0.0
+  },
+  "amp_alpha_active_loss": 15.629562377929688,
+  "amp_alpha_active_components": {
+    "base_total": 15.629562377929688,
+    "semantic": 9.152442932128906,
+    "boundary": 0.0,
+    "smoke_auxiliary": 0.0,
+    "smoke_bce": 0.0,
+    "smoke_dice": 0.0,
+    "weighted_smoke_auxiliary": 0.0
+  },
+  "active_gradient_norms": {
+    "alpha": 0.20043298522698638,
+    "thermal_stem": 0.06857961673439522,
+    "spatial_depthwise": 0.04432488074631551,
+    "spatial_pointwise": 0.002879237053089371,
+    "channel_fc": 0.018291487708697714,
+    "feature_projection": 0.07691572497999172,
+    "p_branch": 4.531469627105667,
+    "i_branch": 166.28417731025638,
+    "d_branch": 4.2937161391184935,
+    "final_head": 30.19009393600641
+  },
+  "training_output_shapes": [
+    [
+      4,
+      3,
+      256,
+      256
+    ],
+    [
+      4,
+      3,
+      256,
+      256
+    ],
+    [
+      4,
+      1,
+      256,
+      256
+    ]
+  ],
+  "inference_output_shape": [
+    1,
+    3,
+    32,
+    32
+  ],
+  "inference_returns_tensor_only": true,
+  "inference_has_auxiliary_heads": false,
+  "baseline_training_parameters": 7717095,
+  "candidate_training_parameters": 7728408,
+  "training_parameter_increment": 11313,
+  "baseline_inference_parameters": 7623939,
+  "candidate_inference_parameters": 7635252,
+  "inference_parameter_increment": 11313
+}

@@ -149,9 +149,13 @@ engineering check is not treated as evidence that a method improves accuracy.
   threshold before unfreezing TGM. SAMF gained 0.001885 mIoU and 0.004068 Fire
   IoU, passed the 30 FPS gate at 34.57 FPS, but failed both internal accuracy
   thresholds; retain it as a positive ablation and unfreeze TGM.
-- [ ] Implement and engineering-check the single frozen TGM variant using the
+- [x] Implement and engineering-check the single frozen TGM variant using the
   confirmed 1/4-to-1/8 pre-gate alignment, explicit spatial/channel gates,
-  post-injection auxiliary P head and alpha-zero identity.
+  post-injection auxiliary P head and alpha-zero identity. Bitwise equivalence,
+  AMP gradients and inference interface passed; 7.635M parameters, 3.0077
+  GFLOPs and paired RTX 2060 44.34 FPS pass engineering admission.
+- [ ] Run the single TGM 30-epoch screen, evaluate both its own promotion rule
+  and the separately preregistered positive trigger for combination screening.
 - [x] Before any TGM result, preregister Amendment 5: if TGM is also positive,
   allow one ABL+SAMF and one ABL+SAMF+TGM 30-epoch screen against the plain
   Fusion baseline; promote at mIoU +0.005 or Fire +0.01, subject to the paired
