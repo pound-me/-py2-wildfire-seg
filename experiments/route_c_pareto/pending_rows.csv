@@ -5,5 +5,7 @@ dysample_pag4,Fusion + DySample Pag4,30e screen,flame2_val_label_fix_seed200,,,,
 dysample_context,Fusion + DySample Context,engineering only,flame2_val_label_fix_seed200,,,,,untrained_no_miou,Do not invent mIoU
 freqfusion_pag3,Fusion + FreqFusion Pag3,engineering only,flame2_val_label_fix_seed200,,,,,untrained_no_miou,Do not invent mIoU
 tgm,Fusion + TGM,Route C,flame2_val_label_fix_seed200,,,,,unblocked_after_samf_formal,TGM engineering is the next authorized node
-samf_tgm,Fusion + SAMF + TGM,Route C combination,flame2_val_label_fix_seed200,,,,,blocked_samf_failed_100e,Combination requires both individual methods to pass 100e
+samf_tgm,Fusion + SAMF + TGM,Route C historical combination,flame2_val_label_fix_seed200,,,,,superseded_by_amendment_5,Not one of the two newly authorized configurations
+abl_samf,Fusion + ABL + SAMF,Route C combination,flame2_val_label_fix_seed200,,,,,conditional_on_positive_tgm,One 30e screen only if standalone TGM is positive
+abl_samf_tgm,Fusion + ABL + SAMF + TGM,Route C combination,flame2_val_label_fix_seed200,,,,,conditional_on_positive_tgm,One 30e screen only if standalone TGM is positive
 robofirefusenet,RoboFireFuseNet,external comparison,flame2_val_label_fix_seed200,,,,,pending_same_split_evaluation,Do not use paper-reported metrics from another split/protocol

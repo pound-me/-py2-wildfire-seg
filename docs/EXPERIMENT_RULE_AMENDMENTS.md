@@ -208,3 +208,57 @@ validation samples have invisible RGB fire, heavy smoke occlusion and clearer
 IR. TGM is explicitly deferred until the SAMF screening result is frozen.
 
 Approved by the user on 2026-07-26 before SAMF implementation or training.
+
+## Amendment 5: positive-component combination screening
+
+Date: 2026-07-27
+
+Chronology: approved after the ABL and SAMF 100-epoch results were frozen, and
+before any TGM implementation, engineering measurement or training result was
+produced.
+
+### Superseded combination rule
+
+> A combination may be screened only when every individual structural method
+> has first passed the 100-epoch internal method-establishment threshold.
+
+This rule is retired for the specifically named combinations below. It remains
+the historical rule under which the earlier SAMF-only formal decision was
+written.
+
+### Operative combination rule, approved and effective immediately
+
+ABL and SAMF both show positive validation direction while acting on different
+error sources: ABL changes training-time boundary supervision without inference
+overhead, whereas SAMF performs smoke-conditioned thermal injection. If the
+standalone TGM result is also positive, TGM does not need to pass the existing
+single-method promotion or 100-epoch establishment threshold to trigger the
+following combination screens:
+
+- Fusion + ABL + SAMF;
+- Fusion + ABL + SAMF + TGM.
+
+These are the only newly authorized combination configurations; the amendment
+does not authorize an unrestricted combination or hyperparameter sweep.
+
+Each combination receives one 30-epoch run under the same label-fix protocol,
+seed 200 and 100-epoch learning-rate horizon. Its gain is always computed
+against the plain Fusion PIDNet-S baseline, not against an individual component
+or an additive estimate. A combination passes the 30-epoch screen when either:
+
+- mIoU gain versus Fusion is at least `+0.005`; or
+- Fire IoU gain versus Fusion is at least `+0.01`.
+
+Smoke and Fire class collapse remains prohibited. A passing combination is
+promoted to one 100-epoch formal run. Every combination architecture must first
+pass the RTX 2060 same-session paired deployment gate of at least 30 FPS.
+Parameters, FLOPs and latency remain mandatory reported quantities. The test set
+remains sealed, and no three-seed expansion occurs before a 100-epoch result
+meets the formal method threshold.
+
+The user's phrase "TGM is also positive" is deliberately recorded without a
+post-result numerical reinterpretation. Its exact operational sign criterion
+must be confirmed before TGM training begins; until then, no combination trigger
+may be evaluated.
+
+Approved by the user on 2026-07-27 before any TGM result existed.

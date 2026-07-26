@@ -50,8 +50,12 @@ SAMF 延迟增加 4.8563%，但旧“速度下降不超过 3%”约束已废止�
 ## 5. 决策
 
 - SAMF 保留为正向消融、病因诊断到结构设计的证据链；
-- 不启动 SAMF+TGM 组合，因为组合只允许在两个单项均通过 100 轮门槛时进行；
+- 本结果归档时的旧组合限制已被 2026-07-27 的 Amendment 5 取代；若
+  TGM 亦呈正向，可按新规则筛选 ABL+SAMF 与 ABL+SAMF+TGM；
 - TGM 现在解锁，按工程验收 → 单一 30 轮筛选 → 通过才 100 轮的顺序执行；
 - 测试集继续封存。
 
 证据文件包括同目录的 `metrics.jsonl`、`environment.json`、`resolved_config.json`、`run_summary.json`、`formal_method_decision.json`、`complexity.json` 和 `paired_latency_rtx2060.json`。best/last checkpoint 不提交 Git。
+
+注：本页原始正式结论保留为历史证据；组合授权的最新有效文本以
+`docs/EXPERIMENT_RULE_AMENDMENTS.md` 的 Amendment 5 为准。

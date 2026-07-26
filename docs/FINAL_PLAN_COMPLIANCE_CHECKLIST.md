@@ -150,7 +150,12 @@ engineering check is not treated as evidence that a method improves accuracy.
   IoU, passed the 30 FPS gate at 34.57 FPS, but failed both internal accuracy
   thresholds; retain it as a positive ablation and unfreeze TGM.
 - [ ] Implement and engineering-check the single frozen TGM variant; do not
-  combine it with SAMF because SAMF did not pass the 100-epoch threshold.
+  produce training results until its remaining structural details and the
+  operational definition of a positive TGM result are explicitly confirmed.
+- [x] Before any TGM result, preregister Amendment 5: if TGM is also positive,
+  allow one ABL+SAMF and one ABL+SAMF+TGM 30-epoch screen against the plain
+  Fusion baseline; promote at mIoU +0.005 or Fire +0.01, subject to the paired
+  RTX 2060 >=30 FPS gate and no class collapse.
 - [x] Verify the Route C bibliography against formal titles, venues/years and
   DOI/original metadata; archive BibTeX and code-reuse status. Mark SGFNet,
   CBL, top-level FreqFusion and PSL as no-license reference-only sources.
