@@ -127,6 +127,9 @@ engineering check is not treated as evidence that a method improves accuracy.
 - [x] Complete and archive the filled worst-20 manual-check summary: RGB
   invisible 20/20, heavy smoke 20/20, IR clearer 20/20, small fire 4/20,
   cross-checked against the Smoke-proximity proxy.
-- [ ] Complete full-validation Fire FN/FP spatial attribution and the IR-only
-  100-epoch motivation row.
+- [x] Complete full-validation Fire FN/FP spatial attribution. The strict
+  lower-quartile rule degenerates at Q1=1 pixel and is preserved as written;
+  Smoke neighbourhoods cover 69.90% of FN and 72.18% of FP.
+- [ ] Complete the IR-only 100-epoch motivation row and paired efficiency
+  measurements for Table 1.
 - [ ] Complete SAMF engineering acceptance and its single 30-epoch screen.

@@ -1,0 +1,102 @@
+{
+  "config": "G:\\py2\\configs\\route_a\\pidnet_s_fusion_100e_label_fix.yaml",
+  "evaluation_dir": "G:\\py2\\experiments\\route_a_pidnet_s_fusion\\route_a_fusion_100e_label_fix_seed200\\val_best",
+  "checkpoint": "G:\\py2\\experiments\\route_a_pidnet_s_fusion\\route_a_fusion_100e_label_fix_seed200\\best.pth",
+  "checkpoint_epoch": 86,
+  "split": "val",
+  "sample_count": 240,
+  "test_set_used": false,
+  "fire_component_definition": "8-connected components on evaluation-resolution GT Fire masks",
+  "gt_fire_component_area_distribution": {
+    "component_count": 31315,
+    "min": 1,
+    "q1_linear": 1.0,
+    "median": 3.0,
+    "mean": 44.91872904358934,
+    "max": 6570,
+    "small_rule": "component area < q1_linear (strict inequality)",
+    "small_component_count_lt_q1": 0,
+    "component_count_leq_q1_sensitivity": 9338
+  },
+  "neighbourhood": {
+    "radius_pixels": 3,
+    "metric": "Chebyshev / square dilation",
+    "smoke_union": "within radius of GT Smoke or predicted Smoke, including the region itself"
+  },
+  "attribution_definitions": {
+    "fn_small_primary": "FN pixel belongs to a small GT Fire component",
+    "fp_small_primary": "FP pixel belongs to a predicted-Fire component whose area is below the GT-Fire q1 threshold",
+    "fp_near_small_gt_fire_secondary": "FP pixel lies within the same radius of a small GT Fire component; reported separately because an FP cannot belong to a GT Fire component",
+    "smoke_related": "error pixel lies in the union of GT-Smoke and predicted-Smoke Chebyshev neighbourhoods",
+    "exclusive_partition": "small_only, smoke_only, both, neither"
+  },
+  "false_negative": {
+    "total": 267801,
+    "small_primary": 0,
+    "smoke_union": 187196,
+    "both": 0,
+    "small_only": 0,
+    "smoke_only": 187196,
+    "neither": 80605,
+    "predicted_smoke_exact": 169560,
+    "gt_smoke_neighbourhood": 180216,
+    "predicted_smoke_neighbourhood": 176825,
+    "fractions": {
+      "small_primary": 0.0,
+      "smoke_union": 0.6990115794937286,
+      "both": 0.0,
+      "small_only": 0.0,
+      "smoke_only": 0.6990115794937286,
+      "neither": 0.30098842050627145,
+      "predicted_smoke_exact": 0.6331567096463419,
+      "gt_smoke_neighbourhood": 0.672947449785475,
+      "predicted_smoke_neighbourhood": 0.660285062415749
+    }
+  },
+  "false_positive": {
+    "total": 294866,
+    "small_primary": 0,
+    "smoke_union": 212836,
+    "both": 0,
+    "small_only": 0,
+    "smoke_only": 212836,
+    "neither": 82030,
+    "gt_smoke_exact": 187370,
+    "gt_smoke_neighbourhood": 201024,
+    "predicted_smoke_neighbourhood": 176677,
+    "near_small_gt_fire": 0,
+    "fractions": {
+      "small_primary": 0.0,
+      "smoke_union": 0.7218058372277577,
+      "both": 0.0,
+      "small_only": 0.0,
+      "smoke_only": 0.7218058372277577,
+      "neither": 0.2781941627722423,
+      "gt_smoke_exact": 0.6354411834528226,
+      "gt_smoke_neighbourhood": 0.6817469630272734,
+      "predicted_smoke_neighbourhood": 0.599177253396458,
+      "near_small_gt_fire": 0.0
+    }
+  },
+  "inclusive_q1_sensitivity": {
+    "definition": "descriptive sensitivity only: component area <= q1; this does not replace the preregistered strict area < q1 primary rule",
+    "fn_small_gt_component": 8749,
+    "fn_small_and_smoke": 5805,
+    "fp_small_predicted_component": 73,
+    "fp_small_and_smoke": 55,
+    "fp_near_small_gt_fire": 25912,
+    "fractions": {
+      "fn_small_gt_component": 0.03266978091941404,
+      "fn_small_and_smoke": 0.021676543403497374,
+      "fp_small_predicted_component": 0.00024757008268162486,
+      "fp_small_and_smoke": 0.00018652540476012832,
+      "fp_near_small_gt_fire": 0.08787720523898991
+    }
+  },
+  "validation_checks": {
+    "fn_matches_saved_confusion": true,
+    "fp_matches_saved_confusion": true,
+    "exclusive_partitions_sum": true,
+    "test_set_used": false
+  }
+}

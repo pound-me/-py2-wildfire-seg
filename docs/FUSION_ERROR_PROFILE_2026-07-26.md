@@ -103,3 +103,10 @@ Fire内部几乎没有错误。B路线唯一候选必须满足：
 - `experiments/route_a_pidnet_s_fusion/route_a_fusion_100e_label_fix_seed200/val_best/error_profile/confusion_matrix_row_normalized.csv`
 - `experiments/route_a_pidnet_s_fusion/route_a_fusion_100e_label_fix_seed200/val_best/error_profile/region_error_summary.csv`
 - `experiments/route_a_pidnet_s_fusion/route_a_fusion_100e_label_fix_seed200/val_best/error_profile/per_image_error_profile.csv`
+
+## 8. Route C追加空间归因
+
+在B路线完成后，Route C又对同一固定Fusion验证预测完成Fire FN/FP的小目标与Smoke
+空间归因。严格下四分位规则因Q1=1像素而退化为空小目标集合；Smoke邻域并集覆盖
+69.90%的FN和72.18%的FP。完整定义、敏感性分析与证据见
+`docs/FUSION_FIRE_SPATIAL_ATTRIBUTION_2026-07-26.md`。
