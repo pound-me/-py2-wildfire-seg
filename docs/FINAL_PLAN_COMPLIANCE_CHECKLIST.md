@@ -62,8 +62,9 @@ engineering check is not treated as evidence that a method improves accuracy.
 - [x] Run P1 and D2 for 100 epochs and verify the internal method threshold.
   Neither method reaches either internal threshold on its mIoU-selected best
   checkpoint; both are preserved as formal negative/near-neutral ablations.
-- [ ] Complete required three-seed rows and aggregate mean plus sample standard
-  deviation with unique-seed/config checks.
+- [x] Complete required three-seed rows and aggregate mean plus sample standard
+  deviation with unique-seed/config checks. The terminal Fusion and ABL+SAMF
+  rows use seeds 200/201/202 and a frozen pooled-SD decision script.
 - [x] Measure P1 and fused-D2 deployment parameters/FLOPs and RTX 2060 speed.
   Both have baseline-identical deployment parameters/FLOPs. A same-process,
   alternating-order paired benchmark verifies that fused D2 has no speed loss.
@@ -71,8 +72,10 @@ engineering check is not treated as evidence that a method improves accuracy.
   statistics, fixed-sample fused features, cosine distances, silhouette score
   and qualitative t-SNE.
 - [x] Test evaluation is code-locked behind `--confirm-frozen-test`.
-- [ ] After all choices are frozen, evaluate each final seed on the test set
-  once and aggregate without further method changes.
+- [x] After all choices are frozen, evaluate each final seed on the test set
+  once and aggregate without further method changes. Six unique frozen
+  checkpoints were evaluated once and summarized by
+  `src/aggregate_terminal_test_once.py`.
 
 ## Backup route
 

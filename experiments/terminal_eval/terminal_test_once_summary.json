@@ -1,0 +1,262 @@
+{
+  "scope": "frozen test set evaluated once per checkpoint after validation decision",
+  "test_result_may_change_method_identity": false,
+  "seeds": [
+    200,
+    201,
+    202
+  ],
+  "methods": {
+    "fusion_baseline": {
+      "runs": [
+        {
+          "method": "fusion_baseline",
+          "seed": 200,
+          "path": "G:\\py2\\experiments\\route_a_pidnet_s_fusion\\route_a_fusion_100e_label_fix_seed200\\test_once\\metrics.json",
+          "checkpoint": "G:\\py2\\experiments\\route_a_pidnet_s_fusion\\route_a_fusion_100e_label_fix_seed200\\best.pth",
+          "checkpoint_epoch": 86,
+          "sample_count": 200,
+          "values": {
+            "miou": 0.8084218922088064,
+            "iou_background": 0.9350295723280712,
+            "iou_smoke": 0.8391215786417014,
+            "iou_fire": 0.6511145256566466,
+            "precision_fire": 0.786417420238931,
+            "recall_fire": 0.7909898072941551,
+            "boundary_f1_fire": 0.8853361634296806
+          }
+        },
+        {
+          "method": "fusion_baseline",
+          "seed": 201,
+          "path": "G:\\py2\\experiments\\terminal_eval_pidnet_s_fusion\\terminal_eval_fusion_100e_seed201\\test_once\\metrics.json",
+          "checkpoint": "G:\\py2\\experiments\\terminal_eval_pidnet_s_fusion\\terminal_eval_fusion_100e_seed201\\best.pth",
+          "checkpoint_epoch": 87,
+          "sample_count": 200,
+          "values": {
+            "miou": 0.8092485044302434,
+            "iou_background": 0.9352413284756057,
+            "iou_smoke": 0.8402258490905908,
+            "iou_fire": 0.6522783357245338,
+            "precision_fire": 0.7807061829646497,
+            "recall_fire": 0.7985968634945617,
+            "boundary_f1_fire": 0.8781355572851273
+          }
+        },
+        {
+          "method": "fusion_baseline",
+          "seed": 202,
+          "path": "G:\\py2\\experiments\\terminal_eval_pidnet_s_fusion\\terminal_eval_fusion_100e_seed202\\test_once\\metrics.json",
+          "checkpoint": "G:\\py2\\experiments\\terminal_eval_pidnet_s_fusion\\terminal_eval_fusion_100e_seed202\\best.pth",
+          "checkpoint_epoch": 87,
+          "sample_count": 200,
+          "values": {
+            "miou": 0.8100832304175065,
+            "iou_background": 0.9364718939480117,
+            "iou_smoke": 0.8415187643170029,
+            "iou_fire": 0.6522590329875052,
+            "precision_fire": 0.746337876875906,
+            "recall_fire": 0.8380420730164976,
+            "boundary_f1_fire": 0.8922109764933546
+          }
+        }
+      ],
+      "aggregate": {
+        "miou": {
+          "values": [
+            0.8084218922088064,
+            0.8092485044302434,
+            0.8100832304175065
+          ],
+          "mean": 0.8092512090188522,
+          "sample_standard_deviation": 0.0008306724065607004
+        },
+        "iou_background": {
+          "values": [
+            0.9350295723280712,
+            0.9352413284756057,
+            0.9364718939480117
+          ],
+          "mean": 0.9355809315838962,
+          "sample_standard_deviation": 0.0007788264358683316
+        },
+        "iou_smoke": {
+          "values": [
+            0.8391215786417014,
+            0.8402258490905908,
+            0.8415187643170029
+          ],
+          "mean": 0.8402887306830984,
+          "sample_standard_deviation": 0.0011998293051408736
+        },
+        "iou_fire": {
+          "values": [
+            0.6511145256566466,
+            0.6522783357245338,
+            0.6522590329875052
+          ],
+          "mean": 0.6518839647895619,
+          "sample_standard_deviation": 0.0006664237265885802
+        },
+        "precision_fire": {
+          "values": [
+            0.786417420238931,
+            0.7807061829646497,
+            0.746337876875906
+          ],
+          "mean": 0.7711538266931622,
+          "sample_standard_deviation": 0.021680131037431924
+        },
+        "recall_fire": {
+          "values": [
+            0.7909898072941551,
+            0.7985968634945617,
+            0.8380420730164976
+          ],
+          "mean": 0.8092095812684048,
+          "sample_standard_deviation": 0.025257697070634022
+        },
+        "boundary_f1_fire": {
+          "values": [
+            0.8853361634296806,
+            0.8781355572851273,
+            0.8922109764933546
+          ],
+          "mean": 0.8852275657360541,
+          "sample_standard_deviation": 0.0070383379832265275
+        }
+      }
+    },
+    "abl_samf": {
+      "runs": [
+        {
+          "method": "abl_samf",
+          "seed": 200,
+          "path": "G:\\py2\\experiments\\terminal_eval_pidnet_s_abl_samf\\terminal_eval_abl_samf_100e_seed200\\test_once\\metrics.json",
+          "checkpoint": "G:\\py2\\experiments\\terminal_eval_pidnet_s_abl_samf\\terminal_eval_abl_samf_100e_seed200\\best.pth",
+          "checkpoint_epoch": 86,
+          "sample_count": 200,
+          "values": {
+            "miou": 0.8130429200846595,
+            "iou_background": 0.9374317944340133,
+            "iou_smoke": 0.8416389461092639,
+            "iou_fire": 0.6600580197107014,
+            "precision_fire": 0.7795021240652033,
+            "recall_fire": 0.8115906897876207,
+            "boundary_f1_fire": 0.8950455754097726
+          }
+        },
+        {
+          "method": "abl_samf",
+          "seed": 201,
+          "path": "G:\\py2\\experiments\\terminal_eval_pidnet_s_abl_samf\\terminal_eval_abl_samf_100e_seed201\\test_once\\metrics.json",
+          "checkpoint": "G:\\py2\\experiments\\terminal_eval_pidnet_s_abl_samf\\terminal_eval_abl_samf_100e_seed201\\best.pth",
+          "checkpoint_epoch": 79,
+          "sample_count": 200,
+          "values": {
+            "miou": 0.8125971158613398,
+            "iou_background": 0.9370624001948177,
+            "iou_smoke": 0.8439061436786666,
+            "iou_fire": 0.656822803710535,
+            "precision_fire": 0.7888685124476614,
+            "recall_fire": 0.7969129123221195,
+            "boundary_f1_fire": 0.8849923234251409
+          }
+        },
+        {
+          "method": "abl_samf",
+          "seed": 202,
+          "path": "G:\\py2\\experiments\\terminal_eval_pidnet_s_abl_samf\\terminal_eval_abl_samf_100e_seed202\\test_once\\metrics.json",
+          "checkpoint": "G:\\py2\\experiments\\terminal_eval_pidnet_s_abl_samf\\terminal_eval_abl_samf_100e_seed202\\best.pth",
+          "checkpoint_epoch": 86,
+          "sample_count": 200,
+          "values": {
+            "miou": 0.8147941649957983,
+            "iou_background": 0.9391204044275947,
+            "iou_smoke": 0.8480804464330519,
+            "iou_fire": 0.6571816441267478,
+            "precision_fire": 0.766225302914529,
+            "recall_fire": 0.8219965243622532,
+            "boundary_f1_fire": 0.8971721690102169
+          }
+        }
+      ],
+      "aggregate": {
+        "miou": {
+          "values": [
+            0.8130429200846595,
+            0.8125971158613398,
+            0.8147941649957983
+          ],
+          "mean": 0.8134780669805992,
+          "sample_standard_deviation": 0.0011613659374162249
+        },
+        "iou_background": {
+          "values": [
+            0.9374317944340133,
+            0.9370624001948177,
+            0.9391204044275947
+          ],
+          "mean": 0.9378715330188085,
+          "sample_standard_deviation": 0.001097211407501015
+        },
+        "iou_smoke": {
+          "values": [
+            0.8416389461092639,
+            0.8439061436786666,
+            0.8480804464330519
+          ],
+          "mean": 0.8445418454069942,
+          "sample_standard_deviation": 0.003267463713783089
+        },
+        "iou_fire": {
+          "values": [
+            0.6600580197107014,
+            0.656822803710535,
+            0.6571816441267478
+          ],
+          "mean": 0.6580208225159948,
+          "sample_standard_deviation": 0.001773364293840237
+        },
+        "precision_fire": {
+          "values": [
+            0.7795021240652033,
+            0.7888685124476614,
+            0.766225302914529
+          ],
+          "mean": 0.7781986464757978,
+          "sample_standard_deviation": 0.011377742520372701
+        },
+        "recall_fire": {
+          "values": [
+            0.8115906897876207,
+            0.7969129123221195,
+            0.8219965243622532
+          ],
+          "mean": 0.8101667088239978,
+          "sample_standard_deviation": 0.012602289061260109
+        },
+        "boundary_f1_fire": {
+          "values": [
+            0.8950455754097726,
+            0.8849923234251409,
+            0.8971721690102169
+          ],
+          "mean": 0.8924033559483768,
+          "sample_standard_deviation": 0.00650562467259739
+        }
+      }
+    }
+  },
+  "candidate_minus_baseline_mean": {
+    "miou": 0.004226857961747044,
+    "iou_background": 0.0022906014349123316,
+    "iou_smoke": 0.004253114723895779,
+    "iou_fire": 0.006136857726432909,
+    "precision_fire": 0.007044819782635603,
+    "recall_fire": 0.0009571275555929626,
+    "boundary_f1_fire": 0.00717579021232273
+  },
+  "all_six_unique_checkpoints": true,
+  "all_runs_have_200_samples": true
+}

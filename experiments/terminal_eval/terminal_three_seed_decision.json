@@ -1,0 +1,774 @@
+{
+  "manifest": "G:\\py2\\configs\\terminal_eval\\terminal_eval_manifest.yaml",
+  "preregistration_commit": "0b5b1c5b8b02efa2154eacbfb81c9fc11886bb6f",
+  "test_set_used": false,
+  "checkpoint_selection": "validation_miou_strict_best_same_epoch_for_fire",
+  "seeds": [
+    200,
+    201,
+    202
+  ],
+  "methods": {
+    "fusion_baseline": {
+      "runs": [
+        {
+          "method": "fusion_baseline",
+          "seed": 200,
+          "run_dir": "G:\\py2\\experiments\\route_a_pidnet_s_fusion\\route_a_fusion_100e_label_fix_seed200",
+          "config": "G:\\py2\\configs\\route_a\\pidnet_s_fusion_100e_label_fix.yaml",
+          "checkpoint": "G:\\py2\\experiments\\route_a_pidnet_s_fusion\\route_a_fusion_100e_label_fix_seed200\\best.pth",
+          "best_epoch": 86,
+          "values": {
+            "miou": 0.8067280342508664,
+            "iou_background": 0.9088757916268864,
+            "iou_smoke": 0.8419978925293716,
+            "iou_fire": 0.6693104185963411,
+            "precision_fire": 0.7943314303251389,
+            "recall_fire": 0.8096151795425948,
+            "boundary_f1_fire": 0.9096879709360258
+          },
+          "elapsed_seconds": 3951.452813,
+          "peak_allocated_gpu_memory_mb": 228.03662109375,
+          "dataset_list_sha256": {
+            "TRAINSET": "5a210c644eec1688ef6609697ca7e42f387c80597559649f5eebdca9007dbe14",
+            "VALIDSET": "45d2d14bc8af4f0f7d1cb956b6746301bff43c76819c1e815636148d5b03e91f",
+            "TESTSET": "57e3a4b13be799809b5c013f028f76cecd64ae139caae5d15f9aabcf3fc8cb6a"
+          },
+          "pretrained_sha256": "f96e2c96b1aca1400a6f54ac41093d98b4817f6008a5d869abe6248551a5f359",
+          "config_sha256": "f5bd069328a9c7f8e905d37a778fc71853b628d6db7d14d86741cb281d498161",
+          "source_sha256": "6d4640757cef5ef1b179380f56d66be281ab2844bacb46bc67f6b29e650b38c5",
+          "training_identity": {
+            "DEVICE": "cuda:0",
+            "NUM_WORKERS": 0,
+            "MODEL": "pidnet_s",
+            "NUM_OUTPUTS": 2,
+            "PRETRAINED": "G:/py2/weights/PIDNet_S_ImageNet.pth.tar",
+            "CHECKPOINT": null,
+            "ROOTDATASET": "G:/py2/data",
+            "TRAINSET": "lists/train_flm.txt",
+            "VALIDSET": "lists/val_flm.txt",
+            "TESTSET": "lists/test_flm.txt",
+            "NUM_CLASSES": 3,
+            "CLS_NAMES": [
+              "background",
+              "smoke",
+              "fire"
+            ],
+            "MODE": "fusion",
+            "MULTISCALE": true,
+            "FLIP": true,
+            "BRIGHTNESS": false,
+            "SINGLE_SOURCE": false,
+            "COMP_MASK": false,
+            "BLEND_IMGS": false,
+            "IGNORE_LABEL": 255,
+            "SCALE_FACTOR": 10,
+            "CROP_SIZE": [
+              256,
+              256
+            ],
+            "BASE_SIZE": 256,
+            "CLASS_WEIGHTS": [
+              2.27681343,
+              3.04257527,
+              8.8657764
+            ],
+            "ALIGN_CORNERS": true,
+            "LR": 0.001,
+            "BATCHSIZE": 4,
+            "OPTIM": "SGD",
+            "SCHED": "POLY",
+            "USE_OHEM": false,
+            "OHEMTHRES": 0.9,
+            "OHEMKEEP": 131072,
+            "WD": 1e-05,
+            "MOMENTUM": 0.9,
+            "BALANCE_WEIGHTS": [
+              0.4,
+              1.0
+            ],
+            "T_THRESH_BDLOSS": 0.8,
+            "BD_WEIGHT": 1.0,
+            "SB_WEIGHTS": 1.0,
+            "SCALE_MIN": 0.5,
+            "SCALE_MAX": 1.5,
+            "ADOPTED_PROTOCOL_SHA256": "2cef96ab1bbfa471c490be159152584b35040217ab1e4a84b18cb35787508c18",
+            "INPUT_CHANNELS": 4,
+            "PRETRAINED_STEM_POLICY": "official_shape_match_only"
+          }
+        },
+        {
+          "method": "fusion_baseline",
+          "seed": 201,
+          "run_dir": "G:\\py2\\experiments\\terminal_eval_pidnet_s_fusion\\terminal_eval_fusion_100e_seed201",
+          "config": "G:\\py2\\configs\\terminal_eval\\pidnet_s_fusion_100e_seed201.yaml",
+          "checkpoint": "G:\\py2\\experiments\\terminal_eval_pidnet_s_fusion\\terminal_eval_fusion_100e_seed201\\best.pth",
+          "best_epoch": 87,
+          "values": {
+            "miou": 0.8061884139797867,
+            "iou_background": 0.9069275367722451,
+            "iou_smoke": 0.8395812845666303,
+            "iou_fire": 0.6720564206004846,
+            "precision_fire": 0.7855112836485979,
+            "recall_fire": 0.8231034458244172,
+            "boundary_f1_fire": 0.9056428263805476
+          },
+          "elapsed_seconds": 3160.8376413,
+          "peak_allocated_gpu_memory_mb": 228.03662109375,
+          "dataset_list_sha256": {
+            "TRAINSET": "5a210c644eec1688ef6609697ca7e42f387c80597559649f5eebdca9007dbe14",
+            "VALIDSET": "45d2d14bc8af4f0f7d1cb956b6746301bff43c76819c1e815636148d5b03e91f",
+            "TESTSET": "57e3a4b13be799809b5c013f028f76cecd64ae139caae5d15f9aabcf3fc8cb6a"
+          },
+          "pretrained_sha256": "f96e2c96b1aca1400a6f54ac41093d98b4817f6008a5d869abe6248551a5f359",
+          "config_sha256": "4a9687f7eceb162f624c87fd728b4fac44202b8a94cd17c80a503de15e16bec7",
+          "source_sha256": "8fe9b84ad33fecc7e0464790ae8a0ef1e4c5dfb8dbd2fc4c552a90df21541066",
+          "training_identity": {
+            "DEVICE": "cuda:0",
+            "NUM_WORKERS": 0,
+            "MODEL": "pidnet_s",
+            "NUM_OUTPUTS": 2,
+            "PRETRAINED": "G:/py2/weights/PIDNet_S_ImageNet.pth.tar",
+            "CHECKPOINT": null,
+            "ROOTDATASET": "G:/py2/data",
+            "TRAINSET": "lists/train_flm.txt",
+            "VALIDSET": "lists/val_flm.txt",
+            "TESTSET": "lists/test_flm.txt",
+            "NUM_CLASSES": 3,
+            "CLS_NAMES": [
+              "background",
+              "smoke",
+              "fire"
+            ],
+            "MODE": "fusion",
+            "MULTISCALE": true,
+            "FLIP": true,
+            "BRIGHTNESS": false,
+            "SINGLE_SOURCE": false,
+            "COMP_MASK": false,
+            "BLEND_IMGS": false,
+            "IGNORE_LABEL": 255,
+            "SCALE_FACTOR": 10,
+            "CROP_SIZE": [
+              256,
+              256
+            ],
+            "BASE_SIZE": 256,
+            "CLASS_WEIGHTS": [
+              2.27681343,
+              3.04257527,
+              8.8657764
+            ],
+            "ALIGN_CORNERS": true,
+            "LR": 0.001,
+            "BATCHSIZE": 4,
+            "OPTIM": "SGD",
+            "SCHED": "POLY",
+            "USE_OHEM": false,
+            "OHEMTHRES": 0.9,
+            "OHEMKEEP": 131072,
+            "WD": 1e-05,
+            "MOMENTUM": 0.9,
+            "BALANCE_WEIGHTS": [
+              0.4,
+              1.0
+            ],
+            "T_THRESH_BDLOSS": 0.8,
+            "BD_WEIGHT": 1.0,
+            "SB_WEIGHTS": 1.0,
+            "SCALE_MIN": 0.5,
+            "SCALE_MAX": 1.5,
+            "ADOPTED_PROTOCOL_SHA256": "2cef96ab1bbfa471c490be159152584b35040217ab1e4a84b18cb35787508c18",
+            "INPUT_CHANNELS": 4,
+            "PRETRAINED_STEM_POLICY": "official_shape_match_only"
+          }
+        },
+        {
+          "method": "fusion_baseline",
+          "seed": 202,
+          "run_dir": "G:\\py2\\experiments\\terminal_eval_pidnet_s_fusion\\terminal_eval_fusion_100e_seed202",
+          "config": "G:\\py2\\configs\\terminal_eval\\pidnet_s_fusion_100e_seed202.yaml",
+          "checkpoint": "G:\\py2\\experiments\\terminal_eval_pidnet_s_fusion\\terminal_eval_fusion_100e_seed202\\best.pth",
+          "best_epoch": 87,
+          "values": {
+            "miou": 0.8075401407757644,
+            "iou_background": 0.9086545795458235,
+            "iou_smoke": 0.8403017741878525,
+            "iou_fire": 0.6736640685936176,
+            "precision_fire": 0.7617624477312673,
+            "recall_fire": 0.8534795930699616,
+            "boundary_f1_fire": 0.9155100152920026
+          },
+          "elapsed_seconds": 2738.7243892,
+          "peak_allocated_gpu_memory_mb": 228.03662109375,
+          "dataset_list_sha256": {
+            "TRAINSET": "5a210c644eec1688ef6609697ca7e42f387c80597559649f5eebdca9007dbe14",
+            "VALIDSET": "45d2d14bc8af4f0f7d1cb956b6746301bff43c76819c1e815636148d5b03e91f",
+            "TESTSET": "57e3a4b13be799809b5c013f028f76cecd64ae139caae5d15f9aabcf3fc8cb6a"
+          },
+          "pretrained_sha256": "f96e2c96b1aca1400a6f54ac41093d98b4817f6008a5d869abe6248551a5f359",
+          "config_sha256": "536f6deaf0993a45f93b794722fa7d1952a01b727370dae1fc4a6d9ca0ff9643",
+          "source_sha256": "8fe9b84ad33fecc7e0464790ae8a0ef1e4c5dfb8dbd2fc4c552a90df21541066",
+          "training_identity": {
+            "DEVICE": "cuda:0",
+            "NUM_WORKERS": 0,
+            "MODEL": "pidnet_s",
+            "NUM_OUTPUTS": 2,
+            "PRETRAINED": "G:/py2/weights/PIDNet_S_ImageNet.pth.tar",
+            "CHECKPOINT": null,
+            "ROOTDATASET": "G:/py2/data",
+            "TRAINSET": "lists/train_flm.txt",
+            "VALIDSET": "lists/val_flm.txt",
+            "TESTSET": "lists/test_flm.txt",
+            "NUM_CLASSES": 3,
+            "CLS_NAMES": [
+              "background",
+              "smoke",
+              "fire"
+            ],
+            "MODE": "fusion",
+            "MULTISCALE": true,
+            "FLIP": true,
+            "BRIGHTNESS": false,
+            "SINGLE_SOURCE": false,
+            "COMP_MASK": false,
+            "BLEND_IMGS": false,
+            "IGNORE_LABEL": 255,
+            "SCALE_FACTOR": 10,
+            "CROP_SIZE": [
+              256,
+              256
+            ],
+            "BASE_SIZE": 256,
+            "CLASS_WEIGHTS": [
+              2.27681343,
+              3.04257527,
+              8.8657764
+            ],
+            "ALIGN_CORNERS": true,
+            "LR": 0.001,
+            "BATCHSIZE": 4,
+            "OPTIM": "SGD",
+            "SCHED": "POLY",
+            "USE_OHEM": false,
+            "OHEMTHRES": 0.9,
+            "OHEMKEEP": 131072,
+            "WD": 1e-05,
+            "MOMENTUM": 0.9,
+            "BALANCE_WEIGHTS": [
+              0.4,
+              1.0
+            ],
+            "T_THRESH_BDLOSS": 0.8,
+            "BD_WEIGHT": 1.0,
+            "SB_WEIGHTS": 1.0,
+            "SCALE_MIN": 0.5,
+            "SCALE_MAX": 1.5,
+            "ADOPTED_PROTOCOL_SHA256": "2cef96ab1bbfa471c490be159152584b35040217ab1e4a84b18cb35787508c18",
+            "INPUT_CHANNELS": 4,
+            "PRETRAINED_STEM_POLICY": "official_shape_match_only"
+          }
+        }
+      ],
+      "aggregate": {
+        "miou": {
+          "values": [
+            0.8067280342508664,
+            0.8061884139797867,
+            0.8075401407757644
+          ],
+          "mean": 0.8068188630021392,
+          "sample_standard_deviation": 0.0006804254031739135
+        },
+        "iou_background": {
+          "values": [
+            0.9088757916268864,
+            0.9069275367722451,
+            0.9086545795458235
+          ],
+          "mean": 0.9081526359816516,
+          "sample_standard_deviation": 0.0010667168091243475
+        },
+        "iou_smoke": {
+          "values": [
+            0.8419978925293716,
+            0.8395812845666303,
+            0.8403017741878525
+          ],
+          "mean": 0.8406269837612849,
+          "sample_standard_deviation": 0.001240693137478099
+        },
+        "iou_fire": {
+          "values": [
+            0.6693104185963411,
+            0.6720564206004846,
+            0.6736640685936176
+          ],
+          "mean": 0.6716769692634811,
+          "sample_standard_deviation": 0.0022014891693037555
+        },
+        "precision_fire": {
+          "values": [
+            0.7943314303251389,
+            0.7855112836485979,
+            0.7617624477312673
+          ],
+          "mean": 0.780535053901668,
+          "sample_standard_deviation": 0.016845082477407135
+        },
+        "recall_fire": {
+          "values": [
+            0.8096151795425948,
+            0.8231034458244172,
+            0.8534795930699616
+          ],
+          "mean": 0.8287327394789913,
+          "sample_standard_deviation": 0.022467496607589156
+        },
+        "boundary_f1_fire": {
+          "values": [
+            0.9096879709360258,
+            0.9056428263805476,
+            0.9155100152920026
+          ],
+          "mean": 0.9102802708695253,
+          "sample_standard_deviation": 0.004960188369608835
+        }
+      }
+    },
+    "abl_samf": {
+      "runs": [
+        {
+          "method": "abl_samf",
+          "seed": 200,
+          "run_dir": "G:\\py2\\experiments\\terminal_eval_pidnet_s_abl_samf\\terminal_eval_abl_samf_100e_seed200",
+          "config": "G:\\py2\\configs\\terminal_eval\\pidnet_s_abl_samf_100e_seed200.yaml",
+          "checkpoint": "G:\\py2\\experiments\\terminal_eval_pidnet_s_abl_samf\\terminal_eval_abl_samf_100e_seed200\\best.pth",
+          "best_epoch": 86,
+          "values": {
+            "miou": 0.8087321243500435,
+            "iou_background": 0.9084092753960551,
+            "iou_smoke": 0.840665330705683,
+            "iou_fire": 0.6771217669483927,
+            "precision_fire": 0.7842535944892204,
+            "recall_fire": 0.8321257189168438,
+            "boundary_f1_fire": 0.9190441343474051
+          },
+          "elapsed_seconds": 4143.440391499999,
+          "peak_allocated_gpu_memory_mb": 241.5478515625,
+          "dataset_list_sha256": {
+            "TRAINSET": "5a210c644eec1688ef6609697ca7e42f387c80597559649f5eebdca9007dbe14",
+            "VALIDSET": "45d2d14bc8af4f0f7d1cb956b6746301bff43c76819c1e815636148d5b03e91f",
+            "TESTSET": "57e3a4b13be799809b5c013f028f76cecd64ae139caae5d15f9aabcf3fc8cb6a"
+          },
+          "pretrained_sha256": "f96e2c96b1aca1400a6f54ac41093d98b4817f6008a5d869abe6248551a5f359",
+          "config_sha256": "4db74426404a829cbf36d22f75bc45eb6d6317764c50da7ab618b614dabc6cb7",
+          "source_sha256": "8fe9b84ad33fecc7e0464790ae8a0ef1e4c5dfb8dbd2fc4c552a90df21541066",
+          "training_identity": {
+            "DEVICE": "cuda:0",
+            "NUM_WORKERS": 0,
+            "MODEL": "pidnet_s_samf",
+            "NUM_OUTPUTS": 2,
+            "PRETRAINED": "G:/py2/weights/PIDNet_S_ImageNet.pth.tar",
+            "CHECKPOINT": null,
+            "ROOTDATASET": "G:/py2/data",
+            "TRAINSET": "lists/train_flm.txt",
+            "VALIDSET": "lists/val_flm.txt",
+            "TESTSET": "lists/test_flm.txt",
+            "NUM_CLASSES": 3,
+            "CLS_NAMES": [
+              "background",
+              "smoke",
+              "fire"
+            ],
+            "MODE": "fusion",
+            "MULTISCALE": true,
+            "FLIP": true,
+            "BRIGHTNESS": false,
+            "SINGLE_SOURCE": false,
+            "COMP_MASK": false,
+            "BLEND_IMGS": false,
+            "IGNORE_LABEL": 255,
+            "SCALE_FACTOR": 10,
+            "CROP_SIZE": [
+              256,
+              256
+            ],
+            "BASE_SIZE": 256,
+            "CLASS_WEIGHTS": [
+              2.27681343,
+              3.04257527,
+              8.8657764
+            ],
+            "ALIGN_CORNERS": true,
+            "LR": 0.001,
+            "BATCHSIZE": 4,
+            "OPTIM": "SGD",
+            "SCHED": "POLY",
+            "USE_OHEM": false,
+            "OHEMTHRES": 0.9,
+            "OHEMKEEP": 131072,
+            "WD": 1e-05,
+            "MOMENTUM": 0.9,
+            "BALANCE_WEIGHTS": [
+              0.4,
+              1.0
+            ],
+            "T_THRESH_BDLOSS": 0.8,
+            "BD_WEIGHT": 1.0,
+            "SB_WEIGHTS": 1.0,
+            "SCALE_MIN": 0.5,
+            "SCALE_MAX": 1.5,
+            "ADOPTED_PROTOCOL_SHA256": "2cef96ab1bbfa471c490be159152584b35040217ab1e4a84b18cb35787508c18",
+            "INPUT_CHANNELS": 4,
+            "PRETRAINED_STEM_POLICY": "official_shape_match_only",
+            "TRAINING_OBJECTIVE": "active_boundary",
+            "BOUNDARY_TOLERANCE": 3,
+            "ABL_WEIGHT": 1.0,
+            "ABL_DETACH_NEIGHBORS": true,
+            "ABL_MAX_BOUNDARY_RATIO": 0.01,
+            "ABL_LABEL_SMOOTHING": 0.2,
+            "ABL_LABEL_SMOOTHING_BEHAVIOR": "official_source_lssce_v1",
+            "ABL_MAX_CLIP_DISTANCE": 20.0,
+            "ABL_THRESHOLD_SCOPE": "per_image",
+            "ABL_FP32_UNDER_AMP": true,
+            "ABL_UPSTREAM_COMMIT": "1511507533ad98f04ea26e3648360a6c1d477d37",
+            "ABL_UPSTREAM_SOURCE_SHA256": "07fc49d923a2420db7316eeb1650e95b2ea415bc85233937df99b239e3c6fe87",
+            "ABL_LINKED_LSSCE_COMMIT": "af876e43218694dc8599cc4711d9a5c5e043b1b2",
+            "ABL_LINKED_LSSCE_SHA256": "0367fcad3d1b62283db0a4bb40fe7b5e08095f4ad17db4e6b96b323162ac2251",
+            "SAMF_SMOKE_CLASS": 1,
+            "SAMF_THERMAL_CHANNEL": 3,
+            "SAMF_BETA_INIT": 0.0,
+            "SAMF_GATE_SOURCE": "pre_injection_pag3_seghead_p_softmax",
+            "SAMF_GATE_DETACH": false,
+            "SAMF_THERMAL_ALIGNMENT": "adaptive_avg_pool_1_4_to_1_8",
+            "SAMF_THERMAL_PROJECTION": "conv1x1_32_to_64_bias_false",
+            "SAMF_INSERTION": "pag3_output_1_8",
+            "SAMF_INFERENCE_INTERNAL_HEAD": "seghead_p_retained_not_returned",
+            "ABL_SAMF_ONLY_ROUTE_C_COMBINATION": true,
+            "ABL_SAMF_FRESH_IMAGENET_INITIALIZATION": true
+          }
+        },
+        {
+          "method": "abl_samf",
+          "seed": 201,
+          "run_dir": "G:\\py2\\experiments\\terminal_eval_pidnet_s_abl_samf\\terminal_eval_abl_samf_100e_seed201",
+          "config": "G:\\py2\\configs\\terminal_eval\\pidnet_s_abl_samf_100e_seed201.yaml",
+          "checkpoint": "G:\\py2\\experiments\\terminal_eval_pidnet_s_abl_samf\\terminal_eval_abl_samf_100e_seed201\\best.pth",
+          "best_epoch": 79,
+          "values": {
+            "miou": 0.8086664540830188,
+            "iou_background": 0.9089448785656616,
+            "iou_smoke": 0.8422899159629752,
+            "iou_fire": 0.6747645677204198,
+            "precision_fire": 0.7937985618954012,
+            "recall_fire": 0.8181746443627678,
+            "boundary_f1_fire": 0.9088917777029194
+          },
+          "elapsed_seconds": 4268.6485156,
+          "peak_allocated_gpu_memory_mb": 241.4951171875,
+          "dataset_list_sha256": {
+            "TRAINSET": "5a210c644eec1688ef6609697ca7e42f387c80597559649f5eebdca9007dbe14",
+            "VALIDSET": "45d2d14bc8af4f0f7d1cb956b6746301bff43c76819c1e815636148d5b03e91f",
+            "TESTSET": "57e3a4b13be799809b5c013f028f76cecd64ae139caae5d15f9aabcf3fc8cb6a"
+          },
+          "pretrained_sha256": "f96e2c96b1aca1400a6f54ac41093d98b4817f6008a5d869abe6248551a5f359",
+          "config_sha256": "081542f5d43bccbe1003097ec5145925b87f82b8d44e7e1033dbc11004ee5102",
+          "source_sha256": "8fe9b84ad33fecc7e0464790ae8a0ef1e4c5dfb8dbd2fc4c552a90df21541066",
+          "training_identity": {
+            "DEVICE": "cuda:0",
+            "NUM_WORKERS": 0,
+            "MODEL": "pidnet_s_samf",
+            "NUM_OUTPUTS": 2,
+            "PRETRAINED": "G:/py2/weights/PIDNet_S_ImageNet.pth.tar",
+            "CHECKPOINT": null,
+            "ROOTDATASET": "G:/py2/data",
+            "TRAINSET": "lists/train_flm.txt",
+            "VALIDSET": "lists/val_flm.txt",
+            "TESTSET": "lists/test_flm.txt",
+            "NUM_CLASSES": 3,
+            "CLS_NAMES": [
+              "background",
+              "smoke",
+              "fire"
+            ],
+            "MODE": "fusion",
+            "MULTISCALE": true,
+            "FLIP": true,
+            "BRIGHTNESS": false,
+            "SINGLE_SOURCE": false,
+            "COMP_MASK": false,
+            "BLEND_IMGS": false,
+            "IGNORE_LABEL": 255,
+            "SCALE_FACTOR": 10,
+            "CROP_SIZE": [
+              256,
+              256
+            ],
+            "BASE_SIZE": 256,
+            "CLASS_WEIGHTS": [
+              2.27681343,
+              3.04257527,
+              8.8657764
+            ],
+            "ALIGN_CORNERS": true,
+            "LR": 0.001,
+            "BATCHSIZE": 4,
+            "OPTIM": "SGD",
+            "SCHED": "POLY",
+            "USE_OHEM": false,
+            "OHEMTHRES": 0.9,
+            "OHEMKEEP": 131072,
+            "WD": 1e-05,
+            "MOMENTUM": 0.9,
+            "BALANCE_WEIGHTS": [
+              0.4,
+              1.0
+            ],
+            "T_THRESH_BDLOSS": 0.8,
+            "BD_WEIGHT": 1.0,
+            "SB_WEIGHTS": 1.0,
+            "SCALE_MIN": 0.5,
+            "SCALE_MAX": 1.5,
+            "ADOPTED_PROTOCOL_SHA256": "2cef96ab1bbfa471c490be159152584b35040217ab1e4a84b18cb35787508c18",
+            "INPUT_CHANNELS": 4,
+            "PRETRAINED_STEM_POLICY": "official_shape_match_only",
+            "TRAINING_OBJECTIVE": "active_boundary",
+            "BOUNDARY_TOLERANCE": 3,
+            "ABL_WEIGHT": 1.0,
+            "ABL_DETACH_NEIGHBORS": true,
+            "ABL_MAX_BOUNDARY_RATIO": 0.01,
+            "ABL_LABEL_SMOOTHING": 0.2,
+            "ABL_LABEL_SMOOTHING_BEHAVIOR": "official_source_lssce_v1",
+            "ABL_MAX_CLIP_DISTANCE": 20.0,
+            "ABL_THRESHOLD_SCOPE": "per_image",
+            "ABL_FP32_UNDER_AMP": true,
+            "ABL_UPSTREAM_COMMIT": "1511507533ad98f04ea26e3648360a6c1d477d37",
+            "ABL_UPSTREAM_SOURCE_SHA256": "07fc49d923a2420db7316eeb1650e95b2ea415bc85233937df99b239e3c6fe87",
+            "ABL_LINKED_LSSCE_COMMIT": "af876e43218694dc8599cc4711d9a5c5e043b1b2",
+            "ABL_LINKED_LSSCE_SHA256": "0367fcad3d1b62283db0a4bb40fe7b5e08095f4ad17db4e6b96b323162ac2251",
+            "SAMF_SMOKE_CLASS": 1,
+            "SAMF_THERMAL_CHANNEL": 3,
+            "SAMF_BETA_INIT": 0.0,
+            "SAMF_GATE_SOURCE": "pre_injection_pag3_seghead_p_softmax",
+            "SAMF_GATE_DETACH": false,
+            "SAMF_THERMAL_ALIGNMENT": "adaptive_avg_pool_1_4_to_1_8",
+            "SAMF_THERMAL_PROJECTION": "conv1x1_32_to_64_bias_false",
+            "SAMF_INSERTION": "pag3_output_1_8",
+            "SAMF_INFERENCE_INTERNAL_HEAD": "seghead_p_retained_not_returned",
+            "ABL_SAMF_ONLY_ROUTE_C_COMBINATION": true,
+            "ABL_SAMF_FRESH_IMAGENET_INITIALIZATION": true
+          }
+        },
+        {
+          "method": "abl_samf",
+          "seed": 202,
+          "run_dir": "G:\\py2\\experiments\\terminal_eval_pidnet_s_abl_samf\\terminal_eval_abl_samf_100e_seed202",
+          "config": "G:\\py2\\configs\\terminal_eval\\pidnet_s_abl_samf_100e_seed202.yaml",
+          "checkpoint": "G:\\py2\\experiments\\terminal_eval_pidnet_s_abl_samf\\terminal_eval_abl_samf_100e_seed202\\best.pth",
+          "best_epoch": 86,
+          "values": {
+            "miou": 0.8073131147761913,
+            "iou_background": 0.9064316666365573,
+            "iou_smoke": 0.8399634701902619,
+            "iou_fire": 0.6755442075017544,
+            "precision_fire": 0.7749711874695977,
+            "recall_fire": 0.8403944178639727,
+            "boundary_f1_fire": 0.9170419264734978
+          },
+          "elapsed_seconds": 4414.1081579,
+          "peak_allocated_gpu_memory_mb": 241.4375,
+          "dataset_list_sha256": {
+            "TRAINSET": "5a210c644eec1688ef6609697ca7e42f387c80597559649f5eebdca9007dbe14",
+            "VALIDSET": "45d2d14bc8af4f0f7d1cb956b6746301bff43c76819c1e815636148d5b03e91f",
+            "TESTSET": "57e3a4b13be799809b5c013f028f76cecd64ae139caae5d15f9aabcf3fc8cb6a"
+          },
+          "pretrained_sha256": "f96e2c96b1aca1400a6f54ac41093d98b4817f6008a5d869abe6248551a5f359",
+          "config_sha256": "ffcdfc52f23b9c45e3e4b739d4ad42a4302cb6468e7459ba1f0ba993f44adf56",
+          "source_sha256": "8fe9b84ad33fecc7e0464790ae8a0ef1e4c5dfb8dbd2fc4c552a90df21541066",
+          "training_identity": {
+            "DEVICE": "cuda:0",
+            "NUM_WORKERS": 0,
+            "MODEL": "pidnet_s_samf",
+            "NUM_OUTPUTS": 2,
+            "PRETRAINED": "G:/py2/weights/PIDNet_S_ImageNet.pth.tar",
+            "CHECKPOINT": null,
+            "ROOTDATASET": "G:/py2/data",
+            "TRAINSET": "lists/train_flm.txt",
+            "VALIDSET": "lists/val_flm.txt",
+            "TESTSET": "lists/test_flm.txt",
+            "NUM_CLASSES": 3,
+            "CLS_NAMES": [
+              "background",
+              "smoke",
+              "fire"
+            ],
+            "MODE": "fusion",
+            "MULTISCALE": true,
+            "FLIP": true,
+            "BRIGHTNESS": false,
+            "SINGLE_SOURCE": false,
+            "COMP_MASK": false,
+            "BLEND_IMGS": false,
+            "IGNORE_LABEL": 255,
+            "SCALE_FACTOR": 10,
+            "CROP_SIZE": [
+              256,
+              256
+            ],
+            "BASE_SIZE": 256,
+            "CLASS_WEIGHTS": [
+              2.27681343,
+              3.04257527,
+              8.8657764
+            ],
+            "ALIGN_CORNERS": true,
+            "LR": 0.001,
+            "BATCHSIZE": 4,
+            "OPTIM": "SGD",
+            "SCHED": "POLY",
+            "USE_OHEM": false,
+            "OHEMTHRES": 0.9,
+            "OHEMKEEP": 131072,
+            "WD": 1e-05,
+            "MOMENTUM": 0.9,
+            "BALANCE_WEIGHTS": [
+              0.4,
+              1.0
+            ],
+            "T_THRESH_BDLOSS": 0.8,
+            "BD_WEIGHT": 1.0,
+            "SB_WEIGHTS": 1.0,
+            "SCALE_MIN": 0.5,
+            "SCALE_MAX": 1.5,
+            "ADOPTED_PROTOCOL_SHA256": "2cef96ab1bbfa471c490be159152584b35040217ab1e4a84b18cb35787508c18",
+            "INPUT_CHANNELS": 4,
+            "PRETRAINED_STEM_POLICY": "official_shape_match_only",
+            "TRAINING_OBJECTIVE": "active_boundary",
+            "BOUNDARY_TOLERANCE": 3,
+            "ABL_WEIGHT": 1.0,
+            "ABL_DETACH_NEIGHBORS": true,
+            "ABL_MAX_BOUNDARY_RATIO": 0.01,
+            "ABL_LABEL_SMOOTHING": 0.2,
+            "ABL_LABEL_SMOOTHING_BEHAVIOR": "official_source_lssce_v1",
+            "ABL_MAX_CLIP_DISTANCE": 20.0,
+            "ABL_THRESHOLD_SCOPE": "per_image",
+            "ABL_FP32_UNDER_AMP": true,
+            "ABL_UPSTREAM_COMMIT": "1511507533ad98f04ea26e3648360a6c1d477d37",
+            "ABL_UPSTREAM_SOURCE_SHA256": "07fc49d923a2420db7316eeb1650e95b2ea415bc85233937df99b239e3c6fe87",
+            "ABL_LINKED_LSSCE_COMMIT": "af876e43218694dc8599cc4711d9a5c5e043b1b2",
+            "ABL_LINKED_LSSCE_SHA256": "0367fcad3d1b62283db0a4bb40fe7b5e08095f4ad17db4e6b96b323162ac2251",
+            "SAMF_SMOKE_CLASS": 1,
+            "SAMF_THERMAL_CHANNEL": 3,
+            "SAMF_BETA_INIT": 0.0,
+            "SAMF_GATE_SOURCE": "pre_injection_pag3_seghead_p_softmax",
+            "SAMF_GATE_DETACH": false,
+            "SAMF_THERMAL_ALIGNMENT": "adaptive_avg_pool_1_4_to_1_8",
+            "SAMF_THERMAL_PROJECTION": "conv1x1_32_to_64_bias_false",
+            "SAMF_INSERTION": "pag3_output_1_8",
+            "SAMF_INFERENCE_INTERNAL_HEAD": "seghead_p_retained_not_returned",
+            "ABL_SAMF_ONLY_ROUTE_C_COMBINATION": true,
+            "ABL_SAMF_FRESH_IMAGENET_INITIALIZATION": true
+          }
+        }
+      ],
+      "aggregate": {
+        "miou": {
+          "values": [
+            0.8087321243500435,
+            0.8086664540830188,
+            0.8073131147761913
+          ],
+          "mean": 0.8082372310697513,
+          "sample_standard_deviation": 0.0008009814848109646
+        },
+        "iou_background": {
+          "values": [
+            0.9084092753960551,
+            0.9089448785656616,
+            0.9064316666365573
+          ],
+          "mean": 0.9079286068660913,
+          "sample_standard_deviation": 0.001323759882652915
+        },
+        "iou_smoke": {
+          "values": [
+            0.840665330705683,
+            0.8422899159629752,
+            0.8399634701902619
+          ],
+          "mean": 0.84097290561964,
+          "sample_standard_deviation": 0.0011933311481377325
+        },
+        "iou_fire": {
+          "values": [
+            0.6771217669483927,
+            0.6747645677204198,
+            0.6755442075017544
+          ],
+          "mean": 0.6758101807235223,
+          "sample_standard_deviation": 0.0012008969007005306
+        },
+        "precision_fire": {
+          "values": [
+            0.7842535944892204,
+            0.7937985618954012,
+            0.7749711874695977
+          ],
+          "mean": 0.7843411146180731,
+          "sample_standard_deviation": 0.0094139923397072
+        },
+        "recall_fire": {
+          "values": [
+            0.8321257189168438,
+            0.8181746443627678,
+            0.8403944178639727
+          ],
+          "mean": 0.8302315937145281,
+          "sample_standard_deviation": 0.011230332422628829
+        },
+        "boundary_f1_fire": {
+          "values": [
+            0.9190441343474051,
+            0.9088917777029194,
+            0.9170419264734978
+          ],
+          "mean": 0.9149926128412741,
+          "sample_standard_deviation": 0.005377485577072383
+        }
+      }
+    }
+  },
+  "metric_decisions": {
+    "miou": {
+      "baseline_mean": 0.8068188630021392,
+      "baseline_sample_standard_deviation": 0.0006804254031739135,
+      "candidate_mean": 0.8082372310697513,
+      "candidate_sample_standard_deviation": 0.0008009814848109646,
+      "mean_gain": 0.0014183680676120858,
+      "pooled_sample_standard_deviation": 0.0007431520935496179,
+      "gain_over_pooled_sd_ratio": 1.9085838281600507,
+      "strict_gain_gt_pooled_sd": true
+    },
+    "iou_fire": {
+      "baseline_mean": 0.6716769692634811,
+      "baseline_sample_standard_deviation": 0.0022014891693037555,
+      "candidate_mean": 0.6758101807235223,
+      "candidate_sample_standard_deviation": 0.0012008969007005306,
+      "mean_gain": 0.004133211460041197,
+      "pooled_sample_standard_deviation": 0.0017732326311956194,
+      "gain_over_pooled_sd_ratio": 2.330890706232007,
+      "strict_gain_gt_pooled_sd": true
+    }
+  },
+  "baseline_noise_floor": {
+    "miou": 0.0006804254031739135,
+    "iou_fire": 0.0022014891693037555
+  },
+  "paired_latency": "G:\\py2\\experiments\\terminal_eval\\paired_latency_rtx2060_best_seed200.json",
+  "candidate_rtx2060_fps": 43.75295093144837,
+  "passes_30_fps": true,
+  "overall_rule": "(pass_miou OR pass_fire) AND delta_miou>=0 AND delta_fire>=0 AND paired_rtx2060_fps>=30",
+  "abl_samf_is_paper_main_method": true,
+  "paper_position": "main_method_small_but_above_preregistered_seed_variation"
+}
