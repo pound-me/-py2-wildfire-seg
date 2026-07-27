@@ -1,0 +1,1812 @@
+Pretrained initialization: G:\py2\weights\PIDNet_S_ImageNet.pth.tar (301 tensors matched)
+Run directory: G:\py2\experiments\terminal_eval_pidnet_s_abl_samf\terminal_eval_abl_samf_100e_seed202
+Train/val samples: 552/240
+Epochs: 100, batch size: 4, AMP: True
+Learning-rate schedule horizon: 100 epochs
+Active-boundary loss weight: 1.0000
+Matched pretrained tensors: 301
+Epoch 1/100
+  train batch 1/138: loss=13.48856, lr=0.00100000
+  train batch 10/138: loss=12.60855, lr=0.00099941
+  train batch 20/138: loss=11.76849, lr=0.00099876
+  train batch 30/138: loss=11.35382, lr=0.00099811
+  train batch 40/138: loss=9.86258, lr=0.00099746
+  train batch 50/138: loss=10.24936, lr=0.00099680
+  train batch 60/138: loss=8.22404, lr=0.00099615
+  train batch 70/138: loss=8.30250, lr=0.00099550
+  train batch 80/138: loss=7.75525, lr=0.00099485
+  train batch 90/138: loss=8.27357, lr=0.00099419
+  train batch 100/138: loss=7.07321, lr=0.00099354
+  train batch 110/138: loss=6.92812, lr=0.00099289
+  train batch 120/138: loss=5.14511, lr=0.00099224
+  train batch 130/138: loss=9.01361, lr=0.00099158
+  train loss=9.08062, mIoU=0.3962
+  val loss=5.89767, mIoU=0.6212, smoke IoU=0.6675, fire IoU=0.4251
+  active boundary: train=0.36917, val=0.14074, supervised px=5297.5
+Epoch 2/100
+  train batch 1/138: loss=6.15210, lr=0.00099100
+  train batch 10/138: loss=7.93156, lr=0.00099041
+  train batch 20/138: loss=7.06706, lr=0.00098976
+  train batch 30/138: loss=5.18089, lr=0.00098910
+  train batch 40/138: loss=5.53937, lr=0.00098845
+  train batch 50/138: loss=5.70271, lr=0.00098780
+  train batch 60/138: loss=5.95484, lr=0.00098714
+  train batch 70/138: loss=7.15651, lr=0.00098649
+  train batch 80/138: loss=7.70074, lr=0.00098584
+  train batch 90/138: loss=7.64804, lr=0.00098518
+  train batch 100/138: loss=6.35544, lr=0.00098453
+  train batch 110/138: loss=7.61540, lr=0.00098388
+  train batch 120/138: loss=6.83219, lr=0.00098322
+  train batch 130/138: loss=5.18351, lr=0.00098257
+  train loss=5.94394, mIoU=0.5929
+  val loss=5.21679, mIoU=0.6967, smoke IoU=0.7325, fire IoU=0.5114
+  active boundary: train=0.19890, val=0.09020, supervised px=4547.4
+Epoch 3/100
+  train batch 1/138: loss=5.44661, lr=0.00098198
+  train batch 10/138: loss=6.12390, lr=0.00098139
+  train batch 20/138: loss=6.00181, lr=0.00098074
+  train batch 30/138: loss=5.89364, lr=0.00098009
+  train batch 40/138: loss=5.06447, lr=0.00097943
+  train batch 50/138: loss=5.00347, lr=0.00097878
+  train batch 60/138: loss=5.00808, lr=0.00097813
+  train batch 70/138: loss=7.66367, lr=0.00097747
+  train batch 80/138: loss=8.04466, lr=0.00097682
+  train batch 90/138: loss=7.80892, lr=0.00097616
+  train batch 100/138: loss=5.58891, lr=0.00097551
+  train batch 110/138: loss=4.38722, lr=0.00097486
+  train batch 120/138: loss=5.82730, lr=0.00097420
+  train batch 130/138: loss=5.55151, lr=0.00097355
+  train loss=5.44926, mIoU=0.6430
+  val loss=6.07292, mIoU=0.6159, smoke IoU=0.5998, fire IoU=0.4825
+  active boundary: train=0.16609, val=0.06574, supervised px=4633.8
+Epoch 4/100
+  train batch 1/138: loss=4.77308, lr=0.00097296
+  train batch 10/138: loss=6.19748, lr=0.00097237
+  train batch 20/138: loss=3.90740, lr=0.00097172
+  train batch 30/138: loss=4.84613, lr=0.00097106
+  train batch 40/138: loss=4.47981, lr=0.00097041
+  train batch 50/138: loss=5.58094, lr=0.00096975
+  train batch 60/138: loss=5.29893, lr=0.00096910
+  train batch 70/138: loss=4.43230, lr=0.00096844
+  train batch 80/138: loss=4.72470, lr=0.00096779
+  train batch 90/138: loss=5.40906, lr=0.00096714
+  train batch 100/138: loss=4.80495, lr=0.00096648
+  train batch 110/138: loss=4.16293, lr=0.00096583
+  train batch 120/138: loss=4.38661, lr=0.00096517
+  train batch 130/138: loss=4.78605, lr=0.00096452
+  train loss=4.97771, mIoU=0.6824
+  val loss=4.59155, mIoU=0.7553, smoke IoU=0.8057, fire IoU=0.5815
+  active boundary: train=0.15328, val=0.04584, supervised px=4935.9
+Epoch 5/100
+  train batch 1/138: loss=5.40227, lr=0.00096393
+  train batch 10/138: loss=5.45491, lr=0.00096334
+  train batch 20/138: loss=5.70034, lr=0.00096268
+  train batch 30/138: loss=4.13098, lr=0.00096203
+  train batch 40/138: loss=4.99342, lr=0.00096137
+  train batch 50/138: loss=4.50467, lr=0.00096072
+  train batch 60/138: loss=5.44015, lr=0.00096006
+  train batch 70/138: loss=5.13422, lr=0.00095941
+  train batch 80/138: loss=4.82514, lr=0.00095875
+  train batch 90/138: loss=5.11058, lr=0.00095810
+  train batch 100/138: loss=4.36466, lr=0.00095744
+  train batch 110/138: loss=4.10993, lr=0.00095679
+  train batch 120/138: loss=4.66585, lr=0.00095613
+  train batch 130/138: loss=6.27562, lr=0.00095548
+  train loss=4.86808, mIoU=0.6996
+  val loss=4.59519, mIoU=0.7592, smoke IoU=0.8055, fire IoU=0.5860
+  active boundary: train=0.14341, val=0.04966, supervised px=5043.4
+Epoch 6/100
+  train batch 1/138: loss=3.37585, lr=0.00095489
+  train batch 10/138: loss=4.85781, lr=0.00095430
+  train batch 20/138: loss=4.88362, lr=0.00095364
+  train batch 30/138: loss=4.10683, lr=0.00095298
+  train batch 40/138: loss=3.48851, lr=0.00095233
+  train batch 50/138: loss=5.62453, lr=0.00095167
+  train batch 60/138: loss=4.84283, lr=0.00095102
+  train batch 70/138: loss=4.70189, lr=0.00095036
+  train batch 80/138: loss=4.40165, lr=0.00094971
+  train batch 90/138: loss=4.50303, lr=0.00094905
+  train batch 100/138: loss=5.11004, lr=0.00094839
+  train batch 110/138: loss=4.55638, lr=0.00094774
+  train batch 120/138: loss=6.68465, lr=0.00094708
+  train batch 130/138: loss=3.84749, lr=0.00094642
+  train loss=4.91820, mIoU=0.7077
+  val loss=4.67047, mIoU=0.7423, smoke IoU=0.7747, fire IoU=0.5987
+  active boundary: train=0.14730, val=0.04941, supervised px=5136.4
+Epoch 7/100
+  train batch 1/138: loss=4.80597, lr=0.00094583
+  train batch 10/138: loss=4.76493, lr=0.00094524
+  train batch 20/138: loss=5.48870, lr=0.00094459
+  train batch 30/138: loss=4.05776, lr=0.00094393
+  train batch 40/138: loss=4.90483, lr=0.00094327
+  train batch 50/138: loss=5.64364, lr=0.00094262
+  train batch 60/138: loss=4.57504, lr=0.00094196
+  train batch 70/138: loss=4.45229, lr=0.00094131
+  train batch 80/138: loss=4.44603, lr=0.00094065
+  train batch 90/138: loss=5.05022, lr=0.00093999
+  train batch 100/138: loss=6.39249, lr=0.00093934
+  train batch 110/138: loss=4.52541, lr=0.00093868
+  train batch 120/138: loss=6.59928, lr=0.00093802
+  train batch 130/138: loss=4.26544, lr=0.00093736
+  train loss=4.72436, mIoU=0.7185
+  val loss=4.35626, mIoU=0.7693, smoke IoU=0.8125, fire IoU=0.6048
+  active boundary: train=0.15727, val=0.03455, supervised px=5211.2
+Epoch 8/100
+  train batch 1/138: loss=4.51033, lr=0.00093677
+  train batch 10/138: loss=4.87518, lr=0.00093618
+  train batch 20/138: loss=4.08603, lr=0.00093553
+  train batch 30/138: loss=5.15786, lr=0.00093487
+  train batch 40/138: loss=4.95462, lr=0.00093421
+  train batch 50/138: loss=6.13972, lr=0.00093355
+  train batch 60/138: loss=4.34026, lr=0.00093290
+  train batch 70/138: loss=3.58865, lr=0.00093224
+  train batch 80/138: loss=4.14271, lr=0.00093158
+  train batch 90/138: loss=3.96970, lr=0.00093092
+  train batch 100/138: loss=5.46520, lr=0.00093027
+  train batch 110/138: loss=4.13492, lr=0.00092961
+  train batch 120/138: loss=4.78128, lr=0.00092895
+  train batch 130/138: loss=4.79014, lr=0.00092830
+  train loss=4.61286, mIoU=0.7289
+  val loss=4.66657, mIoU=0.7287, smoke IoU=0.7559, fire IoU=0.6075
+  active boundary: train=0.15686, val=0.04200, supervised px=5226.4
+Epoch 9/100
+  train batch 1/138: loss=5.11790, lr=0.00092770
+  train batch 10/138: loss=4.07226, lr=0.00092711
+  train batch 20/138: loss=5.52604, lr=0.00092645
+  train batch 30/138: loss=4.22477, lr=0.00092580
+  train batch 40/138: loss=4.53719, lr=0.00092514
+  train batch 50/138: loss=4.14731, lr=0.00092448
+  train batch 60/138: loss=4.68800, lr=0.00092382
+  train batch 70/138: loss=5.29783, lr=0.00092316
+  train batch 80/138: loss=4.71314, lr=0.00092251
+  train batch 90/138: loss=5.77917, lr=0.00092185
+  train batch 100/138: loss=4.96344, lr=0.00092119
+  train batch 110/138: loss=4.06128, lr=0.00092053
+  train batch 120/138: loss=4.05843, lr=0.00091987
+  train batch 130/138: loss=3.56053, lr=0.00091922
+  train loss=4.43610, mIoU=0.7472
+  val loss=4.48855, mIoU=0.7358, smoke IoU=0.7366, fire IoU=0.6164
+  active boundary: train=0.13468, val=0.03626, supervised px=5370.2
+Epoch 10/100
+  train batch 1/138: loss=4.83507, lr=0.00091862
+  train batch 10/138: loss=4.52359, lr=0.00091803
+  train batch 20/138: loss=5.07596, lr=0.00091737
+  train batch 30/138: loss=4.24167, lr=0.00091671
+  train batch 40/138: loss=3.72662, lr=0.00091605
+  train batch 50/138: loss=2.73201, lr=0.00091540
+  train batch 60/138: loss=4.49619, lr=0.00091474
+  train batch 70/138: loss=3.99647, lr=0.00091408
+  train batch 80/138: loss=3.29860, lr=0.00091342
+  train batch 90/138: loss=5.09571, lr=0.00091276
+  train batch 100/138: loss=5.42242, lr=0.00091210
+  train batch 110/138: loss=3.96184, lr=0.00091144
+  train batch 120/138: loss=3.87898, lr=0.00091078
+  train batch 130/138: loss=5.58318, lr=0.00091013
+  train loss=4.49408, mIoU=0.7493
+  val loss=4.35569, mIoU=0.7537, smoke IoU=0.7671, fire IoU=0.6208
+  active boundary: train=0.14998, val=0.03698, supervised px=5476.3
+Epoch 11/100
+  train batch 1/138: loss=4.66746, lr=0.00090953
+  train batch 10/138: loss=4.30550, lr=0.00090894
+  train batch 20/138: loss=4.20069, lr=0.00090828
+  train batch 30/138: loss=3.92637, lr=0.00090762
+  train batch 40/138: loss=4.20269, lr=0.00090696
+  train batch 50/138: loss=4.49849, lr=0.00090630
+  train batch 60/138: loss=4.20940, lr=0.00090564
+  train batch 70/138: loss=3.94050, lr=0.00090498
+  train batch 80/138: loss=4.61849, lr=0.00090432
+  train batch 90/138: loss=3.77077, lr=0.00090366
+  train batch 100/138: loss=3.65062, lr=0.00090301
+  train batch 110/138: loss=3.25867, lr=0.00090235
+  train batch 120/138: loss=3.64057, lr=0.00090169
+  train batch 130/138: loss=4.24689, lr=0.00090103
+  train loss=4.32806, mIoU=0.7493
+  val loss=4.08076, mIoU=0.7708, smoke IoU=0.8033, fire IoU=0.6187
+  active boundary: train=0.10663, val=0.03609, supervised px=5425.7
+Epoch 12/100
+  train batch 1/138: loss=4.26041, lr=0.00090043
+  train batch 10/138: loss=4.75412, lr=0.00089984
+  train batch 20/138: loss=5.40086, lr=0.00089918
+  train batch 30/138: loss=4.97879, lr=0.00089852
+  train batch 40/138: loss=4.22723, lr=0.00089786
+  train batch 50/138: loss=3.82219, lr=0.00089720
+  train batch 60/138: loss=5.26522, lr=0.00089654
+  train batch 70/138: loss=4.59238, lr=0.00089588
+  train batch 80/138: loss=4.30326, lr=0.00089522
+  train batch 90/138: loss=4.01490, lr=0.00089456
+  train batch 100/138: loss=4.78650, lr=0.00089390
+  train batch 110/138: loss=3.89905, lr=0.00089324
+  train batch 120/138: loss=4.83372, lr=0.00089258
+  train batch 130/138: loss=5.32513, lr=0.00089192
+  train loss=4.45148, mIoU=0.7418
+  val loss=4.15052, mIoU=0.7817, smoke IoU=0.8225, fire IoU=0.6295
+  active boundary: train=0.14306, val=0.03211, supervised px=5472.0
+Epoch 13/100
+  train batch 1/138: loss=4.74881, lr=0.00089132
+  train batch 10/138: loss=3.71585, lr=0.00089073
+  train batch 20/138: loss=7.21608, lr=0.00089007
+  train batch 30/138: loss=4.16014, lr=0.00088941
+  train batch 40/138: loss=3.47148, lr=0.00088874
+  train batch 50/138: loss=5.10238, lr=0.00088808
+  train batch 60/138: loss=4.40506, lr=0.00088742
+  train batch 70/138: loss=4.17223, lr=0.00088676
+  train batch 80/138: loss=3.94776, lr=0.00088610
+  train batch 90/138: loss=3.51979, lr=0.00088544
+  train batch 100/138: loss=3.42187, lr=0.00088478
+  train batch 110/138: loss=4.52659, lr=0.00088412
+  train batch 120/138: loss=3.51730, lr=0.00088346
+  train batch 130/138: loss=4.17882, lr=0.00088280
+  train loss=4.20980, mIoU=0.7632
+  val loss=4.17587, mIoU=0.7822, smoke IoU=0.8180, fire IoU=0.6339
+  active boundary: train=0.11404, val=0.03290, supervised px=5606.5
+Epoch 14/100
+  train batch 1/138: loss=3.88908, lr=0.00088220
+  train batch 10/138: loss=4.49669, lr=0.00088161
+  train batch 20/138: loss=4.36285, lr=0.00088094
+  train batch 30/138: loss=4.42112, lr=0.00088028
+  train batch 40/138: loss=4.04035, lr=0.00087962
+  train batch 50/138: loss=4.49187, lr=0.00087896
+  train batch 60/138: loss=4.91322, lr=0.00087830
+  train batch 70/138: loss=3.58900, lr=0.00087764
+  train batch 80/138: loss=4.47735, lr=0.00087697
+  train batch 90/138: loss=4.51308, lr=0.00087631
+  train batch 100/138: loss=3.90864, lr=0.00087565
+  train batch 110/138: loss=4.14345, lr=0.00087499
+  train batch 120/138: loss=4.25763, lr=0.00087433
+  train batch 130/138: loss=2.77801, lr=0.00087366
+  train loss=4.29281, mIoU=0.7586
+  val loss=4.05283, mIoU=0.7844, smoke IoU=0.8230, fire IoU=0.6379
+  active boundary: train=0.11261, val=0.03142, supervised px=5556.9
+Epoch 15/100
+  train batch 1/138: loss=4.28335, lr=0.00087307
+  train batch 10/138: loss=4.41272, lr=0.00087247
+  train batch 20/138: loss=4.90543, lr=0.00087181
+  train batch 30/138: loss=3.72835, lr=0.00087115
+  train batch 40/138: loss=5.67080, lr=0.00087049
+  train batch 50/138: loss=4.24584, lr=0.00086982
+  train batch 60/138: loss=4.14408, lr=0.00086916
+  train batch 70/138: loss=3.74947, lr=0.00086850
+  train batch 80/138: loss=3.85967, lr=0.00086784
+  train batch 90/138: loss=4.72896, lr=0.00086717
+  train batch 100/138: loss=4.15256, lr=0.00086651
+  train batch 110/138: loss=4.78509, lr=0.00086585
+  train batch 120/138: loss=3.41496, lr=0.00086519
+  train batch 130/138: loss=4.35486, lr=0.00086452
+  train loss=4.27508, mIoU=0.7601
+  val loss=4.16746, mIoU=0.7737, smoke IoU=0.8091, fire IoU=0.6232
+  active boundary: train=0.12027, val=0.03290, supervised px=5665.5
+Epoch 16/100
+  train batch 1/138: loss=5.58644, lr=0.00086393
+  train batch 10/138: loss=4.11618, lr=0.00086333
+  train batch 20/138: loss=3.63450, lr=0.00086267
+  train batch 30/138: loss=3.62325, lr=0.00086200
+  train batch 40/138: loss=3.68494, lr=0.00086134
+  train batch 50/138: loss=3.54496, lr=0.00086068
+  train batch 60/138: loss=4.06831, lr=0.00086002
+  train batch 70/138: loss=4.77619, lr=0.00085935
+  train batch 80/138: loss=4.86110, lr=0.00085869
+  train batch 90/138: loss=4.55318, lr=0.00085803
+  train batch 100/138: loss=4.14188, lr=0.00085736
+  train batch 110/138: loss=3.69598, lr=0.00085670
+  train batch 120/138: loss=4.17747, lr=0.00085603
+  train batch 130/138: loss=3.90269, lr=0.00085537
+  train loss=4.17559, mIoU=0.7663
+  val loss=3.83036, mIoU=0.7876, smoke IoU=0.8232, fire IoU=0.6371
+  active boundary: train=0.12598, val=0.03169, supervised px=5630.2
+Epoch 17/100
+  train batch 1/138: loss=3.90919, lr=0.00085477
+  train batch 10/138: loss=3.76833, lr=0.00085418
+  train batch 20/138: loss=3.27384, lr=0.00085351
+  train batch 30/138: loss=4.79193, lr=0.00085285
+  train batch 40/138: loss=3.64240, lr=0.00085219
+  train batch 50/138: loss=7.50366, lr=0.00085152
+  train batch 60/138: loss=3.44577, lr=0.00085086
+  train batch 70/138: loss=4.02137, lr=0.00085019
+  train batch 80/138: loss=3.07937, lr=0.00084953
+  train batch 90/138: loss=4.15323, lr=0.00084887
+  train batch 100/138: loss=4.41132, lr=0.00084820
+  train batch 110/138: loss=4.06489, lr=0.00084754
+  train batch 120/138: loss=3.46844, lr=0.00084687
+  train batch 130/138: loss=3.42179, lr=0.00084621
+  train loss=4.16601, mIoU=0.7681
+  val loss=3.92245, mIoU=0.7918, smoke IoU=0.8291, fire IoU=0.6453
+  active boundary: train=0.10472, val=0.02922, supervised px=5685.7
+Epoch 18/100
+  train batch 1/138: loss=4.15446, lr=0.00084561
+  train batch 10/138: loss=4.66397, lr=0.00084501
+  train batch 20/138: loss=3.84987, lr=0.00084435
+  train batch 30/138: loss=3.64596, lr=0.00084368
+  train batch 40/138: loss=3.28912, lr=0.00084302
+  train batch 50/138: loss=5.29046, lr=0.00084235
+  train batch 60/138: loss=4.87315, lr=0.00084169
+  train batch 70/138: loss=4.04499, lr=0.00084102
+  train batch 80/138: loss=10.77469, lr=0.00084036
+  train batch 90/138: loss=4.69872, lr=0.00083969
+  train batch 100/138: loss=4.08272, lr=0.00083903
+  train batch 110/138: loss=3.72716, lr=0.00083836
+  train batch 120/138: loss=4.58666, lr=0.00083770
+  train batch 130/138: loss=3.65451, lr=0.00083703
+  train loss=4.14563, mIoU=0.7695
+  val loss=3.66667, mIoU=0.7916, smoke IoU=0.8292, fire IoU=0.6465
+  active boundary: train=0.11559, val=0.02788, supervised px=5714.6
+Epoch 19/100
+  train batch 1/138: loss=3.80085, lr=0.00083644
+  train batch 10/138: loss=4.43621, lr=0.00083584
+  train batch 20/138: loss=3.25478, lr=0.00083517
+  train batch 30/138: loss=3.57546, lr=0.00083451
+  train batch 40/138: loss=4.11140, lr=0.00083384
+  train batch 50/138: loss=3.80299, lr=0.00083318
+  train batch 60/138: loss=4.31071, lr=0.00083251
+  train batch 70/138: loss=4.36726, lr=0.00083184
+  train batch 80/138: loss=5.45803, lr=0.00083118
+  train batch 90/138: loss=3.76120, lr=0.00083051
+  train batch 100/138: loss=4.28247, lr=0.00082985
+  train batch 110/138: loss=3.76074, lr=0.00082918
+  train batch 120/138: loss=3.25437, lr=0.00082851
+  train batch 130/138: loss=4.12723, lr=0.00082785
+  train loss=4.06845, mIoU=0.7673
+  val loss=3.94313, mIoU=0.7884, smoke IoU=0.8220, fire IoU=0.6474
+  active boundary: train=0.10127, val=0.02472, supervised px=5814.2
+Epoch 20/100
+  train batch 1/138: loss=3.03950, lr=0.00082725
+  train batch 10/138: loss=4.13334, lr=0.00082665
+  train batch 20/138: loss=4.85193, lr=0.00082598
+  train batch 30/138: loss=4.01515, lr=0.00082532
+  train batch 40/138: loss=4.20245, lr=0.00082465
+  train batch 50/138: loss=5.28479, lr=0.00082399
+  train batch 60/138: loss=3.34415, lr=0.00082332
+  train batch 70/138: loss=4.42545, lr=0.00082265
+  train batch 80/138: loss=3.41127, lr=0.00082199
+  train batch 90/138: loss=3.49631, lr=0.00082132
+  train batch 100/138: loss=3.69172, lr=0.00082065
+  train batch 110/138: loss=5.29267, lr=0.00081999
+  train batch 120/138: loss=3.13189, lr=0.00081932
+  train batch 130/138: loss=4.21741, lr=0.00081865
+  train loss=3.99739, mIoU=0.7825
+  val loss=3.81984, mIoU=0.7839, smoke IoU=0.8123, fire IoU=0.6416
+  active boundary: train=0.11396, val=0.03083, supervised px=5812.9
+Epoch 21/100
+  train batch 1/138: loss=3.81849, lr=0.00081805
+  train batch 10/138: loss=4.20063, lr=0.00081745
+  train batch 20/138: loss=4.02108, lr=0.00081678
+  train batch 30/138: loss=3.83697, lr=0.00081612
+  train batch 40/138: loss=3.36291, lr=0.00081545
+  train batch 50/138: loss=4.09456, lr=0.00081478
+  train batch 60/138: loss=2.99130, lr=0.00081412
+  train batch 70/138: loss=3.85585, lr=0.00081345
+  train batch 80/138: loss=4.40250, lr=0.00081278
+  train batch 90/138: loss=4.38586, lr=0.00081211
+  train batch 100/138: loss=4.14775, lr=0.00081145
+  train batch 110/138: loss=4.03939, lr=0.00081078
+  train batch 120/138: loss=3.84199, lr=0.00081011
+  train batch 130/138: loss=3.64511, lr=0.00080944
+  train loss=3.94402, mIoU=0.7826
+  val loss=3.97215, mIoU=0.7923, smoke IoU=0.8322, fire IoU=0.6439
+  active boundary: train=0.11734, val=0.02460, supervised px=5887.9
+Epoch 22/100
+  train batch 1/138: loss=4.51272, lr=0.00080884
+  train batch 10/138: loss=5.52083, lr=0.00080824
+  train batch 20/138: loss=3.91608, lr=0.00080757
+  train batch 30/138: loss=3.64156, lr=0.00080691
+  train batch 40/138: loss=3.36963, lr=0.00080624
+  train batch 50/138: loss=3.36208, lr=0.00080557
+  train batch 60/138: loss=3.78056, lr=0.00080490
+  train batch 70/138: loss=3.96736, lr=0.00080423
+  train batch 80/138: loss=4.01547, lr=0.00080357
+  train batch 90/138: loss=3.63796, lr=0.00080290
+  train batch 100/138: loss=3.15787, lr=0.00080223
+  train batch 110/138: loss=3.74956, lr=0.00080156
+  train batch 120/138: loss=3.94089, lr=0.00080089
+  train batch 130/138: loss=4.31212, lr=0.00080022
+  train loss=4.03100, mIoU=0.7789
+  val loss=3.79668, mIoU=0.7916, smoke IoU=0.8230, fire IoU=0.6527
+  active boundary: train=0.10495, val=0.02683, supervised px=5935.9
+Epoch 23/100
+  train batch 1/138: loss=4.77874, lr=0.00079962
+  train batch 10/138: loss=4.37180, lr=0.00079902
+  train batch 20/138: loss=3.86111, lr=0.00079835
+  train batch 30/138: loss=4.28681, lr=0.00079768
+  train batch 40/138: loss=5.78117, lr=0.00079701
+  train batch 50/138: loss=3.73726, lr=0.00079635
+  train batch 60/138: loss=3.36906, lr=0.00079568
+  train batch 70/138: loss=3.43856, lr=0.00079501
+  train batch 80/138: loss=4.00452, lr=0.00079434
+  train batch 90/138: loss=3.81417, lr=0.00079367
+  train batch 100/138: loss=3.41464, lr=0.00079300
+  train batch 110/138: loss=4.41333, lr=0.00079233
+  train batch 120/138: loss=2.70384, lr=0.00079166
+  train batch 130/138: loss=3.85706, lr=0.00079099
+  train loss=3.99628, mIoU=0.7796
+  val loss=3.69191, mIoU=0.7932, smoke IoU=0.8267, fire IoU=0.6518
+  active boundary: train=0.13417, val=0.02752, supervised px=5883.1
+Epoch 24/100
+  train batch 1/138: loss=2.78355, lr=0.00079039
+  train batch 10/138: loss=3.76266, lr=0.00078979
+  train batch 20/138: loss=4.18346, lr=0.00078912
+  train batch 30/138: loss=4.38184, lr=0.00078845
+  train batch 40/138: loss=4.66934, lr=0.00078778
+  train batch 50/138: loss=3.58270, lr=0.00078711
+  train batch 60/138: loss=4.26518, lr=0.00078644
+  train batch 70/138: loss=3.84259, lr=0.00078577
+  train batch 80/138: loss=2.92946, lr=0.00078510
+  train batch 90/138: loss=4.20864, lr=0.00078443
+  train batch 100/138: loss=3.29223, lr=0.00078376
+  train batch 110/138: loss=3.90110, lr=0.00078309
+  train batch 120/138: loss=5.05650, lr=0.00078242
+  train batch 130/138: loss=4.21393, lr=0.00078175
+  train loss=3.89541, mIoU=0.7872
+  val loss=3.50254, mIoU=0.7944, smoke IoU=0.8273, fire IoU=0.6580
+  active boundary: train=0.11836, val=0.02417, supervised px=6008.3
+Epoch 25/100
+  train batch 1/138: loss=4.82119, lr=0.00078115
+  train batch 10/138: loss=4.04560, lr=0.00078054
+  train batch 20/138: loss=3.78950, lr=0.00077987
+  train batch 30/138: loss=4.15564, lr=0.00077920
+  train batch 40/138: loss=3.18578, lr=0.00077853
+  train batch 50/138: loss=4.38318, lr=0.00077786
+  train batch 60/138: loss=4.37171, lr=0.00077719
+  train batch 70/138: loss=2.84561, lr=0.00077652
+  train batch 80/138: loss=3.81640, lr=0.00077585
+  train batch 90/138: loss=3.64211, lr=0.00077518
+  train batch 100/138: loss=3.37128, lr=0.00077451
+  train batch 110/138: loss=3.59351, lr=0.00077384
+  train batch 120/138: loss=3.46841, lr=0.00077316
+  train batch 130/138: loss=3.77119, lr=0.00077249
+  train loss=4.05261, mIoU=0.7715
+  val loss=4.01313, mIoU=0.7711, smoke IoU=0.7869, fire IoU=0.6456
+  active boundary: train=0.10883, val=0.02693, supervised px=6032.6
+Epoch 26/100
+  train batch 1/138: loss=4.09058, lr=0.00077189
+  train batch 10/138: loss=4.63552, lr=0.00077129
+  train batch 20/138: loss=3.79395, lr=0.00077061
+  train batch 30/138: loss=4.50232, lr=0.00076994
+  train batch 40/138: loss=3.36113, lr=0.00076927
+  train batch 50/138: loss=3.95587, lr=0.00076860
+  train batch 60/138: loss=3.00575, lr=0.00076793
+  train batch 70/138: loss=4.24410, lr=0.00076726
+  train batch 80/138: loss=4.12455, lr=0.00076658
+  train batch 90/138: loss=3.50040, lr=0.00076591
+  train batch 100/138: loss=3.60036, lr=0.00076524
+  train batch 110/138: loss=4.66525, lr=0.00076457
+  train batch 120/138: loss=3.99075, lr=0.00076390
+  train batch 130/138: loss=4.33231, lr=0.00076323
+  train loss=4.03156, mIoU=0.7748
+  val loss=3.61657, mIoU=0.7892, smoke IoU=0.8351, fire IoU=0.6302
+  active boundary: train=0.11478, val=0.02383, supervised px=5995.2
+Epoch 27/100
+  train batch 1/138: loss=4.18956, lr=0.00076262
+  train batch 10/138: loss=4.13525, lr=0.00076202
+  train batch 20/138: loss=3.58075, lr=0.00076134
+  train batch 30/138: loss=4.25925, lr=0.00076067
+  train batch 40/138: loss=3.85654, lr=0.00076000
+  train batch 50/138: loss=4.00232, lr=0.00075933
+  train batch 60/138: loss=3.81431, lr=0.00075865
+  train batch 70/138: loss=6.91356, lr=0.00075798
+  train batch 80/138: loss=4.35288, lr=0.00075731
+  train batch 90/138: loss=3.02141, lr=0.00075664
+  train batch 100/138: loss=3.81801, lr=0.00075596
+  train batch 110/138: loss=3.96650, lr=0.00075529
+  train batch 120/138: loss=3.87057, lr=0.00075462
+  train batch 130/138: loss=4.09642, lr=0.00075394
+  train loss=4.06441, mIoU=0.7801
+  val loss=3.55767, mIoU=0.7911, smoke IoU=0.8220, fire IoU=0.6574
+  active boundary: train=0.12497, val=0.02541, supervised px=5957.3
+Epoch 28/100
+  train batch 1/138: loss=4.04672, lr=0.00075334
+  train batch 10/138: loss=3.67634, lr=0.00075273
+  train batch 20/138: loss=3.22692, lr=0.00075206
+  train batch 30/138: loss=3.15236, lr=0.00075139
+  train batch 40/138: loss=4.20059, lr=0.00075071
+  train batch 50/138: loss=4.28169, lr=0.00075004
+  train batch 60/138: loss=3.54377, lr=0.00074937
+  train batch 70/138: loss=4.75061, lr=0.00074869
+  train batch 80/138: loss=3.46854, lr=0.00074802
+  train batch 90/138: loss=3.54772, lr=0.00074735
+  train batch 100/138: loss=4.42190, lr=0.00074667
+  train batch 110/138: loss=4.09876, lr=0.00074600
+  train batch 120/138: loss=4.04632, lr=0.00074533
+  train batch 130/138: loss=3.50047, lr=0.00074465
+  train loss=3.93491, mIoU=0.7785
+  val loss=3.60238, mIoU=0.7870, smoke IoU=0.8127, fire IoU=0.6525
+  active boundary: train=0.09125, val=0.02659, supervised px=6025.0
+Epoch 29/100
+  train batch 1/138: loss=4.46493, lr=0.00074405
+  train batch 10/138: loss=3.74260, lr=0.00074344
+  train batch 20/138: loss=4.17865, lr=0.00074276
+  train batch 30/138: loss=2.69642, lr=0.00074209
+  train batch 40/138: loss=4.00789, lr=0.00074142
+  train batch 50/138: loss=4.23130, lr=0.00074074
+  train batch 60/138: loss=4.43529, lr=0.00074007
+  train batch 70/138: loss=3.76470, lr=0.00073939
+  train batch 80/138: loss=3.43313, lr=0.00073872
+  train batch 90/138: loss=3.79658, lr=0.00073804
+  train batch 100/138: loss=4.34799, lr=0.00073737
+  train batch 110/138: loss=4.34217, lr=0.00073669
+  train batch 120/138: loss=4.51003, lr=0.00073602
+  train batch 130/138: loss=3.50129, lr=0.00073535
+  train loss=3.85542, mIoU=0.7881
+  val loss=3.63836, mIoU=0.7989, smoke IoU=0.8354, fire IoU=0.6582
+  active boundary: train=0.09017, val=0.02435, supervised px=6074.1
+Epoch 30/100
+  train batch 1/138: loss=3.63827, lr=0.00073474
+  train batch 10/138: loss=4.43974, lr=0.00073413
+  train batch 20/138: loss=3.76573, lr=0.00073346
+  train batch 30/138: loss=3.68458, lr=0.00073278
+  train batch 40/138: loss=4.07802, lr=0.00073211
+  train batch 50/138: loss=3.60115, lr=0.00073143
+  train batch 60/138: loss=3.36307, lr=0.00073075
+  train batch 70/138: loss=3.27282, lr=0.00073008
+  train batch 80/138: loss=2.85844, lr=0.00072940
+  train batch 90/138: loss=3.71502, lr=0.00072873
+  train batch 100/138: loss=3.74111, lr=0.00072805
+  train batch 110/138: loss=4.09409, lr=0.00072738
+  train batch 120/138: loss=3.67507, lr=0.00072670
+  train batch 130/138: loss=3.51216, lr=0.00072603
+  train loss=3.97888, mIoU=0.7766
+  val loss=3.84572, mIoU=0.7926, smoke IoU=0.8293, fire IoU=0.6486
+  active boundary: train=0.11031, val=0.02434, supervised px=6051.1
+Epoch 31/100
+  train batch 1/138: loss=4.03177, lr=0.00072542
+  train batch 10/138: loss=3.07704, lr=0.00072481
+  train batch 20/138: loss=4.17130, lr=0.00072413
+  train batch 30/138: loss=3.63033, lr=0.00072346
+  train batch 40/138: loss=4.66069, lr=0.00072278
+  train batch 50/138: loss=3.57366, lr=0.00072211
+  train batch 60/138: loss=3.34209, lr=0.00072143
+  train batch 70/138: loss=3.89860, lr=0.00072075
+  train batch 80/138: loss=3.71136, lr=0.00072008
+  train batch 90/138: loss=3.58477, lr=0.00071940
+  train batch 100/138: loss=4.10524, lr=0.00071872
+  train batch 110/138: loss=3.43224, lr=0.00071805
+  train batch 120/138: loss=3.85304, lr=0.00071737
+  train batch 130/138: loss=3.75628, lr=0.00071669
+  train loss=3.91226, mIoU=0.7862
+  val loss=3.55776, mIoU=0.7907, smoke IoU=0.8221, fire IoU=0.6509
+  active boundary: train=0.11823, val=0.02714, supervised px=6000.4
+Epoch 32/100
+  train batch 1/138: loss=3.13228, lr=0.00071608
+  train batch 10/138: loss=4.75690, lr=0.00071548
+  train batch 20/138: loss=3.71860, lr=0.00071480
+  train batch 30/138: loss=2.76127, lr=0.00071412
+  train batch 40/138: loss=4.24486, lr=0.00071344
+  train batch 50/138: loss=3.80424, lr=0.00071277
+  train batch 60/138: loss=3.84500, lr=0.00071209
+  train batch 70/138: loss=3.31833, lr=0.00071141
+  train batch 80/138: loss=4.76466, lr=0.00071074
+  train batch 90/138: loss=3.76460, lr=0.00071006
+  train batch 100/138: loss=3.95784, lr=0.00070938
+  train batch 110/138: loss=4.04988, lr=0.00070870
+  train batch 120/138: loss=3.60113, lr=0.00070803
+  train batch 130/138: loss=4.01302, lr=0.00070735
+  train loss=3.96632, mIoU=0.7882
+  val loss=3.41563, mIoU=0.8010, smoke IoU=0.8377, fire IoU=0.6603
+  active boundary: train=0.09979, val=0.02438, supervised px=6073.7
+Epoch 33/100
+  train batch 1/138: loss=3.77388, lr=0.00070674
+  train batch 10/138: loss=4.93921, lr=0.00070613
+  train batch 20/138: loss=3.43401, lr=0.00070545
+  train batch 30/138: loss=3.68977, lr=0.00070477
+  train batch 40/138: loss=3.59912, lr=0.00070409
+  train batch 50/138: loss=4.99369, lr=0.00070342
+  train batch 60/138: loss=4.47054, lr=0.00070274
+  train batch 70/138: loss=2.75624, lr=0.00070206
+  train batch 80/138: loss=4.40195, lr=0.00070138
+  train batch 90/138: loss=3.16426, lr=0.00070070
+  train batch 100/138: loss=3.93917, lr=0.00070002
+  train batch 110/138: loss=3.97369, lr=0.00069934
+  train batch 120/138: loss=3.26690, lr=0.00069867
+  train batch 130/138: loss=3.58418, lr=0.00069799
+  train loss=3.87267, mIoU=0.7921
+  val loss=3.35677, mIoU=0.7965, smoke IoU=0.8308, fire IoU=0.6560
+  active boundary: train=0.13100, val=0.02608, supervised px=6101.6
+Epoch 34/100
+  train batch 1/138: loss=3.67330, lr=0.00069738
+  train batch 10/138: loss=3.17122, lr=0.00069677
+  train batch 20/138: loss=3.16475, lr=0.00069609
+  train batch 30/138: loss=3.57767, lr=0.00069541
+  train batch 40/138: loss=3.82963, lr=0.00069473
+  train batch 50/138: loss=3.97640, lr=0.00069405
+  train batch 60/138: loss=4.98040, lr=0.00069337
+  train batch 70/138: loss=3.32805, lr=0.00069269
+  train batch 80/138: loss=4.73256, lr=0.00069201
+  train batch 90/138: loss=3.01875, lr=0.00069133
+  train batch 100/138: loss=4.78891, lr=0.00069065
+  train batch 110/138: loss=3.55258, lr=0.00068997
+  train batch 120/138: loss=3.89776, lr=0.00068929
+  train batch 130/138: loss=3.71738, lr=0.00068861
+  train loss=3.85604, mIoU=0.7875
+  val loss=3.78272, mIoU=0.7648, smoke IoU=0.7863, fire IoU=0.6194
+  active boundary: train=0.10601, val=0.04432, supervised px=6133.2
+Epoch 35/100
+  train batch 1/138: loss=3.81429, lr=0.00068800
+  train batch 10/138: loss=4.54694, lr=0.00068739
+  train batch 20/138: loss=4.04038, lr=0.00068671
+  train batch 30/138: loss=2.64316, lr=0.00068603
+  train batch 40/138: loss=3.30664, lr=0.00068535
+  train batch 50/138: loss=4.09123, lr=0.00068467
+  train batch 60/138: loss=3.20462, lr=0.00068399
+  train batch 70/138: loss=3.39327, lr=0.00068331
+  train batch 80/138: loss=3.97406, lr=0.00068263
+  train batch 90/138: loss=4.18537, lr=0.00068195
+  train batch 100/138: loss=4.12866, lr=0.00068127
+  train batch 110/138: loss=4.43412, lr=0.00068059
+  train batch 120/138: loss=3.91291, lr=0.00067991
+  train batch 130/138: loss=3.55292, lr=0.00067923
+  train loss=3.82864, mIoU=0.7930
+  val loss=3.63375, mIoU=0.7987, smoke IoU=0.8272, fire IoU=0.6667
+  active boundary: train=0.10734, val=0.02334, supervised px=6114.4
+Epoch 36/100
+  train batch 1/138: loss=4.01580, lr=0.00067861
+  train batch 10/138: loss=3.59500, lr=0.00067800
+  train batch 20/138: loss=3.95903, lr=0.00067732
+  train batch 30/138: loss=3.35282, lr=0.00067664
+  train batch 40/138: loss=5.13764, lr=0.00067596
+  train batch 50/138: loss=4.37844, lr=0.00067528
+  train batch 60/138: loss=4.68474, lr=0.00067459
+  train batch 70/138: loss=4.00233, lr=0.00067391
+  train batch 80/138: loss=3.86677, lr=0.00067323
+  train batch 90/138: loss=3.83328, lr=0.00067255
+  train batch 100/138: loss=3.28536, lr=0.00067187
+  train batch 110/138: loss=3.72032, lr=0.00067119
+  train batch 120/138: loss=3.93318, lr=0.00067050
+  train batch 130/138: loss=4.35582, lr=0.00066982
+  train loss=3.89136, mIoU=0.7905
+  val loss=3.57424, mIoU=0.7754, smoke IoU=0.7987, fire IoU=0.6334
+  active boundary: train=0.12646, val=0.03534, supervised px=6170.1
+Epoch 37/100
+  train batch 1/138: loss=3.91356, lr=0.00066921
+  train batch 10/138: loss=2.92036, lr=0.00066860
+  train batch 20/138: loss=3.37335, lr=0.00066791
+  train batch 30/138: loss=3.64086, lr=0.00066723
+  train batch 40/138: loss=4.95704, lr=0.00066655
+  train batch 50/138: loss=3.95079, lr=0.00066587
+  train batch 60/138: loss=3.30186, lr=0.00066518
+  train batch 70/138: loss=3.53701, lr=0.00066450
+  train batch 80/138: loss=3.99906, lr=0.00066382
+  train batch 90/138: loss=3.53712, lr=0.00066314
+  train batch 100/138: loss=4.04010, lr=0.00066245
+  train batch 110/138: loss=3.41924, lr=0.00066177
+  train batch 120/138: loss=2.35624, lr=0.00066109
+  train batch 130/138: loss=3.26921, lr=0.00066041
+  train loss=3.77637, mIoU=0.7975
+  val loss=3.50075, mIoU=0.7921, smoke IoU=0.8241, fire IoU=0.6515
+  active boundary: train=0.10192, val=0.02807, supervised px=6198.4
+Epoch 38/100
+  train batch 1/138: loss=4.03455, lr=0.00065979
+  train batch 10/138: loss=2.99705, lr=0.00065918
+  train batch 20/138: loss=2.42289, lr=0.00065849
+  train batch 30/138: loss=2.95875, lr=0.00065781
+  train batch 40/138: loss=4.50006, lr=0.00065713
+  train batch 50/138: loss=4.26815, lr=0.00065644
+  train batch 60/138: loss=3.77794, lr=0.00065576
+  train batch 70/138: loss=5.04411, lr=0.00065508
+  train batch 80/138: loss=4.15721, lr=0.00065439
+  train batch 90/138: loss=3.88810, lr=0.00065371
+  train batch 100/138: loss=4.13024, lr=0.00065303
+  train batch 110/138: loss=3.66989, lr=0.00065234
+  train batch 120/138: loss=3.51280, lr=0.00065166
+  train batch 130/138: loss=3.31131, lr=0.00065097
+  train loss=3.78305, mIoU=0.7935
+  val loss=3.41927, mIoU=0.7807, smoke IoU=0.8023, fire IoU=0.6482
+  active boundary: train=0.10305, val=0.02906, supervised px=6191.4
+Epoch 39/100
+  train batch 1/138: loss=4.16734, lr=0.00065036
+  train batch 10/138: loss=3.84889, lr=0.00064974
+  train batch 20/138: loss=3.09423, lr=0.00064906
+  train batch 30/138: loss=5.10441, lr=0.00064837
+  train batch 40/138: loss=3.95258, lr=0.00064769
+  train batch 50/138: loss=3.58614, lr=0.00064700
+  train batch 60/138: loss=3.36828, lr=0.00064632
+  train batch 70/138: loss=4.56491, lr=0.00064564
+  train batch 80/138: loss=3.56800, lr=0.00064495
+  train batch 90/138: loss=3.67624, lr=0.00064427
+  train batch 100/138: loss=4.22629, lr=0.00064358
+  train batch 110/138: loss=3.75375, lr=0.00064290
+  train batch 120/138: loss=3.26721, lr=0.00064221
+  train batch 130/138: loss=3.29698, lr=0.00064153
+  train loss=3.80349, mIoU=0.7915
+  val loss=3.33670, mIoU=0.7974, smoke IoU=0.8278, fire IoU=0.6625
+  active boundary: train=0.11210, val=0.02518, supervised px=6252.5
+Epoch 40/100
+  train batch 1/138: loss=3.07342, lr=0.00064091
+  train batch 10/138: loss=4.48402, lr=0.00064029
+  train batch 20/138: loss=3.94102, lr=0.00063961
+  train batch 30/138: loss=3.05196, lr=0.00063892
+  train batch 40/138: loss=3.77653, lr=0.00063824
+  train batch 50/138: loss=3.62021, lr=0.00063755
+  train batch 60/138: loss=3.00283, lr=0.00063687
+  train batch 70/138: loss=4.68635, lr=0.00063618
+  train batch 80/138: loss=3.31132, lr=0.00063549
+  train batch 90/138: loss=4.74803, lr=0.00063481
+  train batch 100/138: loss=3.38736, lr=0.00063412
+  train batch 110/138: loss=3.38818, lr=0.00063344
+  train batch 120/138: loss=3.57488, lr=0.00063275
+  train batch 130/138: loss=4.06724, lr=0.00063206
+  train loss=3.82814, mIoU=0.7928
+  val loss=3.55773, mIoU=0.8003, smoke IoU=0.8324, fire IoU=0.6664
+  active boundary: train=0.11487, val=0.02342, supervised px=6170.7
+Epoch 41/100
+  train batch 1/138: loss=3.33531, lr=0.00063145
+  train batch 10/138: loss=4.43426, lr=0.00063083
+  train batch 20/138: loss=2.99908, lr=0.00063014
+  train batch 30/138: loss=3.54850, lr=0.00062946
+  train batch 40/138: loss=3.21229, lr=0.00062877
+  train batch 50/138: loss=4.05267, lr=0.00062808
+  train batch 60/138: loss=4.01600, lr=0.00062739
+  train batch 70/138: loss=3.36978, lr=0.00062671
+  train batch 80/138: loss=3.20931, lr=0.00062602
+  train batch 90/138: loss=3.40213, lr=0.00062533
+  train batch 100/138: loss=4.47467, lr=0.00062465
+  train batch 110/138: loss=4.05009, lr=0.00062396
+  train batch 120/138: loss=4.96483, lr=0.00062327
+  train batch 130/138: loss=4.63999, lr=0.00062258
+  train loss=3.81349, mIoU=0.7947
+  val loss=3.28135, mIoU=0.7964, smoke IoU=0.8237, fire IoU=0.6663
+  active boundary: train=0.10671, val=0.02298, supervised px=6187.8
+Epoch 42/100
+  train batch 1/138: loss=3.30786, lr=0.00062197
+  train batch 10/138: loss=3.93195, lr=0.00062135
+  train batch 20/138: loss=4.76311, lr=0.00062066
+  train batch 30/138: loss=3.18203, lr=0.00061997
+  train batch 40/138: loss=3.46132, lr=0.00061928
+  train batch 50/138: loss=2.49014, lr=0.00061860
+  train batch 60/138: loss=3.43778, lr=0.00061791
+  train batch 70/138: loss=3.71034, lr=0.00061722
+  train batch 80/138: loss=3.97382, lr=0.00061653
+  train batch 90/138: loss=2.83818, lr=0.00061584
+  train batch 100/138: loss=4.08917, lr=0.00061516
+  train batch 110/138: loss=4.41289, lr=0.00061447
+  train batch 120/138: loss=4.08594, lr=0.00061378
+  train batch 130/138: loss=3.65872, lr=0.00061309
+  train loss=3.69426, mIoU=0.7983
+  val loss=3.39300, mIoU=0.7853, smoke IoU=0.8138, fire IoU=0.6414
+  active boundary: train=0.10571, val=0.03269, supervised px=6252.4
+Epoch 43/100
+  train batch 1/138: loss=3.42307, lr=0.00061247
+  train batch 10/138: loss=3.24428, lr=0.00061185
+  train batch 20/138: loss=3.88836, lr=0.00061116
+  train batch 30/138: loss=4.27304, lr=0.00061047
+  train batch 40/138: loss=4.73301, lr=0.00060978
+  train batch 50/138: loss=3.53847, lr=0.00060909
+  train batch 60/138: loss=4.39104, lr=0.00060841
+  train batch 70/138: loss=3.63722, lr=0.00060772
+  train batch 80/138: loss=3.25559, lr=0.00060703
+  train batch 90/138: loss=4.27450, lr=0.00060634
+  train batch 100/138: loss=3.50453, lr=0.00060565
+  train batch 110/138: loss=4.62302, lr=0.00060496
+  train batch 120/138: loss=5.71529, lr=0.00060427
+  train batch 130/138: loss=4.32354, lr=0.00060358
+  train loss=3.78770, mIoU=0.7935
+  val loss=3.41923, mIoU=0.8009, smoke IoU=0.8332, fire IoU=0.6653
+  active boundary: train=0.09991, val=0.02244, supervised px=6241.2
+Epoch 44/100
+  train batch 1/138: loss=3.80471, lr=0.00060296
+  train batch 10/138: loss=9.32155, lr=0.00060234
+  train batch 20/138: loss=3.67993, lr=0.00060165
+  train batch 30/138: loss=4.19775, lr=0.00060096
+  train batch 40/138: loss=4.86261, lr=0.00060027
+  train batch 50/138: loss=3.74644, lr=0.00059958
+  train batch 60/138: loss=3.46090, lr=0.00059889
+  train batch 70/138: loss=3.60399, lr=0.00059820
+  train batch 80/138: loss=3.36272, lr=0.00059751
+  train batch 90/138: loss=4.20841, lr=0.00059681
+  train batch 100/138: loss=3.87710, lr=0.00059612
+  train batch 110/138: loss=3.94082, lr=0.00059543
+  train batch 120/138: loss=3.11424, lr=0.00059474
+  train batch 130/138: loss=4.21769, lr=0.00059405
+  train loss=3.84957, mIoU=0.7935
+  val loss=3.39377, mIoU=0.7975, smoke IoU=0.8254, fire IoU=0.6642
+  active boundary: train=0.09720, val=0.02487, supervised px=6214.7
+Epoch 45/100
+  train batch 1/138: loss=3.14937, lr=0.00059343
+  train batch 10/138: loss=3.05594, lr=0.00059281
+  train batch 20/138: loss=2.74952, lr=0.00059212
+  train batch 30/138: loss=3.06650, lr=0.00059143
+  train batch 40/138: loss=3.59959, lr=0.00059073
+  train batch 50/138: loss=2.55877, lr=0.00059004
+  train batch 60/138: loss=3.96442, lr=0.00058935
+  train batch 70/138: loss=4.23327, lr=0.00058866
+  train batch 80/138: loss=4.74933, lr=0.00058797
+  train batch 90/138: loss=3.24298, lr=0.00058728
+  train batch 100/138: loss=3.66350, lr=0.00058658
+  train batch 110/138: loss=4.11410, lr=0.00058589
+  train batch 120/138: loss=3.82490, lr=0.00058520
+  train batch 130/138: loss=3.55382, lr=0.00058451
+  train loss=3.89928, mIoU=0.7957
+  val loss=3.30589, mIoU=0.8021, smoke IoU=0.8328, fire IoU=0.6672
+  active boundary: train=0.11992, val=0.02410, supervised px=6210.9
+Epoch 46/100
+  train batch 1/138: loss=4.76644, lr=0.00058388
+  train batch 10/138: loss=4.11126, lr=0.00058326
+  train batch 20/138: loss=2.79059, lr=0.00058257
+  train batch 30/138: loss=4.23773, lr=0.00058188
+  train batch 40/138: loss=3.40472, lr=0.00058118
+  train batch 50/138: loss=4.63947, lr=0.00058049
+  train batch 60/138: loss=3.98333, lr=0.00057980
+  train batch 70/138: loss=4.07043, lr=0.00057910
+  train batch 80/138: loss=2.69398, lr=0.00057841
+  train batch 90/138: loss=2.64034, lr=0.00057772
+  train batch 100/138: loss=4.18134, lr=0.00057703
+  train batch 110/138: loss=4.02497, lr=0.00057633
+  train batch 120/138: loss=3.32237, lr=0.00057564
+  train batch 130/138: loss=3.68155, lr=0.00057494
+  train loss=3.86577, mIoU=0.7962
+  val loss=3.23314, mIoU=0.8006, smoke IoU=0.8337, fire IoU=0.6628
+  active boundary: train=0.12640, val=0.02342, supervised px=6185.8
+Epoch 47/100
+  train batch 1/138: loss=4.16613, lr=0.00057432
+  train batch 10/138: loss=3.69828, lr=0.00057370
+  train batch 20/138: loss=3.98811, lr=0.00057300
+  train batch 30/138: loss=3.29992, lr=0.00057231
+  train batch 40/138: loss=4.59241, lr=0.00057161
+  train batch 50/138: loss=3.41081, lr=0.00057092
+  train batch 60/138: loss=4.16121, lr=0.00057023
+  train batch 70/138: loss=3.78653, lr=0.00056953
+  train batch 80/138: loss=4.71503, lr=0.00056884
+  train batch 90/138: loss=3.57718, lr=0.00056814
+  train batch 100/138: loss=3.60600, lr=0.00056745
+  train batch 110/138: loss=3.64140, lr=0.00056675
+  train batch 120/138: loss=3.49064, lr=0.00056606
+  train batch 130/138: loss=4.53707, lr=0.00056537
+  train loss=3.75945, mIoU=0.7977
+  val loss=3.41672, mIoU=0.7861, smoke IoU=0.8121, fire IoU=0.6471
+  active boundary: train=0.08549, val=0.03009, supervised px=6294.0
+Epoch 48/100
+  train batch 1/138: loss=3.44757, lr=0.00056474
+  train batch 10/138: loss=4.37156, lr=0.00056411
+  train batch 20/138: loss=3.91410, lr=0.00056342
+  train batch 30/138: loss=3.03148, lr=0.00056272
+  train batch 40/138: loss=5.13000, lr=0.00056203
+  train batch 50/138: loss=4.98110, lr=0.00056133
+  train batch 60/138: loss=4.22483, lr=0.00056064
+  train batch 70/138: loss=3.33783, lr=0.00055994
+  train batch 80/138: loss=4.28812, lr=0.00055925
+  train batch 90/138: loss=3.89024, lr=0.00055855
+  train batch 100/138: loss=4.28823, lr=0.00055786
+  train batch 110/138: loss=3.54974, lr=0.00055716
+  train batch 120/138: loss=2.84967, lr=0.00055646
+  train batch 130/138: loss=2.85165, lr=0.00055577
+  train loss=3.75113, mIoU=0.7975
+  val loss=3.31398, mIoU=0.7953, smoke IoU=0.8265, fire IoU=0.6573
+  active boundary: train=0.10523, val=0.02626, supervised px=6290.7
+Epoch 49/100
+  train batch 1/138: loss=2.44166, lr=0.00055514
+  train batch 10/138: loss=4.25761, lr=0.00055451
+  train batch 20/138: loss=4.48759, lr=0.00055382
+  train batch 30/138: loss=3.99584, lr=0.00055312
+  train batch 40/138: loss=3.59374, lr=0.00055242
+  train batch 50/138: loss=3.25767, lr=0.00055173
+  train batch 60/138: loss=3.83411, lr=0.00055103
+  train batch 70/138: loss=4.38618, lr=0.00055033
+  train batch 80/138: loss=3.53198, lr=0.00054964
+  train batch 90/138: loss=4.30731, lr=0.00054894
+  train batch 100/138: loss=2.41017, lr=0.00054824
+  train batch 110/138: loss=4.14631, lr=0.00054755
+  train batch 120/138: loss=3.98001, lr=0.00054685
+  train batch 130/138: loss=4.50428, lr=0.00054615
+  train loss=3.75873, mIoU=0.7994
+  val loss=3.30322, mIoU=0.8023, smoke IoU=0.8322, fire IoU=0.6710
+  active boundary: train=0.09631, val=0.02178, supervised px=6233.1
+Epoch 50/100
+  train batch 1/138: loss=3.72671, lr=0.00054552
+  train batch 10/138: loss=3.88270, lr=0.00054490
+  train batch 20/138: loss=3.77299, lr=0.00054420
+  train batch 30/138: loss=3.44937, lr=0.00054350
+  train batch 40/138: loss=3.36956, lr=0.00054280
+  train batch 50/138: loss=3.64765, lr=0.00054210
+  train batch 60/138: loss=4.37622, lr=0.00054141
+  train batch 70/138: loss=3.78586, lr=0.00054071
+  train batch 80/138: loss=3.12271, lr=0.00054001
+  train batch 90/138: loss=2.95509, lr=0.00053931
+  train batch 100/138: loss=4.01392, lr=0.00053861
+  train batch 110/138: loss=3.68503, lr=0.00053791
+  train batch 120/138: loss=4.02367, lr=0.00053721
+  train batch 130/138: loss=4.00750, lr=0.00053652
+  train loss=3.63599, mIoU=0.8025
+  val loss=3.20253, mIoU=0.7999, smoke IoU=0.8306, fire IoU=0.6658
+  active boundary: train=0.09884, val=0.02297, supervised px=6345.5
+Epoch 51/100
+  train batch 1/138: loss=3.57260, lr=0.00053589
+  train batch 10/138: loss=4.02843, lr=0.00053526
+  train batch 20/138: loss=3.45062, lr=0.00053456
+  train batch 30/138: loss=3.16055, lr=0.00053386
+  train batch 40/138: loss=4.27033, lr=0.00053316
+  train batch 50/138: loss=5.58740, lr=0.00053246
+  train batch 60/138: loss=3.67402, lr=0.00053176
+  train batch 70/138: loss=3.80389, lr=0.00053106
+  train batch 80/138: loss=3.57263, lr=0.00053036
+  train batch 90/138: loss=3.49706, lr=0.00052966
+  train batch 100/138: loss=3.48762, lr=0.00052896
+  train batch 110/138: loss=3.43436, lr=0.00052826
+  train batch 120/138: loss=2.58263, lr=0.00052756
+  train batch 130/138: loss=3.36445, lr=0.00052686
+  train loss=3.69191, mIoU=0.7968
+  val loss=3.32508, mIoU=0.8049, smoke IoU=0.8363, fire IoU=0.6714
+  active boundary: train=0.08896, val=0.02224, supervised px=6349.8
+Epoch 52/100
+  train batch 1/138: loss=3.56124, lr=0.00052623
+  train batch 10/138: loss=3.91281, lr=0.00052560
+  train batch 20/138: loss=3.52893, lr=0.00052490
+  train batch 30/138: loss=3.21404, lr=0.00052420
+  train batch 40/138: loss=3.33661, lr=0.00052350
+  train batch 50/138: loss=3.14806, lr=0.00052280
+  train batch 60/138: loss=3.60299, lr=0.00052210
+  train batch 70/138: loss=4.47270, lr=0.00052140
+  train batch 80/138: loss=3.79727, lr=0.00052069
+  train batch 90/138: loss=4.48738, lr=0.00051999
+  train batch 100/138: loss=4.02556, lr=0.00051929
+  train batch 110/138: loss=3.38759, lr=0.00051859
+  train batch 120/138: loss=4.00313, lr=0.00051789
+  train batch 130/138: loss=3.23003, lr=0.00051719
+  train loss=3.75954, mIoU=0.8014
+  val loss=3.16636, mIoU=0.8027, smoke IoU=0.8356, fire IoU=0.6670
+  active boundary: train=0.09959, val=0.02374, supervised px=6302.3
+Epoch 53/100
+  train batch 1/138: loss=3.81675, lr=0.00051656
+  train batch 10/138: loss=2.97733, lr=0.00051592
+  train batch 20/138: loss=3.20673, lr=0.00051522
+  train batch 30/138: loss=4.77714, lr=0.00051452
+  train batch 40/138: loss=4.79711, lr=0.00051382
+  train batch 50/138: loss=3.37959, lr=0.00051312
+  train batch 60/138: loss=3.27741, lr=0.00051241
+  train batch 70/138: loss=3.46264, lr=0.00051171
+  train batch 80/138: loss=3.37370, lr=0.00051101
+  train batch 90/138: loss=4.02101, lr=0.00051031
+  train batch 100/138: loss=3.07900, lr=0.00050960
+  train batch 110/138: loss=3.55189, lr=0.00050890
+  train batch 120/138: loss=2.84945, lr=0.00050820
+  train batch 130/138: loss=4.30913, lr=0.00050749
+  train loss=3.69993, mIoU=0.8034
+  val loss=3.15052, mIoU=0.7936, smoke IoU=0.8167, fire IoU=0.6663
+  active boundary: train=0.09911, val=0.02405, supervised px=6372.8
+Epoch 54/100
+  train batch 1/138: loss=4.15624, lr=0.00050686
+  train batch 10/138: loss=3.24320, lr=0.00050623
+  train batch 20/138: loss=3.73604, lr=0.00050552
+  train batch 30/138: loss=3.25826, lr=0.00050482
+  train batch 40/138: loss=3.57916, lr=0.00050412
+  train batch 50/138: loss=3.12235, lr=0.00050341
+  train batch 60/138: loss=4.69500, lr=0.00050271
+  train batch 70/138: loss=3.76613, lr=0.00050200
+  train batch 80/138: loss=3.70540, lr=0.00050130
+  train batch 90/138: loss=3.83824, lr=0.00050060
+  train batch 100/138: loss=3.72061, lr=0.00049989
+  train batch 110/138: loss=4.51950, lr=0.00049919
+  train batch 120/138: loss=5.72317, lr=0.00049848
+  train batch 130/138: loss=3.09043, lr=0.00049778
+  train loss=3.76712, mIoU=0.7969
+  val loss=3.33703, mIoU=0.7943, smoke IoU=0.8275, fire IoU=0.6505
+  active boundary: train=0.10437, val=0.02877, supervised px=6349.3
+Epoch 55/100
+  train batch 1/138: loss=2.92790, lr=0.00049714
+  train batch 10/138: loss=3.23210, lr=0.00049651
+  train batch 20/138: loss=3.84432, lr=0.00049580
+  train batch 30/138: loss=3.29781, lr=0.00049510
+  train batch 40/138: loss=3.54341, lr=0.00049439
+  train batch 50/138: loss=3.84646, lr=0.00049369
+  train batch 60/138: loss=3.72092, lr=0.00049298
+  train batch 70/138: loss=2.71633, lr=0.00049228
+  train batch 80/138: loss=3.17532, lr=0.00049157
+  train batch 90/138: loss=2.37559, lr=0.00049087
+  train batch 100/138: loss=4.39694, lr=0.00049016
+  train batch 110/138: loss=3.62888, lr=0.00048945
+  train batch 120/138: loss=3.21369, lr=0.00048875
+  train batch 130/138: loss=3.71145, lr=0.00048804
+  train loss=3.66141, mIoU=0.8013
+  val loss=3.16600, mIoU=0.7928, smoke IoU=0.8195, fire IoU=0.6606
+  active boundary: train=0.09307, val=0.02524, supervised px=6372.9
+Epoch 56/100
+  train batch 1/138: loss=3.97211, lr=0.00048741
+  train batch 10/138: loss=3.83365, lr=0.00048677
+  train batch 20/138: loss=3.45591, lr=0.00048606
+  train batch 30/138: loss=3.13949, lr=0.00048536
+  train batch 40/138: loss=7.02309, lr=0.00048465
+  train batch 50/138: loss=4.03185, lr=0.00048394
+  train batch 60/138: loss=3.28673, lr=0.00048324
+  train batch 70/138: loss=2.67347, lr=0.00048253
+  train batch 80/138: loss=3.35355, lr=0.00048182
+  train batch 90/138: loss=3.72507, lr=0.00048112
+  train batch 100/138: loss=4.37542, lr=0.00048041
+  train batch 110/138: loss=4.21344, lr=0.00047970
+  train batch 120/138: loss=3.02874, lr=0.00047899
+  train batch 130/138: loss=4.63236, lr=0.00047828
+  train loss=3.74909, mIoU=0.7976
+  val loss=3.31999, mIoU=0.7973, smoke IoU=0.8237, fire IoU=0.6685
+  active boundary: train=0.09309, val=0.02346, supervised px=6357.4
+Epoch 57/100
+  train batch 1/138: loss=3.41823, lr=0.00047765
+  train batch 10/138: loss=3.11279, lr=0.00047701
+  train batch 20/138: loss=3.18259, lr=0.00047630
+  train batch 30/138: loss=3.00778, lr=0.00047559
+  train batch 40/138: loss=3.40092, lr=0.00047489
+  train batch 50/138: loss=3.96360, lr=0.00047418
+  train batch 60/138: loss=4.13081, lr=0.00047347
+  train batch 70/138: loss=3.96994, lr=0.00047276
+  train batch 80/138: loss=4.02222, lr=0.00047205
+  train batch 90/138: loss=4.84817, lr=0.00047134
+  train batch 100/138: loss=5.63893, lr=0.00047063
+  train batch 110/138: loss=3.75034, lr=0.00046992
+  train batch 120/138: loss=4.27071, lr=0.00046921
+  train batch 130/138: loss=2.85259, lr=0.00046850
+  train loss=3.63725, mIoU=0.8036
+  val loss=3.29778, mIoU=0.7949, smoke IoU=0.8182, fire IoU=0.6693
+  active boundary: train=0.06646, val=0.02250, supervised px=6354.1
+Epoch 58/100
+  train batch 1/138: loss=2.67655, lr=0.00046787
+  train batch 10/138: loss=3.89218, lr=0.00046723
+  train batch 20/138: loss=3.48593, lr=0.00046652
+  train batch 30/138: loss=3.93753, lr=0.00046581
+  train batch 40/138: loss=4.37623, lr=0.00046510
+  train batch 50/138: loss=2.91730, lr=0.00046439
+  train batch 60/138: loss=4.08031, lr=0.00046368
+  train batch 70/138: loss=3.51954, lr=0.00046297
+  train batch 80/138: loss=3.41318, lr=0.00046226
+  train batch 90/138: loss=3.58883, lr=0.00046155
+  train batch 100/138: loss=4.40720, lr=0.00046084
+  train batch 110/138: loss=4.51661, lr=0.00046012
+  train batch 120/138: loss=3.18440, lr=0.00045941
+  train batch 130/138: loss=4.06360, lr=0.00045870
+  train loss=3.72249, mIoU=0.8040
+  val loss=3.27629, mIoU=0.8011, smoke IoU=0.8319, fire IoU=0.6682
+  active boundary: train=0.09759, val=0.02283, supervised px=6347.1
+Epoch 59/100
+  train batch 1/138: loss=3.45919, lr=0.00045806
+  train batch 10/138: loss=4.80028, lr=0.00045742
+  train batch 20/138: loss=3.29072, lr=0.00045671
+  train batch 30/138: loss=2.61353, lr=0.00045600
+  train batch 40/138: loss=3.16572, lr=0.00045529
+  train batch 50/138: loss=3.15084, lr=0.00045458
+  train batch 60/138: loss=2.49825, lr=0.00045386
+  train batch 70/138: loss=3.26804, lr=0.00045315
+  train batch 80/138: loss=3.69949, lr=0.00045244
+  train batch 90/138: loss=3.68656, lr=0.00045173
+  train batch 100/138: loss=3.80165, lr=0.00045101
+  train batch 110/138: loss=3.90034, lr=0.00045030
+  train batch 120/138: loss=2.78393, lr=0.00044959
+  train batch 130/138: loss=3.95378, lr=0.00044888
+  train loss=3.73555, mIoU=0.8015
+  val loss=3.40035, mIoU=0.8024, smoke IoU=0.8333, fire IoU=0.6693
+  active boundary: train=0.09838, val=0.02319, supervised px=6381.3
+Epoch 60/100
+  train batch 1/138: loss=3.28199, lr=0.00044823
+  train batch 10/138: loss=3.71990, lr=0.00044759
+  train batch 20/138: loss=2.76348, lr=0.00044688
+  train batch 30/138: loss=4.82549, lr=0.00044617
+  train batch 40/138: loss=4.36580, lr=0.00044545
+  train batch 50/138: loss=3.69574, lr=0.00044474
+  train batch 60/138: loss=2.41805, lr=0.00044403
+  train batch 70/138: loss=3.67919, lr=0.00044331
+  train batch 80/138: loss=2.70650, lr=0.00044260
+  train batch 90/138: loss=3.00391, lr=0.00044188
+  train batch 100/138: loss=3.77446, lr=0.00044117
+  train batch 110/138: loss=4.17446, lr=0.00044046
+  train batch 120/138: loss=3.87176, lr=0.00043974
+  train batch 130/138: loss=3.15040, lr=0.00043903
+  train loss=3.69986, mIoU=0.8035
+  val loss=3.14663, mIoU=0.8045, smoke IoU=0.8351, fire IoU=0.6725
+  active boundary: train=0.09912, val=0.02149, supervised px=6377.0
+Epoch 61/100
+  train batch 1/138: loss=2.78755, lr=0.00043838
+  train batch 10/138: loss=3.47194, lr=0.00043774
+  train batch 20/138: loss=3.04671, lr=0.00043703
+  train batch 30/138: loss=3.06233, lr=0.00043631
+  train batch 40/138: loss=4.22585, lr=0.00043559
+  train batch 50/138: loss=3.18477, lr=0.00043488
+  train batch 60/138: loss=3.26446, lr=0.00043416
+  train batch 70/138: loss=3.29765, lr=0.00043345
+  train batch 80/138: loss=3.80240, lr=0.00043273
+  train batch 90/138: loss=3.96804, lr=0.00043202
+  train batch 100/138: loss=3.04042, lr=0.00043130
+  train batch 110/138: loss=2.52799, lr=0.00043058
+  train batch 120/138: loss=3.94407, lr=0.00042987
+  train batch 130/138: loss=3.53643, lr=0.00042915
+  train loss=3.66162, mIoU=0.8042
+  val loss=3.22665, mIoU=0.7914, smoke IoU=0.8229, fire IoU=0.6494
+  active boundary: train=0.09017, val=0.02967, supervised px=6353.1
+Epoch 62/100
+  train batch 1/138: loss=3.81695, lr=0.00042851
+  train batch 10/138: loss=3.77542, lr=0.00042786
+  train batch 20/138: loss=3.33526, lr=0.00042715
+  train batch 30/138: loss=3.61210, lr=0.00042643
+  train batch 40/138: loss=3.79526, lr=0.00042571
+  train batch 50/138: loss=3.78985, lr=0.00042499
+  train batch 60/138: loss=4.02143, lr=0.00042428
+  train batch 70/138: loss=3.24654, lr=0.00042356
+  train batch 80/138: loss=4.92015, lr=0.00042284
+  train batch 90/138: loss=3.63415, lr=0.00042212
+  train batch 100/138: loss=2.96868, lr=0.00042141
+  train batch 110/138: loss=4.94412, lr=0.00042069
+  train batch 120/138: loss=3.20365, lr=0.00041997
+  train batch 130/138: loss=3.74868, lr=0.00041925
+  train loss=3.67559, mIoU=0.8016
+  val loss=3.21431, mIoU=0.7988, smoke IoU=0.8251, fire IoU=0.6712
+  active boundary: train=0.08622, val=0.02146, supervised px=6380.7
+Epoch 63/100
+  train batch 1/138: loss=3.76882, lr=0.00041861
+  train batch 10/138: loss=3.47491, lr=0.00041796
+  train batch 20/138: loss=2.97904, lr=0.00041724
+  train batch 30/138: loss=3.37980, lr=0.00041652
+  train batch 40/138: loss=3.52605, lr=0.00041580
+  train batch 50/138: loss=3.18913, lr=0.00041508
+  train batch 60/138: loss=3.11642, lr=0.00041436
+  train batch 70/138: loss=4.58626, lr=0.00041365
+  train batch 80/138: loss=2.64715, lr=0.00041293
+  train batch 90/138: loss=4.68245, lr=0.00041221
+  train batch 100/138: loss=4.53985, lr=0.00041149
+  train batch 110/138: loss=3.67656, lr=0.00041077
+  train batch 120/138: loss=3.84317, lr=0.00041005
+  train batch 130/138: loss=4.55320, lr=0.00040933
+  train loss=3.62470, mIoU=0.8071
+  val loss=3.49244, mIoU=0.8039, smoke IoU=0.8351, fire IoU=0.6708
+  active boundary: train=0.08203, val=0.02272, supervised px=6404.2
+Epoch 64/100
+  train batch 1/138: loss=3.46682, lr=0.00040868
+  train batch 10/138: loss=3.61405, lr=0.00040803
+  train batch 20/138: loss=3.93928, lr=0.00040731
+  train batch 30/138: loss=3.37356, lr=0.00040659
+  train batch 40/138: loss=4.33424, lr=0.00040587
+  train batch 50/138: loss=3.04999, lr=0.00040515
+  train batch 60/138: loss=4.03341, lr=0.00040443
+  train batch 70/138: loss=3.66169, lr=0.00040370
+  train batch 80/138: loss=4.12526, lr=0.00040298
+  train batch 90/138: loss=4.83728, lr=0.00040226
+  train batch 100/138: loss=4.11594, lr=0.00040154
+  train batch 110/138: loss=2.83088, lr=0.00040082
+  train batch 120/138: loss=3.38072, lr=0.00040010
+  train batch 130/138: loss=4.03610, lr=0.00039937
+  train loss=3.66920, mIoU=0.8011
+  val loss=3.18936, mIoU=0.8046, smoke IoU=0.8343, fire IoU=0.6737
+  active boundary: train=0.09665, val=0.02191, supervised px=6355.9
+Epoch 65/100
+  train batch 1/138: loss=2.65040, lr=0.00039872
+  train batch 10/138: loss=3.63741, lr=0.00039807
+  train batch 20/138: loss=3.56093, lr=0.00039735
+  train batch 30/138: loss=3.16827, lr=0.00039663
+  train batch 40/138: loss=3.47048, lr=0.00039591
+  train batch 50/138: loss=3.89318, lr=0.00039518
+  train batch 60/138: loss=4.32563, lr=0.00039446
+  train batch 70/138: loss=3.08506, lr=0.00039374
+  train batch 80/138: loss=3.65839, lr=0.00039301
+  train batch 90/138: loss=3.26816, lr=0.00039229
+  train batch 100/138: loss=3.82010, lr=0.00039157
+  train batch 110/138: loss=3.64272, lr=0.00039084
+  train batch 120/138: loss=3.44416, lr=0.00039012
+  train batch 130/138: loss=3.49986, lr=0.00038939
+  train loss=3.59015, mIoU=0.8088
+  val loss=3.26819, mIoU=0.7911, smoke IoU=0.8165, fire IoU=0.6575
+  active boundary: train=0.09928, val=0.02650, supervised px=6452.7
+Epoch 66/100
+  train batch 1/138: loss=3.09049, lr=0.00038874
+  train batch 10/138: loss=3.55014, lr=0.00038809
+  train batch 20/138: loss=4.37552, lr=0.00038737
+  train batch 30/138: loss=3.27202, lr=0.00038664
+  train batch 40/138: loss=2.98662, lr=0.00038592
+  train batch 50/138: loss=3.36396, lr=0.00038519
+  train batch 60/138: loss=3.80502, lr=0.00038447
+  train batch 70/138: loss=3.01298, lr=0.00038374
+  train batch 80/138: loss=4.03219, lr=0.00038301
+  train batch 90/138: loss=2.67075, lr=0.00038229
+  train batch 100/138: loss=4.60722, lr=0.00038156
+  train batch 110/138: loss=2.85285, lr=0.00038084
+  train batch 120/138: loss=3.67001, lr=0.00038011
+  train batch 130/138: loss=5.41623, lr=0.00037938
+  train loss=3.69249, mIoU=0.8060
+  val loss=3.27742, mIoU=0.8010, smoke IoU=0.8311, fire IoU=0.6683
+  active boundary: train=0.12027, val=0.02307, supervised px=6464.1
+Epoch 67/100
+  train batch 1/138: loss=3.07575, lr=0.00037873
+  train batch 10/138: loss=3.57901, lr=0.00037808
+  train batch 20/138: loss=3.23579, lr=0.00037735
+  train batch 30/138: loss=3.64521, lr=0.00037662
+  train batch 40/138: loss=3.92151, lr=0.00037590
+  train batch 50/138: loss=2.99399, lr=0.00037517
+  train batch 60/138: loss=3.50524, lr=0.00037444
+  train batch 70/138: loss=3.48651, lr=0.00037371
+  train batch 80/138: loss=3.95135, lr=0.00037299
+  train batch 90/138: loss=4.41907, lr=0.00037226
+  train batch 100/138: loss=3.94106, lr=0.00037153
+  train batch 110/138: loss=4.43507, lr=0.00037080
+  train batch 120/138: loss=3.94675, lr=0.00037008
+  train batch 130/138: loss=3.90226, lr=0.00036935
+  train loss=3.76429, mIoU=0.8056
+  val loss=3.40089, mIoU=0.8061, smoke IoU=0.8387, fire IoU=0.6729
+  active boundary: train=0.09972, val=0.02215, supervised px=6445.0
+Epoch 68/100
+  train batch 1/138: loss=3.28390, lr=0.00036869
+  train batch 10/138: loss=3.27412, lr=0.00036804
+  train batch 20/138: loss=3.89524, lr=0.00036731
+  train batch 30/138: loss=3.12929, lr=0.00036658
+  train batch 40/138: loss=3.00895, lr=0.00036585
+  train batch 50/138: loss=2.82851, lr=0.00036512
+  train batch 60/138: loss=3.65018, lr=0.00036439
+  train batch 70/138: loss=3.69161, lr=0.00036366
+  train batch 80/138: loss=3.42989, lr=0.00036293
+  train batch 90/138: loss=3.14679, lr=0.00036220
+  train batch 100/138: loss=3.66870, lr=0.00036147
+  train batch 110/138: loss=3.68363, lr=0.00036074
+  train batch 120/138: loss=3.92928, lr=0.00036001
+  train batch 130/138: loss=2.93439, lr=0.00035928
+  train loss=3.68497, mIoU=0.8049
+  val loss=3.48055, mIoU=0.8038, smoke IoU=0.8349, fire IoU=0.6737
+  active boundary: train=0.10036, val=0.02187, supervised px=6436.9
+Epoch 69/100
+  train batch 1/138: loss=2.77496, lr=0.00035862
+  train batch 10/138: loss=3.48059, lr=0.00035796
+  train batch 20/138: loss=3.42819, lr=0.00035723
+  train batch 30/138: loss=3.85899, lr=0.00035650
+  train batch 40/138: loss=2.90922, lr=0.00035577
+  train batch 50/138: loss=3.50657, lr=0.00035504
+  train batch 60/138: loss=3.28343, lr=0.00035431
+  train batch 70/138: loss=4.20327, lr=0.00035357
+  train batch 80/138: loss=3.46556, lr=0.00035284
+  train batch 90/138: loss=4.15378, lr=0.00035211
+  train batch 100/138: loss=3.18083, lr=0.00035138
+  train batch 110/138: loss=3.96890, lr=0.00035064
+  train batch 120/138: loss=3.91524, lr=0.00034991
+  train batch 130/138: loss=4.38276, lr=0.00034918
+  train loss=3.68407, mIoU=0.8016
+  val loss=3.37442, mIoU=0.8032, smoke IoU=0.8311, fire IoU=0.6740
+  active boundary: train=0.09822, val=0.02280, supervised px=6388.5
+Epoch 70/100
+  train batch 1/138: loss=3.53494, lr=0.00034852
+  train batch 10/138: loss=3.80356, lr=0.00034786
+  train batch 20/138: loss=4.17957, lr=0.00034712
+  train batch 30/138: loss=2.40076, lr=0.00034639
+  train batch 40/138: loss=3.91997, lr=0.00034566
+  train batch 50/138: loss=4.31075, lr=0.00034492
+  train batch 60/138: loss=3.39751, lr=0.00034419
+  train batch 70/138: loss=3.92752, lr=0.00034346
+  train batch 80/138: loss=3.42321, lr=0.00034272
+  train batch 90/138: loss=3.56362, lr=0.00034199
+  train batch 100/138: loss=3.88709, lr=0.00034125
+  train batch 110/138: loss=3.92630, lr=0.00034052
+  train batch 120/138: loss=3.44116, lr=0.00033978
+  train batch 130/138: loss=4.20988, lr=0.00033905
+  train loss=3.64893, mIoU=0.8068
+  val loss=3.17569, mIoU=0.8041, smoke IoU=0.8354, fire IoU=0.6705
+  active boundary: train=0.09794, val=0.02317, supervised px=6396.9
+Epoch 71/100
+  train batch 1/138: loss=4.55132, lr=0.00033838
+  train batch 10/138: loss=5.20320, lr=0.00033772
+  train batch 20/138: loss=4.23734, lr=0.00033699
+  train batch 30/138: loss=2.63586, lr=0.00033625
+  train batch 40/138: loss=4.35457, lr=0.00033551
+  train batch 50/138: loss=3.03913, lr=0.00033478
+  train batch 60/138: loss=3.69655, lr=0.00033404
+  train batch 70/138: loss=2.49388, lr=0.00033330
+  train batch 80/138: loss=3.42498, lr=0.00033257
+  train batch 90/138: loss=2.74345, lr=0.00033183
+  train batch 100/138: loss=3.12938, lr=0.00033109
+  train batch 110/138: loss=3.71132, lr=0.00033035
+  train batch 120/138: loss=3.71894, lr=0.00032962
+  train batch 130/138: loss=4.19285, lr=0.00032888
+  train loss=3.58685, mIoU=0.8086
+  val loss=3.25066, mIoU=0.8013, smoke IoU=0.8325, fire IoU=0.6651
+  active boundary: train=0.09461, val=0.02498, supervised px=6466.9
+Epoch 72/100
+  train batch 1/138: loss=4.21861, lr=0.00032821
+  train batch 10/138: loss=3.40896, lr=0.00032755
+  train batch 20/138: loss=3.80354, lr=0.00032681
+  train batch 30/138: loss=3.30300, lr=0.00032607
+  train batch 40/138: loss=3.58763, lr=0.00032533
+  train batch 50/138: loss=4.24670, lr=0.00032460
+  train batch 60/138: loss=3.39416, lr=0.00032386
+  train batch 70/138: loss=4.02596, lr=0.00032312
+  train batch 80/138: loss=3.71281, lr=0.00032238
+  train batch 90/138: loss=3.22539, lr=0.00032164
+  train batch 100/138: loss=4.01742, lr=0.00032090
+  train batch 110/138: loss=3.79382, lr=0.00032016
+  train batch 120/138: loss=4.05741, lr=0.00031942
+  train batch 130/138: loss=4.00309, lr=0.00031868
+  train loss=3.70307, mIoU=0.8021
+  val loss=3.29671, mIoU=0.8042, smoke IoU=0.8335, fire IoU=0.6732
+  active boundary: train=0.09808, val=0.02254, supervised px=6418.0
+Epoch 73/100
+  train batch 1/138: loss=3.08719, lr=0.00031801
+  train batch 10/138: loss=3.14863, lr=0.00031734
+  train batch 20/138: loss=3.41938, lr=0.00031660
+  train batch 30/138: loss=3.70509, lr=0.00031586
+  train batch 40/138: loss=3.74108, lr=0.00031512
+  train batch 50/138: loss=3.18134, lr=0.00031438
+  train batch 60/138: loss=3.52703, lr=0.00031364
+  train batch 70/138: loss=2.70586, lr=0.00031290
+  train batch 80/138: loss=3.93965, lr=0.00031215
+  train batch 90/138: loss=3.80550, lr=0.00031141
+  train batch 100/138: loss=3.85535, lr=0.00031067
+  train batch 110/138: loss=3.97219, lr=0.00030993
+  train batch 120/138: loss=3.08890, lr=0.00030918
+  train batch 130/138: loss=4.39566, lr=0.00030844
+  train loss=3.67146, mIoU=0.8008
+  val loss=3.30490, mIoU=0.8051, smoke IoU=0.8366, fire IoU=0.6741
+  active boundary: train=0.09320, val=0.02220, supervised px=6402.2
+Epoch 74/100
+  train batch 1/138: loss=3.75604, lr=0.00030777
+  train batch 10/138: loss=3.18851, lr=0.00030710
+  train batch 20/138: loss=3.30870, lr=0.00030636
+  train batch 30/138: loss=3.17674, lr=0.00030561
+  train batch 40/138: loss=3.24066, lr=0.00030487
+  train batch 50/138: loss=3.69148, lr=0.00030413
+  train batch 60/138: loss=4.93976, lr=0.00030338
+  train batch 70/138: loss=3.90942, lr=0.00030264
+  train batch 80/138: loss=4.18855, lr=0.00030189
+  train batch 90/138: loss=4.47482, lr=0.00030115
+  train batch 100/138: loss=2.32257, lr=0.00030040
+  train batch 110/138: loss=3.49633, lr=0.00029966
+  train batch 120/138: loss=3.14493, lr=0.00029891
+  train batch 130/138: loss=2.55524, lr=0.00029816
+  train loss=3.73022, mIoU=0.8051
+  val loss=3.72194, mIoU=0.7970, smoke IoU=0.8215, fire IoU=0.6690
+  active boundary: train=0.09375, val=0.02434, supervised px=6401.5
+Epoch 75/100
+  train batch 1/138: loss=3.91300, lr=0.00029749
+  train batch 10/138: loss=3.75111, lr=0.00029682
+  train batch 20/138: loss=3.43069, lr=0.00029607
+  train batch 30/138: loss=2.75834, lr=0.00029533
+  train batch 40/138: loss=3.10406, lr=0.00029458
+  train batch 50/138: loss=2.75377, lr=0.00029383
+  train batch 60/138: loss=4.08653, lr=0.00029309
+  train batch 70/138: loss=2.78819, lr=0.00029234
+  train batch 80/138: loss=3.83477, lr=0.00029159
+  train batch 90/138: loss=3.97116, lr=0.00029084
+  train batch 100/138: loss=2.78016, lr=0.00029009
+  train batch 110/138: loss=3.18705, lr=0.00028935
+  train batch 120/138: loss=4.00743, lr=0.00028860
+  train batch 130/138: loss=2.45566, lr=0.00028785
+  train loss=3.59322, mIoU=0.8055
+  val loss=3.30147, mIoU=0.8046, smoke IoU=0.8346, fire IoU=0.6750
+  active boundary: train=0.09033, val=0.02106, supervised px=6446.5
+Epoch 76/100
+  train batch 1/138: loss=2.66039, lr=0.00028717
+  train batch 10/138: loss=3.47064, lr=0.00028650
+  train batch 20/138: loss=3.69789, lr=0.00028575
+  train batch 30/138: loss=3.17916, lr=0.00028500
+  train batch 40/138: loss=3.91298, lr=0.00028425
+  train batch 50/138: loss=3.86399, lr=0.00028350
+  train batch 60/138: loss=3.67113, lr=0.00028275
+  train batch 70/138: loss=2.91175, lr=0.00028200
+  train batch 80/138: loss=3.70561, lr=0.00028125
+  train batch 90/138: loss=4.24047, lr=0.00028050
+  train batch 100/138: loss=3.13477, lr=0.00027975
+  train batch 110/138: loss=3.87458, lr=0.00027900
+  train batch 120/138: loss=3.48264, lr=0.00027824
+  train batch 130/138: loss=3.38074, lr=0.00027749
+  train loss=3.72429, mIoU=0.8046
+  val loss=3.28557, mIoU=0.8030, smoke IoU=0.8313, fire IoU=0.6739
+  active boundary: train=0.08745, val=0.02300, supervised px=6492.7
+Epoch 77/100
+  train batch 1/138: loss=3.56227, lr=0.00027682
+  train batch 10/138: loss=3.62394, lr=0.00027614
+  train batch 20/138: loss=3.35283, lr=0.00027539
+  train batch 30/138: loss=2.23060, lr=0.00027463
+  train batch 40/138: loss=3.85275, lr=0.00027388
+  train batch 50/138: loss=4.23383, lr=0.00027313
+  train batch 60/138: loss=3.69142, lr=0.00027237
+  train batch 70/138: loss=4.86933, lr=0.00027162
+  train batch 80/138: loss=3.71149, lr=0.00027087
+  train batch 90/138: loss=3.05295, lr=0.00027011
+  train batch 100/138: loss=3.74013, lr=0.00026936
+  train batch 110/138: loss=2.95311, lr=0.00026860
+  train batch 120/138: loss=3.36899, lr=0.00026785
+  train batch 130/138: loss=5.73939, lr=0.00026709
+  train loss=3.67863, mIoU=0.8096
+  val loss=3.31027, mIoU=0.8049, smoke IoU=0.8343, fire IoU=0.6760
+  active boundary: train=0.09086, val=0.02122, supervised px=6394.9
+Epoch 78/100
+  train batch 1/138: loss=4.09315, lr=0.00026641
+  train batch 10/138: loss=3.69387, lr=0.00026573
+  train batch 20/138: loss=4.12995, lr=0.00026498
+  train batch 30/138: loss=3.27317, lr=0.00026422
+  train batch 40/138: loss=3.28250, lr=0.00026346
+  train batch 50/138: loss=4.42335, lr=0.00026271
+  train batch 60/138: loss=2.81882, lr=0.00026195
+  train batch 70/138: loss=4.54265, lr=0.00026119
+  train batch 80/138: loss=4.55144, lr=0.00026044
+  train batch 90/138: loss=3.68595, lr=0.00025968
+  train batch 100/138: loss=4.14658, lr=0.00025892
+  train batch 110/138: loss=3.98818, lr=0.00025816
+  train batch 120/138: loss=3.31928, lr=0.00025741
+  train batch 130/138: loss=3.95639, lr=0.00025665
+  train loss=3.66518, mIoU=0.8039
+  val loss=3.25772, mIoU=0.8033, smoke IoU=0.8319, fire IoU=0.6734
+  active boundary: train=0.07850, val=0.02269, supervised px=6431.6
+Epoch 79/100
+  train batch 1/138: loss=4.14723, lr=0.00025596
+  train batch 10/138: loss=3.09025, lr=0.00025528
+  train batch 20/138: loss=3.20775, lr=0.00025452
+  train batch 30/138: loss=3.80662, lr=0.00025376
+  train batch 40/138: loss=3.15319, lr=0.00025300
+  train batch 50/138: loss=3.84726, lr=0.00025224
+  train batch 60/138: loss=2.73907, lr=0.00025148
+  train batch 70/138: loss=3.68783, lr=0.00025072
+  train batch 80/138: loss=3.27765, lr=0.00024996
+  train batch 90/138: loss=3.21217, lr=0.00024920
+  train batch 100/138: loss=3.39979, lr=0.00024844
+  train batch 110/138: loss=2.68787, lr=0.00024768
+  train batch 120/138: loss=3.89110, lr=0.00024692
+  train batch 130/138: loss=3.15427, lr=0.00024616
+  train loss=3.68400, mIoU=0.8091
+  val loss=3.21202, mIoU=0.8044, smoke IoU=0.8364, fire IoU=0.6697
+  active boundary: train=0.11833, val=0.02382, supervised px=6480.9
+Epoch 80/100
+  train batch 1/138: loss=3.05931, lr=0.00024547
+  train batch 10/138: loss=3.67665, lr=0.00024478
+  train batch 20/138: loss=4.84183, lr=0.00024402
+  train batch 30/138: loss=3.61167, lr=0.00024326
+  train batch 40/138: loss=2.86445, lr=0.00024249
+  train batch 50/138: loss=4.12853, lr=0.00024173
+  train batch 60/138: loss=2.85713, lr=0.00024097
+  train batch 70/138: loss=4.16932, lr=0.00024020
+  train batch 80/138: loss=3.53332, lr=0.00023944
+  train batch 90/138: loss=3.99709, lr=0.00023867
+  train batch 100/138: loss=3.76621, lr=0.00023791
+  train batch 110/138: loss=3.83215, lr=0.00023714
+  train batch 120/138: loss=3.53434, lr=0.00023638
+  train batch 130/138: loss=3.69861, lr=0.00023561
+  train loss=3.65295, mIoU=0.8058
+  val loss=3.21179, mIoU=0.8045, smoke IoU=0.8334, fire IoU=0.6765
+  active boundary: train=0.07992, val=0.02141, supervised px=6459.8
+Epoch 81/100
+  train batch 1/138: loss=3.42080, lr=0.00023492
+  train batch 10/138: loss=6.89438, lr=0.00023423
+  train batch 20/138: loss=3.04502, lr=0.00023347
+  train batch 30/138: loss=3.14271, lr=0.00023270
+  train batch 40/138: loss=3.20065, lr=0.00023193
+  train batch 50/138: loss=3.09722, lr=0.00023117
+  train batch 60/138: loss=2.82511, lr=0.00023040
+  train batch 70/138: loss=3.04110, lr=0.00022963
+  train batch 80/138: loss=2.80705, lr=0.00022886
+  train batch 90/138: loss=3.47870, lr=0.00022809
+  train batch 100/138: loss=3.79749, lr=0.00022733
+  train batch 110/138: loss=3.38396, lr=0.00022656
+  train batch 120/138: loss=3.44652, lr=0.00022579
+  train batch 130/138: loss=3.24943, lr=0.00022502
+  train loss=3.58584, mIoU=0.8087
+  val loss=3.18961, mIoU=0.8038, smoke IoU=0.8350, fire IoU=0.6704
+  active boundary: train=0.09534, val=0.02453, supervised px=6488.4
+Epoch 82/100
+  train batch 1/138: loss=4.20841, lr=0.00022433
+  train batch 10/138: loss=3.15422, lr=0.00022363
+  train batch 20/138: loss=3.29303, lr=0.00022286
+  train batch 30/138: loss=3.38850, lr=0.00022209
+  train batch 40/138: loss=4.15509, lr=0.00022132
+  train batch 50/138: loss=3.48214, lr=0.00022055
+  train batch 60/138: loss=3.23552, lr=0.00021978
+  train batch 70/138: loss=3.04028, lr=0.00021901
+  train batch 80/138: loss=3.67278, lr=0.00021823
+  train batch 90/138: loss=2.81989, lr=0.00021746
+  train batch 100/138: loss=4.91321, lr=0.00021669
+  train batch 110/138: loss=3.93493, lr=0.00021591
+  train batch 120/138: loss=3.35057, lr=0.00021514
+  train batch 130/138: loss=3.52222, lr=0.00021437
+  train loss=3.69056, mIoU=0.8072
+  val loss=3.17918, mIoU=0.8029, smoke IoU=0.8303, fire IoU=0.6752
+  active boundary: train=0.09488, val=0.02211, supervised px=6448.9
+Epoch 83/100
+  train batch 1/138: loss=3.51079, lr=0.00021367
+  train batch 10/138: loss=3.71930, lr=0.00021297
+  train batch 20/138: loss=3.15035, lr=0.00021220
+  train batch 30/138: loss=3.00115, lr=0.00021142
+  train batch 40/138: loss=3.32242, lr=0.00021065
+  train batch 50/138: loss=2.95437, lr=0.00020987
+  train batch 60/138: loss=3.45135, lr=0.00020910
+  train batch 70/138: loss=2.88632, lr=0.00020832
+  train batch 80/138: loss=3.79176, lr=0.00020755
+  train batch 90/138: loss=3.23154, lr=0.00020677
+  train batch 100/138: loss=4.52152, lr=0.00020599
+  train batch 110/138: loss=3.78571, lr=0.00020521
+  train batch 120/138: loss=4.74873, lr=0.00020444
+  train batch 130/138: loss=2.93454, lr=0.00020366
+  train loss=3.68209, mIoU=0.8075
+  val loss=3.11549, mIoU=0.8040, smoke IoU=0.8331, fire IoU=0.6747
+  active boundary: train=0.08748, val=0.02124, supervised px=6485.0
+Epoch 84/100
+  train batch 1/138: loss=3.37963, lr=0.00020296
+  train batch 10/138: loss=4.36150, lr=0.00020226
+  train batch 20/138: loss=4.29798, lr=0.00020148
+  train batch 30/138: loss=3.09260, lr=0.00020070
+  train batch 40/138: loss=4.65773, lr=0.00019992
+  train batch 50/138: loss=3.94510, lr=0.00019914
+  train batch 60/138: loss=3.69607, lr=0.00019836
+  train batch 70/138: loss=3.35191, lr=0.00019758
+  train batch 80/138: loss=3.94451, lr=0.00019680
+  train batch 90/138: loss=3.66061, lr=0.00019601
+  train batch 100/138: loss=3.13042, lr=0.00019523
+  train batch 110/138: loss=4.30875, lr=0.00019445
+  train batch 120/138: loss=3.48882, lr=0.00019367
+  train batch 130/138: loss=4.64149, lr=0.00019288
+  train loss=3.62229, mIoU=0.8082
+  val loss=3.11164, mIoU=0.8069, smoke IoU=0.8393, fire IoU=0.6733
+  active boundary: train=0.07703, val=0.02257, supervised px=6431.7
+Epoch 85/100
+  train batch 1/138: loss=2.96872, lr=0.00019218
+  train batch 10/138: loss=4.61438, lr=0.00019147
+  train batch 20/138: loss=3.11918, lr=0.00019069
+  train batch 30/138: loss=3.04812, lr=0.00018991
+  train batch 40/138: loss=3.53977, lr=0.00018912
+  train batch 50/138: loss=3.97997, lr=0.00018834
+  train batch 60/138: loss=4.38050, lr=0.00018755
+  train batch 70/138: loss=2.20569, lr=0.00018677
+  train batch 80/138: loss=3.79540, lr=0.00018598
+  train batch 90/138: loss=3.94167, lr=0.00018519
+  train batch 100/138: loss=2.67909, lr=0.00018441
+  train batch 110/138: loss=3.52784, lr=0.00018362
+  train batch 120/138: loss=3.52914, lr=0.00018283
+  train batch 130/138: loss=3.29269, lr=0.00018204
+  train loss=3.69104, mIoU=0.8030
+  val loss=3.13889, mIoU=0.8071, smoke IoU=0.8397, fire IoU=0.6756
+  active boundary: train=0.08643, val=0.02204, supervised px=6479.7
+Epoch 86/100
+  train batch 1/138: loss=2.89470, lr=0.00018134
+  train batch 10/138: loss=3.64741, lr=0.00018063
+  train batch 20/138: loss=3.59532, lr=0.00017984
+  train batch 30/138: loss=3.59033, lr=0.00017905
+  train batch 40/138: loss=4.01322, lr=0.00017826
+  train batch 50/138: loss=3.36174, lr=0.00017747
+  train batch 60/138: loss=3.17892, lr=0.00017668
+  train batch 70/138: loss=3.26377, lr=0.00017589
+  train batch 80/138: loss=4.54989, lr=0.00017509
+  train batch 90/138: loss=3.44146, lr=0.00017430
+  train batch 100/138: loss=3.76090, lr=0.00017351
+  train batch 110/138: loss=3.82413, lr=0.00017272
+  train batch 120/138: loss=3.82507, lr=0.00017193
+  train batch 130/138: loss=4.18041, lr=0.00017113
+  train loss=3.65636, mIoU=0.8052
+  val loss=3.20172, mIoU=0.8073, smoke IoU=0.8400, fire IoU=0.6755
+  active boundary: train=0.08738, val=0.02149, supervised px=6491.8
+Epoch 87/100
+  train batch 1/138: loss=4.05568, lr=0.00017042
+  train batch 10/138: loss=3.58946, lr=0.00016970
+  train batch 20/138: loss=5.30409, lr=0.00016891
+  train batch 30/138: loss=3.60984, lr=0.00016811
+  train batch 40/138: loss=4.18712, lr=0.00016732
+  train batch 50/138: loss=3.06081, lr=0.00016652
+  train batch 60/138: loss=4.09197, lr=0.00016573
+  train batch 70/138: loss=3.25779, lr=0.00016493
+  train batch 80/138: loss=3.45459, lr=0.00016413
+  train batch 90/138: loss=3.48027, lr=0.00016334
+  train batch 100/138: loss=2.94799, lr=0.00016254
+  train batch 110/138: loss=3.27861, lr=0.00016174
+  train batch 120/138: loss=3.84745, lr=0.00016094
+  train batch 130/138: loss=2.64535, lr=0.00016014
+  train loss=3.59453, mIoU=0.8097
+  val loss=3.09689, mIoU=0.8069, smoke IoU=0.8377, fire IoU=0.6757
+  active boundary: train=0.08256, val=0.02250, supervised px=6450.7
+Epoch 88/100
+  train batch 1/138: loss=4.44771, lr=0.00015942
+  train batch 10/138: loss=3.02004, lr=0.00015870
+  train batch 20/138: loss=3.78994, lr=0.00015790
+  train batch 30/138: loss=3.40662, lr=0.00015710
+  train batch 40/138: loss=3.19104, lr=0.00015630
+  train batch 50/138: loss=4.17873, lr=0.00015550
+  train batch 60/138: loss=3.82178, lr=0.00015470
+  train batch 70/138: loss=3.88742, lr=0.00015389
+  train batch 80/138: loss=3.64081, lr=0.00015309
+  train batch 90/138: loss=4.08042, lr=0.00015229
+  train batch 100/138: loss=3.01607, lr=0.00015148
+  train batch 110/138: loss=3.35253, lr=0.00015068
+  train batch 120/138: loss=3.62629, lr=0.00014987
+  train batch 130/138: loss=3.46111, lr=0.00014907
+  train loss=3.63552, mIoU=0.8083
+  val loss=3.21422, mIoU=0.8010, smoke IoU=0.8263, fire IoU=0.6765
+  active boundary: train=0.09237, val=0.02032, supervised px=6385.4
+Epoch 89/100
+  train batch 1/138: loss=3.13659, lr=0.00014834
+  train batch 10/138: loss=4.27341, lr=0.00014762
+  train batch 20/138: loss=4.57913, lr=0.00014681
+  train batch 30/138: loss=4.14290, lr=0.00014600
+  train batch 40/138: loss=2.64047, lr=0.00014519
+  train batch 50/138: loss=3.36352, lr=0.00014439
+  train batch 60/138: loss=2.60477, lr=0.00014358
+  train batch 70/138: loss=2.91711, lr=0.00014277
+  train batch 80/138: loss=3.90848, lr=0.00014196
+  train batch 90/138: loss=3.55361, lr=0.00014115
+  train batch 100/138: loss=3.88162, lr=0.00014034
+  train batch 110/138: loss=4.91257, lr=0.00013952
+  train batch 120/138: loss=3.71564, lr=0.00013871
+  train batch 130/138: loss=4.10123, lr=0.00013790
+  train loss=3.67926, mIoU=0.8086
+  val loss=3.13810, mIoU=0.8039, smoke IoU=0.8321, fire IoU=0.6759
+  active boundary: train=0.07349, val=0.02139, supervised px=6468.5
+Epoch 90/100
+  train batch 1/138: loss=4.22640, lr=0.00013717
+  train batch 10/138: loss=2.99989, lr=0.00013644
+  train batch 20/138: loss=3.33325, lr=0.00013562
+  train batch 30/138: loss=3.45567, lr=0.00013481
+  train batch 40/138: loss=3.82511, lr=0.00013399
+  train batch 50/138: loss=3.87410, lr=0.00013318
+  train batch 60/138: loss=3.97607, lr=0.00013236
+  train batch 70/138: loss=3.86944, lr=0.00013154
+  train batch 80/138: loss=3.01334, lr=0.00013073
+  train batch 90/138: loss=2.86775, lr=0.00012991
+  train batch 100/138: loss=4.11164, lr=0.00012909
+  train batch 110/138: loss=3.33501, lr=0.00012827
+  train batch 120/138: loss=3.83373, lr=0.00012745
+  train batch 130/138: loss=3.59233, lr=0.00012663
+  train loss=3.60744, mIoU=0.8104
+  val loss=3.19778, mIoU=0.7990, smoke IoU=0.8245, fire IoU=0.6715
+  active boundary: train=0.07431, val=0.02334, supervised px=6478.9
+Epoch 91/100
+  train batch 1/138: loss=3.89756, lr=0.00012589
+  train batch 10/138: loss=3.55418, lr=0.00012515
+  train batch 20/138: loss=3.24188, lr=0.00012433
+  train batch 30/138: loss=3.69313, lr=0.00012351
+  train batch 40/138: loss=3.47776, lr=0.00012269
+  train batch 50/138: loss=4.37452, lr=0.00012186
+  train batch 60/138: loss=3.65507, lr=0.00012104
+  train batch 70/138: loss=3.08073, lr=0.00012021
+  train batch 80/138: loss=3.08402, lr=0.00011939
+  train batch 90/138: loss=3.60862, lr=0.00011856
+  train batch 100/138: loss=3.80019, lr=0.00011773
+  train batch 110/138: loss=2.78539, lr=0.00011691
+  train batch 120/138: loss=2.69801, lr=0.00011608
+  train batch 130/138: loss=4.33951, lr=0.00011525
+  train loss=3.62651, mIoU=0.8104
+  val loss=3.14948, mIoU=0.8015, smoke IoU=0.8308, fire IoU=0.6705
+  active boundary: train=0.07959, val=0.02332, supervised px=6513.3
+Epoch 92/100
+  train batch 1/138: loss=2.93942, lr=0.00011450
+  train batch 10/138: loss=2.88501, lr=0.00011376
+  train batch 20/138: loss=2.93989, lr=0.00011293
+  train batch 30/138: loss=3.85689, lr=0.00011209
+  train batch 40/138: loss=3.50423, lr=0.00011126
+  train batch 50/138: loss=3.68395, lr=0.00011043
+  train batch 60/138: loss=2.98131, lr=0.00010960
+  train batch 70/138: loss=3.90059, lr=0.00010876
+  train batch 80/138: loss=3.70887, lr=0.00010793
+  train batch 90/138: loss=4.02075, lr=0.00010709
+  train batch 100/138: loss=4.17112, lr=0.00010626
+  train batch 110/138: loss=3.24894, lr=0.00010542
+  train batch 120/138: loss=3.02247, lr=0.00010458
+  train batch 130/138: loss=3.90612, lr=0.00010374
+  train loss=3.55825, mIoU=0.8113
+  val loss=3.21662, mIoU=0.8061, smoke IoU=0.8366, fire IoU=0.6760
+  active boundary: train=0.09200, val=0.02141, supervised px=6451.9
+Epoch 93/100
+  train batch 1/138: loss=4.16708, lr=0.00010299
+  train batch 10/138: loss=3.69765, lr=0.00010223
+  train batch 20/138: loss=4.12240, lr=0.00010139
+  train batch 30/138: loss=3.96481, lr=0.00010055
+  train batch 40/138: loss=3.06086, lr=0.00009971
+  train batch 50/138: loss=3.55237, lr=0.00009886
+  train batch 60/138: loss=4.04354, lr=0.00009802
+  train batch 70/138: loss=3.66353, lr=0.00009718
+  train batch 80/138: loss=4.31478, lr=0.00009633
+  train batch 90/138: loss=3.56857, lr=0.00009548
+  train batch 100/138: loss=3.61306, lr=0.00009464
+  train batch 110/138: loss=3.29637, lr=0.00009379
+  train batch 120/138: loss=3.84913, lr=0.00009294
+  train batch 130/138: loss=3.64288, lr=0.00009209
+  train loss=3.59971, mIoU=0.8034
+  val loss=3.14032, mIoU=0.8038, smoke IoU=0.8324, fire IoU=0.6749
+  active boundary: train=0.08689, val=0.02190, supervised px=6544.2
+Epoch 94/100
+  train batch 1/138: loss=2.87270, lr=0.00009132
+  train batch 10/138: loss=4.42456, lr=0.00009056
+  train batch 20/138: loss=4.14860, lr=0.00008971
+  train batch 30/138: loss=4.40007, lr=0.00008885
+  train batch 40/138: loss=3.56796, lr=0.00008800
+  train batch 50/138: loss=3.68378, lr=0.00008714
+  train batch 60/138: loss=3.33014, lr=0.00008629
+  train batch 70/138: loss=3.10417, lr=0.00008543
+  train batch 80/138: loss=4.65043, lr=0.00008457
+  train batch 90/138: loss=3.52832, lr=0.00008372
+  train batch 100/138: loss=4.19303, lr=0.00008286
+  train batch 110/138: loss=3.85663, lr=0.00008200
+  train batch 120/138: loss=4.02224, lr=0.00008113
+  train batch 130/138: loss=3.18390, lr=0.00008027
+  train loss=3.63181, mIoU=0.8082
+  val loss=3.17875, mIoU=0.8028, smoke IoU=0.8321, fire IoU=0.6718
+  active boundary: train=0.08198, val=0.02282, supervised px=6486.5
+Epoch 95/100
+  train batch 1/138: loss=3.49766, lr=0.00007949
+  train batch 10/138: loss=4.78706, lr=0.00007872
+  train batch 20/138: loss=2.92752, lr=0.00007785
+  train batch 30/138: loss=2.87806, lr=0.00007698
+  train batch 40/138: loss=3.58210, lr=0.00007612
+  train batch 50/138: loss=4.64610, lr=0.00007525
+  train batch 60/138: loss=3.36580, lr=0.00007438
+  train batch 70/138: loss=3.23491, lr=0.00007351
+  train batch 80/138: loss=4.21875, lr=0.00007263
+  train batch 90/138: loss=3.60292, lr=0.00007176
+  train batch 100/138: loss=4.12708, lr=0.00007089
+  train batch 110/138: loss=3.81471, lr=0.00007001
+  train batch 120/138: loss=3.80917, lr=0.00006913
+  train batch 130/138: loss=3.05697, lr=0.00006826
+  train loss=3.59050, mIoU=0.8083
+  val loss=3.18485, mIoU=0.8054, smoke IoU=0.8355, fire IoU=0.6748
+  active boundary: train=0.08853, val=0.02175, supervised px=6420.8
+Epoch 96/100
+  train batch 1/138: loss=4.09063, lr=0.00006746
+  train batch 10/138: loss=4.03658, lr=0.00006667
+  train batch 20/138: loss=4.35130, lr=0.00006579
+  train batch 30/138: loss=3.65190, lr=0.00006491
+  train batch 40/138: loss=2.97700, lr=0.00006402
+  train batch 50/138: loss=2.42584, lr=0.00006314
+  train batch 60/138: loss=3.17544, lr=0.00006225
+  train batch 70/138: loss=3.65040, lr=0.00006136
+  train batch 80/138: loss=3.66459, lr=0.00006047
+  train batch 90/138: loss=3.56149, lr=0.00005958
+  train batch 100/138: loss=4.06546, lr=0.00005869
+  train batch 110/138: loss=3.37815, lr=0.00005779
+  train batch 120/138: loss=3.71997, lr=0.00005690
+  train batch 130/138: loss=3.01767, lr=0.00005600
+  train loss=3.56993, mIoU=0.8120
+  val loss=3.21824, mIoU=0.8047, smoke IoU=0.8329, fire IoU=0.6773
+  active boundary: train=0.10274, val=0.02065, supervised px=6514.2
+Epoch 97/100
+  train batch 1/138: loss=3.33642, lr=0.00005519
+  train batch 10/138: loss=3.69386, lr=0.00005438
+  train batch 20/138: loss=3.30845, lr=0.00005348
+  train batch 30/138: loss=2.83503, lr=0.00005257
+  train batch 40/138: loss=2.67638, lr=0.00005167
+  train batch 50/138: loss=3.49942, lr=0.00005076
+  train batch 60/138: loss=3.55299, lr=0.00004985
+  train batch 70/138: loss=3.27070, lr=0.00004894
+  train batch 80/138: loss=2.89724, lr=0.00004803
+  train batch 90/138: loss=3.04603, lr=0.00004711
+  train batch 100/138: loss=3.88095, lr=0.00004620
+  train batch 110/138: loss=4.22395, lr=0.00004528
+  train batch 120/138: loss=4.14324, lr=0.00004436
+  train batch 130/138: loss=3.56018, lr=0.00004343
+  train loss=3.54411, mIoU=0.8101
+  val loss=3.16617, mIoU=0.8051, smoke IoU=0.8344, fire IoU=0.6754
+  active boundary: train=0.09144, val=0.02212, supervised px=6501.1
+Epoch 98/100
+  train batch 1/138: loss=3.76997, lr=0.00004260
+  train batch 10/138: loss=4.25520, lr=0.00004177
+  train batch 20/138: loss=3.52517, lr=0.00004084
+  train batch 30/138: loss=3.12098, lr=0.00003990
+  train batch 40/138: loss=3.86486, lr=0.00003897
+  train batch 50/138: loss=4.05622, lr=0.00003803
+  train batch 60/138: loss=3.16540, lr=0.00003709
+  train batch 70/138: loss=3.40498, lr=0.00003615
+  train batch 80/138: loss=3.44391, lr=0.00003521
+  train batch 90/138: loss=3.98846, lr=0.00003426
+  train batch 100/138: loss=3.25042, lr=0.00003331
+  train batch 110/138: loss=3.00579, lr=0.00003236
+  train batch 120/138: loss=4.09942, lr=0.00003140
+  train batch 130/138: loss=3.13545, lr=0.00003044
+  train loss=3.67643, mIoU=0.8074
+  val loss=3.16119, mIoU=0.8047, smoke IoU=0.8332, fire IoU=0.6759
+  active boundary: train=0.08644, val=0.02181, supervised px=6436.6
+Epoch 99/100
+  train batch 1/138: loss=3.94562, lr=0.00002958
+  train batch 10/138: loss=3.84820, lr=0.00002871
+  train batch 20/138: loss=3.66518, lr=0.00002774
+  train batch 30/138: loss=3.99898, lr=0.00002676
+  train batch 40/138: loss=3.96426, lr=0.00002579
+  train batch 50/138: loss=3.25913, lr=0.00002480
+  train batch 60/138: loss=3.47119, lr=0.00002382
+  train batch 70/138: loss=3.91774, lr=0.00002283
+  train batch 80/138: loss=3.61161, lr=0.00002183
+  train batch 90/138: loss=5.06774, lr=0.00002083
+  train batch 100/138: loss=3.41450, lr=0.00001983
+  train batch 110/138: loss=3.79515, lr=0.00001882
+  train batch 120/138: loss=3.72630, lr=0.00001780
+  train batch 130/138: loss=4.10914, lr=0.00001678
+  train loss=3.62120, mIoU=0.8071
+  val loss=3.15322, mIoU=0.8060, smoke IoU=0.8370, fire IoU=0.6753
+  active boundary: train=0.09451, val=0.02181, supervised px=6497.4
+Epoch 100/100
+  train batch 1/138: loss=4.28854, lr=0.00001585
+  train batch 10/138: loss=4.14741, lr=0.00001492
+  train batch 20/138: loss=3.42036, lr=0.00001387
+  train batch 30/138: loss=3.61791, lr=0.00001282
+  train batch 40/138: loss=2.31595, lr=0.00001175
+  train batch 50/138: loss=3.47661, lr=0.00001068
+  train batch 60/138: loss=5.95386, lr=0.00000959
+  train batch 70/138: loss=3.81598, lr=0.00000849
+  train batch 80/138: loss=2.83138, lr=0.00000738
+  train batch 90/138: loss=4.41496, lr=0.00000624
+  train batch 100/138: loss=3.27126, lr=0.00000508
+  train batch 110/138: loss=3.65847, lr=0.00000389
+  train batch 120/138: loss=4.20024, lr=0.00000266
+  train batch 130/138: loss=2.55953, lr=0.00000136
+  train loss=3.59897, mIoU=0.8070
+  val loss=3.13663, mIoU=0.8050, smoke IoU=0.8344, fire IoU=0.6754
+  active boundary: train=0.09575, val=0.02219, supervised px=6531.3
+Training run completed
+Best validation mIoU: 0.8073
+Elapsed time: 4414.1 seconds
+Peak allocated GPU memory: 241.4 MB
+Metrics: G:\py2\experiments\terminal_eval_pidnet_s_abl_samf\terminal_eval_abl_samf_100e_seed202\metrics.jsonl
