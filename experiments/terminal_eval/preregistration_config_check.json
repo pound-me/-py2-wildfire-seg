@@ -1,0 +1,71 @@
+{
+  "manifest": "G:\\py2\\configs\\terminal_eval\\terminal_eval_manifest.yaml",
+  "preregistration_document": "G:\\py2\\docs\\TERMINAL_THREE_SEED_PREREGISTRATION_2026-07-27.md",
+  "preregistration_commit": "0b5b1c5b8b02efa2154eacbfb81c9fc11886bb6f",
+  "head_at_check": "0b5b1c5b8b02efa2154eacbfb81c9fc11886bb6f",
+  "test_set_used": false,
+  "expected_seeds": [
+    200,
+    201,
+    202
+  ],
+  "expected_epochs": 100,
+  "new_run_count": 5,
+  "decision_formula_frozen": true,
+  "runs": [
+    {
+      "method": "fusion_baseline",
+      "seed": 200,
+      "config": "G:\\py2\\configs\\route_a\\pidnet_s_fusion_100e_label_fix.yaml",
+      "run_dir": "G:\\py2\\experiments\\route_a_pidnet_s_fusion\\route_a_fusion_100e_label_fix_seed200",
+      "existing_frozen": true,
+      "epochs": 100,
+      "fresh_initialization": true
+    },
+    {
+      "method": "fusion_baseline",
+      "seed": 201,
+      "config": "G:\\py2\\configs\\terminal_eval\\pidnet_s_fusion_100e_seed201.yaml",
+      "run_dir": "G:\\py2\\experiments\\terminal_eval_pidnet_s_fusion\\terminal_eval_fusion_100e_seed201",
+      "existing_frozen": false,
+      "epochs": 100,
+      "fresh_initialization": true
+    },
+    {
+      "method": "fusion_baseline",
+      "seed": 202,
+      "config": "G:\\py2\\configs\\terminal_eval\\pidnet_s_fusion_100e_seed202.yaml",
+      "run_dir": "G:\\py2\\experiments\\terminal_eval_pidnet_s_fusion\\terminal_eval_fusion_100e_seed202",
+      "existing_frozen": false,
+      "epochs": 100,
+      "fresh_initialization": true
+    },
+    {
+      "method": "abl_samf",
+      "seed": 200,
+      "config": "G:\\py2\\configs\\terminal_eval\\pidnet_s_abl_samf_100e_seed200.yaml",
+      "run_dir": "G:\\py2\\experiments\\terminal_eval_pidnet_s_abl_samf\\terminal_eval_abl_samf_100e_seed200",
+      "existing_frozen": false,
+      "epochs": 100,
+      "fresh_initialization": true
+    },
+    {
+      "method": "abl_samf",
+      "seed": 201,
+      "config": "G:\\py2\\configs\\terminal_eval\\pidnet_s_abl_samf_100e_seed201.yaml",
+      "run_dir": "G:\\py2\\experiments\\terminal_eval_pidnet_s_abl_samf\\terminal_eval_abl_samf_100e_seed201",
+      "existing_frozen": false,
+      "epochs": 100,
+      "fresh_initialization": true
+    },
+    {
+      "method": "abl_samf",
+      "seed": 202,
+      "config": "G:\\py2\\configs\\terminal_eval\\pidnet_s_abl_samf_100e_seed202.yaml",
+      "run_dir": "G:\\py2\\experiments\\terminal_eval_pidnet_s_abl_samf\\terminal_eval_abl_samf_100e_seed202",
+      "existing_frozen": false,
+      "epochs": 100,
+      "fresh_initialization": true
+    }
+  ]
+}

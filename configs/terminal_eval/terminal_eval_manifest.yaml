@@ -1,0 +1,52 @@
+PREREGISTRATION_DOCUMENT: G:\py2\docs\TERMINAL_THREE_SEED_PREREGISTRATION_2026-07-27.md
+PREREGISTRATION_COMMIT: 0b5b1c5b8b02efa2154eacbfb81c9fc11886bb6f
+EXPECTED_SEEDS:
+- 200
+- 201
+- 202
+EXPECTED_EPOCHS: 100
+CHECKPOINT_SELECTION: validation_miou_strict_best
+TESTSET_SEALED: true
+DECISION:
+  METRICS:
+  - miou
+  - iou_fire
+  SAMPLE_STANDARD_DEVIATION_DDOF: 1
+  POOLED_STANDARD_DEVIATION: equal_n_within_group_pooled_sample_sd
+  STRICT_COMPARISON: mean_gain_gt_pooled_sd
+  OVERALL: at_least_one_metric_passes_and_neither_mean_declines_and_rtx2060_fps_ge_30
+METHODS:
+  fusion_baseline:
+    MODEL: pidnet_s
+    TRAINING_OBJECTIVE: null
+    SOURCE_CONFIG: G:\py2\configs\route_a\pidnet_s_fusion_100e_label_fix.yaml
+    RUNS:
+    - SEED: 200
+      CONFIG: G:\py2\configs\route_a\pidnet_s_fusion_100e_label_fix.yaml
+      RUN_DIR: G:\py2\experiments\route_a_pidnet_s_fusion\route_a_fusion_100e_label_fix_seed200
+      EXISTING_FROZEN: true
+    - SEED: 201
+      CONFIG: G:\py2\configs\terminal_eval\pidnet_s_fusion_100e_seed201.yaml
+      RUN_DIR: G:\py2\experiments\terminal_eval_pidnet_s_fusion\terminal_eval_fusion_100e_seed201
+      EXISTING_FROZEN: false
+    - SEED: 202
+      CONFIG: G:\py2\configs\terminal_eval\pidnet_s_fusion_100e_seed202.yaml
+      RUN_DIR: G:\py2\experiments\terminal_eval_pidnet_s_fusion\terminal_eval_fusion_100e_seed202
+      EXISTING_FROZEN: false
+  abl_samf:
+    MODEL: pidnet_s_samf
+    TRAINING_OBJECTIVE: active_boundary
+    SOURCE_CONFIG: G:\py2\configs\route_c\pidnet_s_fusion_abl_samf_30e_label_fix.yaml
+    RUNS:
+    - SEED: 200
+      CONFIG: G:\py2\configs\terminal_eval\pidnet_s_abl_samf_100e_seed200.yaml
+      RUN_DIR: G:\py2\experiments\terminal_eval_pidnet_s_abl_samf\terminal_eval_abl_samf_100e_seed200
+      EXISTING_FROZEN: false
+    - SEED: 201
+      CONFIG: G:\py2\configs\terminal_eval\pidnet_s_abl_samf_100e_seed201.yaml
+      RUN_DIR: G:\py2\experiments\terminal_eval_pidnet_s_abl_samf\terminal_eval_abl_samf_100e_seed201
+      EXISTING_FROZEN: false
+    - SEED: 202
+      CONFIG: G:\py2\configs\terminal_eval\pidnet_s_abl_samf_100e_seed202.yaml
+      RUN_DIR: G:\py2\experiments\terminal_eval_pidnet_s_abl_samf\terminal_eval_abl_samf_100e_seed202
+      EXISTING_FROZEN: false
