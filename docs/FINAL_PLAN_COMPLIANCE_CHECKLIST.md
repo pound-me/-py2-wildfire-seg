@@ -157,14 +157,15 @@ engineering check is not treated as evidence that a method improves accuracy.
 - [x] Run the single TGM 30-epoch screen and evaluate both decisions. TGM
   gained -0.003078 mIoU and -0.006146 Fire, so it failed its own promotion and
   cannot be added to the ABL+SAMF+TGM triple.
-- [ ] Complete the independently triggered ABL+SAMF 30-epoch screen against
-  plain Fusion; promote at mIoU +0.005 or Fire +0.01, subject to no class
-  collapse and the paired RTX 2060 >=30 FPS gate.
+- [x] Complete the independently triggered ABL+SAMF 30-epoch screen against
+  plain Fusion. It gains mIoU +0.004589 and Fire +0.002935 with no collapse and
+  45.41 FPS, so it narrowly fails both accuracy gates and is not promoted.
 - [x] Freeze ABL+SAMF as the existing SAMF inference structure plus the
   training-only ABL objective; beta-zero equivalence, AMP gradients, inference
   isolation, 7.705M parameters, 3.1545 GFLOPs and paired 35.90 FPS all pass.
-- [ ] Close Route C only after the ABL+SAMF branch is resolved: run one fresh
-  100-epoch formal experiment if it passes, otherwise record the failed screen.
+- [x] Close Route C only after the ABL+SAMF branch is resolved. The branch
+  failed its 30-epoch screen, so no 100-epoch combination run is authorized and
+  the corrected Route C closure is now final.
 - [x] Correct the premature closure record: ABL+SAMF is triggered by ABL and
   SAMF both being positive; TGM positivity controls only the three-module
   ABL+SAMF+TGM branch.

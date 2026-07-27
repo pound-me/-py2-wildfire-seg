@@ -1,0 +1,110 @@
+{
+  "device": "NVIDIA GeForce RTX 2060",
+  "input_shape": [
+    1,
+    4,
+    256,
+    256
+  ],
+  "weights_source": "checkpoints",
+  "amp": true,
+  "warmup_iterations_per_model": 100,
+  "timed_iterations_per_trial": 200,
+  "repeats": 10,
+  "trial_orders": [
+    [
+      "baseline",
+      "candidate"
+    ],
+    [
+      "candidate",
+      "baseline"
+    ],
+    [
+      "baseline",
+      "candidate"
+    ],
+    [
+      "candidate",
+      "baseline"
+    ],
+    [
+      "baseline",
+      "candidate"
+    ],
+    [
+      "candidate",
+      "baseline"
+    ],
+    [
+      "baseline",
+      "candidate"
+    ],
+    [
+      "candidate",
+      "baseline"
+    ],
+    [
+      "baseline",
+      "candidate"
+    ],
+    [
+      "candidate",
+      "baseline"
+    ]
+  ],
+  "baseline": {
+    "config": "G:\\py2\\configs\\route_a\\pidnet_s_fusion_100e_label_fix.yaml",
+    "checkpoint": "G:\\py2\\experiments\\route_a_pidnet_s_fusion\\route_a_fusion_100e_label_fix_seed200\\best.pth",
+    "deployment_parameters": 7623939,
+    "latency_ms_trials": [
+      20.88003050000001,
+      20.65984200000001,
+      20.33946199999999,
+      20.69224049999999,
+      22.910196499999994,
+      21.228808499999978,
+      28.868162500000025,
+      20.552307999999968,
+      22.748248999999987,
+      20.338217999999983
+    ],
+    "latency_ms_median": 20.7861355,
+    "latency_ms_mean": 21.92175174999999,
+    "latency_ms_std": 2.479290359195109,
+    "fps_from_median": 48.10899072605391
+  },
+  "candidate": {
+    "config": "G:\\py2\\configs\\route_c\\pidnet_s_fusion_abl_samf_30e_label_fix.yaml",
+    "checkpoint": "G:\\py2\\experiments\\route_c_pidnet_s_abl_samf\\route_c_abl_samf_30e_label_fix_seed200\\best.pth",
+    "deployment_parameters": 7705271,
+    "latency_ms_trials": [
+      22.041206,
+      23.071927499999987,
+      21.963307500000013,
+      22.00344600000001,
+      22.854390000000002,
+      22.093700500000004,
+      23.106187500000033,
+      21.709378999999984,
+      21.855829,
+      21.557472499999975
+    ],
+    "latency_ms_median": 22.022326000000007,
+    "latency_ms_mean": 22.22568455,
+    "latency_ms_std": 0.5390954298797478,
+    "fps_from_median": 45.40846411954848
+  },
+  "candidate_latency_relative_change": 0.059471877300136367,
+  "candidate_latency_percent_change": 5.947187730013637,
+  "candidate_parameter_relative_change": 0.010667976225937847,
+  "speed_drop_at_most_3_percent": false,
+  "real_time_minimum_fps": 30.0,
+  "real_time_maximum_median_latency_ms": 33.333333333333336,
+  "baseline_passes_30_fps": true,
+  "candidate_passes_30_fps": true,
+  "route_c_admission_rule": "candidate median FPS >= 30 in paired RTX 2060 measurement",
+  "route_c_candidate_admitted": true,
+  "deployment_parameter_counts_equal": false,
+  "scope": "paired model-forward benchmark in one process"
+}

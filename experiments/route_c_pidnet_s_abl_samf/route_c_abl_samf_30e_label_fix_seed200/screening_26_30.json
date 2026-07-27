@@ -1,0 +1,80 @@
+{
+  "test_set_used": false,
+  "epoch_window": [
+    26,
+    30
+  ],
+  "baseline_metrics": "G:\\py2\\experiments\\route_a_pidnet_s_fusion\\route_a_fusion_100e_label_fix_seed200\\metrics.jsonl",
+  "candidate_metrics": "G:\\py2\\experiments\\route_c_pidnet_s_abl_samf\\route_c_abl_samf_30e_label_fix_seed200\\metrics.jsonl",
+  "paired_latency": "G:\\py2\\experiments\\route_c_pidnet_s_abl_samf\\route_c_abl_samf_30e_label_fix_seed200\\paired_latency_rtx2060_best.json",
+  "baseline": {
+    "miou_mean": 0.7861409555868736,
+    "smoke_iou_mean": 0.8197274415552007,
+    "fire_iou_mean": 0.6467101737950955,
+    "miou_values": [
+      0.7678683840912598,
+      0.7932996047193628,
+      0.7944135566309853,
+      0.7886447504805859,
+      0.7864784820121743
+    ],
+    "smoke_iou_values": [
+      0.7976434077884589,
+      0.8301245665853345,
+      0.8309908147076196,
+      0.8186877745934676,
+      0.8211906441011225
+    ],
+    "fire_iou_values": [
+      0.6358597750161066,
+      0.6493812593823567,
+      0.6495982023626671,
+      0.6501107181545912,
+      0.6486009140597562
+    ],
+    "smoke_or_fire_class_collapse": false
+  },
+  "candidate": {
+    "miou_mean": 0.7907295602217858,
+    "smoke_iou_mean": 0.8242810699068656,
+    "fire_iou_mean": 0.6496448808509688,
+    "miou_values": [
+      0.7892220140092884,
+      0.787302239857503,
+      0.7899757386715613,
+      0.7921172843643297,
+      0.7950305242062461
+    ],
+    "smoke_iou_values": [
+      0.8263122692122333,
+      0.8154377158530532,
+      0.8220032575380345,
+      0.8242033069078555,
+      0.8334488000231519
+    ],
+    "fire_iou_values": [
+      0.6445116884836013,
+      0.6526003385701853,
+      0.6474555662056689,
+      0.6530537798482371,
+      0.650603031147152
+    ],
+    "smoke_or_fire_class_collapse": false
+  },
+  "gains_vs_plain_fusion": {
+    "miou": 0.0045886046349121745,
+    "fire_iou": 0.002934707055873287
+  },
+  "preregistered_thresholds": {
+    "miou_gain": 0.005,
+    "fire_iou_gain": 0.01,
+    "logic": "miou_gain >= threshold OR fire_iou_gain >= threshold"
+  },
+  "passes_miou_rule": false,
+  "passes_fire_rule": false,
+  "no_smoke_or_fire_class_collapse": true,
+  "paired_rtx2060_fps": 45.40846411954848,
+  "passes_30_fps": true,
+  "passes_30_epoch_combination_screen": false,
+  "promote_to_fresh_100_epochs": false
+}

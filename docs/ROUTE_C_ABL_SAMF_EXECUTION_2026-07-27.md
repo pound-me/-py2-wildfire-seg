@@ -2,7 +2,7 @@
 
 日期：2026-07-27
 
-状态：预注册执行遗漏已纠正；组合配置与工程验收通过，允许进入唯一一次 30 轮筛选。
+状态：预注册执行遗漏已纠正；唯一一次 30 轮筛选已完成但未过门槛，不进入 100 轮。
 
 ## 1. 授权依据
 
@@ -59,3 +59,26 @@ ABL 是训练专用损失，因此 ABL+SAMF 的推理参数和 FLOPs与 standalo
 ## 6. 唯一训练节点
 
 只运行 `route_c_pidnet_s_abl_samf/route_c_abl_samf_30e_label_fix_seed200`。不扫描 ABL 权重、SAMF 门控或插入点，不启用三元组合。第 26--30 轮由专用脚本按本页第 3 节的组合门槛判定。
+
+## 7. 30轮结果与决策
+
+训练完成 30/30 轮，seed 200，AMP，ImageNet fresh 初始化；用时 1431.6 秒，峰值分配显存 242.4 MB，stderr 为空。第 26--30 轮结果：
+
+| 指标 | plain Fusion | ABL+SAMF | 增益 |
+|---|---:|---:|---:|
+| mIoU | 0.786140956 | 0.790729560 | +0.004588605 |
+| Smoke IoU | 0.819727442 | 0.824281070 | +0.004553628 |
+| Fire IoU | 0.646710174 | 0.649644881 | +0.002934707 |
+
+无 Smoke/Fire 类别崩溃。best 单点为 epoch 30，mIoU 0.795030524、Fire IoU 0.650603031，但单点不用于 30 轮筛选。
+
+正式 best checkpoint 成对测速：Fusion 20.786136 ms / 48.108991 FPS；ABL+SAMF 22.022326 ms / 45.408464 FPS。实时门槛通过。
+
+精度判定：mIoU 增益距离 `+0.005` 还差 `0.000411395`，Fire 增益未达到 `+0.01`。两项均为正，但不得四舍五入为通过。因此：
+
+- `passes_30_epoch_combination_screen: false`；
+- `promote_to_fresh_100_epochs: false`；
+- 不补 3 seed，不运行 100 轮，不解封测试集；
+- Route C 的全部有效预注册分支至此真正闭环。
+
+正式筛选证据：同运行目录的 `metrics.jsonl`、`run_summary.json`、`screening_26_30.json`、`complexity.json` 与 `paired_latency_rtx2060_best.json`。checkpoint 不提交 Git。

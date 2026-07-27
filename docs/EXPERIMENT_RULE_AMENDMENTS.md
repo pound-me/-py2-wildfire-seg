@@ -297,4 +297,11 @@ Fire IoU `+0.01`, subject to no class collapse and the paired RTX 2060
 `>=30 FPS` gate. Passing promotes one fresh-initialization 100-epoch run;
 failure genuinely closes Route C. No threshold or observed result is changed.
 
+The required ABL+SAMF run subsequently completed all 30 epochs. Its epochs
+26--30 mean gains against plain Fusion were mIoU `+0.0045886046` and Fire IoU
+`+0.0029347071`, with no class collapse and checkpoint-paired RTX 2060 speed of
+45.41 FPS. It therefore misses both `+0.005` / `+0.01` combination thresholds
+and is not promoted to 100 epochs. The triple remains unauthorized because TGM
+was negative. With the omitted pair now resolved, Route C is genuinely closed.
+
 No test image or test metric was used in this trigger decision.
