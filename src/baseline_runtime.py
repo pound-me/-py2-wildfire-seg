@@ -157,6 +157,10 @@ def build_model(config: dict, augment: bool = True) -> PIDNet:
         from custom_models.pidnet_tgm import PIDNetTGM
 
         model_class = PIDNetTGM
+    elif model_name == "pidnet_s_erctc":
+        from custom_models.pidnet_erctc import PIDNetERCTC
+
+        model_class = PIDNetERCTC
     else:
         raise ValueError(f"Unsupported model: {model_name}")
     model_kwargs = dict(
@@ -195,6 +199,13 @@ def build_model(config: dict, augment: bool = True) -> PIDNet:
     if model_name == "pidnet_s_tgm":
         model_kwargs["thermal_channel"] = int(
             config.get("TGM_THERMAL_CHANNEL", 3)
+        )
+    if model_name == "pidnet_s_erctc":
+        model_kwargs["thermal_channel"] = int(
+            config.get("ERCTC_THERMAL_CHANNEL", 3)
+        )
+        model_kwargs["compressed_channels"] = int(
+            config.get("ERCTC_COMPRESSED_CHANNELS", 16)
         )
     return model_class(**model_kwargs)
 

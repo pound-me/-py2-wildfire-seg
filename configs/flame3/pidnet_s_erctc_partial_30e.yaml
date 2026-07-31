@@ -1,0 +1,84 @@
+PROJECTNAME: FLAME3_PIDNETS_ERCTC_PARTIAL
+SESSIONAME: flame3_erctc_partial_screening
+EXPERIMENT_GROUP: flame3_pidnet_s_erctc_partial
+DEVICE: cuda:0
+NUM_WORKERS: 0
+SEED: 200
+MODEL: pidnet_s_erctc
+NUM_OUTPUTS: 2
+PRETRAINED: null
+PRETRAIN_SKIP_KEYS:
+- conv1.0.weight
+CHECKPOINT: null
+DATASET_TYPE: flame3_csv
+ROOTDATASET: .
+TRAINSET: splits/portable/train.csv
+VALIDSET: splits/portable/val.csv
+TESTSET: splits/portable/test.csv
+NUM_CLASSES: 3
+CLS_NAMES:
+- background
+- smoke
+- fire
+MODE: fusion
+MULTISCALE: true
+FLIP: true
+BRIGHTNESS: false
+SINGLE_SOURCE: false
+COMP_MASK: false
+BLEND_IMGS: false
+IGNORE_LABEL: 255
+BACKGROUND_CLASS_INDEX: 0
+SMOKE_CLASS_INDEX: 1
+FIRE_CLASS_INDEX: 2
+SCALE_FACTOR: 10
+CROP_SIZE:
+- 512
+- 640
+BASE_SIZE: 640
+BD_DILATE_SIZE: 4
+CLASS_WEIGHTS:
+- 1.0
+- 1.0
+- 1.0
+ALIGN_CORNERS: true
+AMP_INIT_SCALE: 128.0
+LR: 0.001
+BATCHSIZE: 8
+EPOCHS: 30
+OPTIM: SGD
+SCHED: POLY
+USE_OHEM: false
+OHEMTHRES: 0.9
+OHEMKEEP: 131072
+WD: 1.0e-05
+MOMENTUM: 0.9
+BALANCE_WEIGHTS:
+- 0.4
+- 1.0
+T_THRESH_BDLOSS: 0.8
+BD_WEIGHT: 1.0
+SB_WEIGHTS: 1.0
+SCALE_MIN: 0.8
+SCALE_MAX: 1.5
+LR_TOTAL_EPOCHS: 100
+TRAINING_OBJECTIVE: partial_label
+SELECTION_METRIC: fire_iou
+METRIC_PROTOCOL: flame3_active_fire_partial_label
+FORMAL_TRAINING_GPU: NVIDIA GeForce RTX 4090
+PHYSICAL_BATCH_STATUS: frozen_batch_8
+TEST_SET_POLICY: sealed_until_method_freeze
+
+# Standalone ERCTC definition frozen before the 30-epoch screening run.
+ERCTC_THERMAL_CHANNEL: 3
+ERCTC_COMPRESSED_CHANNELS: 16
+ERCTC_INSERTION: pag3_output_1_8
+ERCTC_RGB_STEM: avgpool4_conv1x1_3to16_bn_relu
+ERCTC_THERMAL_FRONTIER: avgpool4_then_fixed_sobel_abs_dx_plus_abs_dy_times_0.25_clamp_0_1
+ERCTC_THERMAL_STEM: concat_pooled_ir_frontier_conv1x1_2to16_bn_relu
+ERCTC_CONTEXT: concat_detail16_rgb16_thermal16_dwconv3x3_bn_relu
+ERCTC_REGION_PATH: signed_2sigmoid_minus1_times_thermal_projection
+ERCTC_FRONTIER_PATH: adaptive_max_frontier_times_thermal_projection
+ERCTC_RESIDUAL_SCALES: independent_region_and_frontier_scalars_zero_initialized
+ERCTC_STANDALONE_NO_ABL_SAMF_TGM: true
+ERCTC_LITERATURE_POSITIONING: task_specific_lightweight_adaptation_not_generic_fusion_first_claim

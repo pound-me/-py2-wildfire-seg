@@ -36,6 +36,23 @@ def create_cuda_grad_scaler(enabled: bool, init_scale: float):
     return torch.cuda.amp.GradScaler(enabled=enabled, init_scale=init_scale)
 
 
+def collect_model_diagnostics(model: torch.nn.Module) -> dict | None:
+    core_model = model.module if hasattr(model, "module") else model
+    if hasattr(core_model, "erctc_region_scale") and hasattr(
+        core_model, "erctc_frontier_scale"
+    ):
+        return {
+            "module": "erctc",
+            "region_scale": float(
+                core_model.erctc_region_scale.detach().float().cpu()
+            ),
+            "frontier_scale": float(
+                core_model.erctc_frontier_scale.detach().float().cpu()
+            ),
+        }
+    return None
+
+
 def update_confusion_matrix(
     confusion: torch.Tensor,
     logits: torch.Tensor,
@@ -1011,6 +1028,7 @@ def main() -> None:
                     torch.cuda.max_memory_allocated(device) / 1024**2
                 ),
                 "prototype_health": prototype_health,
+                "model_diagnostics": collect_model_diagnostics(model),
                 "selection_metric_name": selection_metric_name,
                 "selection_metric_value": validation_metrics[
                     selection_metric_name
@@ -1054,6 +1072,13 @@ def main() -> None:
                     f"val={validation_loss_components['semantic_main']:.5f}/"
                     f"{validation_loss_components['boundary']:.5f}"
                 )
+                model_diagnostics = record["model_diagnostics"]
+                if model_diagnostics is not None:
+                    print(
+                        "  ERCTC scales: "
+                        f"region={model_diagnostics['region_scale']:.6f}, "
+                        f"frontier={model_diagnostics['frontier_scale']:.6f}"
+                    )
             elif criterion.objective_name == "smoke_binary":
                 print(
                     "  smoke auxiliary: "
