@@ -875,13 +875,80 @@ class PartialLabelTotalLoss:
             float(value) for value in config["BALANCE_WEIGHTS"]
         ]
         self.sb_weight = float(config["SB_WEIGHTS"])
+        self.background_class = int(config.get("BACKGROUND_CLASS_INDEX", 0))
+        self.smoke_class = int(config.get("SMOKE_CLASS_INDEX", 1))
+        self.fire_class = int(config.get("FIRE_CLASS_INDEX", 2))
         self.set_criterion = PartialLabelSetLoss(
             ignore_label=self.ignore_label,
-            background_class=int(config.get("BACKGROUND_CLASS_INDEX", 0)),
-            smoke_class=int(config.get("SMOKE_CLASS_INDEX", 1)),
-            fire_class=int(config.get("FIRE_CLASS_INDEX", 2)),
+            background_class=self.background_class,
+            smoke_class=self.smoke_class,
+            fire_class=self.fire_class,
             align_corners=self.align_corners,
         )
+        self.partial_abl_enabled = bool(config.get("PARTIAL_ABL_ENABLED", False))
+        self.partial_abl_weight = float(config.get("PARTIAL_ABL_WEIGHT", 1.0))
+        self.partial_active_boundary: ActiveBoundaryLoss | None = None
+        if self.partial_abl_enabled:
+            if str(config.get("PARTIAL_ABL_BINARY_UNION", "")) != (
+                "background_smoke_vs_fire"
+            ):
+                raise ValueError(
+                    "FLAME3 partial ABL requires Background+Smoke to be merged "
+                    "as the Non-fire class."
+                )
+            if self.partial_abl_weight <= 0.0:
+                raise ValueError("PARTIAL_ABL_WEIGHT must be positive when enabled.")
+            if not bool(config.get("PARTIAL_ABL_FIRE_CORE_IMAGES_ONLY", True)):
+                raise ValueError(
+                    "Partial ABL must skip images without any supervised Fire core."
+                )
+            if not bool(config.get("ABL_FP32_UNDER_AMP", True)):
+                raise ValueError("Partial-label ABL must remain FP32 under AMP.")
+            self.partial_active_boundary = ActiveBoundaryLoss(
+                ignore_label=self.ignore_label,
+                detach_neighbors=bool(config.get("ABL_DETACH_NEIGHBORS", True)),
+                max_boundary_ratio=float(
+                    config.get("ABL_MAX_BOUNDARY_RATIO", 0.01)
+                ),
+                label_smoothing=float(config.get("ABL_LABEL_SMOOTHING", 0.2)),
+                max_clip_distance=float(
+                    config.get("ABL_MAX_CLIP_DISTANCE", 20.0)
+                ),
+                threshold_scope=str(config.get("ABL_THRESHOLD_SCOPE", "per_image")),
+            )
+
+    def build_partial_abl_inputs(
+        self,
+        semantic_logits: torch.Tensor,
+        labels: torch.Tensor,
+    ) -> tuple[torch.Tensor, torch.Tensor]:
+        """Build a binary Fire-vs-set target without choosing BG or Smoke.
+
+        The Non-fire logit is the exact log-sum-exp union of Background and
+        Smoke.  Therefore the auxiliary boundary objective cannot force a
+        partially labelled pixel toward either member of that set.
+        """
+        if semantic_logits.ndim != 4 or labels.ndim != 3:
+            raise ValueError("Partial ABL expects logits [N,C,H,W] and labels [N,H,W].")
+        required_channels = {
+            self.background_class,
+            self.smoke_class,
+            self.fire_class,
+        }
+        if min(required_channels) < 0 or max(required_channels) >= semantic_logits.shape[1]:
+            raise ValueError("Partial ABL class indices do not match semantic logits.")
+        logits_fp32 = semantic_logits.float()
+        nonfire_logit = torch.logsumexp(
+            logits_fp32[:, [self.background_class, self.smoke_class]],
+            dim=1,
+            keepdim=True,
+        )
+        fire_logit = logits_fp32[:, [self.fire_class]]
+        binary_logits = torch.cat((nonfire_logit, fire_logit), dim=1)
+        binary_target = torch.full_like(labels, self.ignore_label)
+        binary_target[labels.eq(self.background_class)] = 0
+        binary_target[labels.eq(self.fire_class)] = 1
+        return binary_logits, binary_target
 
     def get_loss(
         self,
@@ -935,6 +1002,33 @@ class PartialLabelTotalLoss:
         )
         weighted_semantic_boundary = self.sb_weight * semantic_boundary
         total = semantic_total + boundary_loss + weighted_semantic_boundary
+        partial_active_boundary = total * 0.0
+        weighted_partial_active_boundary = total * 0.0
+        partial_abl_diagnostics = {
+            "predicted_boundary_pixels": total.detach() * 0.0,
+            "supervised_boundary_pixels": total.detach() * 0.0,
+            "mean_boundary_distance": total.detach() * 0.0,
+            "skipped": torch.ones((), device=total.device),
+        }
+        partial_abl_present_fire_images = total.detach() * 0.0
+        if self.partial_active_boundary is not None:
+            binary_logits, binary_target = self.build_partial_abl_inputs(
+                semantic_outputs[1],
+                labels,
+            )
+            present_fire_images = binary_target.eq(1).flatten(1).any(dim=1)
+            partial_abl_present_fire_images = present_fire_images.sum().float()
+            if bool(present_fire_images.any()):
+                partial_active_boundary, partial_abl_diagnostics = (
+                    self.partial_active_boundary(
+                        binary_logits[present_fire_images],
+                        binary_target[present_fire_images],
+                    )
+                )
+            weighted_partial_active_boundary = (
+                self.partial_abl_weight * partial_active_boundary
+            )
+            total = total + weighted_partial_active_boundary
         if not torch.isfinite(total):
             raise RuntimeError("Non-finite FLAME3 partial-label total loss")
         assert main_diagnostics is not None
@@ -945,6 +1039,19 @@ class PartialLabelTotalLoss:
             "boundary": boundary_loss,
             "semantic_boundary": semantic_boundary,
             "weighted_semantic_boundary": weighted_semantic_boundary,
+            "partial_active_boundary": partial_active_boundary,
+            "weighted_partial_active_boundary": weighted_partial_active_boundary,
+            "partial_abl_predicted_boundary_pixels": partial_abl_diagnostics[
+                "predicted_boundary_pixels"
+            ],
+            "partial_abl_supervised_boundary_pixels": partial_abl_diagnostics[
+                "supervised_boundary_pixels"
+            ],
+            "partial_abl_mean_boundary_distance": partial_abl_diagnostics[
+                "mean_boundary_distance"
+            ],
+            "partial_abl_skipped": partial_abl_diagnostics["skipped"],
+            "partial_abl_present_fire_images": partial_abl_present_fire_images,
             **main_diagnostics,
         }
         return total.unsqueeze(0), semantic_outputs, None, components
