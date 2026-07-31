@@ -178,6 +178,19 @@ def main() -> None:
         project_root / "configs" / "flame3",
         update_root / "project_support" / "configs" / "flame3",
     )
+    copy_file(
+        project_root
+        / "third_party"
+        / "RoboFireFuseNet"
+        / "datasets"
+        / "__init__.py",
+        update_root
+        / "project_support"
+        / "third_party"
+        / "RoboFireFuseNet"
+        / "datasets"
+        / "__init__.py",
+    )
     for path in sorted((project_root / "docs").glob("FLAME3_*.md")):
         copy_file(path, update_root / "project_support" / "docs" / path.name)
     scripts_root = project_root / "scripts"
