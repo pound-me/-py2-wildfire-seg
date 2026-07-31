@@ -25,6 +25,17 @@ from baseline_runtime import (
 from custom_losses import build_training_criterion
 
 
+def create_cuda_grad_scaler(enabled: bool, init_scale: float):
+    amp_namespace = getattr(torch, "amp", None)
+    scaler_class = getattr(amp_namespace, "GradScaler", None)
+    if scaler_class is not None:
+        try:
+            return scaler_class("cuda", enabled=enabled, init_scale=init_scale)
+        except TypeError:
+            pass
+    return torch.cuda.amp.GradScaler(enabled=enabled, init_scale=init_scale)
+
+
 def update_confusion_matrix(
     confusion: torch.Tensor,
     logits: torch.Tensor,
@@ -80,6 +91,115 @@ def metrics_from_confusion(confusion: torch.Tensor, class_names: list[str]) -> d
             true_positive[index] / (true_positive[index] + false_negative[index])
         ) if true_positive[index] + false_negative[index] > 0 else 0.0
     return result
+
+
+def new_partial_fire_statistics() -> dict[str, int]:
+    return {
+        "true_positive": 0,
+        "false_positive": 0,
+        "false_negative": 0,
+        "true_negative": 0,
+        "empty_fire_valid_pixels": 0,
+        "empty_fire_predicted_fire_pixels": 0,
+        "no_fire_valid_pixels": 0,
+        "no_fire_predicted_fire_pixels": 0,
+        "partial_nonfire_pixels": 0,
+        "partial_predicted_background_pixels": 0,
+        "partial_predicted_smoke_pixels": 0,
+        "partial_predicted_fire_pixels": 0,
+        "fire_folder_images": 0,
+        "empty_fire_folder_images": 0,
+        "no_fire_images": 0,
+    }
+
+
+def update_partial_fire_statistics(
+    statistics: dict[str, int],
+    logits: torch.Tensor,
+    labels: torch.Tensor,
+    fire_folder_flags: torch.Tensor,
+    fire_class: int,
+    smoke_class: int,
+    ignore_label: int,
+) -> None:
+    if logits.shape[-2:] != labels.shape[-2:]:
+        logits = F.interpolate(
+            logits,
+            size=labels.shape[-2:],
+            mode="bilinear",
+            align_corners=True,
+        )
+    predictions = logits.argmax(dim=1)
+    flags = fire_folder_flags.reshape(-1).to(
+        device=labels.device, dtype=torch.bool
+    )
+    valid = labels != ignore_label
+    target_fire = labels == fire_class
+    predicted_fire = predictions == fire_class
+    statistics["true_positive"] += int((target_fire & predicted_fire & valid).sum())
+    statistics["false_positive"] += int((~target_fire & predicted_fire & valid).sum())
+    statistics["false_negative"] += int((target_fire & ~predicted_fire & valid).sum())
+    statistics["true_negative"] += int((~target_fire & ~predicted_fire & valid).sum())
+
+    for index in range(labels.shape[0]):
+        image_valid = valid[index]
+        if bool(flags[index]):
+            statistics["fire_folder_images"] += 1
+            partial = labels[index].eq(0) & image_valid
+            statistics["partial_nonfire_pixels"] += int(partial.sum())
+            statistics["partial_predicted_background_pixels"] += int(
+                (predictions[index].eq(0) & partial).sum()
+            )
+            statistics["partial_predicted_smoke_pixels"] += int(
+                (predictions[index].eq(smoke_class) & partial).sum()
+            )
+            statistics["partial_predicted_fire_pixels"] += int(
+                (predictions[index].eq(fire_class) & partial).sum()
+            )
+            if not bool((target_fire[index] & image_valid).any()):
+                statistics["empty_fire_folder_images"] += 1
+                statistics["empty_fire_valid_pixels"] += int(image_valid.sum())
+                statistics["empty_fire_predicted_fire_pixels"] += int(
+                    (predicted_fire[index] & image_valid).sum()
+                )
+        else:
+            statistics["no_fire_images"] += 1
+            statistics["no_fire_valid_pixels"] += int(image_valid.sum())
+            statistics["no_fire_predicted_fire_pixels"] += int(
+                (predicted_fire[index] & image_valid).sum()
+            )
+
+
+def finalize_partial_fire_statistics(statistics: dict[str, int]) -> dict:
+    tp = statistics["true_positive"]
+    fp = statistics["false_positive"]
+    fn = statistics["false_negative"]
+    tn = statistics["true_negative"]
+    partial_pixels = statistics["partial_nonfire_pixels"]
+    return {
+        "metric_protocol": "flame3_active_fire_partial_label",
+        "fire_iou": tp / max(tp + fp + fn, 1),
+        "fire_precision": tp / max(tp + fp, 1),
+        "fire_recall": tp / max(tp + fn, 1),
+        "fire_f1": (2 * tp) / max(2 * tp + fp + fn, 1),
+        "binary_accuracy": (tp + tn) / max(tp + fp + fn + tn, 1),
+        "empty_fire_predicted_fire_ratio": statistics[
+            "empty_fire_predicted_fire_pixels"
+        ] / max(statistics["empty_fire_valid_pixels"], 1),
+        "no_fire_predicted_fire_ratio": statistics[
+            "no_fire_predicted_fire_pixels"
+        ] / max(statistics["no_fire_valid_pixels"], 1),
+        "partial_predicted_background_ratio": statistics[
+            "partial_predicted_background_pixels"
+        ] / max(partial_pixels, 1),
+        "partial_predicted_smoke_ratio": statistics[
+            "partial_predicted_smoke_pixels"
+        ] / max(partial_pixels, 1),
+        "partial_predicted_fire_ratio": statistics[
+            "partial_predicted_fire_pixels"
+        ] / max(partial_pixels, 1),
+        **statistics,
+    }
 
 
 def update_fire_boundary_statistics(
@@ -224,6 +344,7 @@ def run_training_epoch(
     confusion = torch.zeros(
         config["NUM_CLASSES"], config["NUM_CLASSES"], dtype=torch.int64
     )
+    partial_statistics = new_partial_fire_statistics()
     loss_sum = 0.0
     component_sums: dict[str, float] = {}
     boundary_statistics = {
@@ -242,6 +363,13 @@ def run_training_epoch(
         if max_batches is not None and batch_index >= max_batches:
             break
         images, labels, edges = batch[0], batch[1], batch[2]
+        fire_folder_flags = None
+        if criterion.objective_name == "partial_label":
+            if len(batch) < 5:
+                raise RuntimeError(
+                    "FLAME3 partial-label training requires Fire-folder flags at batch[4]."
+                )
+            fire_folder_flags = batch[4]
         sampling_labels = labels
         component_maps = None
         if criterion.objective_name == "ema_mproto":
@@ -258,6 +386,10 @@ def run_training_epoch(
         images = images.to(device=device, dtype=torch.float, non_blocking=True)
         labels = labels.to(device=device, dtype=torch.long, non_blocking=True)
         edges = edges.to(device=device, dtype=torch.float, non_blocking=True)
+        if fire_folder_flags is not None:
+            fire_folder_flags = fire_folder_flags.to(
+                device=device, dtype=torch.bool, non_blocking=True
+            )
         global_step = epoch * epoch_batches + batch_index
         learning_rate = set_polynomial_lr(
             optimizer,
@@ -273,7 +405,14 @@ def run_training_epoch(
             enabled=use_amp,
         ):
             outputs = model(images)
-            if criterion.objective_name == "ema_mproto":
+            if criterion.objective_name == "partial_label":
+                losses, metric_outputs, _, loss_components = criterion.get_loss(
+                    outputs,
+                    labels,
+                    edges,
+                    fire_folder_flags=fire_folder_flags,
+                )
+            elif criterion.objective_name == "ema_mproto":
                 losses, metric_outputs, _, loss_components = criterion.get_loss(
                     outputs,
                     labels,
@@ -302,13 +441,24 @@ def run_training_epoch(
         scaler.step(optimizer)
         scaler.update()
 
-        update_confusion_matrix(
-            confusion,
-            metric_outputs[1].detach(),
-            labels,
-            config["NUM_CLASSES"],
-            config["IGNORE_LABEL"],
-        )
+        if criterion.objective_name == "partial_label":
+            update_partial_fire_statistics(
+                partial_statistics,
+                metric_outputs[1].detach(),
+                labels,
+                fire_folder_flags,
+                int(config.get("FIRE_CLASS_INDEX", 2)),
+                int(config.get("SMOKE_CLASS_INDEX", 1)),
+                int(config["IGNORE_LABEL"]),
+            )
+        else:
+            update_confusion_matrix(
+                confusion,
+                metric_outputs[1].detach(),
+                labels,
+                config["NUM_CLASSES"],
+                config["IGNORE_LABEL"],
+            )
         update_fire_boundary_statistics(
             boundary_statistics,
             metric_outputs[1].detach(),
@@ -329,7 +479,11 @@ def run_training_epoch(
                 f"loss={float(loss.detach()):.5f}, lr={learning_rate:.8f}"
             )
 
-    metrics = metrics_from_confusion(confusion, config["CLS_NAMES"])
+    metrics = (
+        finalize_partial_fire_statistics(partial_statistics)
+        if criterion.objective_name == "partial_label"
+        else metrics_from_confusion(confusion, config["CLS_NAMES"])
+    )
     metrics.update(finalize_fire_boundary_statistics(boundary_statistics))
     denominator = max(completed_batches, 1)
     component_averages = {
@@ -358,6 +512,7 @@ def run_validation(
     confusion = torch.zeros(
         config["NUM_CLASSES"], config["NUM_CLASSES"], dtype=torch.int64
     )
+    partial_statistics = new_partial_fire_statistics()
     loss_sum = 0.0
     component_sums: dict[str, float] = {}
     boundary_statistics = {
@@ -372,6 +527,13 @@ def run_validation(
         if max_batches is not None and batch_index >= max_batches:
             break
         images, labels, edges = batch[0], batch[1], batch[2]
+        fire_folder_flags = None
+        if criterion.objective_name == "partial_label":
+            if len(batch) < 5:
+                raise RuntimeError(
+                    "FLAME3 partial-label validation requires Fire-folder flags at batch[4]."
+                )
+            fire_folder_flags = batch[4]
         sampling_labels = labels
         component_maps = None
         if criterion.objective_name == "ema_mproto":
@@ -388,6 +550,10 @@ def run_validation(
         images = images.to(device=device, dtype=torch.float, non_blocking=True)
         labels = labels.to(device=device, dtype=torch.long, non_blocking=True)
         edges = edges.to(device=device, dtype=torch.float, non_blocking=True)
+        if fire_folder_flags is not None:
+            fire_folder_flags = fire_folder_flags.to(
+                device=device, dtype=torch.bool, non_blocking=True
+            )
 
         with torch.autocast(
             device_type="cuda",
@@ -395,7 +561,14 @@ def run_validation(
             enabled=use_amp,
         ):
             outputs = model(images)
-            if criterion.objective_name == "ema_mproto":
+            if criterion.objective_name == "partial_label":
+                losses, metric_outputs, _, loss_components = criterion.get_loss(
+                    outputs,
+                    labels,
+                    edges,
+                    fire_folder_flags=fire_folder_flags,
+                )
+            elif criterion.objective_name == "ema_mproto":
                 losses, metric_outputs, _, loss_components = criterion.get_loss(
                     outputs,
                     labels,
@@ -414,13 +587,24 @@ def run_validation(
                     edges,
                 )
             loss = losses.mean()
-        update_confusion_matrix(
-            confusion,
-            metric_outputs[1],
-            labels,
-            config["NUM_CLASSES"],
-            config["IGNORE_LABEL"],
-        )
+        if criterion.objective_name == "partial_label":
+            update_partial_fire_statistics(
+                partial_statistics,
+                metric_outputs[1],
+                labels,
+                fire_folder_flags,
+                int(config.get("FIRE_CLASS_INDEX", 2)),
+                int(config.get("SMOKE_CLASS_INDEX", 1)),
+                int(config["IGNORE_LABEL"]),
+            )
+        else:
+            update_confusion_matrix(
+                confusion,
+                metric_outputs[1],
+                labels,
+                config["NUM_CLASSES"],
+                config["IGNORE_LABEL"],
+            )
         update_fire_boundary_statistics(
             boundary_statistics,
             metric_outputs[1],
@@ -436,7 +620,11 @@ def run_validation(
             )
         completed_batches += 1
 
-    metrics = metrics_from_confusion(confusion, config["CLS_NAMES"])
+    metrics = (
+        finalize_partial_fire_statistics(partial_statistics)
+        if criterion.objective_name == "partial_label"
+        else metrics_from_confusion(confusion, config["CLS_NAMES"])
+    )
     metrics.update(finalize_fire_boundary_statistics(boundary_statistics))
     denominator = max(completed_batches, 1)
     component_averages = {
@@ -455,7 +643,8 @@ def save_checkpoint(
     config: dict,
     epoch: int,
     validation_metrics: dict,
-    best_miou: float,
+    best_selection_metric: float,
+    selection_metric_name: str,
 ) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     torch.save(
@@ -476,7 +665,11 @@ def save_checkpoint(
             "cuda_random_states": torch.cuda.get_rng_state_all(),
             "config": config,
             "validation_metrics": validation_metrics,
-            "best_miou": best_miou,
+            "selection_metric_name": selection_metric_name,
+            "best_selection_metric": best_selection_metric,
+            "best_miou": (
+                best_selection_metric if selection_metric_name == "miou" else -1.0
+            ),
         },
         path,
     )
@@ -509,6 +702,20 @@ def main() -> None:
         "--device",
         help="Override DEVICE, for example cuda:0, cuda:1, or cuda:2.",
     )
+    parser.add_argument(
+        "--root-dataset",
+        type=Path,
+        help="Override ROOTDATASET, used by the portable FLAME3 bundle.",
+    )
+    parser.add_argument(
+        "--pretrained",
+        type=Path,
+        help="Override PRETRAINED initialization path.",
+    )
+    parser.add_argument("--trainset", type=Path, help="Override TRAINSET path.")
+    parser.add_argument("--validset", type=Path, help="Override VALIDSET path.")
+    parser.add_argument("--batch-size", type=int, help="Override physical batch size.")
+    parser.add_argument("--num-workers", type=int, help="Override data-loader workers.")
     parser.add_argument("--seed", type=int, help="Override the config seed.")
     parser.add_argument("--run-name", default="baseline")
     parser.add_argument(
@@ -522,6 +729,22 @@ def main() -> None:
     config = load_config(args.config.resolve())
     if args.device:
         config["DEVICE"] = args.device
+    if args.root_dataset is not None:
+        config["ROOTDATASET"] = str(args.root_dataset.resolve())
+    if args.pretrained is not None:
+        config["PRETRAINED"] = str(args.pretrained.resolve())
+    if args.trainset is not None:
+        config["TRAINSET"] = str(args.trainset.resolve())
+    if args.validset is not None:
+        config["VALIDSET"] = str(args.validset.resolve())
+    if args.batch_size is not None:
+        if args.batch_size <= 0:
+            raise ValueError("batch-size must be positive")
+        config["BATCHSIZE"] = args.batch_size
+    if args.num_workers is not None:
+        if args.num_workers < 0:
+            raise ValueError("num-workers must be non-negative")
+        config["NUM_WORKERS"] = args.num_workers
     if args.seed is not None:
         config["SEED"] = args.seed
     epochs = args.epochs if args.epochs is not None else config["EPOCHS"]
@@ -578,12 +801,21 @@ def main() -> None:
         momentum=config["MOMENTUM"],
         weight_decay=config["WD"],
     )
-    scaler = torch.amp.GradScaler("cuda", enabled=args.amp)
+    scaler = create_cuda_grad_scaler(
+        enabled=args.amp,
+        init_scale=float(config.get("AMP_INIT_SCALE", 65536.0)),
+    )
     experiment_group = config.get(
         "EXPERIMENT_GROUP",
         "pidnet_s_rgb_baseline",
     )
     run_directory = PROJECT_ROOT / "experiments" / experiment_group / args.run_name
+    if run_directory.exists() and not args.resume:
+        existing = list(run_directory.iterdir())
+        if existing:
+            raise FileExistsError(
+                f"Refusing to overwrite non-empty run directory: {run_directory}"
+            )
     run_directory.mkdir(parents=True, exist_ok=True)
     metrics_path = run_directory / "metrics.jsonl"
     with (run_directory / "resolved_config.json").open(
@@ -591,7 +823,12 @@ def main() -> None:
         encoding="utf-8",
     ) as config_file:
         json.dump(config, config_file, ensure_ascii=False, indent=2)
-    best_miou = -1.0
+    selection_metric_name = str(config.get("SELECTION_METRIC", "miou"))
+    if criterion.objective_name == "partial_label" and selection_metric_name != "fire_iou":
+        raise ValueError(
+            "FLAME3 partial-label training must select checkpoints by fire_iou"
+        )
+    best_selection_metric = -1.0
     start_epoch = 0
     if args.resume:
         resume_path = args.resume.resolve()
@@ -616,7 +853,20 @@ def main() -> None:
         torch.set_rng_state(checkpoint["torch_random_state"])
         torch.cuda.set_rng_state_all(checkpoint["cuda_random_states"])
         start_epoch = int(checkpoint["epoch"])
-        best_miou = float(checkpoint.get("best_miou", -1.0))
+        checkpoint_metric_name = str(
+            checkpoint.get("selection_metric_name", "miou")
+        )
+        if checkpoint_metric_name != selection_metric_name:
+            raise RuntimeError(
+                f"Resume selection metric changed: {checkpoint_metric_name} "
+                f"!= {selection_metric_name}"
+            )
+        best_selection_metric = float(
+            checkpoint.get(
+                "best_selection_metric",
+                checkpoint.get("best_miou", -1.0),
+            )
+        )
         if start_epoch >= epochs:
             raise ValueError(
                 f"Resume epoch {start_epoch} is not below requested epochs {epochs}."
@@ -626,7 +876,13 @@ def main() -> None:
     print(f"Train/val samples: {len(train_dataset)}/{len(validation_dataset)}")
     print(f"Epochs: {epochs}, batch size: {config['BATCHSIZE']}, AMP: {args.amp}")
     print(f"Learning-rate schedule horizon: {lr_total_epochs} epochs")
-    if criterion.objective_name == "smoke_binary":
+    if criterion.objective_name == "partial_label":
+        print(
+            "FLAME3 partial-label objective: Fire core=hard Fire, "
+            "Fire-folder non-core={Background,Smoke}, No Fire=hard Background"
+        )
+        print(f"Checkpoint selection metric: {selection_metric_name}")
+    elif criterion.objective_name == "smoke_binary":
         print(f"Smoke auxiliary loss weight: {criterion.auxiliary_weight:.4f}")
     elif criterion.objective_name == "fire_boundary":
         print(f"Fire-boundary loss weight: {criterion.auxiliary_weight:.4f}")
@@ -755,20 +1011,50 @@ def main() -> None:
                     torch.cuda.max_memory_allocated(device) / 1024**2
                 ),
                 "prototype_health": prototype_health,
+                "selection_metric_name": selection_metric_name,
+                "selection_metric_value": validation_metrics[
+                    selection_metric_name
+                ],
             }
             metrics_file.write(json.dumps(record, ensure_ascii=False) + "\n")
             metrics_file.flush()
 
-            print(
-                f"  train loss={train_loss:.5f}, mIoU={train_metrics['miou']:.4f}"
-            )
-            print(
-                f"  val loss={validation_loss:.5f}, "
-                f"mIoU={validation_metrics['miou']:.4f}, "
-                f"smoke IoU={validation_metrics['iou_smoke']:.4f}, "
-                f"fire IoU={validation_metrics['iou_fire']:.4f}"
-            )
-            if criterion.objective_name == "smoke_binary":
+            if criterion.objective_name == "partial_label":
+                print(
+                    f"  train loss={train_loss:.5f}, "
+                    f"Fire IoU={train_metrics['fire_iou']:.4f}, "
+                    f"precision/recall={train_metrics['fire_precision']:.4f}/"
+                    f"{train_metrics['fire_recall']:.4f}"
+                )
+                print(
+                    f"  val loss={validation_loss:.5f}, "
+                    f"Fire IoU={validation_metrics['fire_iou']:.4f}, "
+                    f"precision/recall={validation_metrics['fire_precision']:.4f}/"
+                    f"{validation_metrics['fire_recall']:.4f}, "
+                    "empty-Fire FP="
+                    f"{validation_metrics['empty_fire_predicted_fire_ratio']:.4%}, "
+                    "No-Fire FP="
+                    f"{validation_metrics['no_fire_predicted_fire_ratio']:.4%}"
+                )
+            else:
+                print(
+                    f"  train loss={train_loss:.5f}, mIoU={train_metrics['miou']:.4f}"
+                )
+                print(
+                    f"  val loss={validation_loss:.5f}, "
+                    f"mIoU={validation_metrics['miou']:.4f}, "
+                    f"smoke IoU={validation_metrics['iou_smoke']:.4f}, "
+                    f"fire IoU={validation_metrics['iou_fire']:.4f}"
+                )
+            if criterion.objective_name == "partial_label":
+                print(
+                    "  partial-label semantic main/boundary: "
+                    f"train={train_loss_components['semantic_main']:.5f}/"
+                    f"{train_loss_components['boundary']:.5f}, "
+                    f"val={validation_loss_components['semantic_main']:.5f}/"
+                    f"{validation_loss_components['boundary']:.5f}"
+                )
+            elif criterion.objective_name == "smoke_binary":
                 print(
                     "  smoke auxiliary: "
                     f"train={train_loss_components['smoke_auxiliary']:.5f}, "
@@ -813,6 +1099,9 @@ def main() -> None:
                     "  prototype health valid: "
                     f"{prototype_health['valid_multi_prototype_method']}"
                 )
+            current_selection_metric = float(
+                validation_metrics[selection_metric_name]
+            )
             save_checkpoint(
                 run_directory / "last.pth",
                 model,
@@ -823,10 +1112,11 @@ def main() -> None:
                 config,
                 epoch + 1,
                 validation_metrics,
-                max(best_miou, validation_metrics["miou"]),
+                max(best_selection_metric, current_selection_metric),
+                selection_metric_name,
             )
-            if validation_metrics["miou"] > best_miou:
-                best_miou = validation_metrics["miou"]
+            if current_selection_metric > best_selection_metric:
+                best_selection_metric = current_selection_metric
                 save_checkpoint(
                     run_directory / "best.pth",
                     model,
@@ -837,18 +1127,23 @@ def main() -> None:
                     config,
                     epoch + 1,
                     validation_metrics,
-                    best_miou,
+                    best_selection_metric,
+                    selection_metric_name,
                 )
 
     elapsed = time.perf_counter() - start_time
     peak_memory_mb = torch.cuda.max_memory_allocated(device) / 1024**2
     print("Training run completed")
-    print(f"Best validation mIoU: {best_miou:.4f}")
+    print(
+        f"Best validation {selection_metric_name}: "
+        f"{best_selection_metric:.4f}"
+    )
     print(f"Elapsed time: {elapsed:.1f} seconds")
     print(f"Peak allocated GPU memory: {peak_memory_mb:.1f} MB")
     print(f"Metrics: {metrics_path}")
     summary = {
-        "best_validation_miou": best_miou,
+        "selection_metric_name": selection_metric_name,
+        "best_validation_selection_metric": best_selection_metric,
         "elapsed_seconds": elapsed,
         "peak_allocated_gpu_memory_mb": peak_memory_mb,
         "metrics": str(metrics_path),

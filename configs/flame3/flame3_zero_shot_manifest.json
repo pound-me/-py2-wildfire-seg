@@ -1,0 +1,24 @@
+{
+  "status": "frozen_before_flame3_inference",
+  "selection_basis": "plain fusion baseline, standalone SAMF, and final ABL+SAMF combination; all seed 200 mIoU-best FLAME2 checkpoints",
+  "models": [
+    {
+      "name": "flame2_fusion_baseline_seed200",
+      "config": "G:/py2/configs/route_a/pidnet_s_fusion_100e_label_fix.yaml",
+      "checkpoint": "G:/py2/experiments/route_a_pidnet_s_fusion/route_a_fusion_100e_label_fix_seed200/best.pth"
+    },
+    {
+      "name": "flame2_samf_seed200",
+      "config": "G:/py2/configs/route_c/pidnet_s_fusion_samf_100e_label_fix.yaml",
+      "checkpoint": "G:/py2/experiments/route_c_pidnet_s_samf/route_c_samf_100e_label_fix_seed200/best.pth"
+    },
+    {
+      "name": "flame2_abl_samf_seed200",
+      "config": "G:/py2/configs/terminal_eval/pidnet_s_abl_samf_100e_seed200.yaml",
+      "checkpoint": "G:/py2/experiments/terminal_eval_pidnet_s_abl_samf/terminal_eval_abl_samf_100e_seed200/best.pth"
+    }
+  ],
+  "split": "G:/py2/data/flame3_splits_preregistered/val.csv",
+  "test_touched": false,
+  "training_performed": false
+}

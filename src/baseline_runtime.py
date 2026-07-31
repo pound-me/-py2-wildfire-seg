@@ -34,6 +34,7 @@ from custom_models.pidnet_dfm_mproto import (  # noqa: E402
 from custom_models.pidnet_dysample import PIDNetDySample  # noqa: E402
 from custom_models.pidnet_samf import PIDNetSAMF  # noqa: E402
 from custom_models.pidnet_tgm import PIDNetTGM  # noqa: E402
+from flame3_dataset import Flame3CsvDataset  # noqa: E402
 
 
 def load_config(path: Path) -> dict:
@@ -50,7 +51,7 @@ def seed_everything(seed: int) -> None:
     torch.backends.cudnn.deterministic = True
 
 
-def build_dataset(config: dict, split: str) -> WildFire:
+def build_dataset(config: dict, split: str):
     split_to_key = {
         "train": "TRAINSET",
         "val": "VALIDSET",
@@ -59,6 +60,28 @@ def build_dataset(config: dict, split: str) -> WildFire:
     if split not in split_to_key:
         raise ValueError(f"Unsupported split: {split}")
     training = split == "train"
+    if str(config.get("DATASET_TYPE", "wildfire_txt")).lower() == "flame3_csv":
+        if config.get("TRAINING_OBJECTIVE") != "partial_label":
+            raise ValueError(
+                "FLAME3 CSV training requires TRAINING_OBJECTIVE=partial_label"
+            )
+        return Flame3CsvDataset(
+            root=config["ROOTDATASET"],
+            csv_path=config[split_to_key[split]],
+            mode=config["MODE"],
+            multi_scale=config["MULTISCALE"] if training else False,
+            flip=config["FLIP"] if training else False,
+            brightness=config["BRIGHTNESS"] if training else False,
+            ignore_label=config["IGNORE_LABEL"],
+            scale_factor=config["SCALE_FACTOR"],
+            crop_size=config["CROP_SIZE"],
+            base_size=config["BASE_SIZE"],
+            bd_dilate_size=int(config.get("BD_DILATE_SIZE", 4)),
+            comp_mask=config["COMP_MASK"] if training else False,
+            single_source=config["SINGLE_SOURCE"] if training else False,
+            scale_min=float(config.get("SCALE_MIN", 0.8)),
+            scale_max=float(config.get("SCALE_MAX", 1.5)),
+        )
     return WildFire(
         root=config["ROOTDATASET"],
         list_path=config[split_to_key[split]],

@@ -741,7 +741,218 @@ class ClassPrototypeTotalLoss:
         return losses, base_outputs, accuracy, components
 
 
+class PartialLabelSetLoss(nn.Module):
+    """Per-image set-likelihood loss for FLAME3 incomplete three-class labels."""
+
+    def __init__(
+        self,
+        ignore_label: int = 255,
+        background_class: int = 0,
+        smoke_class: int = 1,
+        fire_class: int = 2,
+        align_corners: bool = True,
+    ) -> None:
+        super().__init__()
+        self.ignore_label = int(ignore_label)
+        self.background_class = int(background_class)
+        self.smoke_class = int(smoke_class)
+        self.fire_class = int(fire_class)
+        self.align_corners = bool(align_corners)
+
+    def forward(
+        self,
+        logits: torch.Tensor,
+        labels: torch.Tensor,
+        fire_folder_flags: torch.Tensor,
+        pixel_mask: torch.Tensor | None = None,
+    ) -> tuple[torch.Tensor, dict[str, torch.Tensor]]:
+        if logits.ndim != 4 or logits.shape[1] != 3:
+            raise ValueError(
+                "FLAME3 partial-label logits must be [batch, 3, height, width], "
+                f"got {tuple(logits.shape)}"
+            )
+        if labels.ndim != 3 or labels.shape[0] != logits.shape[0]:
+            raise ValueError(
+                f"Label shape {tuple(labels.shape)} is incompatible with logits "
+                f"{tuple(logits.shape)}"
+            )
+        if logits.shape[-2:] != labels.shape[-2:]:
+            logits = F.interpolate(
+                logits,
+                size=labels.shape[-2:],
+                mode="bilinear",
+                align_corners=self.align_corners,
+            )
+        flags = fire_folder_flags.reshape(-1).to(
+            device=labels.device, dtype=torch.bool
+        )
+        if flags.numel() != labels.shape[0]:
+            raise ValueError(
+                f"Expected {labels.shape[0]} Fire-folder flags, got {flags.numel()}"
+            )
+        if pixel_mask is None:
+            active_mask = torch.ones_like(labels, dtype=torch.bool)
+        else:
+            if pixel_mask.shape != labels.shape:
+                raise ValueError(
+                    f"pixel_mask {tuple(pixel_mask.shape)} != labels {tuple(labels.shape)}"
+                )
+            active_mask = pixel_mask.to(device=labels.device, dtype=torch.bool)
+
+        allowed = (
+            labels.eq(self.background_class)
+            | labels.eq(self.fire_class)
+            | labels.eq(self.ignore_label)
+        )
+        if not bool(allowed.all()):
+            unexpected = torch.unique(labels[~allowed]).detach().cpu().tolist()
+            raise RuntimeError(
+                f"FLAME3 partial labels contain unexpected IDs: {unexpected}"
+            )
+
+        log_probabilities = F.log_softmax(logits.float(), dim=1)
+        partial_log_probability = torch.logsumexp(
+            log_probabilities[:, [self.background_class, self.smoke_class]],
+            dim=1,
+        )
+        background_loss = -log_probabilities[:, self.background_class]
+        fire_loss = -log_probabilities[:, self.fire_class]
+        valid = labels.ne(self.ignore_label) & active_mask
+        zero = logits.float().sum() * 0.0
+        image_losses: list[torch.Tensor] = []
+        hard_background_count = torch.zeros((), device=labels.device)
+        partial_count = torch.zeros((), device=labels.device)
+        fire_count = torch.zeros((), device=labels.device)
+
+        for index in range(labels.shape[0]):
+            image_valid = valid[index]
+            terms: list[torch.Tensor] = []
+            if bool(flags[index]):
+                partial_pixels = (
+                    labels[index].eq(self.background_class) & image_valid
+                )
+                fire_pixels = labels[index].eq(self.fire_class) & image_valid
+                partial_count = partial_count + partial_pixels.sum()
+                fire_count = fire_count + fire_pixels.sum()
+                if bool(partial_pixels.any()):
+                    terms.append(partial_log_probability[index][partial_pixels].neg().mean())
+                if bool(fire_pixels.any()):
+                    terms.append(fire_loss[index][fire_pixels].mean())
+            else:
+                if bool((labels[index].eq(self.fire_class) & image_valid).any()):
+                    raise RuntimeError(
+                        "No Fire image contains Fire-core supervision pixels."
+                    )
+                hard_background = (
+                    labels[index].eq(self.background_class) & image_valid
+                )
+                hard_background_count = hard_background_count + hard_background.sum()
+                if bool(hard_background.any()):
+                    terms.append(background_loss[index][hard_background].mean())
+            image_losses.append(torch.stack(terms).mean() if terms else zero)
+
+        loss = torch.stack(image_losses).mean() if image_losses else zero
+        diagnostics = {
+            "hard_background_pixels": hard_background_count.float(),
+            "partial_nonfire_pixels": partial_count.float(),
+            "fire_core_pixels": fire_count.float(),
+            "fire_folder_images": flags.sum().float(),
+            "no_fire_images": (~flags).sum().float(),
+        }
+        return loss, diagnostics
+
+
+class PartialLabelTotalLoss:
+    """PIDNet loss adapted to FLAME3 Fire-core and partial non-Fire labels."""
+
+    def __init__(self, base_criterion: object, config: dict) -> None:
+        self.base_criterion = base_criterion
+        self.objective_name = "partial_label"
+        self.align_corners = bool(config["ALIGN_CORNERS"])
+        self.ignore_label = int(config["IGNORE_LABEL"])
+        self.t_thresh_bd = float(config["T_THRESH_BDLOSS"])
+        self.balance_weights = [
+            float(value) for value in config["BALANCE_WEIGHTS"]
+        ]
+        self.sb_weight = float(config["SB_WEIGHTS"])
+        self.set_criterion = PartialLabelSetLoss(
+            ignore_label=self.ignore_label,
+            background_class=int(config.get("BACKGROUND_CLASS_INDEX", 0)),
+            smoke_class=int(config.get("SMOKE_CLASS_INDEX", 1)),
+            fire_class=int(config.get("FIRE_CLASS_INDEX", 2)),
+            align_corners=self.align_corners,
+        )
+
+    def get_loss(
+        self,
+        outputs: list[torch.Tensor] | tuple[torch.Tensor, ...],
+        labels: torch.Tensor,
+        edges: torch.Tensor,
+        fire_folder_flags: torch.Tensor,
+    ) -> tuple[torch.Tensor, list[torch.Tensor], None, dict[str, torch.Tensor]]:
+        if not isinstance(outputs, (list, tuple)) or len(outputs) != 3:
+            raise RuntimeError(
+                "FLAME3 partial-label training expects PIDNet auxiliary, main, "
+                "and boundary outputs."
+            )
+        raw_outputs = list(outputs)
+        semantic_outputs = raw_outputs[:2]
+        if len(self.balance_weights) != len(semantic_outputs):
+            raise RuntimeError(
+                f"BALANCE_WEIGHTS {self.balance_weights} do not match two semantic heads"
+            )
+        semantic_head_losses: list[torch.Tensor] = []
+        main_diagnostics: dict[str, torch.Tensor] | None = None
+        for index, semantic_logits in enumerate(semantic_outputs):
+            head_loss, diagnostics = self.set_criterion(
+                semantic_logits,
+                labels,
+                fire_folder_flags,
+            )
+            semantic_head_losses.append(head_loss)
+            if index == 1:
+                main_diagnostics = diagnostics
+        semantic_total = sum(
+            weight * loss
+            for weight, loss in zip(self.balance_weights, semantic_head_losses)
+        )
+
+        boundary_logits = raw_outputs[-1]
+        if boundary_logits.shape[-2:] != labels.shape[-2:]:
+            boundary_logits = F.interpolate(
+                boundary_logits,
+                size=labels.shape[-2:],
+                mode="bilinear",
+                align_corners=self.align_corners,
+            )
+        boundary_loss = self.base_criterion.bd_criterion(boundary_logits, edges)
+        predicted_boundary = torch.sigmoid(boundary_logits[:, 0].float()) > self.t_thresh_bd
+        semantic_boundary, _ = self.set_criterion(
+            semantic_outputs[1],
+            labels,
+            fire_folder_flags,
+            pixel_mask=predicted_boundary,
+        )
+        weighted_semantic_boundary = self.sb_weight * semantic_boundary
+        total = semantic_total + boundary_loss + weighted_semantic_boundary
+        if not torch.isfinite(total):
+            raise RuntimeError("Non-finite FLAME3 partial-label total loss")
+        assert main_diagnostics is not None
+        components = {
+            "semantic_total": semantic_total,
+            "semantic_auxiliary": semantic_head_losses[0],
+            "semantic_main": semantic_head_losses[1],
+            "boundary": boundary_loss,
+            "semantic_boundary": semantic_boundary,
+            "weighted_semantic_boundary": weighted_semantic_boundary,
+            **main_diagnostics,
+        }
+        return total.unsqueeze(0), semantic_outputs, None, components
+
+
 def build_training_criterion(base_criterion: object, config: dict):
+    if config.get("TRAINING_OBJECTIVE") == "partial_label":
+        return PartialLabelTotalLoss(base_criterion, config)
     if config.get("TRAINING_OBJECTIVE") == "active_boundary":
         return ActiveBoundaryTotalLoss(base_criterion, config)
     if config.get("TRAINING_OBJECTIVE") == "fire_boundary":
@@ -764,6 +975,8 @@ __all__ = [
     "FireBoundaryTotalLoss",
     "FireRegionAuxiliaryLoss",
     "FireRegionTotalLoss",
+    "PartialLabelSetLoss",
+    "PartialLabelTotalLoss",
     "SmokeAuxiliaryLoss",
     "SmokeAwareTotalLoss",
     "build_training_criterion",
