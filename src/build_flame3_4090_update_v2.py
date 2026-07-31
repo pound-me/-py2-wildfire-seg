@@ -195,7 +195,10 @@ def main() -> None:
         copy_file(path, update_root / "project_support" / "docs" / path.name)
     scripts_root = project_root / "scripts"
     if scripts_root.is_dir():
-        for name in ("launch_flame3_30e_4090.ps1",):
+        for name in (
+            "launch_flame3_30e_4090.ps1",
+            "launch_flame3_100e_resume_4090.ps1",
+        ):
             path = scripts_root / name
             if path.is_file():
                 copy_file(path, update_root / "project_support" / "scripts" / name)
