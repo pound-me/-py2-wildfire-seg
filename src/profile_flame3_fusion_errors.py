@@ -654,6 +654,9 @@ def main() -> None:
                     "predicted_fire_pixels": int(pred_fire.sum()),
                     "predicted_smoke_pixels": int(((prediction == SMOKE_ID) & valid).sum()),
                     "predicted_fire_ratio": int(pred_fire.sum()) / max(int(valid.sum()), 1),
+                    "temperature_min_c": float(np.min(temperature)),
+                    "temperature_max_c": float(np.max(temperature)),
+                    "temperature_mean_c": float(np.mean(temperature)),
                     "fn_boundary_pixels": int((masks["false_negative"] & gt_boundary_band).sum()),
                     "fn_interior_pixels": int((masks["false_negative"] & ~gt_boundary_band).sum()),
                     "fp_near_boundary_pixels": int((masks["false_positive"] & gt_boundary_band).sum()),
@@ -682,6 +685,15 @@ def main() -> None:
         values["fp_share"] = values["false_positive"] / max(totals["fp"], 1)
     for values in fp_groups.values():
         values["false_positive_ratio"] = values["false_positive_pixels"] / max(values["nonfire_valid_pixels"], 1)
+        values["false_positive_share_of_all"] = values["false_positive_pixels"] / max(totals["fp"], 1)
+
+    nonempty_core_fp = fp_groups["fire_folder_nonempty_core"]["false_positive_pixels"]
+    nonempty_core_metrics = fire_metrics(
+        totals["tp"],
+        nonempty_core_fp,
+        totals["fn"],
+        0,
+    )
 
     boundary_summary = {
         **boundary_counts,
@@ -762,6 +774,38 @@ def main() -> None:
     for group_name, tiles in tiles_by_group.items():
         save_contact_sheet(output_dir / f"{group_name}_contact_sheet.jpg", tiles)
 
+    all_empty_tiles: list[np.ndarray] = []
+    empty_manual_rows: list[dict[str, object]] = []
+    for row in empty_rows:
+        key = str(row["sample_key"])
+        source = dataset_rows[key]
+        paths = dataset.paths_for(source)
+        rgb = np.asarray(Image.open(paths["rgb"]).convert("RGB"), dtype=np.uint8)
+        label = np.asarray(Image.open(paths["label"]), dtype=np.uint8)
+        prediction = np.asarray(Image.open(row["prediction_path"]), dtype=np.uint8)
+        caption = (
+            f"{key} | Tmax={float(row['temperature_max_c']):.2f}C | "
+            f"pred Fire={float(row['predicted_fire_ratio']) * 100:.2f}%"
+        )
+        all_empty_tiles.append(
+            contact_tile(rgb, error_overlay(rgb, label, prediction), caption)
+        )
+        empty_manual_rows.append({
+            "sample_key": key,
+            "temperature_max_c": row["temperature_max_c"],
+            "predicted_fire_pixels": row["predicted_fire_pixels"],
+            "predicted_fire_ratio": row["predicted_fire_ratio"],
+            "visible_flame_yes_no_uncertain": "",
+            "hot_or_smoldering_area_yes_no_uncertain": "",
+            "predicted_region_should_count_as_active_fire_yes_no_uncertain": "",
+            "notes": "",
+        })
+    save_contact_sheet(
+        output_dir / "all_16_empty_fire_core_contact_sheet.jpg",
+        all_empty_tiles,
+    )
+    write_csv(output_dir / "empty_fire_core_manual_review_checklist.csv", empty_manual_rows)
+
     summary = {
         "analysis_name": "flame3_fusion_validation_error_profile",
         "protocol": {
@@ -791,6 +835,14 @@ def main() -> None:
             "input_resolution_hw": [512, 640],
         },
         "overall_active_fire": overall,
+        "diagnostic_nonempty_fire_core_images_only": {
+            **nonempty_core_metrics,
+            "interpretation": (
+                "Descriptive sensitivity analysis only. It excludes empty-Fire-core "
+                "Fire-folder frames and No Fire frames and does not replace the "
+                "preregistered aggregate validation metric."
+            ),
+        },
         "gt_component_area_distribution": {
             "component_count": len(all_gt_areas),
             "minimum": int(min(all_gt_areas)),
@@ -803,6 +855,12 @@ def main() -> None:
         "predicted_component_buckets_using_gt_thresholds": predicted_component_aggregate,
         "boundary_vs_interior": boundary_summary,
         "false_positive_groups": fp_groups,
+        "empty_fire_core_interpretation": (
+            "An empty temperature pseudo-label means that the preregistered 200C "
+            "high-confidence seed was absent. It is not a human pixel-level negative "
+            "annotation. False-positive counts in this group mean disagreement with "
+            "the pseudo-label protocol and require manual semantic review."
+        ),
         "error_feature_distributions": feature_distributions,
         "worst_sample_keys": {
             group: [str(row["sample_key"]) for row in rows] for group, rows in selected_groups.items()
