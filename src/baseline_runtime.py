@@ -222,10 +222,24 @@ def load_pretrained_if_available(model: PIDNet, config: dict) -> int:
         source_state = checkpoint
 
     model_state = model.state_dict()
+    configured_skip_keys = config.get("PRETRAIN_SKIP_KEYS", [])
+    if isinstance(configured_skip_keys, str):
+        configured_skip_keys = [configured_skip_keys]
+    skip_keys = {str(key) for key in configured_skip_keys}
+    unknown_source_keys = sorted(skip_keys.difference(source_state))
+    unknown_model_keys = sorted(skip_keys.difference(model_state))
+    if unknown_source_keys or unknown_model_keys:
+        raise KeyError(
+            "Invalid PRETRAIN_SKIP_KEYS: "
+            f"missing_from_checkpoint={unknown_source_keys}, "
+            f"missing_from_model={unknown_model_keys}"
+        )
     matched_state = {
         key: value
         for key, value in source_state.items()
-        if key in model_state and model_state[key].shape == value.shape
+        if key in model_state
+        and model_state[key].shape == value.shape
+        and key not in skip_keys
     }
     model_state.update(matched_state)
     model.load_state_dict(model_state, strict=False)
@@ -233,6 +247,8 @@ def load_pretrained_if_available(model: PIDNet, config: dict) -> int:
         f"Pretrained initialization: {checkpoint_path} "
         f"({len(matched_state)} tensors matched)"
     )
+    if skip_keys:
+        print(f"Explicit pretrained skips: {sorted(skip_keys)}")
     return len(matched_state)
 
 

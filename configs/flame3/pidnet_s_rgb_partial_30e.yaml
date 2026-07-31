@@ -1,6 +1,6 @@
-PROJECTNAME: FLAME3_PIDNETS_FUSION_PARTIAL
-SESSIONAME: flame3_fusion_partial_baseline
-EXPERIMENT_GROUP: flame3_pidnet_s_fusion_partial
+PROJECTNAME: FLAME3_PIDNETS_RGB_PARTIAL
+SESSIONAME: flame3_rgb_partial_baseline
+EXPERIMENT_GROUP: flame3_pidnet_s_rgb_partial
 DEVICE: cuda:0
 NUM_WORKERS: 0
 SEED: 200
@@ -20,7 +20,7 @@ CLS_NAMES:
 - background
 - smoke
 - fire
-MODE: fusion
+MODE: rgb
 MULTISCALE: true
 FLIP: true
 BRIGHTNESS: false
@@ -44,7 +44,7 @@ CLASS_WEIGHTS:
 ALIGN_CORNERS: true
 AMP_INIT_SCALE: 128.0
 LR: 0.001
-BATCHSIZE: 4
+BATCHSIZE: 8
 EPOCHS: 30
 OPTIM: SGD
 SCHED: POLY
@@ -66,5 +66,6 @@ TRAINING_OBJECTIVE: partial_label
 SELECTION_METRIC: fire_iou
 METRIC_PROTOCOL: flame3_active_fire_partial_label
 FORMAL_TRAINING_GPU: NVIDIA GeForce RTX 4090
-PHYSICAL_BATCH_STATUS: pending_batch_4_or_8_engineering_test
+PHYSICAL_BATCH_STATUS: frozen_8_before_accuracy_training
+INPUT_STEM_INITIALIZATION: kaiming_random_exclude_imagenet
 TEST_SET_POLICY: sealed_until_method_freeze
