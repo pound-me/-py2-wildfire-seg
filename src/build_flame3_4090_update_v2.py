@@ -200,6 +200,7 @@ def main() -> None:
             "launch_flame3_100e_resume_4090.ps1",
             "launch_flame3_input_ablation_30e_4090.ps1",
             "launch_flame3_input_ablation_pair_30e_4090.ps1",
+            "launch_flame3_input_ablation_100e_resume_4090.ps1",
         ):
             path = scripts_root / name
             if path.is_file():
