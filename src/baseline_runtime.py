@@ -22,18 +22,6 @@ for import_path in (
 from datasets.wildfire import WildFire  # noqa: E402
 from models.pidnet import PIDNet  # noqa: E402
 from utils.total_loss import TotalLoss  # noqa: E402
-from custom_models.pidnet_lscm import PIDNetLSCM, PIDNetLSCMV2  # noqa: E402
-from custom_models.pidnet_lscm_v21 import PIDNetLSCMV21  # noqa: E402
-from custom_models.pidnet_lscm_v3 import PIDNetLSCMV3  # noqa: E402
-from custom_models.pidnet_lscm_v31 import PIDNetLSCMV31  # noqa: E402
-from custom_models.pidnet_deconv import PIDNetDEConv  # noqa: E402
-from custom_models.pidnet_dfm_mproto import (  # noqa: E402
-    PIDNetDEConvMProto,
-    PIDNetDFMMProto,
-)
-from custom_models.pidnet_dysample import PIDNetDySample  # noqa: E402
-from custom_models.pidnet_samf import PIDNetSAMF  # noqa: E402
-from custom_models.pidnet_tgm import PIDNetTGM  # noqa: E402
 from flame3_dataset import Flame3CsvDataset  # noqa: E402
 
 
@@ -122,30 +110,52 @@ def build_model(config: dict, augment: bool = True) -> PIDNet:
     if model_name == "pidnet_s":
         model_class = PIDNet
     elif model_name == "pidnet_s_lscm":
+        from custom_models.pidnet_lscm import PIDNetLSCM
+
         model_class = PIDNetLSCM
     elif model_name == "pidnet_s_lscm_v2":
+        from custom_models.pidnet_lscm import PIDNetLSCMV2
+
         model_class = PIDNetLSCMV2
     elif model_name == "pidnet_s_lscm_v21":
+        from custom_models.pidnet_lscm_v21 import PIDNetLSCMV21
+
         model_class = PIDNetLSCMV21
     elif model_name == "pidnet_s_lscm_v3":
+        from custom_models.pidnet_lscm_v3 import PIDNetLSCMV3
+
         model_class = PIDNetLSCMV3
     elif model_name == "pidnet_s_lscm_v31":
+        from custom_models.pidnet_lscm_v31 import PIDNetLSCMV31
+
         model_class = PIDNetLSCMV31
     elif model_name == "pidnet_s_deconv":
+        from custom_models.pidnet_deconv import PIDNetDEConv
+
         model_class = PIDNetDEConv
     elif model_name == "pidnet_s_dfm_mproto":
+        from custom_models.pidnet_dfm_mproto import PIDNetDFMMProto
+
         model_class = PIDNetDFMMProto
     elif model_name == "pidnet_s_deconv_mproto":
+        from custom_models.pidnet_dfm_mproto import PIDNetDEConvMProto
+
         model_class = PIDNetDEConvMProto
     elif model_name == "pidnet_s_dysample":
+        from custom_models.pidnet_dysample import PIDNetDySample
+
         model_class = PIDNetDySample
     elif model_name == "pidnet_s_freqfusion":
         from custom_models.pidnet_freqfusion import PIDNetFreqFusion
 
         model_class = PIDNetFreqFusion
     elif model_name == "pidnet_s_samf":
+        from custom_models.pidnet_samf import PIDNetSAMF
+
         model_class = PIDNetSAMF
     elif model_name == "pidnet_s_tgm":
+        from custom_models.pidnet_tgm import PIDNetTGM
+
         model_class = PIDNetTGM
     else:
         raise ValueError(f"Unsupported model: {model_name}")
