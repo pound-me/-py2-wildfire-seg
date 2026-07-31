@@ -21,16 +21,19 @@ def sha256_file(path: Path) -> str:
 
 
 def command_output(arguments: list[str], cwd: Path | None = None) -> str:
-    result = subprocess.run(
-        arguments,
-        cwd=cwd,
-        text=True,
-        encoding="utf-8",
-        errors="replace",
-        stdout=subprocess.PIPE,
-        stderr=subprocess.STDOUT,
-        check=False,
-    )
+    try:
+        result = subprocess.run(
+            arguments,
+            cwd=cwd,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            check=False,
+        )
+    except OSError as error:
+        return f"UNAVAILABLE: {error}"
     return result.stdout.strip()
 
 
@@ -72,6 +75,18 @@ def main() -> None:
     for path in source_files:
         source_digest.update(path.relative_to(project_root).as_posix().encode())
         source_digest.update(path.read_bytes())
+    repository_info_path = project_root / "repository_info_split_v2.json"
+    repository_info = (
+        json.loads(repository_info_path.read_text(encoding="utf-8"))
+        if repository_info_path.is_file()
+        else {}
+    )
+    git_branch = command_output(["git", "branch", "--show-current"], project_root)
+    git_commit = command_output(["git", "rev-parse", "HEAD"], project_root)
+    if git_branch.startswith("UNAVAILABLE") or git_branch.startswith("fatal"):
+        git_branch = str(repository_info.get("branch", git_branch))
+    if git_commit.startswith("UNAVAILABLE") or git_commit.startswith("fatal"):
+        git_commit = str(repository_info.get("commit", git_commit))
     payload = {
         "hostname": platform.node(),
         "platform": platform.platform(),
@@ -100,8 +115,9 @@ def main() -> None:
         "train_split_sha256": sha256_file(train_split),
         "val_split_sha256": sha256_file(val_split),
         "source_sha256": source_digest.hexdigest(),
-        "git_branch": command_output(["git", "branch", "--show-current"], project_root),
-        "git_commit": command_output(["git", "rev-parse", "HEAD"], project_root),
+        "git_branch": git_branch,
+        "git_commit": git_commit,
+        "repository_info_path": str(repository_info_path),
         "test_images_or_labels_read": False,
     }
     args.output.resolve().parent.mkdir(parents=True, exist_ok=True)
