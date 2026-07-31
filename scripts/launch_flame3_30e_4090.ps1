@@ -9,7 +9,7 @@ $BundleRoot = (Resolve-Path -LiteralPath $BundleRoot).Path
 $ProjectRoot = Join-Path $BundleRoot "project_support"
 $Config = Join-Path $ProjectRoot "configs\flame3\pidnet_s_fusion_partial_30e.yaml"
 $Pretrained = Join-Path $BundleRoot "weights\PIDNet_S_ImageNet.pth.tar"
-$BatchRecord = Join-Path $ProjectRoot "audit\flame3_4090_batch\flame3_4090_batch_preregistered.json"
+$BatchRecord = Join-Path $ProjectRoot "audit\flame3_4090_batch_final\flame3_4090_batch_preregistered.json"
 
 foreach ($Path in @($ProjectRoot, $Config, $Pretrained, $BatchRecord)) {
     if (-not (Test-Path -LiteralPath $Path)) {

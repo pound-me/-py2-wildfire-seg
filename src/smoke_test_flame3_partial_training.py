@@ -7,7 +7,7 @@ import time
 from pathlib import Path
 
 import torch
-from torch.utils.data import DataLoader, Subset
+from torch.utils.data import DataLoader
 
 from baseline_runtime import (
     TotalLoss,
@@ -29,22 +29,6 @@ def create_cuda_grad_scaler(init_scale: float):
         except TypeError:
             pass
     return torch.cuda.amp.GradScaler(enabled=True, init_scale=init_scale)
-
-
-def mixed_indices(dataset, batch_size: int) -> list[int]:
-    fire = [
-        index for index, row in enumerate(dataset.rows) if row["sample_class"] == "Fire"
-    ]
-    no_fire = [
-        index
-        for index, row in enumerate(dataset.rows)
-        if row["sample_class"] == "No Fire"
-    ]
-    no_fire_count = max(1, batch_size // 2)
-    fire_count = batch_size - no_fire_count
-    if len(fire) < fire_count or len(no_fire) < no_fire_count:
-        raise RuntimeError("Not enough Fire/No Fire samples for a mixed smoke-test batch")
-    return fire[:fire_count] + no_fire[:no_fire_count]
 
 
 def main() -> None:
@@ -78,23 +62,17 @@ def main() -> None:
         raise RuntimeError(f"Expected RTX 4090, got {gpu_name}")
 
     dataset = build_dataset(config, split="train")
-    indices = mixed_indices(dataset, args.batch_size)
+    loader_generator = torch.Generator()
+    loader_generator.manual_seed(int(config["SEED"]))
     loader = DataLoader(
-        Subset(dataset, indices),
+        dataset,
         batch_size=args.batch_size,
-        shuffle=False,
+        shuffle=True,
         num_workers=0,
         pin_memory=True,
         drop_last=True,
+        generator=loader_generator,
     )
-    images, labels, edges, names, flags = next(iter(loader))
-    images = images.to(device=device, dtype=torch.float, non_blocking=True)
-    labels = labels.to(device=device, dtype=torch.long, non_blocking=True)
-    edges = edges.to(device=device, dtype=torch.float, non_blocking=True)
-    flags = flags.to(device=device, dtype=torch.bool, non_blocking=True)
-    if int(flags.sum()) == 0 or int((~flags).sum()) == 0:
-        raise RuntimeError("Smoke-test batch must contain both Fire and No Fire images")
-
     model = build_model(config).to(device).train()
     matched_pretrained = load_pretrained_if_available(model, config)
     criterion = build_training_criterion(TotalLoss(config), config)
@@ -113,9 +91,25 @@ def main() -> None:
     measured_times: list[float] = []
     measured_losses: list[float] = []
     gradient_norms: list[float] = []
+    total_fire_folder_images = 0
+    total_no_fire_images = 0
+    input_shape: list[int] | None = None
+    iterator = iter(loader)
     torch.cuda.empty_cache()
     torch.cuda.reset_peak_memory_stats(device)
     for step in range(total_steps):
+        try:
+            images, labels, edges, names, flags = next(iterator)
+        except StopIteration:
+            iterator = iter(loader)
+            images, labels, edges, names, flags = next(iterator)
+        images = images.to(device=device, dtype=torch.float, non_blocking=True)
+        labels = labels.to(device=device, dtype=torch.long, non_blocking=True)
+        edges = edges.to(device=device, dtype=torch.float, non_blocking=True)
+        flags = flags.to(device=device, dtype=torch.bool, non_blocking=True)
+        input_shape = list(images.shape)
+        total_fire_folder_images += int(flags.sum())
+        total_no_fire_images += int((~flags).sum())
         optimizer.zero_grad(set_to_none=True)
         torch.cuda.synchronize(device)
         started = time.perf_counter()
@@ -161,6 +155,10 @@ def main() -> None:
             gradient_norms.append(float(gradient_norm.detach()))
 
     total_memory = torch.cuda.get_device_properties(device).total_memory
+    if total_fire_folder_images == 0 or total_no_fire_images == 0:
+        raise RuntimeError(
+            "Random-batch smoke test did not cover both Fire and No Fire images"
+        )
     peak_allocated = torch.cuda.max_memory_allocated(device)
     peak_reserved = torch.cuda.max_memory_reserved(device)
     median_step = statistics.median(measured_times)
@@ -168,9 +166,10 @@ def main() -> None:
         "status": "passed",
         "gpu": gpu_name,
         "batch_size": args.batch_size,
-        "input_shape": list(images.shape),
-        "fire_folder_images": int(flags.sum()),
-        "no_fire_images": int((~flags).sum()),
+        "input_shape": input_shape,
+        "fire_folder_images_seen": total_fire_folder_images,
+        "no_fire_images_seen": total_no_fire_images,
+        "distinct_random_augmented_batches": total_steps,
         "warmup_steps": args.warmup_steps,
         "measured_steps": args.measure_steps,
         "median_step_seconds": median_step,
