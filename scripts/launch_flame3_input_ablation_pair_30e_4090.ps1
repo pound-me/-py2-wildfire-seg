@@ -1,6 +1,7 @@
 param(
     [Parameter(Mandatory=$true)][string]$BundleRoot,
-    [string]$PythonExe = "python"
+    [string]$PythonExe = "python",
+    [string]$RunSuffix = ""
 )
 
 $ErrorActionPreference = "Stop"
@@ -14,10 +15,10 @@ if (-not (Test-Path -LiteralPath $Launcher)) {
     -BundleRoot $BundleRoot `
     -Mode "rgb" `
     -PythonExe $PythonExe `
-    -RunName "flame3_rgb_partial_30e_seed200"
+    -RunName "flame3_rgb_partial_30e_seed200$RunSuffix"
 
 & $Launcher `
     -BundleRoot $BundleRoot `
     -Mode "ir" `
     -PythonExe $PythonExe `
-    -RunName "flame3_ir_partial_30e_seed200"
+    -RunName "flame3_ir_partial_30e_seed200$RunSuffix"
