@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import hashlib
 import json
 import math
 from dataclasses import asdict, dataclass
@@ -51,6 +52,16 @@ def parse_args() -> argparse.Namespace:
         )
     )
     parser.add_argument("--data-root", type=Path, required=True)
+    parser.add_argument(
+        "--split-csv",
+        type=Path,
+        action="append",
+        required=True,
+        help=(
+            "Allowed non-test split CSV. Repeat for train and validation. "
+            "A file named test.csv is rejected."
+        ),
+    )
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--samples", type=int, default=30)
     parser.add_argument("--seed", type=int, default=200)
@@ -62,7 +73,33 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
-def collect_pairs(data_root: Path) -> dict[str, list[tuple[str, Path, Path]]]:
+def sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def load_allowed_sample_keys(split_csvs: list[Path]) -> set[str]:
+    allowed: set[str] = set()
+    for split_csv in split_csvs:
+        split_csv = split_csv.resolve()
+        if split_csv.name.lower() == "test.csv":
+            raise ValueError(f"Test split is sealed and cannot be audited: {split_csv}")
+        with split_csv.open("r", encoding="utf-8-sig", newline="") as handle:
+            rows = list(csv.DictReader(handle))
+        if not rows or "sample_key" not in rows[0]:
+            raise RuntimeError(f"Missing sample_key column: {split_csv}")
+        allowed.update(str(row["sample_key"]).strip() for row in rows)
+    if not allowed:
+        raise RuntimeError("No allowed samples were loaded from split CSV files")
+    return allowed
+
+
+def collect_pairs(
+    data_root: Path, allowed_sample_keys: set[str]
+) -> dict[str, list[tuple[str, Path, Path]]]:
     pairs: dict[str, list[tuple[str, Path, Path]]] = {}
     for class_name in CLASS_ORDER:
         rgb_dir = data_root / class_name / "RGB" / "Corrected FOV"
@@ -81,10 +118,16 @@ def collect_pairs(data_root: Path) -> dict[str, list[tuple[str, Path, Path]]]:
                 f"Pair mismatch for {class_name}: missing_rgb={missing_rgb[:10]}, "
                 f"missing_thermal={missing_thermal[:10]}"
             )
+        class_key = class_name.lower().replace(" ", "_")
         pairs[class_name] = [
             (stem, rgb_by_stem[stem], thermal_by_stem[stem])
             for stem in sorted(rgb_by_stem)
+            if f"{class_key}/{stem}" in allowed_sample_keys
         ]
+        if not pairs[class_name]:
+            raise RuntimeError(
+                f"No allowed {class_name} pairs remain after applying split whitelist"
+            )
     return pairs
 
 
@@ -454,9 +497,26 @@ def summarize(results: list[RegistrationResult], args: argparse.Namespace) -> di
             "scale_x": float(np.median(scale_x)) if scale_x.size else None,
             "scale_y": float(np.median(scale_y)) if scale_y.size else None,
         }
+    final_status = (
+        "pending_manual_overlay_review"
+        if recommend
+        else "rejected_by_numeric_rule"
+    )
+    note = (
+        "Numeric criteria passed, but a global affine still requires manual "
+        "review of every sampled overlay."
+        if recommend
+        else "Numeric criteria failed; a global affine is rejected and manual "
+        "review cannot override this result."
+    )
 
     return {
         "data_root": str(args.data_root.resolve()),
+        "split_csvs": [str(path.resolve()) for path in args.split_csv],
+        "split_csv_sha256": {
+            str(path.resolve()): sha256(path.resolve()) for path in args.split_csv
+        },
+        "test_split_touched": False,
         "sample_count": len(results),
         "sampling_seed": int(args.seed),
         "class_counts": {
@@ -490,11 +550,8 @@ def summarize(results: list[RegistrationResult], args: argparse.Namespace) -> di
         },
         "global_affine_recommended_by_numeric_rule": recommend,
         "global_affine_candidate": candidate,
-        "final_application_status": "pending_manual_overlay_review",
-        "note": (
-            "A global affine must not be applied from numeric evidence alone. "
-            "Manual review of all sampled overlays is required."
-        ),
+        "final_application_status": final_status,
+        "note": note,
     }
 
 
@@ -542,7 +599,7 @@ def save_markdown(summary: dict[str, object], output_path: Path) -> None:
     lines = [
         "# FLAME3 配准审计（自动估计阶段）",
         "",
-        "本审计只读取原始数据，不修改RGB、热图、温度TIFF或标签。",
+        "本审计只读取train/validation白名单内的原始数据，不修改RGB、热图、温度TIFF或标签。",
         "",
         "## 冻结判定规则",
         "",
@@ -559,7 +616,7 @@ def save_markdown(summary: dict[str, object], output_path: Path) -> None:
         f"- 数值规则是否推荐全局仿射：`{decision}`。",
         f"- 候选全局参数（仅供人工复核）：`{candidate}`。",
         f"- layer2等效偏移：dx={summary['dx_layer2_px']}，dy={summary['dy_layer2_px']}。",
-        "- 最终应用状态：`pending_manual_overlay_review`。",
+        f"- 最终应用状态：`{summary['final_application_status']}`。",
         "",
         "详细数值见 `registration_metrics.csv` 和 `registration_summary.json`，",
         "人工检查图见 `registration_contact_sheet.jpg` 与 `visuals/`。",
@@ -577,7 +634,9 @@ def main() -> None:
     visual_dir = args.output / "visuals"
     visual_dir.mkdir(parents=True, exist_ok=True)
 
-    pairs = collect_pairs(args.data_root)
+    args.split_csv = [path.resolve() for path in args.split_csv]
+    allowed_sample_keys = load_allowed_sample_keys(args.split_csv)
+    pairs = collect_pairs(args.data_root, allowed_sample_keys)
     selected = stratified_seeded_sample(pairs, args.samples, args.seed)
     results: list[RegistrationResult] = []
     visual_paths: list[Path] = []
