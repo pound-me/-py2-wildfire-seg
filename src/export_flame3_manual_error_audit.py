@@ -393,7 +393,7 @@ def main() -> None:
         "",
         "固定内容：30个FN、20个FP、20个TP；只读取split v2 validation。",
         "",
-        "`primary_cause`只允许填写以下一个主因：",
+        "FN/FP 的 `primary_cause` 必须填写以下一个主因；TP 的该列可留空：",
         "",
         "```text",
         "小火/远距离火",

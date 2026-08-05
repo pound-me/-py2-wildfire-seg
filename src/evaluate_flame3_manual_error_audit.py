@@ -44,8 +44,10 @@ def main() -> None:
         raise RuntimeError(f"Unexpected checklist counts: {counts}")
     for row in rows:
         cause = row["primary_cause"].strip()
-        if cause not in ALLOWED_CAUSES:
+        if row["category"] in {"FN", "FP"} and cause not in ALLOWED_CAUSES:
             raise ValueError(f"Invalid or missing primary_cause for {row['audit_id']}: {cause!r}")
+        if row["category"] == "TP" and cause and cause not in ALLOWED_CAUSES:
+            raise ValueError(f"Invalid optional primary_cause for {row['audit_id']}: {cause!r}")
         for field in (
             "visible_flame_yes_no_uncertain",
             "registration_mismatch_yes_no_uncertain",
