@@ -28,6 +28,8 @@ class RegistrationResult:
     similarity_gain: float
     dx_px: float | None
     dy_px: float | None
+    dx_layer2_px: float | None
+    dy_layer2_px: float | None
     rotation_deg: float | None
     scale_x: float | None
     scale_y: float | None
@@ -113,15 +115,18 @@ def allocate_sample_counts(
     return counts
 
 
-def stratified_even_sample(
-    pairs: dict[str, list[tuple[str, Path, Path]]], total: int
+def stratified_seeded_sample(
+    pairs: dict[str, list[tuple[str, Path, Path]]], total: int, seed: int
 ) -> list[tuple[str, str, Path, Path]]:
     counts = allocate_sample_counts(pairs, total)
+    generator = np.random.default_rng(int(seed))
     selected: list[tuple[str, str, Path, Path]] = []
     for class_name in CLASS_ORDER:
         class_pairs = pairs[class_name]
         count = min(counts[class_name], len(class_pairs))
-        indices = np.linspace(0, len(class_pairs) - 1, count, dtype=int)
+        indices = np.sort(
+            generator.choice(len(class_pairs), size=count, replace=False)
+        )
         for index in indices.tolist():
             stem, rgb_path, thermal_path = class_pairs[index]
             selected.append((class_name, stem, rgb_path, thermal_path))
@@ -268,6 +273,8 @@ def estimate_registration(
         similarity_gain=gain,
         dx_px=dx,
         dy_px=dy,
+        dx_layer2_px=(dx / 8.0 if dx is not None else None),
+        dy_layer2_px=(dy / 8.0 if dy is not None else None),
         rotation_deg=rotation,
         scale_x=scale_x,
         scale_y=scale_y,
@@ -391,7 +398,8 @@ def summarize(results: list[RegistrationResult], args: argparse.Namespace) -> di
     scale_y = values("scale_y", source)
     gains = values("similarity_gain", source)
 
-    sufficient = len(source) >= max(10, int(math.ceil(0.4 * len(results))))
+    minimum_source_count = max(12, int(math.ceil(0.6 * len(results))))
+    sufficient = len(source) >= minimum_source_count
     stable_translation = (
         dx.size > 0
         and dy.size > 0
@@ -450,6 +458,7 @@ def summarize(results: list[RegistrationResult], args: argparse.Namespace) -> di
     return {
         "data_root": str(args.data_root.resolve()),
         "sample_count": len(results),
+        "sampling_seed": int(args.seed),
         "class_counts": {
             name: sum(item.sample_class == name for item in results)
             for name in CLASS_ORDER
@@ -462,12 +471,14 @@ def summarize(results: list[RegistrationResult], args: argparse.Namespace) -> di
         "statistics_source_count": len(source),
         "dx_px": stats("dx_px", source),
         "dy_px": stats("dy_px", source),
+        "dx_layer2_px": stats("dx_layer2_px", source),
+        "dy_layer2_px": stats("dy_layer2_px", source),
         "rotation_deg": stats("rotation_deg", source),
         "scale_x": stats("scale_x", source),
         "scale_y": stats("scale_y", source),
         "similarity_gain": stats("similarity_gain", source),
         "decision_rule": {
-            "minimum_source_count": max(10, int(math.ceil(0.4 * len(results)))),
+            "minimum_source_count": minimum_source_count,
             "translation_mad_max_px": 1.5,
             "rotation_mad_max_deg": 0.20,
             "scale_mad_max": 0.003,
@@ -495,6 +506,18 @@ def save_csv(results: list[RegistrationResult], path: Path) -> None:
         writer.writerows(rows)
 
 
+def save_cv2_image(path: Path, image: np.ndarray) -> None:
+    """Write an OpenCV image through bytes so Windows Unicode paths work."""
+    suffix = path.suffix.lower() or ".jpg"
+    params: list[int] = []
+    if suffix in {".jpg", ".jpeg"}:
+        params = [cv2.IMWRITE_JPEG_QUALITY, 92]
+    ok, encoded = cv2.imencode(suffix, image, params)
+    if not ok:
+        raise RuntimeError(f"Failed to encode visualization: {path}")
+    path.write_bytes(encoded.tobytes())
+
+
 def save_contact_sheet(visual_paths: list[Path], output_path: Path) -> None:
     thumbs: list[Image.Image] = []
     for path in visual_paths:
@@ -519,14 +542,15 @@ def save_markdown(summary: dict[str, object], output_path: Path) -> None:
     lines = [
         "# FLAME3 配准审计（自动估计阶段）",
         "",
-        "本审计只读取原始数据，不修改 RGB 或热红外文件。",
+        "本审计只读取原始数据，不修改RGB、热图、温度TIFF或标签。",
         "",
         "## 冻结判定规则",
         "",
-        "- 抽样覆盖 Fire 与 No Fire，并按文件序列均匀取样。",
-        "- 使用 RGB/热红外梯度图进行仿射 ECC 估计；超出预注册范围的变换判为不可信。",
-        "- 只有样本数充足、偏移方向稳定、离散度低、偏移达到实质幅度且相似度有稳定提升时，数值规则才推荐全局仿射。",
-        "- 即使数值规则推荐，也必须人工检查全部叠图后才能启用；禁止逐图用验证结果拟合变换。",
+        "- 固定seed，Fire与No Fire平衡、无放回抽样。",
+        "- 100对审计至少需要60个可用估计。",
+        "- 平移MAD不超过1.5像素、旋转MAD不超过0.2度、尺度MAD不超过0.003。",
+        "- 相似度增益中位数至少0.01，并且必须完成人工叠图复核。",
+        "- 数值规则和人工复核未同时通过时，不允许应用统一仿射。",
         "",
         "## 自动结果",
         "",
@@ -534,6 +558,7 @@ def save_markdown(summary: dict[str, object], output_path: Path) -> None:
         f"- 置信度分布：{summary['confidence_counts']}。",
         f"- 数值规则是否推荐全局仿射：`{decision}`。",
         f"- 候选全局参数（仅供人工复核）：`{candidate}`。",
+        f"- layer2等效偏移：dx={summary['dx_layer2_px']}，dy={summary['dy_layer2_px']}。",
         "- 最终应用状态：`pending_manual_overlay_review`。",
         "",
         "详细数值见 `registration_metrics.csv` 和 `registration_summary.json`，",
@@ -553,7 +578,7 @@ def main() -> None:
     visual_dir.mkdir(parents=True, exist_ok=True)
 
     pairs = collect_pairs(args.data_root)
-    selected = stratified_even_sample(pairs, args.samples)
+    selected = stratified_seeded_sample(pairs, args.samples, args.seed)
     results: list[RegistrationResult] = []
     visual_paths: list[Path] = []
     for class_name, stem, rgb_path, thermal_path in selected:
@@ -564,8 +589,7 @@ def main() -> None:
         visual = make_visualization(result, rgb_bgr, thermal, warp)
         safe_class = class_name.lower().replace(" ", "_")
         visual_path = visual_dir / f"{safe_class}_{stem}_registration.jpg"
-        if not cv2.imwrite(str(visual_path), visual):
-            raise RuntimeError(f"Failed to save visualization: {visual_path}")
+        save_cv2_image(visual_path, visual)
         visual_paths.append(visual_path)
 
     summary = summarize(results, args)
