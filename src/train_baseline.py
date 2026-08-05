@@ -53,6 +53,252 @@ def collect_model_diagnostics(model: torch.nn.Module) -> dict | None:
     return None
 
 
+def model_uses_modality_aux(config: dict) -> bool:
+    return str(config.get("MODEL", "")) == "pidnet_s_mrff"
+
+
+def extract_main_logits(outputs) -> torch.Tensor:
+    if isinstance(outputs, (list, tuple)):
+        if len(outputs) < 2:
+            raise RuntimeError("PIDNet training outputs do not contain main logits.")
+        return outputs[1]
+    if isinstance(outputs, torch.Tensor):
+        return outputs
+    raise TypeError(f"Unsupported model output type: {type(outputs)!r}")
+
+
+def nts_weight_for_step(
+    config: dict,
+    epoch: int,
+    batch_index: int,
+    epoch_batches: int,
+    training: bool,
+) -> float:
+    if not bool(config.get("MRFF_NTS_ENABLED", False)):
+        return 0.0
+    target = float(config.get("MRFF_NTS_WEIGHT", 0.02))
+    if target <= 0.0:
+        raise ValueError("MRFF_NTS_WEIGHT must be positive when NTS is enabled.")
+    if epoch <= 0:
+        return 0.0
+    if epoch == 1:
+        if not training:
+            return target
+        return target * min((batch_index + 1) / max(epoch_batches, 1), 1.0)
+    return target
+
+
+def compute_nts_loss(
+    main_logits: torch.Tensor,
+    modality_weights: torch.Tensor,
+    fire_folder_flags: torch.Tensor,
+    fire_class: int,
+) -> tuple[torch.Tensor, torch.Tensor]:
+    """Suppress thermal reliance only at No-Fire pixels predicted as Fire."""
+    if modality_weights.ndim != 4 or modality_weights.shape[1] != 2:
+        raise ValueError(
+            "MRFF modality_weights must be [batch, 2, height, width], got "
+            f"{tuple(modality_weights.shape)}."
+        )
+    if main_logits.ndim != 4 or main_logits.shape[0] != modality_weights.shape[0]:
+        raise ValueError("Main logits and MRFF weights use incompatible batches.")
+    flags = fire_folder_flags.reshape(-1).to(
+        device=main_logits.device,
+        dtype=torch.bool,
+    )
+    if flags.numel() != main_logits.shape[0]:
+        raise ValueError("Fire-folder flags do not match the MRFF batch size.")
+
+    probabilities = torch.softmax(main_logits.float(), dim=1)
+    p_fire = probabilities[:, fire_class]
+    predicted_fire = main_logits.argmax(dim=1).eq(fire_class)
+    thermal_weight = F.interpolate(
+        modality_weights[:, 1:2].float(),
+        size=main_logits.shape[-2:],
+        mode="bilinear",
+        align_corners=False,
+    ).squeeze(1)
+    no_fire_images = (~flags).view(-1, 1, 1)
+    selected = no_fire_images & predicted_fire
+    zero = thermal_weight.sum() * 0.0
+    loss = (
+        (p_fire.detach() * thermal_weight)[selected].mean()
+        if bool(selected.any())
+        else zero
+    )
+    return loss, selected.sum().to(dtype=torch.float32)
+
+
+class ModalityGateAccumulator:
+    """Streaming MRFF gate statistics with fixed-bin distributions."""
+
+    def __init__(self, bins: int = 20) -> None:
+        if bins <= 0:
+            raise ValueError("Gate histogram bins must be positive.")
+        self.bins = int(bins)
+        self.count = [0, 0]
+        self.total: list[torch.Tensor | None] = [None, None]
+        self.square_total: list[torch.Tensor | None] = [None, None]
+        self.histograms = [torch.zeros(self.bins, dtype=torch.int64) for _ in range(2)]
+        self.maximum_sum_error = 0.0
+        self.thermal_groups = {
+            "fire_core": {"count": 0, "total": None},
+            "no_fire": {"count": 0, "total": None},
+            "fire_file_noncore": {"count": 0, "total": None},
+        }
+
+    def update(
+        self,
+        weights: torch.Tensor,
+        labels: torch.Tensor,
+        fire_folder_flags: torch.Tensor,
+        fire_class: int,
+        background_class: int,
+        ignore_label: int,
+    ) -> None:
+        weights_fp32 = weights.detach().float()
+        if weights_fp32.ndim != 4 or weights_fp32.shape[1] != 2:
+            raise ValueError("MRFF gate weights must have shape [B,2,H,W].")
+        sum_error = float(
+            (weights_fp32.sum(dim=1) - 1.0).abs().max().cpu()
+        )
+        self.maximum_sum_error = max(self.maximum_sum_error, sum_error)
+        if sum_error > 1e-5:
+            raise RuntimeError(f"MRFF modality weights do not sum to one: {sum_error}")
+        if self.histograms[0].device != weights_fp32.device:
+            self.histograms = [
+                histogram.to(device=weights_fp32.device)
+                for histogram in self.histograms
+            ]
+
+        resized_labels = F.interpolate(
+            labels.unsqueeze(1).float(),
+            size=weights_fp32.shape[-2:],
+            mode="nearest",
+        )[:, 0].long()
+        valid = resized_labels.ne(ignore_label)
+        for modality in range(2):
+            values = weights_fp32[:, modality][valid]
+            if values.numel() == 0:
+                continue
+            self.count[modality] += int(values.numel())
+            value_sum = values.sum()
+            square_sum = values.square().sum()
+            self.total[modality] = (
+                value_sum
+                if self.total[modality] is None
+                else self.total[modality] + value_sum
+            )
+            self.square_total[modality] = (
+                square_sum
+                if self.square_total[modality] is None
+                else self.square_total[modality] + square_sum
+            )
+            histogram = torch.histc(
+                values,
+                bins=self.bins,
+                min=0.0,
+                max=1.0,
+            ).to(dtype=torch.int64)
+            self.histograms[modality] += histogram
+
+        flags = fire_folder_flags.reshape(-1).to(
+            device=labels.device,
+            dtype=torch.bool,
+        )
+        if flags.numel() != labels.shape[0]:
+            raise ValueError("Fire-folder flags do not match gate statistics batch.")
+        thermal = weights_fp32[:, 1]
+        group_masks = {
+            "fire_core": resized_labels.eq(fire_class) & valid,
+            "no_fire": (~flags).view(-1, 1, 1) & valid,
+            "fire_file_noncore": (
+                flags.view(-1, 1, 1)
+                & resized_labels.eq(background_class)
+                & valid
+            ),
+        }
+        for name, mask in group_masks.items():
+            values = thermal[mask]
+            self.thermal_groups[name]["count"] += int(values.numel())
+            value_sum = values.sum()
+            existing = self.thermal_groups[name]["total"]
+            self.thermal_groups[name]["total"] = (
+                value_sum if existing is None else existing + value_sum
+            )
+
+    def _quantile_from_histogram(self, modality: int, quantile: float) -> float:
+        histogram = self.histograms[modality]
+        count = int(histogram.sum())
+        if count == 0:
+            return 0.0
+        target = max(int(np.ceil(quantile * count)), 1)
+        index = int(torch.searchsorted(histogram.cumsum(0), target).item())
+        index = min(index, self.bins - 1)
+        return (index + 0.5) / self.bins
+
+    def finalize(self) -> dict:
+        modality_names = ("rgb", "thermal")
+        modalities: dict[str, dict] = {}
+        for index, name in enumerate(modality_names):
+            count = max(self.count[index], 1)
+            total = (
+                float(self.total[index].detach().cpu())
+                if self.total[index] is not None
+                else 0.0
+            )
+            square_total = (
+                float(self.square_total[index].detach().cpu())
+                if self.square_total[index] is not None
+                else 0.0
+            )
+            mean = total / count
+            variance = max(square_total / count - mean**2, 0.0)
+            modalities[name] = {
+                "count": self.count[index],
+                "mean": mean,
+                "std": variance**0.5,
+                "quantiles_approx": {
+                    "p05": self._quantile_from_histogram(index, 0.05),
+                    "p25": self._quantile_from_histogram(index, 0.25),
+                    "p50": self._quantile_from_histogram(index, 0.50),
+                    "p75": self._quantile_from_histogram(index, 0.75),
+                    "p95": self._quantile_from_histogram(index, 0.95),
+                },
+                "histogram_0_to_1_20_bins": self.histograms[index].cpu().tolist(),
+            }
+        thermal_groups = {
+            name: {
+                "count": values["count"],
+                "mean": (
+                    float(values["total"].detach().cpu())
+                    if values["total"] is not None
+                    else 0.0
+                ) / max(values["count"], 1),
+            }
+            for name, values in self.thermal_groups.items()
+        }
+        thermal = modalities["thermal"]
+        return {
+            "modalities": modalities,
+            "thermal_weight_by_region": thermal_groups,
+            "weight_sum_max_abs_error": self.maximum_sum_error,
+            "histogram_bin_edges": [
+                index / self.bins for index in range(self.bins + 1)
+            ],
+            "collapse_diagnostic": {
+                "all_rgb_like": (
+                    thermal["mean"] < 0.05
+                    and thermal["quantiles_approx"]["p95"] < 0.10
+                ),
+                "all_thermal_like": (
+                    thermal["mean"] > 0.95
+                    and thermal["quantiles_approx"]["p05"] > 0.90
+                ),
+            },
+        }
+
+
 def update_confusion_matrix(
     confusion: torch.Tensor,
     logits: torch.Tensor,
@@ -355,7 +601,7 @@ def run_training_epoch(
     lr_total_epochs: int,
     max_batches: int | None,
     use_amp: bool,
-) -> tuple[dict, float, dict[str, float], dict | None]:
+) -> tuple[dict, float, dict[str, float], dict | None, dict | None]:
     model.train()
     device = torch.device(config["DEVICE"])
     confusion = torch.zeros(
@@ -373,6 +619,11 @@ def run_training_epoch(
     completed_batches = 0
     epoch_batches = min(len(loader), max_batches) if max_batches else len(loader)
     total_steps = max(lr_total_epochs * epoch_batches, 1)
+    gate_accumulator = (
+        ModalityGateAccumulator()
+        if model_uses_modality_aux(config)
+        else None
+    )
     if criterion.objective_name == "ema_mproto":
         criterion.begin_epoch()
 
@@ -421,7 +672,11 @@ def run_training_epoch(
             dtype=torch.float16,
             enabled=use_amp,
         ):
-            outputs = model(images)
+            modality_aux = None
+            if gate_accumulator is not None:
+                outputs, modality_aux = model(images, return_aux=True)
+            else:
+                outputs = model(images)
             if criterion.objective_name == "partial_label":
                 losses, metric_outputs, _, loss_components = criterion.get_loss(
                     outputs,
@@ -447,6 +702,37 @@ def run_training_epoch(
                     labels,
                     edges,
                 )
+            if bool(config.get("MRFF_NTS_ENABLED", False)):
+                if modality_aux is None or fire_folder_flags is None:
+                    raise RuntimeError(
+                        "NTS requires MRFF auxiliary weights and FLAME3 No-Fire flags."
+                    )
+                nts_loss, nts_selected_pixels = compute_nts_loss(
+                    extract_main_logits(outputs),
+                    modality_aux["modality_weights"],
+                    fire_folder_flags,
+                    int(config.get("FIRE_CLASS_INDEX", 2)),
+                )
+                nts_weight = nts_weight_for_step(
+                    config,
+                    epoch,
+                    batch_index,
+                    epoch_batches,
+                    training=True,
+                )
+                weighted_nts = nts_loss * nts_weight
+                losses = losses + weighted_nts
+                loss_components = {
+                    **loss_components,
+                    "nts_loss": nts_loss,
+                    "nts_weight": torch.tensor(
+                        nts_weight,
+                        device=losses.device,
+                        dtype=torch.float32,
+                    ),
+                    "weighted_nts": weighted_nts,
+                    "nts_selected_pixels": nts_selected_pixels,
+                }
             loss = losses.mean()
 
         if not torch.isfinite(loss):
@@ -457,6 +743,18 @@ def run_training_epoch(
         scaler.scale(loss).backward()
         scaler.step(optimizer)
         scaler.update()
+
+        if gate_accumulator is not None:
+            if modality_aux is None or fire_folder_flags is None:
+                raise RuntimeError("MRFF gate diagnostics require partial-label flags.")
+            gate_accumulator.update(
+                modality_aux["modality_weights"],
+                labels,
+                fire_folder_flags,
+                int(config.get("FIRE_CLASS_INDEX", 2)),
+                int(config.get("BACKGROUND_CLASS_INDEX", 0)),
+                int(config["IGNORE_LABEL"]),
+            )
 
         if criterion.objective_name == "partial_label":
             update_partial_fire_statistics(
@@ -511,7 +809,18 @@ def run_training_epoch(
         if criterion.objective_name == "ema_mproto"
         else None
     )
-    return metrics, loss_sum / denominator, component_averages, prototype_health
+    gate_statistics = (
+        gate_accumulator.finalize()
+        if gate_accumulator is not None
+        else None
+    )
+    return (
+        metrics,
+        loss_sum / denominator,
+        component_averages,
+        prototype_health,
+        gate_statistics,
+    )
 
 
 @torch.inference_mode()
@@ -523,7 +832,7 @@ def run_validation(
     epoch: int,
     max_batches: int | None,
     use_amp: bool,
-) -> tuple[dict, float, dict[str, float]]:
+) -> tuple[dict, float, dict[str, float], dict | None]:
     model.eval()
     device = torch.device(config["DEVICE"])
     confusion = torch.zeros(
@@ -539,6 +848,11 @@ def run_validation(
         "target": 0,
     }
     completed_batches = 0
+    gate_accumulator = (
+        ModalityGateAccumulator()
+        if model_uses_modality_aux(config)
+        else None
+    )
 
     for batch_index, batch in enumerate(loader):
         if max_batches is not None and batch_index >= max_batches:
@@ -577,7 +891,11 @@ def run_validation(
             dtype=torch.float16,
             enabled=use_amp,
         ):
-            outputs = model(images)
+            modality_aux = None
+            if gate_accumulator is not None:
+                outputs, modality_aux = model(images, return_aux=True)
+            else:
+                outputs = model(images)
             if criterion.objective_name == "partial_label":
                 losses, metric_outputs, _, loss_components = criterion.get_loss(
                     outputs,
@@ -603,7 +921,49 @@ def run_validation(
                     labels,
                     edges,
                 )
+            if bool(config.get("MRFF_NTS_ENABLED", False)):
+                if modality_aux is None or fire_folder_flags is None:
+                    raise RuntimeError(
+                        "NTS validation requires MRFF weights and No-Fire flags."
+                    )
+                nts_loss, nts_selected_pixels = compute_nts_loss(
+                    extract_main_logits(outputs),
+                    modality_aux["modality_weights"],
+                    fire_folder_flags,
+                    int(config.get("FIRE_CLASS_INDEX", 2)),
+                )
+                nts_weight = nts_weight_for_step(
+                    config,
+                    epoch,
+                    batch_index,
+                    len(loader),
+                    training=False,
+                )
+                weighted_nts = nts_loss * nts_weight
+                losses = losses + weighted_nts
+                loss_components = {
+                    **loss_components,
+                    "nts_loss": nts_loss,
+                    "nts_weight": torch.tensor(
+                        nts_weight,
+                        device=losses.device,
+                        dtype=torch.float32,
+                    ),
+                    "weighted_nts": weighted_nts,
+                    "nts_selected_pixels": nts_selected_pixels,
+                }
             loss = losses.mean()
+        if gate_accumulator is not None:
+            if modality_aux is None or fire_folder_flags is None:
+                raise RuntimeError("MRFF gate diagnostics require partial-label flags.")
+            gate_accumulator.update(
+                modality_aux["modality_weights"],
+                labels,
+                fire_folder_flags,
+                int(config.get("FIRE_CLASS_INDEX", 2)),
+                int(config.get("BACKGROUND_CLASS_INDEX", 0)),
+                int(config["IGNORE_LABEL"]),
+            )
         if criterion.objective_name == "partial_label":
             update_partial_fire_statistics(
                 partial_statistics,
@@ -647,7 +1007,12 @@ def run_validation(
     component_averages = {
         name: value / denominator for name, value in component_sums.items()
     }
-    return metrics, loss_sum / denominator, component_averages
+    gate_statistics = (
+        gate_accumulator.finalize()
+        if gate_accumulator is not None
+        else None
+    )
+    return metrics, loss_sum / denominator, component_averages, gate_statistics
 
 
 def save_checkpoint(
@@ -806,6 +1171,10 @@ def main() -> None:
     )
 
     model = build_model(config)
+    if bool(config.get("MRFF_NTS_ENABLED", False)) and not model_uses_modality_aux(
+        config
+    ):
+        raise ValueError("MRFF_NTS_ENABLED requires MODEL=pidnet_s_mrff.")
     matched_pretrained = (
         0 if args.resume else load_pretrained_if_available(model, config)
     )
@@ -899,6 +1268,19 @@ def main() -> None:
             "Fire-folder non-core={Background,Smoke}, No Fire=hard Background"
         )
         print(f"Checkpoint selection metric: {selection_metric_name}")
+        if model_uses_modality_aux(config):
+            print(
+                "MRFF: separate RGB/IR stems with explicit per-pixel modality "
+                "weights and epoch gate diagnostics"
+            )
+            print(
+                "NTS: "
+                + (
+                    f"enabled, target weight={float(config.get('MRFF_NTS_WEIGHT', 0.02)):.4f}"
+                    if bool(config.get("MRFF_NTS_ENABLED", False))
+                    else "disabled for standalone MRFF screening"
+                )
+            )
     elif criterion.objective_name == "smoke_binary":
         print(f"Smoke auxiliary loss weight: {criterion.auxiliary_weight:.4f}")
     elif criterion.objective_name == "fire_boundary":
@@ -989,6 +1371,7 @@ def main() -> None:
                 train_loss,
                 train_loss_components,
                 prototype_health,
+                train_gate_statistics,
             ) = run_training_epoch(
                 model,
                 train_loader,
@@ -1001,7 +1384,12 @@ def main() -> None:
                 args.max_train_batches,
                 args.amp,
             )
-            validation_metrics, validation_loss, validation_loss_components = (
+            (
+                validation_metrics,
+                validation_loss,
+                validation_loss_components,
+                validation_gate_statistics,
+            ) = (
                 run_validation(
                 model,
                 validation_loader,
@@ -1028,6 +1416,14 @@ def main() -> None:
                     torch.cuda.max_memory_allocated(device) / 1024**2
                 ),
                 "prototype_health": prototype_health,
+                "modality_gate": (
+                    {
+                        "train": train_gate_statistics,
+                        "validation": validation_gate_statistics,
+                    }
+                    if train_gate_statistics is not None
+                    else None
+                ),
                 "model_diagnostics": collect_model_diagnostics(model),
                 "selection_metric_name": selection_metric_name,
                 "selection_metric_value": validation_metrics[
@@ -1079,6 +1475,24 @@ def main() -> None:
                         f"region={model_diagnostics['region_scale']:.6f}, "
                         f"frontier={model_diagnostics['frontier_scale']:.6f}"
                     )
+                if train_gate_statistics is not None:
+                    train_thermal = train_gate_statistics["modalities"]["thermal"]
+                    val_thermal = validation_gate_statistics["modalities"]["thermal"]
+                    print(
+                        "  MRFF thermal gate mean/std: "
+                        f"train={train_thermal['mean']:.4f}/{train_thermal['std']:.4f}, "
+                        f"val={val_thermal['mean']:.4f}/{val_thermal['std']:.4f}"
+                    )
+                    if bool(config.get("MRFF_NTS_ENABLED", False)):
+                        print(
+                            "  NTS loss/weight/selected px: "
+                            f"train={train_loss_components['nts_loss']:.6f}/"
+                            f"{train_loss_components['nts_weight']:.6f}/"
+                            f"{train_loss_components['nts_selected_pixels']:.1f}, "
+                            f"val={validation_loss_components['nts_loss']:.6f}/"
+                            f"{validation_loss_components['nts_weight']:.6f}/"
+                            f"{validation_loss_components['nts_selected_pixels']:.1f}"
+                        )
             elif criterion.objective_name == "smoke_binary":
                 print(
                     "  smoke auxiliary: "
