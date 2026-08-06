@@ -63,6 +63,36 @@ def read_json(path: Path) -> dict:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+def effective_pretrained_provenance(run: Path, environment: dict, seed: int) -> dict:
+    native_hash = environment.get("pretrained_sha256")
+    if native_hash:
+        return {
+            "sha256": str(native_hash),
+            "source": "environment.json",
+            "resume_provenance": None,
+        }
+    provenance_path = run / "resume_provenance.json"
+    if not provenance_path.is_file():
+        return {
+            "sha256": None,
+            "source": "missing",
+            "resume_provenance": None,
+        }
+    provenance = read_json(provenance_path)
+    if int(provenance.get("checkpoint_seed", -1)) != seed:
+        raise RuntimeError(f"Resume provenance seed mismatch: {provenance_path}")
+    if int(provenance.get("checkpoint_epoch", 0)) <= 0:
+        raise RuntimeError(f"Invalid resume checkpoint epoch: {provenance_path}")
+    pretrained_hash = provenance.get("pretrained_sha256")
+    if not pretrained_hash:
+        raise RuntimeError(f"Missing pretrained hash in {provenance_path}")
+    return {
+        "sha256": str(pretrained_hash),
+        "source": "resume_provenance.json",
+        "resume_provenance": provenance,
+    }
+
+
 def read_window(run: Path, first: int = 26, last: int = 30) -> list[dict]:
     records: dict[int, dict] = {}
     for line in (run / "metrics.jsonl").read_text(encoding="utf-8").splitlines():
@@ -107,9 +137,15 @@ def audit_reference(reference: Path, candidate: Path, seed: int) -> dict:
         reference_environment.get("dataset_list_sha256")
         == candidate_environment.get("dataset_list_sha256")
     )
+    reference_pretrained = effective_pretrained_provenance(
+        reference, reference_environment, seed
+    )
+    candidate_pretrained = effective_pretrained_provenance(
+        candidate, candidate_environment, seed
+    )
     pretrained_match = (
-        reference_environment.get("pretrained_sha256")
-        == candidate_environment.get("pretrained_sha256")
+        reference_pretrained["sha256"] is not None
+        and reference_pretrained["sha256"] == candidate_pretrained["sha256"]
     )
     return {
         "seed": seed,
@@ -117,6 +153,10 @@ def audit_reference(reference: Path, candidate: Path, seed: int) -> dict:
         "protocol_key_mismatches": mismatches,
         "dataset_split_hashes_match": split_match,
         "pretrained_sha256_matches": pretrained_match,
+        "pretrained_provenance": {
+            "reference": reference_pretrained,
+            "candidate": candidate_pretrained,
+        },
         "mode_difference_expected": {
             "reference": reference_config.get("MODE"),
             "candidate": candidate_config.get("MODE"),

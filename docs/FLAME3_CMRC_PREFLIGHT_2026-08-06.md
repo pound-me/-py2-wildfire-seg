@@ -41,12 +41,23 @@
 - 虽然相似度有提升，但可用样本数、平移稳定性和尺度稳定性均未通过冻结阈值。
 - 结论：数值规则拒绝统一全局仿射；继续使用官方 Corrected FOV，不修改源数据。
 
+### RGB/IR/Fusion 三 seed 输入消融
+
+- 全部使用 epoch 26--30 validation Fire IoU 算术均值。
+- RGB-only 三 seed 均值：`0.115512`。
+- IR-only 三 seed均值：`0.509269`。
+- Fusion 三 seed均值：`0.562542`。
+- Fusion 相对 RGB 的同 seed 平均增益：`+0.447030`，`3/3` seed提高。
+- Fusion 相对 IR 的同 seed 平均增益：`+0.053273`，`3/3` seed提高。
+- split哈希、增强、loss、batch、LR总长度和ImageNet权重哈希协议核验通过。
+- IR seed201曾在完成epoch 23后因窗口关闭中断，随后从 `last.pth` 精确恢复模型、优化器、AMP scaler、DataLoader generator及全部随机状态至epoch 30。
+- 续训覆盖了 `environment.json` 中的pretrained字段；中断checkpoint的config、原始日志及权重SHA256共同证明其使用相同ImageNet初始化，证据写入 `resume_provenance.json`。
+- 结论：输入互补性门槛通过。
+
 ## 待完成门槛
 
-1. 补齐 RGB-only 与 IR-only 的 seed 201、202，统一使用 epoch 26--30 验证 Fire IoU 均值。
-2. Fusion 相对 RGB 与 IR 均需满足：平均增益至少 `0.005`，且至少 `2/3` 配对 seed 提高。
-3. 完成冻结的 30 FN、20 FP、20 TP 人工清单：FN 配准错位少于 9 项，且至少 15 项 FN 属于小火/弱火/遮挡/边缘等 CMRC 假设可解释类型。
-4. 上述自动与人工门槛全部通过后，才允许实现唯一冻结 CMRC 结构。
+1. 完成冻结的 30 FN、20 FP、20 TP 人工清单：FN 配准错位少于 9 项，且至少 15 项 FN 属于小火/弱火/遮挡/边缘等 CMRC 假设可解释类型。
+2. 自动输入互补性门槛已经通过；人工门槛通过后，才允许实现唯一冻结 CMRC 结构。
 
 ## 可复现实用工具
 
@@ -56,4 +67,4 @@
 - `src/evaluate_flame3_manual_error_audit.py`
 - `src/summarize_flame3_input_ablation.py`
 
-当前状态：`CMRC implementation blocked by preregistered admission gates`。
+当前状态：`input complementarity passed; CMRC awaits manual-review gate`。
