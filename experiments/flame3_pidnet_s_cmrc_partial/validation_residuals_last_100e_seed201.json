@@ -1,0 +1,13 @@
+{
+  "protocol": "validation_only_cmrc_residual_diagnostics",
+  "config": "D:\\qianpengcheng\\7.31\\flame3_4090_bundle_v1_20260731\\project_support\\configs\\flame3\\pidnet_s_cmrc_partial_30e.yaml",
+  "checkpoint": "D:\\qianpengcheng\\7.31\\flame3_4090_bundle_v1_20260731\\project_support\\experiments\\flame3_pidnet_s_cmrc_partial\\flame3_cmrc_partial_30e_seed201\\last.pth",
+  "checkpoint_epoch": 100,
+  "validation_csv": "D:\\qianpengcheng\\7.31\\flame3_4090_bundle_v1_20260731\\splits\\portable\\val.csv",
+  "validation_images": 134,
+  "residual_abs_mean": 0.0006761453922407062,
+  "residual_abs_max": 0.057952880859375,
+  "residual_saturation_ratio": 0.0,
+  "residual_limit": 0.1,
+  "test_images_or_labels_read": false
+}

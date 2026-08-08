@@ -1,0 +1,175 @@
+{
+  "protocol": "epoch_96_to_100_validation_arithmetic_mean_paired_by_seed",
+  "purpose": "final_100_epoch_stability_gate_after_cmrc_passed_the_30_epoch_screen",
+  "cmrc_source_commit": "ac4259d",
+  "training_resume": {
+    "source": "each_seed_epoch_30_last_checkpoint",
+    "target_epoch": 100,
+    "learning_rate_schedule_total_epochs": 100,
+    "restored_state": "model_optimizer_amp_scaler_dataloader_generator_and_random_state",
+    "test_set_used": false
+  },
+  "source_logs": {
+    "fusion": {
+      "200": {
+        "path": "experiments/flame3_pidnet_s_fusion_partial/flame3_fusion_partial_30e_seed200_retry1/metrics.jsonl",
+        "sha256": "8BFC199FC763AA3A74E42F339CA3BC5040ECDC6BCF9855933BD27016A2F55D48"
+      },
+      "201": {
+        "path": "experiments/flame3_pidnet_s_fusion_partial/flame3_fusion_partial_100e_seed201/metrics.jsonl",
+        "sha256": "185AB2BCB3F21298C954299BA0BD44F380DA371991A48C9C0342205CE94E94D6"
+      },
+      "202": {
+        "path": "experiments/flame3_pidnet_s_fusion_partial/flame3_fusion_partial_100e_seed202/metrics.jsonl",
+        "sha256": "0BE08A9C9091B2DE60CF8CDF1376D93A0F7FF557834842C9095A54A759B672DC"
+      }
+    },
+    "cmrc": {
+      "200": {
+        "archived_local_path": "cmrc_results_remote_100e/metrics_seed200.jsonl",
+        "sha256": "EC3E9094A893F8EFBC04C363B6F4C6A06EE19AC998154C39A005A3A72416337B"
+      },
+      "201": {
+        "archived_local_path": "cmrc_results_remote_100e/metrics_seed201.jsonl",
+        "sha256": "8FC01B2A6DA64CB4EA61B97A33F786329C29A2ADE90567D29516819669A15884"
+      },
+      "202": {
+        "archived_local_path": "cmrc_results_remote_100e/metrics_seed202.jsonl",
+        "sha256": "275ED4234A802A3B042591224C7553E45BE287DB0478C99F51A174298D6CB3B4"
+      }
+    }
+  },
+  "pairs": [
+    {
+      "seed": 200,
+      "fusion": {
+        "fire_iou": 0.6079532870644477,
+        "fire_precision": 0.6445053350129897,
+        "fire_recall": 0.9148799005723852,
+        "no_fire_predicted_fire_ratio": 1.220703125e-07,
+        "empty_fire_predicted_fire_ratio": 0.043373031616210936,
+        "best_epoch": 63,
+        "best_fire_iou": 0.6396804561277713
+      },
+      "cmrc": {
+        "fire_iou": 0.5658280612344839,
+        "fire_precision": 0.6052204657162602,
+        "fire_recall": 0.8972264261014399,
+        "no_fire_predicted_fire_ratio": 3.487723214285715e-07,
+        "empty_fire_predicted_fire_ratio": 0.051191368103027345,
+        "best_epoch": 62,
+        "best_fire_iou": 0.596136933606095
+      },
+      "delta": {
+        "fire_iou": -0.04212522582996381,
+        "fire_precision": -0.039284869296729474,
+        "fire_recall": -0.01765347447094534,
+        "no_fire_predicted_fire_ratio": 2.267020089285715e-07,
+        "empty_fire_predicted_fire_ratio": 0.007818336486816409
+      }
+    },
+    {
+      "seed": 201,
+      "fusion": {
+        "fire_iou": 0.6418677130609521,
+        "fire_precision": 0.6779804248282318,
+        "fire_recall": 0.9238190857055895,
+        "no_fire_predicted_fire_ratio": 0.0,
+        "empty_fire_predicted_fire_ratio": 0.037587471008300774,
+        "best_epoch": 40,
+        "best_fire_iou": 0.6725206876426116
+      },
+      "cmrc": {
+        "fire_iou": 0.5965709122020681,
+        "fire_precision": 0.6307131691208785,
+        "fire_recall": 0.9171474589311531,
+        "no_fire_predicted_fire_ratio": 8.719308035714286e-08,
+        "empty_fire_predicted_fire_ratio": 0.04632534027099609,
+        "best_epoch": 21,
+        "best_fire_iou": 0.6291661988405493
+      },
+      "delta": {
+        "fire_iou": -0.04529680085888399,
+        "fire_precision": -0.04726725570735335,
+        "fire_recall": -0.0066716267744363345,
+        "no_fire_predicted_fire_ratio": 8.719308035714286e-08,
+        "empty_fire_predicted_fire_ratio": 0.00873786926269532
+      }
+    },
+    {
+      "seed": 202,
+      "fusion": {
+        "fire_iou": 0.5870416451830212,
+        "fire_precision": 0.6166338461818066,
+        "fire_recall": 0.9257645188836374,
+        "no_fire_predicted_fire_ratio": 3.4877232142857145e-08,
+        "empty_fire_predicted_fire_ratio": 0.04948814392089844,
+        "best_epoch": 76,
+        "best_fire_iou": 0.6628970186076465
+      },
+      "cmrc": {
+        "fire_iou": 0.6355770138478759,
+        "fire_precision": 0.6770606141855311,
+        "fire_recall": 0.9148596092224187,
+        "no_fire_predicted_fire_ratio": 0.0,
+        "empty_fire_predicted_fire_ratio": 0.0372467041015625,
+        "best_epoch": 92,
+        "best_fire_iou": 0.6994915400304501
+      },
+      "delta": {
+        "fire_iou": 0.04853536866485475,
+        "fire_precision": 0.060426768003724485,
+        "fire_recall": -0.010904909661218709,
+        "no_fire_predicted_fire_ratio": -3.4877232142857145e-08,
+        "empty_fire_predicted_fire_ratio": -0.012241439819335939
+      }
+    }
+  ],
+  "aggregate": {
+    "mean_fusion_fire_iou": 0.6122875484361404,
+    "mean_cmrc_fire_iou": 0.5993253290948094,
+    "mean_delta_fire_iou": -0.012962219341331016,
+    "improved_seed_count": 1,
+    "mean_delta_fire_precision": -0.00870845233345278,
+    "mean_delta_fire_recall": -0.011743336968866794,
+    "mean_delta_no_fire_predicted_fire_ratio": 9.300595238095238e-08,
+    "mean_delta_empty_fire_predicted_fire_ratio": 0.0014382553100585962
+  },
+  "validation_residuals_last_100e": {
+    "200": {
+      "residual_abs_mean": 0.0008320076349399873,
+      "residual_abs_max": 0.019012451171875,
+      "residual_saturation_ratio": 0.0,
+      "sha256": "BF0C2E78AD7766841F2280970AF167F44F373CC25066880C6414D567B4D9344A"
+    },
+    "201": {
+      "residual_abs_mean": 0.0006761453922407062,
+      "residual_abs_max": 0.057952880859375,
+      "residual_saturation_ratio": 0.0,
+      "sha256": "181871155AD8BDC9204078B78605BABB218110BB9B9DB55965A39E1BFDFC582C"
+    },
+    "202": {
+      "residual_abs_mean": 0.0010253369735220253,
+      "residual_abs_max": 0.099853515625,
+      "residual_saturation_ratio": 1.1523802150641945e-05,
+      "sha256": "2E48B3886314D2E598E6C6109AF1CDE3FC91A128502FFB09538DDD212B90CFFD"
+    },
+    "interpretation": "Residual magnitudes are small and essentially unsaturated; the failure is seed-dependent correction behavior rather than amplitude explosion."
+  },
+  "final_gate": {
+    "mean_fire_iou_gain_positive": false,
+    "at_least_two_of_three_seeds_improve": false,
+    "mean_recall_delta_at_least_minus_0_03": true,
+    "rtx2060_fps_at_least_30": true,
+    "decision": "stop_cmrc_route",
+    "reason": "At 100 epochs the paired mean Fire IoU is negative and only one of three seeds improves."
+  },
+  "route_lock": {
+    "cmrc_is_final_model": false,
+    "run_nts_to_rescue_cmrc": false,
+    "continue_searching_rgb_t_fusion_modules": false,
+    "evaluate_test_set": false,
+    "next_route": "manual_semantic_pixel_annotation_subset_up_to_150_then_one_data_side_sampling_candidate"
+  },
+  "test_images_or_labels_read": false
+}
