@@ -165,6 +165,10 @@ def build_model(config: dict, augment: bool = True) -> PIDNet:
         from custom_models.pidnet_mrff import PIDNetMRFF
 
         model_class = PIDNetMRFF
+    elif model_name == "pidnet_s_cmrc":
+        from custom_models.pidnet_cmrc import PIDNetCMRC
+
+        model_class = PIDNetCMRC
     else:
         raise ValueError(f"Unsupported model: {model_name}")
     model_kwargs = dict(
@@ -217,6 +221,25 @@ def build_model(config: dict, augment: bool = True) -> PIDNet:
         )
         model_kwargs["gate_hidden_channels"] = int(
             config.get("MRFF_GATE_HIDDEN_CHANNELS", 16)
+        )
+    if model_name == "pidnet_s_cmrc":
+        model_kwargs["thermal_channel"] = int(
+            config.get("CMRC_THERMAL_CHANNEL", 3)
+        )
+        model_kwargs["hint_stem_channels"] = int(
+            config.get("CMRC_HINT_STEM_CHANNELS", 8)
+        )
+        model_kwargs["hint_channels"] = int(
+            config.get("CMRC_HINT_CHANNELS", 16)
+        )
+        model_kwargs["context_channels"] = int(
+            config.get("CMRC_CONTEXT_CHANNELS", 16)
+        )
+        model_kwargs["correction_hidden_channels"] = int(
+            config.get("CMRC_CORRECTION_HIDDEN_CHANNELS", 16)
+        )
+        model_kwargs["residual_limit"] = float(
+            config.get("CMRC_RESIDUAL_LIMIT", 0.1)
         )
     return model_class(**model_kwargs)
 

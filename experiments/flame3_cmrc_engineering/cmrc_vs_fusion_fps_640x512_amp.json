@@ -1,0 +1,101 @@
+{
+  "protocol": "same-session paired alternating-order model-forward benchmark",
+  "device": "NVIDIA GeForce RTX 2060",
+  "input_shape": [
+    1,
+    4,
+    512,
+    640
+  ],
+  "amp": true,
+  "warmup_iterations_per_model": 100,
+  "timed_iterations_per_trial": 200,
+  "repeats": 10,
+  "trial_orders": [
+    [
+      "fusion",
+      "cmrc"
+    ],
+    [
+      "cmrc",
+      "fusion"
+    ],
+    [
+      "fusion",
+      "cmrc"
+    ],
+    [
+      "cmrc",
+      "fusion"
+    ],
+    [
+      "fusion",
+      "cmrc"
+    ],
+    [
+      "cmrc",
+      "fusion"
+    ],
+    [
+      "fusion",
+      "cmrc"
+    ],
+    [
+      "cmrc",
+      "fusion"
+    ],
+    [
+      "fusion",
+      "cmrc"
+    ],
+    [
+      "cmrc",
+      "fusion"
+    ]
+  ],
+  "common_baseline_state_tensors": 453,
+  "models": {
+    "fusion": {
+      "parameters": 7623939,
+      "latency_ms_trials": [
+        36.53154349999999,
+        32.823919000000004,
+        28.498103000000015,
+        29.635562500000034,
+        34.42379150000001,
+        29.293637999999973,
+        30.097942000000018,
+        34.145262000000045,
+        27.433623999999956,
+        34.346082499999966
+      ],
+      "latency_ms_median": 31.46093050000001,
+      "latency_ms_mean": 31.7229468,
+      "latency_ms_std": 2.9338544375850146,
+      "fps_from_median": 31.785455296689324,
+      "passes_30_fps": true
+    },
+    "cmrc": {
+      "parameters": 7628659,
+      "latency_ms_trials": [
+        44.1135165,
+        38.45183700000003,
+        33.131296000000034,
+        32.43896849999999,
+        33.47053549999998,
+        32.648028500000024,
+        32.761122,
+        32.56714950000003,
+        30.9631195,
+        32.798978000000005
+      ],
+      "latency_ms_median": 32.78005,
+      "latency_ms_mean": 34.334455100000014,
+      "latency_ms_std": 3.7488140575168636,
+      "fps_from_median": 30.50635981336209,
+      "passes_30_fps": true
+    }
+  },
+  "cmrc_passes_30_fps": true,
+  "test_images_or_labels_read": false
+}

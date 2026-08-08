@@ -1,0 +1,18 @@
+{
+  "audit": "flame3_cmrc_manual_review_gate",
+  "counts": {
+    "FN": 30,
+    "FP": 20,
+    "TP": 20
+  },
+  "fn_registration_mismatch_yes": 1,
+  "fn_addressable_by_frozen_cmrc_hypothesis": 28,
+  "fp_label_uncertain_or_hot_smoldering": 15,
+  "fp_reduction_interpretation": "pseudo_label_consistency_only",
+  "cmrc_manual_review_gate": "pass",
+  "rule": {
+    "registration_mismatch_fn_max_exclusive": 9,
+    "addressable_fn_minimum": 15,
+    "ambiguous_fp_semantic_caveat_threshold": 10
+  }
+}

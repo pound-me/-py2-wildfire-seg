@@ -1,0 +1,127 @@
+{
+  "config": "G:\\py2\\configs\\flame3\\pidnet_s_cmrc_partial_30e.yaml",
+  "frozen_definition": {
+    "CMRC_INSERTION": "layer2_output_before_pid_branches_1_8",
+    "CMRC_HINT_STEM_CHANNELS": 8,
+    "CMRC_HINT_CHANNELS": 16,
+    "CMRC_CONTEXT_CHANNELS": 16,
+    "CMRC_CORRECTION_HIDDEN_CHANNELS": 16,
+    "CMRC_RESIDUAL_LIMIT": 0.1,
+    "CMRC_ALIGNMENT": "adaptive_avg_pool_hint_1_4_to_layer2_1_8",
+    "CMRC_FINAL_INITIALIZATION": "final_conv_weight_and_bias_zero",
+    "CMRC_RESIDUAL": "x2_plus_0.1_tanh_head_without_post_relu"
+  },
+  "common_baseline_state_tensors": 479,
+  "baseline_state_tensor_count": 479,
+  "matched_pretrained_tensors": 301,
+  "baseline_matched_pretrained_tensors": 301,
+  "fp32_output_max_abs": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "fp32_argmax_identical": true,
+  "amp_output_max_abs": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "amp_argmax_identical": true,
+  "zero_residual_aux": {
+    "residual_abs_mean": 0.0,
+    "residual_abs_max": 0.0,
+    "residual_saturation_ratio": 0.0
+  },
+  "insertion_shapes": {
+    "rgb_hint_1_4": [
+      2,
+      16,
+      128,
+      160
+    ],
+    "thermal_hint_1_4": [
+      2,
+      16,
+      128,
+      160
+    ],
+    "context_1_8": [
+      2,
+      16,
+      64,
+      80
+    ],
+    "correction_logits_1_8": [
+      2,
+      64,
+      64,
+      80
+    ]
+  },
+  "first_amp_loss": 5.448598384857178,
+  "first_gradient_norms": {
+    "final_correction": 5.335536973782636,
+    "correction_early": 0.0,
+    "correction_hidden": 0.0,
+    "rgb_hint": 0.0,
+    "thermal_hint": 0.0,
+    "context_projection": 0.0,
+    "fusion_stem": 546.4659811767282,
+    "pidnet_backbone": 214.38091459873348,
+    "final_head": 40.25847989326238
+  },
+  "first_blocked_branch_gradient_norms": {
+    "correction_early": 0.0,
+    "correction_hidden": 0.0,
+    "rgb_hint": 0.0,
+    "thermal_hint": 0.0,
+    "context_projection": 0.0
+  },
+  "second_amp_loss": 7.923878192901611,
+  "second_gradient_norms": {
+    "final_correction": 5.561463476097259,
+    "correction_early": 0.025893866065777114,
+    "correction_hidden": 0.003747336991884355,
+    "rgb_hint": 0.02141977788333454,
+    "thermal_hint": 0.013477802147227573,
+    "context_projection": 0.0024031647077853223,
+    "fusion_stem": 320.88161397593046,
+    "pidnet_backbone": 200.93133303847523,
+    "final_head": 52.39580002348229
+  },
+  "first_aux": {
+    "residual_abs_mean": 0.0,
+    "residual_abs_max": 0.0,
+    "residual_saturation_ratio": 0.0
+  },
+  "second_aux": {
+    "residual_abs_mean": 4.985495615983382e-05,
+    "residual_abs_max": 0.0017185211181640625,
+    "residual_saturation_ratio": 0.0
+  },
+  "peak_allocated_gpu_memory_mb": 461.08935546875,
+  "checkpoint_output_max_abs": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "checkpoint_aux_max_abs": {
+    "residual_abs_mean": 0.0,
+    "residual_abs_max": 0.0,
+    "residual_saturation_ratio": 0.0
+  },
+  "default_training_forward_has_aux": false,
+  "default_inference_returns_tensor_only": true,
+  "inference_aux_available_explicitly": true,
+  "inference_output_shape": [
+    1,
+    3,
+    64,
+    80
+  ],
+  "training_parameters": 7721815,
+  "training_parameter_increment": 4720,
+  "inference_parameters": 7628659,
+  "inference_parameter_increment": 4720,
+  "test_images_or_labels_read": false
+}
