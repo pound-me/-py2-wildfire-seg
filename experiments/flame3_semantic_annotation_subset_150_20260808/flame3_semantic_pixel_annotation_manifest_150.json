@@ -1,0 +1,1253 @@
+{
+  "protocol": "flame3_train_val_only_targeted_semantic_pixel_annotation_subset",
+  "status": "candidate_subset_frozen_before_manual_pixel_annotation",
+  "maximum_images": 150,
+  "selected_images": 150,
+  "selection_counts": {
+    "boundary_complex_fire_core": 20,
+    "empty_fire_hotspot": 30,
+    "no_fire_hotspot_negative": 13,
+    "reviewed_validation": 47,
+    "small_or_weak_fire_core": 25,
+    "suspected_label_gap_hot_noncore": 15
+  },
+  "selection_rules": {
+    "reviewed_validation": "all 47 unique validation images from the completed 70-component manual audit",
+    "empty_fire_hotspot": "30 train Fire images with empty pseudo Fire core, selected by farthest-point timestamp dispersion with thermal score as tie-break",
+    "suspected_label_gap_hot_noncore": "15 train Fire images ranked by 80C-plus non-core thermal extent, ignore extent and component count, with 12-second within-block spacing",
+    "small_or_weak_fire_core": "25 train Fire images ranked by small core, lower peak temperature and boundary-to-core ratio, with 12-second within-block spacing",
+    "boundary_complex_fire_core": "20 train Fire images ranked by ignored-boundary/core ratio and component count, with 12-second within-block spacing",
+    "no_fire_hotspot_negative": "13 train No-Fire images ranked by strongest thermal response with spatial-cluster diversity"
+  },
+  "split_counts": {
+    "train": 103,
+    "val": 47
+  },
+  "inputs": {
+    "train_csv": "G:\\py2\\data\\flame3_splits_v2_preregistered\\train.csv",
+    "train_csv_sha256": "a20f896921b16a8eab7ff2e91f8dc56df717517a23d842e85f977e63230feecd",
+    "val_csv": "G:\\py2\\data\\flame3_splits_v2_preregistered\\val.csv",
+    "val_csv_sha256": "bf641cc447570f0fa06626996508db3aa3ed635811b0758125759f54f714cc72",
+    "statistics_csv": "G:\\py2\\experiments\\flame3_temperature_pseudolabels_preregistered\\pseudolabel_statistics.csv",
+    "statistics_csv_sha256": "a4f26d0c17d2263839adbf652b48ac49088b3a3917a65589f952cd320345c612",
+    "prior_audit_checklist": "G:\\py2\\experiments\\flame3_cmrc_preflight_20260806\\flame3_fusion_manual_error_audit_70\\manual_error_audit_checklist.csv",
+    "prior_audit_checklist_sha256": "7ed1a70ee7105585d7cb0d653ed815378b4c740e725274c45416d7a8fd24b482"
+  },
+  "mask_schema": {
+    "0": "background_or_non_active_residual_heat",
+    "1": "smoke",
+    "2": "active_fire",
+    "255": "uncertain_or_ignore"
+  },
+  "annotation_policy": {
+    "purpose": "resolve active-fire versus residual-heat and smoke-occlusion ambiguity before any data-side training change",
+    "pseudo_masks_are_seeds_only": true,
+    "do_not_count_high_temperature_alone_as_active_fire": true,
+    "uncertain_pixels_use_255": true,
+    "not_a_representative_metric_sample": true
+  },
+  "test_images_or_labels_read": false,
+  "test_set_policy": "sealed_until_final_method_freeze",
+  "items": [
+    {
+      "annotation_id": "A001",
+      "split": "val",
+      "selection_category": "reviewed_validation",
+      "sample_key": "fire/00001",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A001_fire_00001.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A001.png"
+    },
+    {
+      "annotation_id": "A002",
+      "split": "val",
+      "selection_category": "reviewed_validation",
+      "sample_key": "fire/00008",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A002_fire_00008.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A002.png"
+    },
+    {
+      "annotation_id": "A003",
+      "split": "val",
+      "selection_category": "reviewed_validation",
+      "sample_key": "fire/00019",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A003_fire_00019.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A003.png"
+    },
+    {
+      "annotation_id": "A004",
+      "split": "val",
+      "selection_category": "reviewed_validation",
+      "sample_key": "fire/00020",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A004_fire_00020.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A004.png"
+    },
+    {
+      "annotation_id": "A005",
+      "split": "val",
+      "selection_category": "reviewed_validation",
+      "sample_key": "fire/00057",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A005_fire_00057.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A005.png"
+    },
+    {
+      "annotation_id": "A006",
+      "split": "val",
+      "selection_category": "reviewed_validation",
+      "sample_key": "fire/00393",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A006_fire_00393.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A006.png"
+    },
+    {
+      "annotation_id": "A007",
+      "split": "val",
+      "selection_category": "reviewed_validation",
+      "sample_key": "fire/00037",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A007_fire_00037.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A007.png"
+    },
+    {
+      "annotation_id": "A008",
+      "split": "val",
+      "selection_category": "reviewed_validation",
+      "sample_key": "fire/00508",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A008_fire_00508.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A008.png"
+    },
+    {
+      "annotation_id": "A009",
+      "split": "val",
+      "selection_category": "reviewed_validation",
+      "sample_key": "fire/00042",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A009_fire_00042.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A009.png"
+    },
+    {
+      "annotation_id": "A010",
+      "split": "val",
+      "selection_category": "reviewed_validation",
+      "sample_key": "fire/00444",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A010_fire_00444.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A010.png"
+    },
+    {
+      "annotation_id": "A011",
+      "split": "val",
+      "selection_category": "reviewed_validation",
+      "sample_key": "fire/00183",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A011_fire_00183.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A011.png"
+    },
+    {
+      "annotation_id": "A012",
+      "split": "val",
+      "selection_category": "reviewed_validation",
+      "sample_key": "fire/00325",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A012_fire_00325.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A012.png"
+    },
+    {
+      "annotation_id": "A013",
+      "split": "val",
+      "selection_category": "reviewed_validation",
+      "sample_key": "fire/00131",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A013_fire_00131.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A013.png"
+    },
+    {
+      "annotation_id": "A014",
+      "split": "val",
+      "selection_category": "reviewed_validation",
+      "sample_key": "fire/00525",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A014_fire_00525.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A014.png"
+    },
+    {
+      "annotation_id": "A015",
+      "split": "val",
+      "selection_category": "reviewed_validation",
+      "sample_key": "fire/00284",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A015_fire_00284.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A015.png"
+    },
+    {
+      "annotation_id": "A016",
+      "split": "val",
+      "selection_category": "reviewed_validation",
+      "sample_key": "fire/00197",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A016_fire_00197.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A016.png"
+    },
+    {
+      "annotation_id": "A017",
+      "split": "val",
+      "selection_category": "reviewed_validation",
+      "sample_key": "fire/00314",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A017_fire_00314.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A017.png"
+    },
+    {
+      "annotation_id": "A018",
+      "split": "val",
+      "selection_category": "reviewed_validation",
+      "sample_key": "fire/00396",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A018_fire_00396.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A018.png"
+    },
+    {
+      "annotation_id": "A019",
+      "split": "val",
+      "selection_category": "reviewed_validation",
+      "sample_key": "fire/00566",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A019_fire_00566.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A019.png"
+    },
+    {
+      "annotation_id": "A020",
+      "split": "val",
+      "selection_category": "reviewed_validation",
+      "sample_key": "fire/00515",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A020_fire_00515.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A020.png"
+    },
+    {
+      "annotation_id": "A021",
+      "split": "val",
+      "selection_category": "reviewed_validation",
+      "sample_key": "fire/00269",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A021_fire_00269.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A021.png"
+    },
+    {
+      "annotation_id": "A022",
+      "split": "val",
+      "selection_category": "reviewed_validation",
+      "sample_key": "fire/00077",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A022_fire_00077.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A022.png"
+    },
+    {
+      "annotation_id": "A023",
+      "split": "val",
+      "selection_category": "reviewed_validation",
+      "sample_key": "fire/00600",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A023_fire_00600.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A023.png"
+    },
+    {
+      "annotation_id": "A024",
+      "split": "val",
+      "selection_category": "reviewed_validation",
+      "sample_key": "fire/00105",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A024_fire_00105.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A024.png"
+    },
+    {
+      "annotation_id": "A025",
+      "split": "val",
+      "selection_category": "reviewed_validation",
+      "sample_key": "fire/00374",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A025_fire_00374.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A025.png"
+    },
+    {
+      "annotation_id": "A026",
+      "split": "val",
+      "selection_category": "reviewed_validation",
+      "sample_key": "fire/00181",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A026_fire_00181.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A026.png"
+    },
+    {
+      "annotation_id": "A027",
+      "split": "val",
+      "selection_category": "reviewed_validation",
+      "sample_key": "fire/00533",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A027_fire_00533.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A027.png"
+    },
+    {
+      "annotation_id": "A028",
+      "split": "val",
+      "selection_category": "reviewed_validation",
+      "sample_key": "fire/00322",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A028_fire_00322.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A028.png"
+    },
+    {
+      "annotation_id": "A029",
+      "split": "val",
+      "selection_category": "reviewed_validation",
+      "sample_key": "fire/00278",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A029_fire_00278.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A029.png"
+    },
+    {
+      "annotation_id": "A030",
+      "split": "val",
+      "selection_category": "reviewed_validation",
+      "sample_key": "fire/00394",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A030_fire_00394.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A030.png"
+    },
+    {
+      "annotation_id": "A031",
+      "split": "val",
+      "selection_category": "reviewed_validation",
+      "sample_key": "fire/00458",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A031_fire_00458.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A031.png"
+    },
+    {
+      "annotation_id": "A032",
+      "split": "val",
+      "selection_category": "reviewed_validation",
+      "sample_key": "fire/00249",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A032_fire_00249.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A032.png"
+    },
+    {
+      "annotation_id": "A033",
+      "split": "val",
+      "selection_category": "reviewed_validation",
+      "sample_key": "fire/00352",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A033_fire_00352.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A033.png"
+    },
+    {
+      "annotation_id": "A034",
+      "split": "val",
+      "selection_category": "reviewed_validation",
+      "sample_key": "fire/00184",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A034_fire_00184.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A034.png"
+    },
+    {
+      "annotation_id": "A035",
+      "split": "val",
+      "selection_category": "reviewed_validation",
+      "sample_key": "fire/00455",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A035_fire_00455.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A035.png"
+    },
+    {
+      "annotation_id": "A036",
+      "split": "val",
+      "selection_category": "reviewed_validation",
+      "sample_key": "fire/00022",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A036_fire_00022.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A036.png"
+    },
+    {
+      "annotation_id": "A037",
+      "split": "val",
+      "selection_category": "reviewed_validation",
+      "sample_key": "fire/00110",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A037_fire_00110.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A037.png"
+    },
+    {
+      "annotation_id": "A038",
+      "split": "val",
+      "selection_category": "reviewed_validation",
+      "sample_key": "fire/00075",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A038_fire_00075.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A038.png"
+    },
+    {
+      "annotation_id": "A039",
+      "split": "val",
+      "selection_category": "reviewed_validation",
+      "sample_key": "fire/00111",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A039_fire_00111.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A039.png"
+    },
+    {
+      "annotation_id": "A040",
+      "split": "val",
+      "selection_category": "reviewed_validation",
+      "sample_key": "fire/00305",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A040_fire_00305.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A040.png"
+    },
+    {
+      "annotation_id": "A041",
+      "split": "val",
+      "selection_category": "reviewed_validation",
+      "sample_key": "fire/00431",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A041_fire_00431.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A041.png"
+    },
+    {
+      "annotation_id": "A042",
+      "split": "val",
+      "selection_category": "reviewed_validation",
+      "sample_key": "fire/00612",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A042_fire_00612.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A042.png"
+    },
+    {
+      "annotation_id": "A043",
+      "split": "val",
+      "selection_category": "reviewed_validation",
+      "sample_key": "fire/00463",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A043_fire_00463.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A043.png"
+    },
+    {
+      "annotation_id": "A044",
+      "split": "val",
+      "selection_category": "reviewed_validation",
+      "sample_key": "fire/00380",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A044_fire_00380.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A044.png"
+    },
+    {
+      "annotation_id": "A045",
+      "split": "val",
+      "selection_category": "reviewed_validation",
+      "sample_key": "fire/00304",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A045_fire_00304.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A045.png"
+    },
+    {
+      "annotation_id": "A046",
+      "split": "val",
+      "selection_category": "reviewed_validation",
+      "sample_key": "fire/00274",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A046_fire_00274.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A046.png"
+    },
+    {
+      "annotation_id": "A047",
+      "split": "val",
+      "selection_category": "reviewed_validation",
+      "sample_key": "fire/00572",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A047_fire_00572.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A047.png"
+    },
+    {
+      "annotation_id": "A048",
+      "split": "train",
+      "selection_category": "empty_fire_hotspot",
+      "sample_key": "fire/00137",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A048_fire_00137.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A048.png"
+    },
+    {
+      "annotation_id": "A049",
+      "split": "train",
+      "selection_category": "empty_fire_hotspot",
+      "sample_key": "fire/00531",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A049_fire_00531.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A049.png"
+    },
+    {
+      "annotation_id": "A050",
+      "split": "train",
+      "selection_category": "empty_fire_hotspot",
+      "sample_key": "fire/00070",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A050_fire_00070.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A050.png"
+    },
+    {
+      "annotation_id": "A051",
+      "split": "train",
+      "selection_category": "empty_fire_hotspot",
+      "sample_key": "fire/00091",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A051_fire_00091.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A051.png"
+    },
+    {
+      "annotation_id": "A052",
+      "split": "train",
+      "selection_category": "empty_fire_hotspot",
+      "sample_key": "fire/00334",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A052_fire_00334.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A052.png"
+    },
+    {
+      "annotation_id": "A053",
+      "split": "train",
+      "selection_category": "empty_fire_hotspot",
+      "sample_key": "fire/00157",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A053_fire_00157.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A053.png"
+    },
+    {
+      "annotation_id": "A054",
+      "split": "train",
+      "selection_category": "empty_fire_hotspot",
+      "sample_key": "fire/00313",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A054_fire_00313.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A054.png"
+    },
+    {
+      "annotation_id": "A055",
+      "split": "train",
+      "selection_category": "empty_fire_hotspot",
+      "sample_key": "fire/00006",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A055_fire_00006.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A055.png"
+    },
+    {
+      "annotation_id": "A056",
+      "split": "train",
+      "selection_category": "empty_fire_hotspot",
+      "sample_key": "fire/00258",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A056_fire_00258.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A056.png"
+    },
+    {
+      "annotation_id": "A057",
+      "split": "train",
+      "selection_category": "empty_fire_hotspot",
+      "sample_key": "fire/00614",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A057_fire_00614.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A057.png"
+    },
+    {
+      "annotation_id": "A058",
+      "split": "train",
+      "selection_category": "empty_fire_hotspot",
+      "sample_key": "fire/00421",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A058_fire_00421.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A058.png"
+    },
+    {
+      "annotation_id": "A059",
+      "split": "train",
+      "selection_category": "empty_fire_hotspot",
+      "sample_key": "fire/00556",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A059_fire_00556.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A059.png"
+    },
+    {
+      "annotation_id": "A060",
+      "split": "train",
+      "selection_category": "empty_fire_hotspot",
+      "sample_key": "fire/00571",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A060_fire_00571.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A060.png"
+    },
+    {
+      "annotation_id": "A061",
+      "split": "train",
+      "selection_category": "empty_fire_hotspot",
+      "sample_key": "fire/00569",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A061_fire_00569.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A061.png"
+    },
+    {
+      "annotation_id": "A062",
+      "split": "train",
+      "selection_category": "empty_fire_hotspot",
+      "sample_key": "fire/00010",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A062_fire_00010.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A062.png"
+    },
+    {
+      "annotation_id": "A063",
+      "split": "train",
+      "selection_category": "empty_fire_hotspot",
+      "sample_key": "fire/00446",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A063_fire_00446.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A063.png"
+    },
+    {
+      "annotation_id": "A064",
+      "split": "train",
+      "selection_category": "empty_fire_hotspot",
+      "sample_key": "fire/00251",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A064_fire_00251.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A064.png"
+    },
+    {
+      "annotation_id": "A065",
+      "split": "train",
+      "selection_category": "empty_fire_hotspot",
+      "sample_key": "fire/00287",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A065_fire_00287.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A065.png"
+    },
+    {
+      "annotation_id": "A066",
+      "split": "train",
+      "selection_category": "empty_fire_hotspot",
+      "sample_key": "fire/00253",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A066_fire_00253.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A066.png"
+    },
+    {
+      "annotation_id": "A067",
+      "split": "train",
+      "selection_category": "empty_fire_hotspot",
+      "sample_key": "fire/00459",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A067_fire_00459.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A067.png"
+    },
+    {
+      "annotation_id": "A068",
+      "split": "train",
+      "selection_category": "empty_fire_hotspot",
+      "sample_key": "fire/00247",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A068_fire_00247.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A068.png"
+    },
+    {
+      "annotation_id": "A069",
+      "split": "train",
+      "selection_category": "empty_fire_hotspot",
+      "sample_key": "fire/00302",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A069_fire_00302.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A069.png"
+    },
+    {
+      "annotation_id": "A070",
+      "split": "train",
+      "selection_category": "empty_fire_hotspot",
+      "sample_key": "fire/00544",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A070_fire_00544.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A070.png"
+    },
+    {
+      "annotation_id": "A071",
+      "split": "train",
+      "selection_category": "empty_fire_hotspot",
+      "sample_key": "fire/00450",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A071_fire_00450.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A071.png"
+    },
+    {
+      "annotation_id": "A072",
+      "split": "train",
+      "selection_category": "empty_fire_hotspot",
+      "sample_key": "fire/00449",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A072_fire_00449.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A072.png"
+    },
+    {
+      "annotation_id": "A073",
+      "split": "train",
+      "selection_category": "empty_fire_hotspot",
+      "sample_key": "fire/00486",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A073_fire_00486.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A073.png"
+    },
+    {
+      "annotation_id": "A074",
+      "split": "train",
+      "selection_category": "empty_fire_hotspot",
+      "sample_key": "fire/00143",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A074_fire_00143.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A074.png"
+    },
+    {
+      "annotation_id": "A075",
+      "split": "train",
+      "selection_category": "empty_fire_hotspot",
+      "sample_key": "fire/00335",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A075_fire_00335.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A075.png"
+    },
+    {
+      "annotation_id": "A076",
+      "split": "train",
+      "selection_category": "empty_fire_hotspot",
+      "sample_key": "fire/00517",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A076_fire_00517.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A076.png"
+    },
+    {
+      "annotation_id": "A077",
+      "split": "train",
+      "selection_category": "empty_fire_hotspot",
+      "sample_key": "fire/00538",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A077_fire_00538.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A077.png"
+    },
+    {
+      "annotation_id": "A078",
+      "split": "train",
+      "selection_category": "suspected_label_gap_hot_noncore",
+      "sample_key": "fire/00170",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A078_fire_00170.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A078.png"
+    },
+    {
+      "annotation_id": "A079",
+      "split": "train",
+      "selection_category": "suspected_label_gap_hot_noncore",
+      "sample_key": "fire/00466",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A079_fire_00466.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A079.png"
+    },
+    {
+      "annotation_id": "A080",
+      "split": "train",
+      "selection_category": "suspected_label_gap_hot_noncore",
+      "sample_key": "fire/00213",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A080_fire_00213.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A080.png"
+    },
+    {
+      "annotation_id": "A081",
+      "split": "train",
+      "selection_category": "suspected_label_gap_hot_noncore",
+      "sample_key": "fire/00281",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A081_fire_00281.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A081.png"
+    },
+    {
+      "annotation_id": "A082",
+      "split": "train",
+      "selection_category": "suspected_label_gap_hot_noncore",
+      "sample_key": "fire/00467",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A082_fire_00467.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A082.png"
+    },
+    {
+      "annotation_id": "A083",
+      "split": "train",
+      "selection_category": "suspected_label_gap_hot_noncore",
+      "sample_key": "fire/00224",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A083_fire_00224.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A083.png"
+    },
+    {
+      "annotation_id": "A084",
+      "split": "train",
+      "selection_category": "suspected_label_gap_hot_noncore",
+      "sample_key": "fire/00297",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A084_fire_00297.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A084.png"
+    },
+    {
+      "annotation_id": "A085",
+      "split": "train",
+      "selection_category": "suspected_label_gap_hot_noncore",
+      "sample_key": "fire/00078",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A085_fire_00078.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A085.png"
+    },
+    {
+      "annotation_id": "A086",
+      "split": "train",
+      "selection_category": "suspected_label_gap_hot_noncore",
+      "sample_key": "fire/00074",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A086_fire_00074.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A086.png"
+    },
+    {
+      "annotation_id": "A087",
+      "split": "train",
+      "selection_category": "suspected_label_gap_hot_noncore",
+      "sample_key": "fire/00040",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A087_fire_00040.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A087.png"
+    },
+    {
+      "annotation_id": "A088",
+      "split": "train",
+      "selection_category": "suspected_label_gap_hot_noncore",
+      "sample_key": "fire/00056",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A088_fire_00056.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A088.png"
+    },
+    {
+      "annotation_id": "A089",
+      "split": "train",
+      "selection_category": "suspected_label_gap_hot_noncore",
+      "sample_key": "fire/00122",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A089_fire_00122.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A089.png"
+    },
+    {
+      "annotation_id": "A090",
+      "split": "train",
+      "selection_category": "suspected_label_gap_hot_noncore",
+      "sample_key": "fire/00419",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A090_fire_00419.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A090.png"
+    },
+    {
+      "annotation_id": "A091",
+      "split": "train",
+      "selection_category": "suspected_label_gap_hot_noncore",
+      "sample_key": "fire/00039",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A091_fire_00039.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A091.png"
+    },
+    {
+      "annotation_id": "A092",
+      "split": "train",
+      "selection_category": "suspected_label_gap_hot_noncore",
+      "sample_key": "fire/00107",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A092_fire_00107.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A092.png"
+    },
+    {
+      "annotation_id": "A093",
+      "split": "train",
+      "selection_category": "small_or_weak_fire_core",
+      "sample_key": "fire/00426",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A093_fire_00426.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A093.png"
+    },
+    {
+      "annotation_id": "A094",
+      "split": "train",
+      "selection_category": "small_or_weak_fire_core",
+      "sample_key": "fire/00361",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A094_fire_00361.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A094.png"
+    },
+    {
+      "annotation_id": "A095",
+      "split": "train",
+      "selection_category": "small_or_weak_fire_core",
+      "sample_key": "fire/00557",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A095_fire_00557.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A095.png"
+    },
+    {
+      "annotation_id": "A096",
+      "split": "train",
+      "selection_category": "small_or_weak_fire_core",
+      "sample_key": "fire/00079",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A096_fire_00079.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A096.png"
+    },
+    {
+      "annotation_id": "A097",
+      "split": "train",
+      "selection_category": "small_or_weak_fire_core",
+      "sample_key": "fire/00398",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A097_fire_00398.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A097.png"
+    },
+    {
+      "annotation_id": "A098",
+      "split": "train",
+      "selection_category": "small_or_weak_fire_core",
+      "sample_key": "fire/00101",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A098_fire_00101.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A098.png"
+    },
+    {
+      "annotation_id": "A099",
+      "split": "train",
+      "selection_category": "small_or_weak_fire_core",
+      "sample_key": "fire/00405",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A099_fire_00405.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A099.png"
+    },
+    {
+      "annotation_id": "A100",
+      "split": "train",
+      "selection_category": "small_or_weak_fire_core",
+      "sample_key": "fire/00277",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A100_fire_00277.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A100.png"
+    },
+    {
+      "annotation_id": "A101",
+      "split": "train",
+      "selection_category": "small_or_weak_fire_core",
+      "sample_key": "fire/00033",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A101_fire_00033.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A101.png"
+    },
+    {
+      "annotation_id": "A102",
+      "split": "train",
+      "selection_category": "small_or_weak_fire_core",
+      "sample_key": "fire/00416",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A102_fire_00416.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A102.png"
+    },
+    {
+      "annotation_id": "A103",
+      "split": "train",
+      "selection_category": "small_or_weak_fire_core",
+      "sample_key": "fire/00364",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A103_fire_00364.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A103.png"
+    },
+    {
+      "annotation_id": "A104",
+      "split": "train",
+      "selection_category": "small_or_weak_fire_core",
+      "sample_key": "fire/00012",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A104_fire_00012.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A104.png"
+    },
+    {
+      "annotation_id": "A105",
+      "split": "train",
+      "selection_category": "small_or_weak_fire_core",
+      "sample_key": "fire/00387",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A105_fire_00387.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A105.png"
+    },
+    {
+      "annotation_id": "A106",
+      "split": "train",
+      "selection_category": "small_or_weak_fire_core",
+      "sample_key": "fire/00493",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A106_fire_00493.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A106.png"
+    },
+    {
+      "annotation_id": "A107",
+      "split": "train",
+      "selection_category": "small_or_weak_fire_core",
+      "sample_key": "fire/00318",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A107_fire_00318.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A107.png"
+    },
+    {
+      "annotation_id": "A108",
+      "split": "train",
+      "selection_category": "small_or_weak_fire_core",
+      "sample_key": "fire/00003",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A108_fire_00003.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A108.png"
+    },
+    {
+      "annotation_id": "A109",
+      "split": "train",
+      "selection_category": "small_or_weak_fire_core",
+      "sample_key": "fire/00046",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A109_fire_00046.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A109.png"
+    },
+    {
+      "annotation_id": "A110",
+      "split": "train",
+      "selection_category": "small_or_weak_fire_core",
+      "sample_key": "fire/00097",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A110_fire_00097.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A110.png"
+    },
+    {
+      "annotation_id": "A111",
+      "split": "train",
+      "selection_category": "small_or_weak_fire_core",
+      "sample_key": "fire/00153",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A111_fire_00153.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A111.png"
+    },
+    {
+      "annotation_id": "A112",
+      "split": "train",
+      "selection_category": "small_or_weak_fire_core",
+      "sample_key": "fire/00512",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A112_fire_00512.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A112.png"
+    },
+    {
+      "annotation_id": "A113",
+      "split": "train",
+      "selection_category": "small_or_weak_fire_core",
+      "sample_key": "fire/00090",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A113_fire_00090.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A113.png"
+    },
+    {
+      "annotation_id": "A114",
+      "split": "train",
+      "selection_category": "small_or_weak_fire_core",
+      "sample_key": "fire/00243",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A114_fire_00243.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A114.png"
+    },
+    {
+      "annotation_id": "A115",
+      "split": "train",
+      "selection_category": "small_or_weak_fire_core",
+      "sample_key": "fire/00577",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A115_fire_00577.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A115.png"
+    },
+    {
+      "annotation_id": "A116",
+      "split": "train",
+      "selection_category": "small_or_weak_fire_core",
+      "sample_key": "fire/00618",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A116_fire_00618.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A116.png"
+    },
+    {
+      "annotation_id": "A117",
+      "split": "train",
+      "selection_category": "small_or_weak_fire_core",
+      "sample_key": "fire/00574",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A117_fire_00574.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A117.png"
+    },
+    {
+      "annotation_id": "A118",
+      "split": "train",
+      "selection_category": "boundary_complex_fire_core",
+      "sample_key": "fire/00148",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A118_fire_00148.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A118.png"
+    },
+    {
+      "annotation_id": "A119",
+      "split": "train",
+      "selection_category": "boundary_complex_fire_core",
+      "sample_key": "fire/00509",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A119_fire_00509.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A119.png"
+    },
+    {
+      "annotation_id": "A120",
+      "split": "train",
+      "selection_category": "boundary_complex_fire_core",
+      "sample_key": "fire/00425",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A120_fire_00425.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A120.png"
+    },
+    {
+      "annotation_id": "A121",
+      "split": "train",
+      "selection_category": "boundary_complex_fire_core",
+      "sample_key": "fire/00329",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A121_fire_00329.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A121.png"
+    },
+    {
+      "annotation_id": "A122",
+      "split": "train",
+      "selection_category": "boundary_complex_fire_core",
+      "sample_key": "fire/00299",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A122_fire_00299.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A122.png"
+    },
+    {
+      "annotation_id": "A123",
+      "split": "train",
+      "selection_category": "boundary_complex_fire_core",
+      "sample_key": "fire/00233",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A123_fire_00233.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A123.png"
+    },
+    {
+      "annotation_id": "A124",
+      "split": "train",
+      "selection_category": "boundary_complex_fire_core",
+      "sample_key": "fire/00478",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A124_fire_00478.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A124.png"
+    },
+    {
+      "annotation_id": "A125",
+      "split": "train",
+      "selection_category": "boundary_complex_fire_core",
+      "sample_key": "fire/00384",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A125_fire_00384.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A125.png"
+    },
+    {
+      "annotation_id": "A126",
+      "split": "train",
+      "selection_category": "boundary_complex_fire_core",
+      "sample_key": "fire/00370",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A126_fire_00370.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A126.png"
+    },
+    {
+      "annotation_id": "A127",
+      "split": "train",
+      "selection_category": "boundary_complex_fire_core",
+      "sample_key": "fire/00341",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A127_fire_00341.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A127.png"
+    },
+    {
+      "annotation_id": "A128",
+      "split": "train",
+      "selection_category": "boundary_complex_fire_core",
+      "sample_key": "fire/00579",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A128_fire_00579.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A128.png"
+    },
+    {
+      "annotation_id": "A129",
+      "split": "train",
+      "selection_category": "boundary_complex_fire_core",
+      "sample_key": "fire/00126",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A129_fire_00126.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A129.png"
+    },
+    {
+      "annotation_id": "A130",
+      "split": "train",
+      "selection_category": "boundary_complex_fire_core",
+      "sample_key": "fire/00216",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A130_fire_00216.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A130.png"
+    },
+    {
+      "annotation_id": "A131",
+      "split": "train",
+      "selection_category": "boundary_complex_fire_core",
+      "sample_key": "fire/00069",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A131_fire_00069.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A131.png"
+    },
+    {
+      "annotation_id": "A132",
+      "split": "train",
+      "selection_category": "boundary_complex_fire_core",
+      "sample_key": "fire/00563",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A132_fire_00563.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A132.png"
+    },
+    {
+      "annotation_id": "A133",
+      "split": "train",
+      "selection_category": "boundary_complex_fire_core",
+      "sample_key": "fire/00293",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A133_fire_00293.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A133.png"
+    },
+    {
+      "annotation_id": "A134",
+      "split": "train",
+      "selection_category": "boundary_complex_fire_core",
+      "sample_key": "fire/00460",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A134_fire_00460.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A134.png"
+    },
+    {
+      "annotation_id": "A135",
+      "split": "train",
+      "selection_category": "boundary_complex_fire_core",
+      "sample_key": "fire/00282",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A135_fire_00282.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A135.png"
+    },
+    {
+      "annotation_id": "A136",
+      "split": "train",
+      "selection_category": "boundary_complex_fire_core",
+      "sample_key": "fire/00298",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A136_fire_00298.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A136.png"
+    },
+    {
+      "annotation_id": "A137",
+      "split": "train",
+      "selection_category": "boundary_complex_fire_core",
+      "sample_key": "fire/00378",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A137_fire_00378.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A137.png"
+    },
+    {
+      "annotation_id": "A138",
+      "split": "train",
+      "selection_category": "no_fire_hotspot_negative",
+      "sample_key": "no_fire/00102",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A138_no_fire_00102.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A138.png"
+    },
+    {
+      "annotation_id": "A139",
+      "split": "train",
+      "selection_category": "no_fire_hotspot_negative",
+      "sample_key": "no_fire/00003",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A139_no_fire_00003.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A139.png"
+    },
+    {
+      "annotation_id": "A140",
+      "split": "train",
+      "selection_category": "no_fire_hotspot_negative",
+      "sample_key": "no_fire/00106",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A140_no_fire_00106.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A140.png"
+    },
+    {
+      "annotation_id": "A141",
+      "split": "train",
+      "selection_category": "no_fire_hotspot_negative",
+      "sample_key": "no_fire/00079",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A141_no_fire_00079.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A141.png"
+    },
+    {
+      "annotation_id": "A142",
+      "split": "train",
+      "selection_category": "no_fire_hotspot_negative",
+      "sample_key": "no_fire/00011",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A142_no_fire_00011.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A142.png"
+    },
+    {
+      "annotation_id": "A143",
+      "split": "train",
+      "selection_category": "no_fire_hotspot_negative",
+      "sample_key": "no_fire/00080",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A143_no_fire_00080.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A143.png"
+    },
+    {
+      "annotation_id": "A144",
+      "split": "train",
+      "selection_category": "no_fire_hotspot_negative",
+      "sample_key": "no_fire/00058",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A144_no_fire_00058.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A144.png"
+    },
+    {
+      "annotation_id": "A145",
+      "split": "train",
+      "selection_category": "no_fire_hotspot_negative",
+      "sample_key": "no_fire/00092",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A145_no_fire_00092.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A145.png"
+    },
+    {
+      "annotation_id": "A146",
+      "split": "train",
+      "selection_category": "no_fire_hotspot_negative",
+      "sample_key": "no_fire/00019",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A146_no_fire_00019.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A146.png"
+    },
+    {
+      "annotation_id": "A147",
+      "split": "train",
+      "selection_category": "no_fire_hotspot_negative",
+      "sample_key": "no_fire/00023",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A147_no_fire_00023.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A147.png"
+    },
+    {
+      "annotation_id": "A148",
+      "split": "train",
+      "selection_category": "no_fire_hotspot_negative",
+      "sample_key": "no_fire/00029",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A148_no_fire_00029.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A148.png"
+    },
+    {
+      "annotation_id": "A149",
+      "split": "train",
+      "selection_category": "no_fire_hotspot_negative",
+      "sample_key": "no_fire/00056",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A149_no_fire_00056.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A149.png"
+    },
+    {
+      "annotation_id": "A150",
+      "split": "train",
+      "selection_category": "no_fire_hotspot_negative",
+      "sample_key": "no_fire/00033",
+      "visual": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\visuals\\A150_no_fire_00033.jpg",
+      "pseudo_mask_seed": "C:\\Users\\钱鹏程QQ78293044\\Documents\\论文2\\flame3_semantic_annotation_subset_150_20260808_final\\pseudo_mask_seeds\\A150.png"
+    }
+  ]
+}
