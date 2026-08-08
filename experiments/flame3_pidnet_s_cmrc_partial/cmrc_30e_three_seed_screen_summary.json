@@ -1,0 +1,67 @@
+{
+  "protocol": "epoch_26_to_30_validation_arithmetic_mean_paired_by_seed",
+  "fusion_reference": "frozen_existing_logs_from_input_ablation_three_seed_summary",
+  "cmrc_source_commit": "ac4259d",
+  "pairs": [
+    {
+      "seed": 200,
+      "fusion_fire_iou": 0.5641100961601341,
+      "cmrc_fire_iou": 0.5476945289874207,
+      "delta_fire_iou": -0.01641556717271342
+    },
+    {
+      "seed": 201,
+      "fusion_fire_iou": 0.5773005766674186,
+      "cmrc_fire_iou": 0.5848013127055923,
+      "delta_fire_iou": 0.007500736038173694
+    },
+    {
+      "seed": 202,
+      "fusion_fire_iou": 0.5462152710485106,
+      "cmrc_fire_iou": 0.5900849673360908,
+      "delta_fire_iou": 0.043869696287580195
+    }
+  ],
+  "mean_fusion_fire_iou": 0.5625419812920212,
+  "mean_cmrc_fire_iou": 0.5741936030097012,
+  "mean_delta_fire_iou": 0.011651621717680158,
+  "improved_seed_count": 2,
+  "mean_delta_fire_precision": 0.01504279410393942,
+  "mean_delta_fire_recall": -0.007101690664006122,
+  "mean_delta_no_fire_predicted_fire_ratio": 0.00002787272135416667,
+  "mean_delta_empty_fire_predicted_fire_ratio": -0.0037090810139973965,
+  "rtx2060_fps": 30.50635981336209,
+  "numeric_gate": {
+    "mean_fire_iou_gain_at_least_0_005": true,
+    "at_least_two_of_three_seeds_improve": true,
+    "mean_recall_delta_at_least_minus_0_03": true,
+    "fps_at_least_30": true,
+    "decision": "pass"
+  },
+  "validation_residuals_last": {
+    "200": {
+      "abs_mean": 0.0006742254021202228,
+      "abs_max": 0.015869140625,
+      "saturation_ratio": 0.0
+    },
+    "201": {
+      "abs_mean": 0.0006444623612159335,
+      "abs_max": 0.061859130859375,
+      "saturation_ratio": 0.0
+    },
+    "202": {
+      "abs_mean": 0.0010198952383431259,
+      "abs_max": 0.09942626953125,
+      "saturation_ratio": 0.000003461695494262307
+    }
+  },
+  "visual_review": {
+    "status": "required_before_100_epoch_resume",
+    "seed": 202,
+    "comparison_scope": "same_current_code_same_seed_same_30_epochs_validation_only",
+    "fusion_replay_tail_mean_fire_iou": 0.53602,
+    "replay_caveat": "The replay did not exactly reproduce the historical Fusion log and is used only for mechanism-level paired visualization, not as the formal numeric baseline.",
+    "pseudo_label_caveat": "Removed or added Fire outside the pseudo Fire core is a pseudo-label consistency change, not automatically a true semantic false-positive change."
+  },
+  "test_images_or_labels_read": false
+}

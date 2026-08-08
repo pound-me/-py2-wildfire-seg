@@ -1,0 +1,924 @@
+{
+  "protocol": "validation_only_fixed_paired_fusion_cmrc_visual_comparison",
+  "seed": 202,
+  "fusion_checkpoint": "D:\\qianpengcheng\\7.31\\flame3_4090_bundle_v1_20260731\\project_support\\experiments\\flame3_pidnet_s_fusion_partial\\flame3_fusion_partial_30e_visual_replay_seed202\\last.pth",
+  "cmrc_checkpoint": "D:\\qianpengcheng\\7.31\\flame3_4090_bundle_v1_20260731\\project_support\\experiments\\flame3_pidnet_s_cmrc_partial\\flame3_cmrc_partial_30e_seed202\\last.pth",
+  "validation_csv": "D:\\qianpengcheng\\7.31\\flame3_4090_bundle_v1_20260731\\splits\\portable\\val.csv",
+  "selection_rules": {
+    "green": "target Fire missed by Fusion and recovered by CMRC",
+    "blue": "target Fire found by Fusion and lost by CMRC",
+    "cyan": "non-Fire pseudo-label pixel predicted Fire only by Fusion",
+    "magenta": "non-Fire pseudo-label pixel predicted Fire only by CMRC"
+  },
+  "selections": {
+    "top_recovered_fire": [
+      "fire/00525",
+      "fire/00057",
+      "fire/00393",
+      "fire/00197",
+      "fire/00037",
+      "fire/00323"
+    ],
+    "top_lost_fire": [
+      "fire/00284",
+      "fire/00508",
+      "fire/00110",
+      "fire/00612",
+      "fire/00063",
+      "fire/00566"
+    ],
+    "top_removed_pseudo_fp": [
+      "fire/00187",
+      "fire/00194",
+      "fire/00105",
+      "fire/00269",
+      "fire/00458",
+      "fire/00181"
+    ],
+    "top_added_pseudo_fp": [
+      "fire/00257",
+      "fire/00305",
+      "fire/00037",
+      "fire/00222",
+      "fire/00322",
+      "fire/00458"
+    ],
+    "audit_fn_001_030": [
+      "fire/00001",
+      "fire/00008",
+      "fire/00019",
+      "fire/00020",
+      "fire/00037",
+      "fire/00042",
+      "fire/00057",
+      "fire/00131",
+      "fire/00183",
+      "fire/00197",
+      "fire/00284",
+      "fire/00314",
+      "fire/00325",
+      "fire/00393",
+      "fire/00396",
+      "fire/00444",
+      "fire/00508",
+      "fire/00515",
+      "fire/00525",
+      "fire/00566"
+    ],
+    "audit_fp_residual_heat_031_045": [
+      "fire/00077",
+      "fire/00105",
+      "fire/00181",
+      "fire/00269",
+      "fire/00278",
+      "fire/00322",
+      "fire/00374",
+      "fire/00394",
+      "fire/00458",
+      "fire/00533",
+      "fire/00600"
+    ],
+    "audit_fp_label_gap_046_050": [
+      "fire/00184",
+      "fire/00249",
+      "fire/00352",
+      "fire/00455"
+    ],
+    "audit_tp_051_070": [
+      "fire/00001",
+      "fire/00022",
+      "fire/00037",
+      "fire/00075",
+      "fire/00110",
+      "fire/00111",
+      "fire/00274",
+      "fire/00304",
+      "fire/00305",
+      "fire/00380",
+      "fire/00431",
+      "fire/00455",
+      "fire/00463",
+      "fire/00508",
+      "fire/00572",
+      "fire/00612"
+    ]
+  },
+  "records": {
+    "fire/00001": {
+      "recovered_fire": 65,
+      "lost_fire": 38,
+      "removed_pseudo_fp": 352,
+      "added_pseudo_fp": 443
+    },
+    "fire/00008": {
+      "recovered_fire": 1,
+      "lost_fire": 26,
+      "removed_pseudo_fp": 126,
+      "added_pseudo_fp": 290
+    },
+    "fire/00019": {
+      "recovered_fire": 107,
+      "lost_fire": 31,
+      "removed_pseudo_fp": 118,
+      "added_pseudo_fp": 383
+    },
+    "fire/00020": {
+      "recovered_fire": 2,
+      "lost_fire": 53,
+      "removed_pseudo_fp": 46,
+      "added_pseudo_fp": 4
+    },
+    "fire/00022": {
+      "recovered_fire": 70,
+      "lost_fire": 28,
+      "removed_pseudo_fp": 268,
+      "added_pseudo_fp": 356
+    },
+    "fire/00023": {
+      "recovered_fire": 8,
+      "lost_fire": 7,
+      "removed_pseudo_fp": 136,
+      "added_pseudo_fp": 40
+    },
+    "fire/00024": {
+      "recovered_fire": 183,
+      "lost_fire": 69,
+      "removed_pseudo_fp": 156,
+      "added_pseudo_fp": 409
+    },
+    "fire/00037": {
+      "recovered_fire": 360,
+      "lost_fire": 64,
+      "removed_pseudo_fp": 256,
+      "added_pseudo_fp": 805
+    },
+    "fire/00042": {
+      "recovered_fire": 221,
+      "lost_fire": 190,
+      "removed_pseudo_fp": 105,
+      "added_pseudo_fp": 205
+    },
+    "fire/00055": {
+      "recovered_fire": 2,
+      "lost_fire": 9,
+      "removed_pseudo_fp": 162,
+      "added_pseudo_fp": 75
+    },
+    "fire/00057": {
+      "recovered_fire": 749,
+      "lost_fire": 259,
+      "removed_pseudo_fp": 345,
+      "added_pseudo_fp": 329
+    },
+    "fire/00063": {
+      "recovered_fire": 215,
+      "lost_fire": 349,
+      "removed_pseudo_fp": 222,
+      "added_pseudo_fp": 96
+    },
+    "fire/00065": {
+      "recovered_fire": 29,
+      "lost_fire": 56,
+      "removed_pseudo_fp": 659,
+      "added_pseudo_fp": 304
+    },
+    "fire/00066": {
+      "recovered_fire": 13,
+      "lost_fire": 24,
+      "removed_pseudo_fp": 237,
+      "added_pseudo_fp": 393
+    },
+    "fire/00075": {
+      "recovered_fire": 7,
+      "lost_fire": 57,
+      "removed_pseudo_fp": 521,
+      "added_pseudo_fp": 50
+    },
+    "fire/00077": {
+      "recovered_fire": 0,
+      "lost_fire": 0,
+      "removed_pseudo_fp": 6651,
+      "added_pseudo_fp": 275
+    },
+    "fire/00086": {
+      "recovered_fire": 20,
+      "lost_fire": 63,
+      "removed_pseudo_fp": 230,
+      "added_pseudo_fp": 387
+    },
+    "fire/00103": {
+      "recovered_fire": 112,
+      "lost_fire": 41,
+      "removed_pseudo_fp": 179,
+      "added_pseudo_fp": 460
+    },
+    "fire/00105": {
+      "recovered_fire": 0,
+      "lost_fire": 0,
+      "removed_pseudo_fp": 9275,
+      "added_pseudo_fp": 259
+    },
+    "fire/00110": {
+      "recovered_fire": 106,
+      "lost_fire": 385,
+      "removed_pseudo_fp": 478,
+      "added_pseudo_fp": 238
+    },
+    "fire/00111": {
+      "recovered_fire": 89,
+      "lost_fire": 83,
+      "removed_pseudo_fp": 177,
+      "added_pseudo_fp": 498
+    },
+    "fire/00131": {
+      "recovered_fire": 31,
+      "lost_fire": 35,
+      "removed_pseudo_fp": 287,
+      "added_pseudo_fp": 300
+    },
+    "fire/00151": {
+      "recovered_fire": 0,
+      "lost_fire": 0,
+      "removed_pseudo_fp": 4197,
+      "added_pseudo_fp": 312
+    },
+    "fire/00163": {
+      "recovered_fire": 63,
+      "lost_fire": 14,
+      "removed_pseudo_fp": 160,
+      "added_pseudo_fp": 196
+    },
+    "fire/00181": {
+      "recovered_fire": 0,
+      "lost_fire": 0,
+      "removed_pseudo_fp": 6790,
+      "added_pseudo_fp": 72
+    },
+    "fire/00183": {
+      "recovered_fire": 182,
+      "lost_fire": 144,
+      "removed_pseudo_fp": 191,
+      "added_pseudo_fp": 160
+    },
+    "fire/00184": {
+      "recovered_fire": 54,
+      "lost_fire": 48,
+      "removed_pseudo_fp": 280,
+      "added_pseudo_fp": 445
+    },
+    "fire/00187": {
+      "recovered_fire": 0,
+      "lost_fire": 0,
+      "removed_pseudo_fp": 13208,
+      "added_pseudo_fp": 327
+    },
+    "fire/00191": {
+      "recovered_fire": 0,
+      "lost_fire": 0,
+      "removed_pseudo_fp": 4457,
+      "added_pseudo_fp": 416
+    },
+    "fire/00194": {
+      "recovered_fire": 0,
+      "lost_fire": 0,
+      "removed_pseudo_fp": 10515,
+      "added_pseudo_fp": 271
+    },
+    "fire/00197": {
+      "recovered_fire": 467,
+      "lost_fire": 91,
+      "removed_pseudo_fp": 37,
+      "added_pseudo_fp": 437
+    },
+    "fire/00206": {
+      "recovered_fire": 7,
+      "lost_fire": 56,
+      "removed_pseudo_fp": 109,
+      "added_pseudo_fp": 67
+    },
+    "fire/00222": {
+      "recovered_fire": 75,
+      "lost_fire": 3,
+      "removed_pseudo_fp": 128,
+      "added_pseudo_fp": 795
+    },
+    "fire/00223": {
+      "recovered_fire": 0,
+      "lost_fire": 13,
+      "removed_pseudo_fp": 87,
+      "added_pseudo_fp": 30
+    },
+    "fire/00232": {
+      "recovered_fire": 4,
+      "lost_fire": 0,
+      "removed_pseudo_fp": 55,
+      "added_pseudo_fp": 90
+    },
+    "fire/00245": {
+      "recovered_fire": 165,
+      "lost_fire": 321,
+      "removed_pseudo_fp": 228,
+      "added_pseudo_fp": 151
+    },
+    "fire/00249": {
+      "recovered_fire": 0,
+      "lost_fire": 109,
+      "removed_pseudo_fp": 919,
+      "added_pseudo_fp": 72
+    },
+    "fire/00256": {
+      "recovered_fire": 51,
+      "lost_fire": 98,
+      "removed_pseudo_fp": 461,
+      "added_pseudo_fp": 138
+    },
+    "fire/00257": {
+      "recovered_fire": 36,
+      "lost_fire": 4,
+      "removed_pseudo_fp": 47,
+      "added_pseudo_fp": 1124
+    },
+    "fire/00259": {
+      "recovered_fire": 6,
+      "lost_fire": 31,
+      "removed_pseudo_fp": 617,
+      "added_pseudo_fp": 508
+    },
+    "fire/00263": {
+      "recovered_fire": 52,
+      "lost_fire": 36,
+      "removed_pseudo_fp": 367,
+      "added_pseudo_fp": 461
+    },
+    "fire/00269": {
+      "recovered_fire": 0,
+      "lost_fire": 0,
+      "removed_pseudo_fp": 9253,
+      "added_pseudo_fp": 134
+    },
+    "fire/00274": {
+      "recovered_fire": 68,
+      "lost_fire": 66,
+      "removed_pseudo_fp": 132,
+      "added_pseudo_fp": 366
+    },
+    "fire/00278": {
+      "recovered_fire": 0,
+      "lost_fire": 0,
+      "removed_pseudo_fp": 4026,
+      "added_pseudo_fp": 380
+    },
+    "fire/00280": {
+      "recovered_fire": 0,
+      "lost_fire": 15,
+      "removed_pseudo_fp": 88,
+      "added_pseudo_fp": 332
+    },
+    "fire/00284": {
+      "recovered_fire": 177,
+      "lost_fire": 865,
+      "removed_pseudo_fp": 212,
+      "added_pseudo_fp": 304
+    },
+    "fire/00288": {
+      "recovered_fire": 43,
+      "lost_fire": 133,
+      "removed_pseudo_fp": 240,
+      "added_pseudo_fp": 228
+    },
+    "fire/00289": {
+      "recovered_fire": 0,
+      "lost_fire": 46,
+      "removed_pseudo_fp": 17,
+      "added_pseudo_fp": 93
+    },
+    "fire/00304": {
+      "recovered_fire": 38,
+      "lost_fire": 33,
+      "removed_pseudo_fp": 407,
+      "added_pseudo_fp": 551
+    },
+    "fire/00305": {
+      "recovered_fire": 126,
+      "lost_fire": 31,
+      "removed_pseudo_fp": 210,
+      "added_pseudo_fp": 823
+    },
+    "fire/00314": {
+      "recovered_fire": 278,
+      "lost_fire": 217,
+      "removed_pseudo_fp": 59,
+      "added_pseudo_fp": 215
+    },
+    "fire/00315": {
+      "recovered_fire": 47,
+      "lost_fire": 24,
+      "removed_pseudo_fp": 206,
+      "added_pseudo_fp": 206
+    },
+    "fire/00322": {
+      "recovered_fire": 0,
+      "lost_fire": 0,
+      "removed_pseudo_fp": 5236,
+      "added_pseudo_fp": 727
+    },
+    "fire/00323": {
+      "recovered_fire": 354,
+      "lost_fire": 321,
+      "removed_pseudo_fp": 229,
+      "added_pseudo_fp": 189
+    },
+    "fire/00325": {
+      "recovered_fire": 50,
+      "lost_fire": 69,
+      "removed_pseudo_fp": 791,
+      "added_pseudo_fp": 302
+    },
+    "fire/00332": {
+      "recovered_fire": 0,
+      "lost_fire": 0,
+      "removed_pseudo_fp": 4388,
+      "added_pseudo_fp": 23
+    },
+    "fire/00333": {
+      "recovered_fire": 89,
+      "lost_fire": 72,
+      "removed_pseudo_fp": 348,
+      "added_pseudo_fp": 295
+    },
+    "fire/00342": {
+      "recovered_fire": 29,
+      "lost_fire": 48,
+      "removed_pseudo_fp": 225,
+      "added_pseudo_fp": 296
+    },
+    "fire/00344": {
+      "recovered_fire": 10,
+      "lost_fire": 34,
+      "removed_pseudo_fp": 360,
+      "added_pseudo_fp": 281
+    },
+    "fire/00352": {
+      "recovered_fire": 16,
+      "lost_fire": 22,
+      "removed_pseudo_fp": 539,
+      "added_pseudo_fp": 321
+    },
+    "fire/00354": {
+      "recovered_fire": 0,
+      "lost_fire": 38,
+      "removed_pseudo_fp": 43,
+      "added_pseudo_fp": 7
+    },
+    "fire/00356": {
+      "recovered_fire": 87,
+      "lost_fire": 44,
+      "removed_pseudo_fp": 356,
+      "added_pseudo_fp": 565
+    },
+    "fire/00358": {
+      "recovered_fire": 34,
+      "lost_fire": 0,
+      "removed_pseudo_fp": 251,
+      "added_pseudo_fp": 525
+    },
+    "fire/00368": {
+      "recovered_fire": 103,
+      "lost_fire": 133,
+      "removed_pseudo_fp": 41,
+      "added_pseudo_fp": 634
+    },
+    "fire/00374": {
+      "recovered_fire": 0,
+      "lost_fire": 0,
+      "removed_pseudo_fp": 5477,
+      "added_pseudo_fp": 277
+    },
+    "fire/00380": {
+      "recovered_fire": 4,
+      "lost_fire": 16,
+      "removed_pseudo_fp": 311,
+      "added_pseudo_fp": 203
+    },
+    "fire/00381": {
+      "recovered_fire": 15,
+      "lost_fire": 42,
+      "removed_pseudo_fp": 269,
+      "added_pseudo_fp": 349
+    },
+    "fire/00391": {
+      "recovered_fire": 36,
+      "lost_fire": 116,
+      "removed_pseudo_fp": 285,
+      "added_pseudo_fp": 410
+    },
+    "fire/00393": {
+      "recovered_fire": 558,
+      "lost_fire": 173,
+      "removed_pseudo_fp": 288,
+      "added_pseudo_fp": 207
+    },
+    "fire/00394": {
+      "recovered_fire": 0,
+      "lost_fire": 0,
+      "removed_pseudo_fp": 2249,
+      "added_pseudo_fp": 463
+    },
+    "fire/00396": {
+      "recovered_fire": 113,
+      "lost_fire": 296,
+      "removed_pseudo_fp": 571,
+      "added_pseudo_fp": 304
+    },
+    "fire/00397": {
+      "recovered_fire": 1,
+      "lost_fire": 4,
+      "removed_pseudo_fp": 198,
+      "added_pseudo_fp": 74
+    },
+    "fire/00402": {
+      "recovered_fire": 84,
+      "lost_fire": 8,
+      "removed_pseudo_fp": 168,
+      "added_pseudo_fp": 459
+    },
+    "fire/00409": {
+      "recovered_fire": 10,
+      "lost_fire": 14,
+      "removed_pseudo_fp": 80,
+      "added_pseudo_fp": 12
+    },
+    "fire/00428": {
+      "recovered_fire": 45,
+      "lost_fire": 64,
+      "removed_pseudo_fp": 339,
+      "added_pseudo_fp": 528
+    },
+    "fire/00431": {
+      "recovered_fire": 18,
+      "lost_fire": 26,
+      "removed_pseudo_fp": 365,
+      "added_pseudo_fp": 312
+    },
+    "fire/00435": {
+      "recovered_fire": 7,
+      "lost_fire": 52,
+      "removed_pseudo_fp": 57,
+      "added_pseudo_fp": 97
+    },
+    "fire/00442": {
+      "recovered_fire": 10,
+      "lost_fire": 19,
+      "removed_pseudo_fp": 257,
+      "added_pseudo_fp": 77
+    },
+    "fire/00444": {
+      "recovered_fire": 272,
+      "lost_fire": 196,
+      "removed_pseudo_fp": 117,
+      "added_pseudo_fp": 145
+    },
+    "fire/00453": {
+      "recovered_fire": 0,
+      "lost_fire": 37,
+      "removed_pseudo_fp": 75,
+      "added_pseudo_fp": 15
+    },
+    "fire/00455": {
+      "recovered_fire": 9,
+      "lost_fire": 24,
+      "removed_pseudo_fp": 524,
+      "added_pseudo_fp": 497
+    },
+    "fire/00458": {
+      "recovered_fire": 0,
+      "lost_fire": 0,
+      "removed_pseudo_fp": 7223,
+      "added_pseudo_fp": 640
+    },
+    "fire/00463": {
+      "recovered_fire": 5,
+      "lost_fire": 29,
+      "removed_pseudo_fp": 571,
+      "added_pseudo_fp": 161
+    },
+    "fire/00508": {
+      "recovered_fire": 225,
+      "lost_fire": 433,
+      "removed_pseudo_fp": 172,
+      "added_pseudo_fp": 330
+    },
+    "fire/00515": {
+      "recovered_fire": 259,
+      "lost_fire": 195,
+      "removed_pseudo_fp": 255,
+      "added_pseudo_fp": 390
+    },
+    "fire/00525": {
+      "recovered_fire": 1229,
+      "lost_fire": 246,
+      "removed_pseudo_fp": 321,
+      "added_pseudo_fp": 331
+    },
+    "fire/00533": {
+      "recovered_fire": 0,
+      "lost_fire": 0,
+      "removed_pseudo_fp": 6209,
+      "added_pseudo_fp": 384
+    },
+    "fire/00537": {
+      "recovered_fire": 14,
+      "lost_fire": 4,
+      "removed_pseudo_fp": 100,
+      "added_pseudo_fp": 104
+    },
+    "fire/00541": {
+      "recovered_fire": 56,
+      "lost_fire": 13,
+      "removed_pseudo_fp": 131,
+      "added_pseudo_fp": 216
+    },
+    "fire/00566": {
+      "recovered_fire": 152,
+      "lost_fire": 348,
+      "removed_pseudo_fp": 679,
+      "added_pseudo_fp": 452
+    },
+    "fire/00568": {
+      "recovered_fire": 50,
+      "lost_fire": 131,
+      "removed_pseudo_fp": 396,
+      "added_pseudo_fp": 227
+    },
+    "fire/00572": {
+      "recovered_fire": 18,
+      "lost_fire": 20,
+      "removed_pseudo_fp": 419,
+      "added_pseudo_fp": 160
+    },
+    "fire/00591": {
+      "recovered_fire": 57,
+      "lost_fire": 201,
+      "removed_pseudo_fp": 897,
+      "added_pseudo_fp": 376
+    },
+    "fire/00600": {
+      "recovered_fire": 0,
+      "lost_fire": 0,
+      "removed_pseudo_fp": 6310,
+      "added_pseudo_fp": 194
+    },
+    "fire/00603": {
+      "recovered_fire": 2,
+      "lost_fire": 9,
+      "removed_pseudo_fp": 450,
+      "added_pseudo_fp": 123
+    },
+    "fire/00606": {
+      "recovered_fire": 43,
+      "lost_fire": 88,
+      "removed_pseudo_fp": 641,
+      "added_pseudo_fp": 211
+    },
+    "fire/00607": {
+      "recovered_fire": 10,
+      "lost_fire": 19,
+      "removed_pseudo_fp": 490,
+      "added_pseudo_fp": 493
+    },
+    "fire/00612": {
+      "recovered_fire": 17,
+      "lost_fire": 379,
+      "removed_pseudo_fp": 602,
+      "added_pseudo_fp": 471
+    },
+    "fire/00617": {
+      "recovered_fire": 8,
+      "lost_fire": 55,
+      "removed_pseudo_fp": 9,
+      "added_pseudo_fp": 18
+    },
+    "no_fire/00005": {
+      "recovered_fire": 0,
+      "lost_fire": 0,
+      "removed_pseudo_fp": 0,
+      "added_pseudo_fp": 0
+    },
+    "no_fire/00008": {
+      "recovered_fire": 0,
+      "lost_fire": 0,
+      "removed_pseudo_fp": 7,
+      "added_pseudo_fp": 0
+    },
+    "no_fire/00015": {
+      "recovered_fire": 0,
+      "lost_fire": 0,
+      "removed_pseudo_fp": 23,
+      "added_pseudo_fp": 0
+    },
+    "no_fire/00017": {
+      "recovered_fire": 0,
+      "lost_fire": 0,
+      "removed_pseudo_fp": 12,
+      "added_pseudo_fp": 0
+    },
+    "no_fire/00020": {
+      "recovered_fire": 0,
+      "lost_fire": 0,
+      "removed_pseudo_fp": 1,
+      "added_pseudo_fp": 0
+    },
+    "no_fire/00024": {
+      "recovered_fire": 0,
+      "lost_fire": 0,
+      "removed_pseudo_fp": 4,
+      "added_pseudo_fp": 0
+    },
+    "no_fire/00027": {
+      "recovered_fire": 0,
+      "lost_fire": 0,
+      "removed_pseudo_fp": 0,
+      "added_pseudo_fp": 0
+    },
+    "no_fire/00028": {
+      "recovered_fire": 0,
+      "lost_fire": 0,
+      "removed_pseudo_fp": 4,
+      "added_pseudo_fp": 0
+    },
+    "no_fire/00030": {
+      "recovered_fire": 0,
+      "lost_fire": 0,
+      "removed_pseudo_fp": 54,
+      "added_pseudo_fp": 0
+    },
+    "no_fire/00036": {
+      "recovered_fire": 0,
+      "lost_fire": 0,
+      "removed_pseudo_fp": 3,
+      "added_pseudo_fp": 0
+    },
+    "no_fire/00040": {
+      "recovered_fire": 0,
+      "lost_fire": 0,
+      "removed_pseudo_fp": 0,
+      "added_pseudo_fp": 0
+    },
+    "no_fire/00041": {
+      "recovered_fire": 0,
+      "lost_fire": 0,
+      "removed_pseudo_fp": 36,
+      "added_pseudo_fp": 0
+    },
+    "no_fire/00042": {
+      "recovered_fire": 0,
+      "lost_fire": 0,
+      "removed_pseudo_fp": 12,
+      "added_pseudo_fp": 0
+    },
+    "no_fire/00045": {
+      "recovered_fire": 0,
+      "lost_fire": 0,
+      "removed_pseudo_fp": 0,
+      "added_pseudo_fp": 0
+    },
+    "no_fire/00048": {
+      "recovered_fire": 0,
+      "lost_fire": 0,
+      "removed_pseudo_fp": 0,
+      "added_pseudo_fp": 0
+    },
+    "no_fire/00049": {
+      "recovered_fire": 0,
+      "lost_fire": 0,
+      "removed_pseudo_fp": 49,
+      "added_pseudo_fp": 0
+    },
+    "no_fire/00053": {
+      "recovered_fire": 0,
+      "lost_fire": 0,
+      "removed_pseudo_fp": 0,
+      "added_pseudo_fp": 0
+    },
+    "no_fire/00057": {
+      "recovered_fire": 0,
+      "lost_fire": 0,
+      "removed_pseudo_fp": 0,
+      "added_pseudo_fp": 0
+    },
+    "no_fire/00062": {
+      "recovered_fire": 0,
+      "lost_fire": 0,
+      "removed_pseudo_fp": 0,
+      "added_pseudo_fp": 0
+    },
+    "no_fire/00068": {
+      "recovered_fire": 0,
+      "lost_fire": 0,
+      "removed_pseudo_fp": 1,
+      "added_pseudo_fp": 0
+    },
+    "no_fire/00072": {
+      "recovered_fire": 0,
+      "lost_fire": 0,
+      "removed_pseudo_fp": 0,
+      "added_pseudo_fp": 0
+    },
+    "no_fire/00076": {
+      "recovered_fire": 0,
+      "lost_fire": 0,
+      "removed_pseudo_fp": 0,
+      "added_pseudo_fp": 0
+    },
+    "no_fire/00084": {
+      "recovered_fire": 0,
+      "lost_fire": 0,
+      "removed_pseudo_fp": 0,
+      "added_pseudo_fp": 0
+    },
+    "no_fire/00086": {
+      "recovered_fire": 0,
+      "lost_fire": 0,
+      "removed_pseudo_fp": 9,
+      "added_pseudo_fp": 0
+    },
+    "no_fire/00087": {
+      "recovered_fire": 0,
+      "lost_fire": 0,
+      "removed_pseudo_fp": 0,
+      "added_pseudo_fp": 0
+    },
+    "no_fire/00088": {
+      "recovered_fire": 0,
+      "lost_fire": 0,
+      "removed_pseudo_fp": 0,
+      "added_pseudo_fp": 0
+    },
+    "no_fire/00089": {
+      "recovered_fire": 0,
+      "lost_fire": 0,
+      "removed_pseudo_fp": 0,
+      "added_pseudo_fp": 0
+    },
+    "no_fire/00097": {
+      "recovered_fire": 0,
+      "lost_fire": 0,
+      "removed_pseudo_fp": 0,
+      "added_pseudo_fp": 0
+    },
+    "no_fire/00099": {
+      "recovered_fire": 0,
+      "lost_fire": 0,
+      "removed_pseudo_fp": 0,
+      "added_pseudo_fp": 0
+    },
+    "no_fire/00100": {
+      "recovered_fire": 0,
+      "lost_fire": 0,
+      "removed_pseudo_fp": 0,
+      "added_pseudo_fp": 0
+    },
+    "no_fire/00105": {
+      "recovered_fire": 0,
+      "lost_fire": 0,
+      "removed_pseudo_fp": 0,
+      "added_pseudo_fp": 0
+    },
+    "no_fire/00108": {
+      "recovered_fire": 0,
+      "lost_fire": 0,
+      "removed_pseudo_fp": 0,
+      "added_pseudo_fp": 0
+    },
+    "no_fire/00109": {
+      "recovered_fire": 0,
+      "lost_fire": 0,
+      "removed_pseudo_fp": 0,
+      "added_pseudo_fp": 9
+    },
+    "no_fire/00112": {
+      "recovered_fire": 0,
+      "lost_fire": 0,
+      "removed_pseudo_fp": 4,
+      "added_pseudo_fp": 0
+    },
+    "no_fire/00116": {
+      "recovered_fire": 0,
+      "lost_fire": 0,
+      "removed_pseudo_fp": 0,
+      "added_pseudo_fp": 0
+    }
+  },
+  "contact_sheets": {
+    "top_recovered_fire": "D:\\qianpengcheng\\7.31\\flame3_4090_bundle_v1_20260731\\project_support\\experiments\\flame3_cmrc_visual_compare_seed202\\top_recovered_fire_contact_sheet.jpg",
+    "top_lost_fire": "D:\\qianpengcheng\\7.31\\flame3_4090_bundle_v1_20260731\\project_support\\experiments\\flame3_cmrc_visual_compare_seed202\\top_lost_fire_contact_sheet.jpg",
+    "top_removed_pseudo_fp": "D:\\qianpengcheng\\7.31\\flame3_4090_bundle_v1_20260731\\project_support\\experiments\\flame3_cmrc_visual_compare_seed202\\top_removed_pseudo_fp_contact_sheet.jpg",
+    "top_added_pseudo_fp": "D:\\qianpengcheng\\7.31\\flame3_4090_bundle_v1_20260731\\project_support\\experiments\\flame3_cmrc_visual_compare_seed202\\top_added_pseudo_fp_contact_sheet.jpg",
+    "audit_fn_001_030": "D:\\qianpengcheng\\7.31\\flame3_4090_bundle_v1_20260731\\project_support\\experiments\\flame3_cmrc_visual_compare_seed202\\audit_fn_001_030_contact_sheet.jpg",
+    "audit_fp_residual_heat_031_045": "D:\\qianpengcheng\\7.31\\flame3_4090_bundle_v1_20260731\\project_support\\experiments\\flame3_cmrc_visual_compare_seed202\\audit_fp_residual_heat_031_045_contact_sheet.jpg",
+    "audit_fp_label_gap_046_050": "D:\\qianpengcheng\\7.31\\flame3_4090_bundle_v1_20260731\\project_support\\experiments\\flame3_cmrc_visual_compare_seed202\\audit_fp_label_gap_046_050_contact_sheet.jpg",
+    "audit_tp_051_070": "D:\\qianpengcheng\\7.31\\flame3_4090_bundle_v1_20260731\\project_support\\experiments\\flame3_cmrc_visual_compare_seed202\\audit_tp_051_070_contact_sheet.jpg"
+  },
+  "test_images_or_labels_read": false,
+  "interpretation_caveat": "cyan/magenta are pseudo-label consistency changes, not automatically true false-positive changes in semantically ambiguous hot or smoky regions"
+}
