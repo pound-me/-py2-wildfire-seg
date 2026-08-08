@@ -1,0 +1,75 @@
+{
+  "protocol": "flame3_single_data_side_candidate_engineering_only",
+  "formal_training_started": false,
+  "ratio_status": "provisional_engineering_value_pending_manual_semantic_audit",
+  "baseline_default_path_unchanged": true,
+  "validation_augmentation_unchanged": true,
+  "protected_crop": {
+    "sample_key": "fire/00426",
+    "trials": 100,
+    "minimum_retained_fire_pixels": 61,
+    "maximum_retained_fire_pixels": 79,
+    "all_trials_retain_fire": true,
+    "configured_min_pixels": 32,
+    "configured_attempts": 64
+  },
+  "targeted_sampling": {
+    "sampler": "fixed_ratio_subset_with_replacement",
+    "dataset_images": 493,
+    "batch_size": 8,
+    "batches_per_epoch": 61,
+    "samples_drawn_per_epoch": 488,
+    "drop_last_remainder_excluded_before_sampling": 5,
+    "target_pool_images": 60,
+    "non_target_pool_images": 433,
+    "target_draws_per_epoch": 146,
+    "non_target_draws_per_epoch": 342,
+    "requested_target_ratio": 0.3,
+    "realized_target_ratio": 0.29918032786885246,
+    "target_manifest_path": "G:\\py2\\experiments\\flame3_semantic_annotation_subset_150_20260808\\flame3_semantic_pixel_annotation_checklist_150.csv",
+    "target_categories": [
+      "boundary_complex_fire_core",
+      "small_or_weak_fire_core",
+      "suspected_label_gap_hot_noncore"
+    ],
+    "target_sample_key_count": 60,
+    "test_images_or_labels_read": false,
+    "five_epoch_target_draws": [
+      146,
+      146,
+      146,
+      146,
+      146
+    ],
+    "same_seed_first_epoch_identical": true,
+    "exact_generator_state_resume": true
+  },
+  "batch_smoke": {
+    "images": [
+      8,
+      4,
+      512,
+      640
+    ],
+    "labels": [
+      8,
+      512,
+      640
+    ],
+    "edges": [
+      8,
+      512,
+      640
+    ],
+    "sample_key_batch_items": 8,
+    "is_fire_folder": [
+      8
+    ]
+  },
+  "other_data_changes_enabled": {
+    "rgb_ir_separate_standardization": false,
+    "thermal_dynamic_range_enhancement": false,
+    "registration_perturbation": false
+  },
+  "test_images_or_labels_read": false
+}

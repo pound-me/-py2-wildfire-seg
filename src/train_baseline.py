@@ -23,6 +23,10 @@ from baseline_runtime import (
     seed_everything,
 )
 from custom_losses import build_training_criterion
+from flame3_sampling import (
+    build_flame3_train_sampler,
+    sampler_audit_summary,
+)
 
 
 def create_cuda_grad_scaler(enabled: bool, init_scale: float):
@@ -1153,10 +1157,16 @@ def main() -> None:
     validation_dataset = build_dataset(config, split="val")
     train_generator = torch.Generator()
     train_generator.manual_seed(config["SEED"])
+    train_sampler = build_flame3_train_sampler(
+        train_dataset,
+        config,
+        train_generator,
+    )
     train_loader = DataLoader(
         train_dataset,
         batch_size=config["BATCHSIZE"],
-        shuffle=True,
+        shuffle=train_sampler is None,
+        sampler=train_sampler,
         num_workers=config["NUM_WORKERS"],
         pin_memory=True,
         drop_last=True,
@@ -1209,6 +1219,18 @@ def main() -> None:
         encoding="utf-8",
     ) as config_file:
         json.dump(config, config_file, ensure_ascii=False, indent=2)
+    sampling_summary = sampler_audit_summary(train_sampler)
+    if sampling_summary is not None:
+        with (run_directory / "flame3_targeted_sampling.json").open(
+            "w",
+            encoding="utf-8",
+        ) as sampling_file:
+            json.dump(
+                sampling_summary,
+                sampling_file,
+                ensure_ascii=False,
+                indent=2,
+            )
     selection_metric_name = str(config.get("SELECTION_METRIC", "miou"))
     if criterion.objective_name == "partial_label" and selection_metric_name != "fire_iou":
         raise ValueError(

@@ -69,6 +69,16 @@ def build_dataset(config: dict, split: str):
             single_source=config["SINGLE_SOURCE"] if training else False,
             scale_min=float(config.get("SCALE_MIN", 0.8)),
             scale_max=float(config.get("SCALE_MAX", 1.5)),
+            protect_fire_core_crop=(
+                training
+                and bool(config.get("FLAME3_PROTECT_FIRE_CORE_CROP", False))
+            ),
+            fire_core_crop_min_pixels=int(
+                config.get("FLAME3_FIRE_CORE_CROP_MIN_PIXELS", 1)
+            ),
+            fire_core_crop_attempts=int(
+                config.get("FLAME3_FIRE_CORE_CROP_ATTEMPTS", 32)
+            ),
         )
     return WildFire(
         root=config["ROOTDATASET"],

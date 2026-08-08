@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import csv
+import random
 from pathlib import Path
 
 import cv2
@@ -51,6 +52,9 @@ class Flame3CsvDataset(BaseDataset):
         bd_dilate_size: int = 4,
         comp_mask: bool = False,
         single_source: bool = False,
+        protect_fire_core_crop: bool = False,
+        fire_core_crop_min_pixels: int = 1,
+        fire_core_crop_attempts: int = 32,
     ) -> None:
         if int(ignore_label) != IGNORE_LABEL:
             raise ValueError("FLAME3 temperature masks require IGNORE_LABEL=255")
@@ -82,6 +86,13 @@ class Flame3CsvDataset(BaseDataset):
         self.comp_mask = bool(comp_mask)
         self.single_source = bool(single_source)
         self.bd_dilate_size = int(bd_dilate_size)
+        self.protect_fire_core_crop = bool(protect_fire_core_crop)
+        self.fire_core_crop_min_pixels = int(fire_core_crop_min_pixels)
+        self.fire_core_crop_attempts = int(fire_core_crop_attempts)
+        if self.fire_core_crop_min_pixels <= 0:
+            raise ValueError("fire_core_crop_min_pixels must be positive")
+        if self.fire_core_crop_attempts <= 0:
+            raise ValueError("fire_core_crop_attempts must be positive")
         with self.csv_path.open("r", encoding="utf-8-sig", newline="") as handle:
             self.rows = list(csv.DictReader(handle))
         if not self.rows:
@@ -142,6 +153,81 @@ class Flame3CsvDataset(BaseDataset):
                 f"has {sorted(values)}"
             )
         return [rgb, thermal], label, is_fire_folder, row["sample_key"]
+
+    def rand_crop(
+        self,
+        images: list[np.ndarray],
+        label: np.ndarray,
+        edge: np.ndarray,
+        component_map: np.ndarray | None = None,
+    ):
+        if not self.protect_fire_core_crop or not np.any(label == FIRE_CLASS):
+            return super().rand_crop(images, label, edge, component_map)
+
+        h, w = images[0].shape[:-1]
+        for index, image in enumerate(images):
+            images[index] = self.pad_image(
+                image,
+                h,
+                w,
+                self.crop_size,
+                (0.0, 0.0, 0.0),
+            )
+        label = self.pad_image(
+            label,
+            h,
+            w,
+            self.crop_size,
+            (float(self.ignore_label),) * 3,
+        )
+        edge = self.pad_image(edge, h, w, self.crop_size, (0.0,))
+        if component_map is not None:
+            component_map = self.pad_image(
+                component_map,
+                h,
+                w,
+                self.crop_size,
+                0,
+            )
+
+        new_h, new_w = label.shape
+        crop_h, crop_w = self.crop_size
+        fire_y, fire_x = np.nonzero(label == FIRE_CLASS)
+        total_fire_pixels = int(fire_y.size)
+        required_pixels = min(self.fire_core_crop_min_pixels, total_fire_pixels)
+        best_origin: tuple[int, int] | None = None
+        best_pixels = -1
+        for _ in range(self.fire_core_crop_attempts):
+            target = random.randrange(total_fire_pixels)
+            target_y = int(fire_y[target])
+            target_x = int(fire_x[target])
+            min_x = max(0, target_x - crop_w + 1)
+            max_x = min(target_x, new_w - crop_w)
+            min_y = max(0, target_y - crop_h + 1)
+            max_y = min(target_y, new_h - crop_h)
+            x = random.randint(min_x, max_x)
+            y = random.randint(min_y, max_y)
+            retained = int(
+                np.count_nonzero(
+                    label[y : y + crop_h, x : x + crop_w] == FIRE_CLASS
+                )
+            )
+            if retained > best_pixels:
+                best_origin = (y, x)
+                best_pixels = retained
+            if retained >= required_pixels:
+                break
+        if best_origin is None or best_pixels <= 0:
+            raise RuntimeError("Protected FLAME3 crop failed to retain Fire-core pixels")
+        y, x = best_origin
+        for index, image in enumerate(images):
+            images[index] = image[y : y + crop_h, x : x + crop_w]
+        label = label[y : y + crop_h, x : x + crop_w]
+        edge = edge[y : y + crop_h, x : x + crop_w]
+        if component_map is not None:
+            component_map = component_map[y : y + crop_h, x : x + crop_w]
+            return images, label, edge, component_map
+        return images, label, edge
 
     def __getitem__(self, index: int):
         images, label, is_fire_folder, sample_key = self._load_raw(index)
